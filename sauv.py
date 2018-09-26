@@ -48,7 +48,12 @@
 # 15-01-2018
 
 version = 0.31 # suppression log de fusion et verifie_arbre
-#
+# 20-01-2018
+
+#version = 0.32 # modifie hiérarchie log
+#				# détecte la suppression de sauvegarde dans la période de conservation
+				# le verrou par fichier est remplacer par une variable d'environnement qui sera perdu à chaque coupure électrique
+
 
 	# clé du fichier de configuration (en minucule)
 per1='periode1'
@@ -88,8 +93,8 @@ format_bilan = "\n{:%Y-%m-%d %H:%M:%S} {:>16} {:>15d} {:>15d} {:>10.2f} {:>4}"
 	# fichier de données
 conf_log='log.conf'
 conf_sauv='sauv.conf'
-	# fichier de lock
-f_lock='sauv.lock'
+	# variable de lock
+var_env_verrou = "SAUV_VERROU"
 	# fichier d'enregistrement de l'historique des sauvegardes
 f_arbre='historique.sauv'
 	#définit un variable globale pour conserver la trace des processus extérieur lancé et les fermer si nécessaire
@@ -285,7 +290,7 @@ def fermer_programme(signal, frame):
 	if process_en_cours:
 		process_en_cours.terminate()
 		# déverrouille
-	deverrouille(os.path.join(os.path.split(__file__)[0], f_lock))
+	deverrouille()
 		# démonte les volumes
 	demonte(a_demonter)
 
@@ -1050,10 +1055,26 @@ def reduction(config,arbre):
 
 	logger.info("réduction nécessaire")
 	nbrsauv = 0
+
 	for l_niv in arbre:
 		nbrsauv += len(l_niv)
 
 	erreur=False
+
+	# recherche la date de la dernière sauvegarde
+	for l_niv in arbre:
+		if len(l_niv) != 0:
+			doldest_sav = dlast_sav = l_niv[0].date
+			break
+	# dlast_sav = datetime.datetime.today()
+	# for a in range(0,2):
+	# 	try:
+	# 		if arbre[a][0].date < dlast_sav:
+	# 			dlast_sav = arbre[a][0].date
+	# 	except IndexError:
+	# 		None
+	# doldest_sav = dlast_sav
+
 
 	# regarde dans tous les niveaux en commençant par le 3
 	for niv in range(3,0,-1):
@@ -1104,12 +1125,20 @@ def reduction(config,arbre):
 
 						erreur = True
 					else:
-							# si la durée de conservation ne peut être respectée
-						if  arbre[niv-1][0].date - rep.date> datetime.timedelta(days=limite_cons):
-							logger.warning("{}-Le répertoire '{}' aurait du être conservé,\n le quota ne permet pas de respecter le critère de conservation CONSERVATION{}".format(config.name, rep.chemin, niv))
+						# si la durée de conservation ne peut être respectée
+						# calcul le temps entre la première sauvegarde et celle en traitement converti en jour
+						ecart_cons = ( arbre[niv-1][0].date - rep.date ).total_seconds()/86400
+						if  ecart_cons - limite_cons*0.75 < 0:
+							# message si la conservation est réduite à moins de 75%
+							logger.error("{}-Le répertoire '{}' aurait du être conservé,\n le quota ne permet pas de respecter 75% du critère de conservation CONSERVATION{}".format(config.name, rep.chemin, niv))
+						else:
+							if  ecart_cons - limite_cons < 0:
+								# message si la conservation est réduite entre 75% et 100%
+								logger.warning("{}-Le répertoire '{}' aurait du être conservé,\n le quota ne permet pas de respecter le critère de conservation CONSERVATION{}".format(config.name, rep.chemin, niv))
 
-							# effacement dans le tableau arbre
+						# effacement dans le tableau arbre
 						del (arbre[niv-1][sav])
+
 
 
 			else:
@@ -1117,6 +1146,13 @@ def reduction(config,arbre):
 
 				break
 
+	# recherche la sauvegarde la plus ancienne
+	for l_niv in reversed(arbre):
+		if len(l_niv) != 0:
+			doldest_sav  = l_niv[-1].date
+			break
+	# if doldest_sav > rep.date:
+	# 	doldest_sav = rep.date
 	# ecrit la taille dans bilan
 	ecriture_taille_sauv(config, taille_arbre(arbre))
 
@@ -1167,46 +1203,48 @@ def init_logging(fichier):
 		raise init_erreur("Le journal d'événement n'est pas configuré")
 	return logger
 
-def verrouille(flock):
+
+def verrouille():
 	logger.debug("Lancement de 'verrouille'")
 
-
-	if os.path.exists(flock):
-			#calcule le temps en heure depuis sa création. un décalage de une heure apparait en fonction des décalages
-		délai_h=((datetime.datetime.now()-datetime.datetime(1970, 1, 1)).total_seconds()-os.stat(flock).st_mtime)/3600
-			#si une autre sauvegarde n'est pas terminée
+	if var_env_verrou in os.environ:
+		# calcule le temps en heure depuis sa création. un décalage de une heure apparait en fonction des décalages
+		délai_h = ((datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds() - float(
+			os.environ[var_env_verrou])) / 3600
+		# si une autre sauvegarde n'est pas terminée
 		if délai_h < 14:
 			logger.info("une sauvegarde est déjà en cours depuis {0:.1f} heures".format(délai_h))
 			return False
 		else:
-				#si une autre sauvegarde date de plus d'un jour
-			if délai_h>1*24:
-				logger.error("Un verrou de plus d'une semaine est détecté. force la sauvegarde")
-				deverrouille(flock)
-				return verrouille(flock)
+			# si une autre sauvegarde date de plus d'un jour
+			if délai_h > 2 * 24:
+				logger.error("Un verrou de plus de deux jours est détecté. force la sauvegarde")
+				deverrouille()
+				return verrouille()
 			else:
 				logger.warning("sauvegarde déjà verrouillée - sauvegarde annulée")
 				return False
 	else:
-		with open (flock, 'w', encoding='utf8') as f:
-			try:
-				f.write("Lancement d'une sauvegarde le {0}".format(datetime.datetime.now()))
-			except OSError:
-				logger.error("Impossible de créer le fichier de verrou")
-				return False
+		try:  # nombre de seconde depuis 1970
+			os.environ[var_env_verrou] = str((datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds())
+		except OSError:
+			logger.error("Impossible de créer le fichier de verrou")
+			return False
 		return True
 
-def deverrouille(flock):
+
+def deverrouille():
 	logger.debug("Lancement de 'deverrouille'")
 
-	if os.path.exists(flock):
+	if var_env_verrou in os.environ:
 		logger.info("suppression du verrou de la sauvegarde")
 		try:
-			os.remove(flock)
-		except OSError:
-			logger.error("Suppression du fichier verrou '{0}' impossible".format(flock))
+			del (os.environ[var_env_verrou])
+		except (OSError, KeyError):
+			logger.error("Suppression du verrou impossible")
 	else:
 		logger.info("le fichier verrou n'existe pas")
+
 
 def monte(sens, config):
 	""" monte le répertoire source ou destination et retourne l'opération de démontage correpondante
@@ -1322,10 +1360,10 @@ def repertoire_accessible(rep):
 	try:
 		commande_ext(commande, verb=False)
 	except OSError:
-		logger.info("Répertoire '{}' non trouvé".format(rep))
+		logger.debug("Répertoire '{}' non trouvé".format(rep))
 		return False
 	else:
-		logger.info("Répertoire '{}' trouvé".format(rep))
+		logger.debug("Répertoire '{}' trouvé".format(rep))
 		return True
 
 
@@ -1451,10 +1489,10 @@ if __name__ == '__main__':
 
 	# si l'argument ignore_verrou est demandé, supprime le verrou antérieur
 	if args.ignore_verrou:
-		deverrouille(os.path.join(os.path.split(os.path.abspath(__file__))[0], f_lock))
+		deverrouille()
 
 	# verrouille la sauvegarde pour éviter un second lancement
-	if not verrouille(os.path.join(os.path.split(os.path.abspath(__file__))[0], f_lock)):
+	if not verrouille():
 		sys.exit()
 
 	a_demonter=set()
@@ -1476,7 +1514,7 @@ if __name__ == '__main__':
 			a_demonter.add(monte(0, config[sauv]))
 			a_demonter.add(monte(1, config[sauv]))
 		except OSError as exception:
-			logger.debug(exception)
+			logger.info(exception)
 			logger.warning("{}-La sauvegarde  est abandonnée, les répertoires ne sont pas accessibles".format(sauv))
 			# saute à la sauvegarde suivante
 			continue
@@ -1513,7 +1551,7 @@ if __name__ == '__main__':
 	except SyntaxError as exception:
 		logger.warning(exception)
 
-	deverrouille(os.path.join(os.path.split(os.path.abspath(__file__))[0],f_lock))
+	deverrouille()
 	logger.info("--------------- Fin de la sauvegarde ------------------")
 #else:
 #    logger=logging.getLogger("main.sub")

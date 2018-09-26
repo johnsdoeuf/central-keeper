@@ -5,6 +5,7 @@ import configparser
 import datetime
 import shutil
 import logging.config
+import logging
 import json
 import subprocess
 import glob
@@ -395,66 +396,45 @@ class Init_log(unittest.TestCase):
 
 
 class Verrou(unittest.TestCase):
-	fichverrou = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'essai.lock')
 
 	def setUp(self):
-		config_log()
-		try:
-			os.remove(self.fichverrou)
-		except OSError:
-			pass
+		sauv.logger = logging.getLogger(__name__)
 
 	def tearDown(self):
 		try:
-			os.remove(self.fichverrou)
-		except OSError:
+			del os.environ[sauv.var_env_verrou]
+		except KeyError:
 			pass
 
 	def test_fonctionnel(self):
 		"""test fonctionnel de verrouille puis déverrouille"""
 
-		self.assertTrue(sauv.verrouille(self.fichverrou))
-		self.assertTrue(os.path.exists(self.fichverrou))
+		self.assertTrue(sauv.verrouille())
+		self.assertTrue(sauv.var_env_verrou in os.environ)
 		maintenant = (datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds() - 2 * 60 * 60 - 10
-		self.assertLess(maintenant, os.stat(self.fichverrou).st_mtime)
+		self.assertLess(maintenant, float(os.environ[sauv.var_env_verrou]))
 
-		sauv.deverrouille(self.fichverrou)
-		self.assertFalse(os.path.exists(self.fichverrou))
+		sauv.deverrouille()
+		self.assertFalse(sauv.var_env_verrou in os.environ)
 
 	def test_verrou_présent(self):
-		"""test du comportement si un fichier lock existe déjà"""
-		# créé un fichier
-		with open(self.fichverrou, 'w', encoding='utf8') as f:
-			f.write("Lancement d'une sauvegarde le {0}".format(datetime.datetime.now()))
-		# modifie sa date (4 heures en arrière
-		dat = (datetime.datetime.now() - datetime.timedelta(days=0, hours=4, minutes=3, seconds=12)).strftime(
-			'%Y%m%d%H%M.%S')
-		commande = "touch -t " + dat + " " + self.fichverrou
-		subprocess.call(commande, shell=True)
-		self.assertFalse(sauv.verrouille(self.fichverrou))
+		"""test du comportement si un lock existe déjà"""
+		# créé le verrou
+		os.environ[sauv.var_env_verrou] = str((datetime.datetime.now() - datetime.datetime(1970, 1,  1) - datetime.timedelta(
+			hours=4, minutes=3)).total_seconds())
+		self.assertFalse(sauv.verrouille())
 
-		dat = (datetime.datetime.now() - datetime.timedelta(days=0, hours=21, minutes=50, seconds=12)).strftime(
-			'%Y%m%d%H%M.%S')
-		commande = "touch -t " + dat + " " + self.fichverrou
-		subprocess.call(commande, shell=True)
-		self.assertFalse(sauv.verrouille(self.fichverrou))
+		os.environ[sauv.var_env_verrou] = str((datetime.datetime.now() - datetime.datetime(1970, 1,  1) - datetime.timedelta(
+			hours=21, minutes=50)).total_seconds())
+		self.assertFalse(sauv.verrouille())
 		#
-		maintenant = (datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds() - 2 * 60 * 60 - 10
-		dat = (datetime.datetime.now() - datetime.timedelta(days=1, hours=2, minutes=3, seconds=12)).strftime(
-			'%Y%m%d%H%M.%S')
-		commande = "touch -t " + dat + " " + self.fichverrou
-		subprocess.call(commande, shell=True)
-		self.assertTrue(sauv.verrouille(self.fichverrou))
+		os.environ[sauv.var_env_verrou] = str((datetime.datetime.now() - datetime.datetime(1970, 1, 1) - datetime.timedelta(
+			days=2, hours=0, minutes=3)).total_seconds())
+		self.assertTrue(sauv.verrouille())
 
 		# test si un nouveau verrou a bien été créé
-		self.assertLess(maintenant, os.stat(self.fichverrou).st_mtime)
-
-	def test_deverouille_bloqué(self):
-		"""test deverrouille avec fichier ouvert"""
-		with open(self.fichverrou, 'w', encoding='utf8') as f:
-			f.write("Lancement d'une sauvegarde le {0}".format(datetime.datetime.now()))
-			sauv.deverrouille(self.fichverrou)
-			self.assertFalse(os.path.exists(self.fichverrou))
+		maintenant = (datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds()
+		self.assertLess(maintenant - float(os.environ[sauv.var_env_verrou]), 5)
 
 
 class monte(unittest.TestCase):
@@ -1217,6 +1197,28 @@ class fusion_rep(unittest.TestCase):
 		with l_rep[3].open('r', encoding='utf8') as f:
 			self.assertTrue(f.read() == test[0] )
 
+	def test_fonctionnel3(self):
+		"""teste si la source disparait et les fichiers se retouvent bien dans dst  """
+
+		test  = ['2017-12-25 19-00_2/johannes/.thunderbird/b4wxdk9g.default/datareporting/state.json',
+				 '2018-12-25 19-00_2/johannes/.thunderbird/b4wxdk9g.default/datareporting/state.json']
+		l_rep = [Path(self.rep, rep) for rep in test]
+		for prep in l_rep:
+			prep.parent.mkdir(parents=True, exist_ok=True)
+			with prep.open('w', encoding='utf8') as f:
+				# ecrit le string de test correspondant
+				f.write(test[l_rep.index(prep)])
+
+		sauv.fusion_rep(Path(self.rep,'2017-12-25 19-00_2'),Path(self.rep,'2018-12-25 19-00_2'))
+
+		# verifie l'effacement  de la source
+		self.assertFalse(l_rep[0].parent.parent.parent.parent.parent.exists())
+		# verifie que le fichier existe
+		self.assertTrue(l_rep[1].exists())
+		# regarde si le contenu est bien celui provenant de la source (écrasement)
+		with l_rep[1].open('r', encoding='utf8') as f:
+			self.assertTrue(f.read() == test[0] )
+
 	def test_source_non_path(self):
 		"""teste si renvoie bien valuerror si la source n'est pas un path"""
 
@@ -1770,7 +1772,7 @@ class reduction(unittest.TestCase):
 				os.mkdir(os.path.join(self.rep, rep[0]))
 
 			except OSError:
-				logger.error("problème de création de fichier")
+				sauv.logger.error("problème de création de fichier")
 
 			fichier = os.path.join(self.rep, rep[0], "essai")
 			with open(fichier, mode='w') as file:
@@ -1794,9 +1796,11 @@ class reduction(unittest.TestCase):
 		config['sauv'][sauv.qta] = '0.000000025'
 		config['sauv'][sauv.dest] = self.rep
 
-		# lance la fonction
-		sauv.reduction(config['sauv'], arbre)
-
+		sauv.logger = logging.getLogger('main')
+		# lance la fonction et teste le retour de d'un log d'erreur pour supression dans la période de conservation
+		with self.assertLogs(logger=sauv.logger , level=logging.ERROR):
+			sauv.reduction(config['sauv'], arbre)
+#todo comprendre l'erreur du test unitaire
 		self.assertEqual(arbre, reference)
 		# teste existance entre du second
 		self.assertTrue(os.path.exists(os.path.join(self.rep, test[1][0])))
@@ -2019,4 +2023,6 @@ class en_decode_json(unittest.TestCase):
 # Programme principal
 
 if __name__ == '__main__':
+
+
 	unittest.main()
