@@ -1739,6 +1739,7 @@ class regroupe(unittest.TestCase):
 		self.assertTrue(os.path.exists(os.path.join(che, rep[:-2] + "_2")))
 # todo - ajouter un test de conservation de taille
 
+
 class reduction(unittest.TestCase):
 	rep = os.path.join(os.path.split(os.path.abspath(__file__))[0], "K45kjioyuG")
 	now = datetime.datetime.now()
@@ -1986,40 +1987,203 @@ class reduction(unittest.TestCase):
 		self.assertFalse(os.path.exists(os.path.join(self.rep, test[2][0])))
 
 
-
-class en_decode_json(unittest.TestCase):
+class En_Decode_Json(unittest.TestCase):
 	def setUp(self):
 		config_log()
 
-	def test_endecode(self):
+	def test_en_decode(self):
 		""" Encode puis décode un objet rep_sauv"""
 		rsauv = sauv.rep_sauv(datetime.datetime(2017, 10, 5), "/ertert/erte")
 		arbre = [[], [rsauv]]
 
-		try:
-			fichier = sauv.my_encoder().encode(arbre)
-		except json.decoder.JSONDecodeError as exception:
-			pass
+		# try:
+		fichier = sauv.my_encoder().encode(arbre)
+		# except json.decoder.JSONDecodeError as exception:
+		# 	pass
 
-		try:
-			resultat = sauv.my_decoder().decode(fichier)
-		except json.decoder.JSONDecodeError as exception:
-			pass
+		# try:
+		resultat = sauv.my_decoder().decode(fichier)
+		# except json.decoder.JSONDecodeError as exception:
+		# 	pass
 
 		self.assertEqual(arbre, resultat)
 
-	def test_decode_erroné(self):
+	def test_decode_errone(self):
 		""" Encode puis décode un objet rep_sauv"""
-		l_entree = ('{"date": "2017-10-05 00-0045", "chemin": "/ertert/erte", "__class__": "rep_sauv"}',
-					'{"date": "55-10-05 00-00", "chemin": "/ertert/erte", "__class__": "rep_sauv"}',
-					'{"date": "2016-10-05 00-00", "chemin": 5, "__class__": "rep_sauv"}',
-					'{"date": "2017-10-05 00-00",  "__class__": "rep_sauv"}',
-					'{"date": "2017-10-05 00-00", "chemin": ["dffdggdfg"], "__class__": "rep_sauv"}')
+		l_entree = (
+			'{"date": "2017-10-05 00-0045", "chemin": "/ertert/erte", "__class__": "rep_sauv"}',
+			'{"date": "55-10-05 00-00", "chemin": "/ertert/erte", "__class__": "rep_sauv"}',
+			'{"date": "2016-10-05 00-00", "chemin": 5, "__class__": "rep_sauv"}',
+			'{"date": "2017-10-05 00-00",  "__class__": "rep_sauv"}',
+			'{"date": "2017-10-05 00-00", "chemin": ["dffdggdfg"], "__class__": "rep_sauv"}'
+		)
 
 		for entree in l_entree:
 			self.assertRaises(json.decoder.JSONDecodeError, sauv.my_decoder().decode, entree)
 
 
+class Ecriture_Bilan(unittest.TestCase):
+	rep = os.path.join(os.path.split(os.path.abspath(__file__))[0], "K45gdgt6ioyuG", "bdd.dbf")
+
+	
+	def setUp(self):
+		config_log()
+		try:
+			shutil.rmtree(os.path.split(self.rep)[0])
+		except OSError:
+			pass
+		os.makedirs(os.path.split(self.rep)[0], mode=0o777)
+		# Créé la configuration
+		self.config = sauv.My_configparser()
+		self.config['sauv'] = {}
+
+	def tearDown(self):
+		try:
+			shutil.rmtree(os.path.split(self.rep)[0])
+		except OSError:
+			pass
+		self.config = None
+	
+	def test_ecriture(self):
+		"""test fonctionnel de création et écritures de données dans le fichier dbf"""
+		
+		self.config['sauv'][sauv.bilan] = self.rep
+		
+		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		cli.stat = {sauv.bl_date:"2017-06-10 19:26:27", sauv.bl_job:"internet", sauv.bl_voltransfere:4589655}
+		sauv.ecriture_bilan(self.config['sauv'], cli)
+		# test de création
+		self.assertTrue(os.path.exists(self.rep))
+		with sauv.dbf.Table(self.rep) as db:
+			self.assertEqual(db[0][sauv.bl_date], cli.stat[sauv.bl_date])
+		
+
+		# test ajout
+		cli.stat = {sauv.bl_date:"2017-06-11 20:26:27", sauv.bl_job:"internet", sauv.bl_voltransfere:10000}
+		sauv.ecriture_bilan(self.config['sauv'], cli)
+		with sauv.dbf.Table(self.rep) as db:
+			self.assertEqual(db[1][sauv.bl_voltransfere], cli.stat[sauv.bl_voltransfere])
+		# test ajout avec propriété manquante
+		cli.stat = {sauv.bl_date:"2017-06-12 20:26:27", sauv.bl_job:"home"}
+		sauv.ecriture_bilan(self.config['sauv'], cli)
+		with sauv.dbf.Table(self.rep) as db:
+			self.assertEqual((db[2][sauv.bl_job]).strip(), cli.stat[sauv.bl_job])
+			self.assertEqual((db[2][sauv.bl_voltransfere]), None)
+		
+		# test ajout avec proprité dans un mauvais format (str - num, num ->str)
+		cli.stat = {sauv.bl_date:"2017-06-12 20:26:27", sauv.bl_job:555, sauv.bl_voltransfere:"888888"}
+		sauv.ecriture_bilan(self.config['sauv'], cli)
+		with sauv.dbf.Table(self.rep) as db:
+			self.assertEqual(int(db[2][sauv.bl_job]), int(cli.stat[sauv.bl_job]))
+			self.assertEqual(int(db[1][sauv.bl_voltransfere]), int(cli.stat[sauv.bl_voltransfere]))
+			
+			
+	
+	def test_fichier_errone(self):
+		"""test le retour si le fichier bilan n'est pas du type dbf"""
+		self.config['sauv'][sauv.bilan] = self.rep
+		
+		with open(self.rep, mode='w') as file:
+			file.write('cnimporte quoi')
+		
+		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		cli.stat = {sauv.bl_date:"2017-06-10 19:26:27", sauv.bl_job:"internet", sauv.bl_voltransfere:4589655}
+		self.assertRaises( sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
+	
+	
+	def test_fichier_corrompu(self):
+		"""test le retour si le fichier bilan est endommagé"""
+		self.config['sauv'][sauv.bilan] = self.rep
+		
+		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		cli.stat = {sauv.bl_date:"2017-06-10 19:26:27", sauv.bl_job:"internet", sauv.bl_voltransfere:4589655}
+		sauv.ecriture_bilan(self.config['sauv'], cli)
+		with open(self.rep, mode='w') as file:
+			file.write('cnimporte quoi')
+		
+		self.assertRaises( sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
+	
+	def test_mauvais_type_données(self):
+		"""test de l'erreur si le type de donnée fourni n'est pas bon """
+		
+		self.config['sauv'][sauv.bilan] = self.rep
+		
+		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		cli.stat = {sauv.bl_date:"2017-06-10 19:26:27", sauv.bl_job:"internet", sauv.bl_voltransfere:"erreur"}
+		self.assertRaises(sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
+	
+	def test_stat_manquant(self):
+		"""test de l'erreur si le type de donnée fourni n'est pas bon """
+		
+		self.config['sauv'][sauv.bilan] = self.rep
+		
+		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		sauv.ecriture_bilan(self.config['sauv'], cli)
+
+	def test_stat_vide(self):
+		"""test de l'erreur si le type de donnée fourni n'est pas bon """
+		
+		self.config['sauv'][sauv.bilan] = self.rep
+		
+		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		cli.stat = {}
+		sauv.ecriture_bilan(self.config['sauv'], cli)
+		
+	def test_mauvais_champs_données(self):
+		"""test de l'erreur si un champs non déclaré est utilisé dans stat """
+		
+		self.config['sauv'][sauv.bilan] = self.rep
+		
+		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		cli.stat = {'gdfgdfgg':"2017-06-10 19:26:27", sauv.bl_job:"internet", sauv.bl_voltransfere:555555}
+		self.assertRaises( sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
+		
+	
+class calcul_retention(unittest.TestCase):
+	
+	
+	
+	def setUp(self):
+		config_log()
+		self.cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+
+		# Créé la configuration
+		self.config = sauv.My_configparser()
+		self.config['sauv'] = {}
+	
+	def tearDown(self):
+		self.cli = None
+		self.config = None
+	
+	def test_fonctionnel(self):
+		"""test fonctionnel de création et écritures de données dans le fichier dbf"""
+		self.config['sauv'][sauv.cons1] = '5'
+		self.config['sauv'][sauv.cons2] = '30'
+		self.config['sauv'][sauv.cons3] = '90'
+		
+		arbre = [[], [], []]
+		données = (
+			(0, 12, 5),
+			(0, 11, 28),
+			(0, 11, 26,),
+			(1, 1, 1),
+			(1, 2, 15),
+			(2, 1, 10),
+		)
+		for l1,  mois, jour in données:
+			arbre[l1].append(sauv.rep_sauv(datetime.datetime(year=2017,month=mois, day=jour), "chemin"))
+		maintenant = datetime.datetime.now()
+		
+		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
+		
+		self.assertEqual(self.cli.stat[sauv.bl_cons1], (maintenant - arbre[0][-1].date).total_seconds()//86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons2], (arbre[0][-1].date - arbre[1][-1].date).total_seconds()//86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons3], (arbre[1][-1].date - arbre[2][-1].date).total_seconds()//86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons], (maintenant - arbre[2][-1].date).total_seconds()//86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons1obj], self.config['sauv'][sauv.cons1])
+		self.assertEqual(self.cli.stat[sauv.bl_cons2obj], self.config['sauv'][sauv.cons2])
+		self.assertEqual(self.cli.stat[sauv.bl_cons3obj], self.config['sauv'][sauv.cons3])
+		self.assertEqual(self.cli.stat[sauv.bl_consobj], 125)
 # Programme principal
 
 if __name__ == '__main__':

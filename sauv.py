@@ -52,7 +52,7 @@ version = 0.31 # suppression log de fusion et verifie_arbre
 
 #version = 0.32 # modifie hiérarchie log
 #				# détecte la suppression de sauvegarde dans la période de conservation
-				# le verrou par fichier est remplacer par une variable d'environnement qui sera perdu à chaque coupure électrique
+				# le verrou par fichier est remplacé par une variable d'environnement qui sera perdu à chaque coupure électrique
 
 
 	# clé du fichier de configuration (en minucule)
@@ -121,6 +121,7 @@ class rep_sauv():
 
 		self.lnoeud = {}
 		self.taille = 0
+		self.stat = {}
 
 		#définit opérateur d'égalité
 	def __eq__(self, other):
@@ -1157,7 +1158,7 @@ def reduction(config,arbre):
 	ecriture_taille_sauv(config, taille_arbre(arbre))
 
 
-def ecriture_taille_sauv(config,taille):
+def ecriture_taille_sauv(config, taille):
 	""" ecrit la taille dans le bilan """
 
 	if bilan in config:
@@ -1419,6 +1420,102 @@ def pas_de_sauv(config,  arbre,  force):
 
 		return False
 
+import dbf
+bl_date = "datecliche"
+bl_job = "job"
+bl_voltransfere ="vtransfere"
+bl_volcli = "vcliche"
+bl_voljob = "vsauvegard"
+bl_voljobobj = "ovsauvegar"
+bl_debit = "debit"
+bl_md5 = "avec_hash"
+bl_md5dern = "duree_hash"
+bl_md5dernobj = "odureehash"
+bl_cons1 = "duree1"
+bl_cons1obj = "oduree1"
+bl_cons2 = "duree2"
+bl_cons2obj = "oduree2"
+bl_cons3 = "duree3"
+bl_cons3obj = "oduree3"
+bl_cons = "dureeg"
+bl_consobj = "odureeg"
+dbf_structure = """{} C(19);{} C(18);
+	{} N(15,0);{} N(15,0);{} N(15,0);{} N(15,0);
+	{} N(8,2);{} L;{} N(5,0);{} N(5,0);
+	{} N(5,0);{} N(5,0);
+	{} N(5,0);{} N(5,0);
+	{} N(5,0);{} N(5,0);
+	{} N(5,0);{} N(5,0);""".format(
+	bl_date, bl_job,
+	bl_voltransfere, bl_volcli, bl_voljob, bl_voljobobj,
+	bl_debit, bl_md5, bl_md5dern, bl_md5dernobj,
+	bl_cons1, bl_cons1obj,
+	bl_cons2, bl_cons2obj,
+	bl_cons3, bl_cons3obj,
+	bl_cons, bl_consobj
+)
+
+
+def ecriture_bilan(config, cli):
+	""" ecrit le données du cliché courant dans la base de donnée dbase
+		créé le fichier si inexistant
+		supprime le dictionnaire prop
+		
+		entrée:
+		Config, objet configparser
+		cli, objet rep_sauv avec un dictionnaire de statistique à écrire
+		
+		retour:
+		FileNotFoundError si l'écriture n'est pas possible
+		dbf.DbfError si le ficher est corrompu, ou l'enregistrement à écrire mal formé
+	"""
+	print(dbf_structure)
+
+	if bilan in config:
+		fbilan = config[bilan]
+		if not os.path.exists(fbilan):
+			dbf.Table(fbilan, dbf_structure)
+
+		with dbf.Table(fbilan) as db:
+			db.open(mode=dbf.READ_WRITE)
+			db.append(cli.stat)
+			
+def calcul_retention(cli, arbre, config):
+	stat = cli.stat
+	cons = 0
+	# création des objectifs
+	# if cons1 in config:
+	# 	stat[bl_consobj1] = config[cons1]
+	# 	cons += config[cons1]
+	# if cons2 in config:
+	# 	stat[bl_consobj2] = config[cons2]
+	# 	cons += config[cons2]
+	# if cons3 in config:
+	# 	stat[bl_consobj3] = config[cons3]
+	# 	cons += config[cons3]
+	
+	cle_conf = (cons1, cons2, cons3)
+	cle_stat = (bl_cons1obj, bl_cons2obj, bl_cons3obj)
+	maintenant = datetime.datetime.now()
+	cons = 0
+	for a,b in zip(cle_conf, cle_stat):
+		if a in config:
+			stat[b] = config[a]
+			cons += float(config[a])
+	stat[bl_consobj] = cons
+	
+	cle_stat = (bl_cons1, bl_cons2, bl_cons3)
+	base = maintenant
+	date_max = maintenant
+	for	level,b in zip(arbre, cle_stat):
+		if len(level):
+			stat[b] = (base - level[-1].date).total_seconds()//86400
+			base = level[-1].date
+			date_max = min(date_max, level[-1].date)
+			
+	stat[bl_cons] = (maintenant - date_max).total_seconds()//86400
+	
+	
 #Début du programme
 import argparse
 import os
