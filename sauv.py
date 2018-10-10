@@ -1129,7 +1129,7 @@ def reduction(config,arbre):
 						# si la durée de conservation ne peut être respectée
 						# calcul le temps entre la première sauvegarde et celle en traitement converti en jour
 						ecart_cons = ( arbre[niv-1][0].date - rep.date ).total_seconds()/86400
-						if  ecart_cons - limite_cons*0.75 < 0:
+						if ecart_cons - limite_cons*0.75 < 0:
 							# message si la conservation est réduite à moins de 75%
 							logger.error("{}-Le répertoire '{}' aurait du être conservé,\n le quota ne permet pas de respecter 75% du critère de conservation CONSERVATION{}".format(config.name, rep.chemin, niv))
 						else:
@@ -1163,7 +1163,7 @@ def ecriture_taille_sauv(config, taille):
 
 	if bilan in config:
 		fbilan = config[bilan]
-			# ouvre le fichier
+		# ouvre le fichier
 		logger.debug("Ecriture dans le fichier bilan: {}".format(taille))
 		with open(fbilan, 'a', encoding='utf8') as f:
 			try:
@@ -1173,33 +1173,32 @@ def ecriture_taille_sauv(config, taille):
 				logger.warning("{}-Impossible de compléter le fichier bilan : {}".format(config.name, fbilan))
 
 
-
 def init_logging(fichier):
 
-		#si le fichier n'existe pas
+	# si le fichier n'existe pas
 	if not os.path.exists(fichier):
 		logger = logging.getLogger()
 		logger.warning("fichier de configuration {0} ne se trouve pas dans {1}".format(conf_log,os.path.split(os.path.abspath(__file__))[0] ))
 		return logger
 
-		#ouvre le fichier de configuration du journal
-	with  open(fichier,'r',  encoding='utf8') as f:
+	# ouvre le fichier de configuration du journal
+	with open(fichier, 'r',  encoding='utf8') as f:
 		try:
 			logging_config=json.load(f)
 		except json.decoder.JSONDecodeError:
 			raise init_erreur("fichier de configuration erroné" )
 
-		#interprète le fichier de configuration
+	# interprète le fichier de configuration
 	try:
 		dictConfig(logging_config)
 	except (ValueError, TypeError, AttributeError , ImportError,  KeyError) as err:
 		raise init_erreur("Le ficher de configuration du journal est erronée - {0}".format(err))
-	if 'loggers'  in logging_config:
+	if 'loggers' in logging_config:
 		for a in logging_config['loggers']:pass
 	else:
 		raise init_erreur("La clé 'loggers' ne se trouve pas dans la configuration")
 
-	logger=logging.getLogger(a)
+	logger = logging.getLogger(a)
 	if not logger.hasHandlers():
 		raise init_erreur("Le journal d'événement n'est pas configuré")
 	return logger
@@ -1328,7 +1327,7 @@ def monte(sens, config):
 				logger.debug("Le répertoire {} n'est pas accessible".format(repertoire))
 	else:
 		raise OSError("""{}-Le répertoire '{}' n'est pas accessible et aucune instruction de montage
-		 n'est disponible""".format(config.name,config[rep[sens]]))
+			n'est disponible""".format(config.name,config[rep[sens]]))
 
 		# si rien n'a fonctionné
 		# démonte le répertoire
@@ -1344,19 +1343,20 @@ def demonte(a_demonter):
 		return
 
 	for commande in a_demonter:
-		if type(commande)==str:
-			if commande!="":
+		if type(commande) == str:
+			if commande != "":
 				logger.info("commande de démontage '{}'".format(commande))
 				try:
 					commande_ext(shlex.split(commande), verb=True)
 				except OSError:
 					logger.warning("Une erreur est apparue lors du démontage '{}'".format(commande))
 
-def repertoire_accessible(rep): 
+
+def repertoire_accessible(rep):
 	logger.debug("Lancement de 'repertoire_accessible' {}".format(rep))
 
 	commande = shlex.split('rsync --list-only "{0}" "{1}"'.format(rep, os.path.split(__file__)[0] ))
-	logger.debug (commande)
+	logger.debug(commande)
 
 	try:
 		commande_ext(commande, verb=False)
@@ -1366,7 +1366,6 @@ def repertoire_accessible(rep):
 	else:
 		logger.debug("Répertoire '{}' trouvé".format(rep))
 		return True
-
 
 
 def init_args():
@@ -1383,11 +1382,11 @@ def init_args():
 
 
 def pas_de_sauv(config,  arbre,  force):  
-			# teste si une sauvegarde est nécessaire,
+		# teste si une sauvegarde est nécessaire,
 		logger.debug("Lancement de 'pas_de_sauv'")
 
-			# teste si l'arbre est rempli
-			# Si l'arbre n'est pas défini, laisse passer pour refaire le calcul après la création de l'arbre
+		# teste si l'arbre est rempli
+		# Si l'arbre n'est pas défini, laisse passer pour refaire le calcul après la création de l'arbre
 		if len(arbre[0])+len(arbre[1])+len(arbre[2]) == 0:
 			logger.info("L'arbre est vide")
 			return False
@@ -1403,11 +1402,10 @@ def pas_de_sauv(config,  arbre,  force):
 
 		logger.debug("niveau:{}".format(niv))
 
-
 		# saute cette sauvegarde si  periode1 définie et délai entre deux sauvegardes pas atteint
-		if  per1 in config:
+		if per1 in config:
 			limite=arbre[niv][0].date+datetime.timedelta(hours=config.getfloat(per1)*24*.9)
-			if datetime.datetime.now()<limite:
+			if datetime.datetime.now() < limite:
 				logger.info("La sauvegarde est sautée car il est trop tôt" )
 				logger.debug("limite:{}".format(limite))
 				return True
