@@ -2071,11 +2071,19 @@ class Ecriture_Bilan(unittest.TestCase):
 			self.assertEqual((db[2][sauv.bl_voltransfere]), None)
 		
 		# test ajout avec proprité dans un mauvais format (str - num, num ->str)
+<<<<<<< Updated upstream
 		cli.stat = {sauv.bl_date:"2017-06-12 20:26:27", sauv.bl_job:555, sauv.bl_voltransfere:"888888"}
 		sauv.ecriture_bilan(self.config['sauv'], cli)
 		with sauv.dbf.Table(self.rep) as db:
 			self.assertEqual(int(db[2][sauv.bl_job]), int(cli.stat[sauv.bl_job]))
 			self.assertEqual(int(db[1][sauv.bl_voltransfere]), int(cli.stat[sauv.bl_voltransfere]))
+=======
+		# cli.stat = {sauv.bl_date:"2017-06-12 20:26:27", sauv.bl_job:555, sauv.bl_voltransfere:"888888"}
+		# sauv.ecriture_bilan(self.config['sauv'], cli)
+		# with sauv.dbf.Table(self.rep) as db:
+		# 	self.assertEqual(int(db[2][sauv.bl_job]), int(cli.stat[sauv.bl_job]))
+		# 	self.assertEqual(int(db[1][sauv.bl_voltransfere]), int(cli.stat[sauv.bl_voltransfere]))
+>>>>>>> Stashed changes
 			
 			
 	

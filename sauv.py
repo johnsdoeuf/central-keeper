@@ -1421,6 +1421,7 @@ def pas_de_sauv(config,  arbre,  force):
 		return False
 
 import dbf
+<<<<<<< Updated upstream
 bl_date = "datecliche"
 bl_job = "job"
 bl_voltransfere ="vtransfere"
@@ -1439,6 +1440,26 @@ bl_cons3 = "duree3"
 bl_cons3obj = "oduree3"
 bl_cons = "dureeg"
 bl_consobj = "odureeg"
+=======
+bl_date = "Date_du_cliché"
+bl_job = "Sauvegarde"
+bl_voltransfere ="Volume_transfere"
+bl_volcli = "Volume_cliché"
+bl_voljob = "Volume_de_la_sauvegarde"
+bl_voljobobj = "Objectif_volume_de_la_sauvegarde"
+bl_debit = "Debit"
+bl_md5 = "Avec_hashage"
+bl_md5dern = "Durée_depuis_le_dernier_hashage"
+bl_md5dernobj = "Objectif_de_durée_depuis_le_dernier_hashage"
+bl_cons1 = "Durée_de_conservation_niveau_1"
+bl_cons1obj = "Objectif_durée_de_conservation_niveau_1"
+bl_cons2 = "Durée_de_conservation_niveau_2"
+bl_cons2obj = "Objectif_durée_de_conservation_niveau_2"
+bl_cons3 = "Durée_de_conservation_niveau_3"
+bl_cons3obj = "Objectif_durée_de_conservation_niveau_3"
+bl_cons = "Durée_de_conservation_générale"
+bl_consobj = "Objectif_durée_de_conservation_générale"
+>>>>>>> Stashed changes
 dbf_structure = """{} C(19);{} C(18);
 	{} N(15,0);{} N(15,0);{} N(15,0);{} N(15,0);
 	{} N(8,2);{} L;{} N(5,0);{} N(5,0);
