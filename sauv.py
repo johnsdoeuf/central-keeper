@@ -74,30 +74,30 @@ md5='md5'
 permd5='periodemd5'
 filt='filtre'
 bilan='bilan'
-	# sépara
+# sépara
 src_separateur = ';'
-	# liste de clé
+# liste de clé
 l_clenum = [per1, per2, per3, cons1, cons2, cons3, qta, md5, permd5]
 l_cle = [src, dest, mntsrc, umntsrc, mntdst, umntdst, para,  filt, bilan] +l_clenum
 
-	# tableaux pour fonction monte
+# tableaux pour fonction monte
 rep = [src, dest]
 mnt = [mntsrc, mntdst]
 umnt = [umntsrc, umntdst]
 
-	# declaration de constante
-formatdate="%Y-%m-%d %H-%M"     # Format de date des répertoires de sauvegarde
+# declaration de constante
+formatdate = "%Y-%m-%d %H-%M"     # Format de date des répertoires de sauvegarde
 temp = 'temp'         #répertoire temporaire de sauvegarde"
 format_bilan = "\n{:%Y-%m-%d %H:%M:%S} {:>16} {:>15d} {:>15d} {:>10.2f} {:>4}"
 
-	# fichier de données
+# fichier de données
 conf_log='log.conf'
 conf_sauv='sauv.conf'
-	# variable de lock
+# variable de lock
 var_env_verrou = "SAUV_VERROU"
-	# fichier d'enregistrement de l'historique des sauvegardes
+# fichier d'enregistrement de l'historique des sauvegardes
 f_arbre='historique.sauv'
-	#définit un variable globale pour conserver la trace des processus extérieur lancé et les fermer si nécessaire
+#définit un variable globale pour conserver la trace des processus extérieur lancé et les fermer si nécessaire
 process_en_cours = None
 
 class init_erreur(Exception):
@@ -1459,7 +1459,7 @@ dbf_structure = """{} C(19);{} C(18);
 def ecriture_bilan(config, cli):
 	""" ecrit le données du cliché courant dans la base de donnée dbase
 		créé le fichier si inexistant
-		supprime le dictionnaire prop
+		Les stats écrites doivent être au bon format(texte,int ou boolean)
 		
 		entrée:
 		Config, objet configparser
@@ -1469,7 +1469,6 @@ def ecriture_bilan(config, cli):
 		FileNotFoundError si l'écriture n'est pas possible
 		dbf.DbfError si le ficher est corrompu, ou l'enregistrement à écrire mal formé
 	"""
-	print(dbf_structure)
 
 	if bilan in config:
 		fbilan = config[bilan]

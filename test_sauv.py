@@ -2070,14 +2070,7 @@ class Ecriture_Bilan(unittest.TestCase):
 			self.assertEqual((db[2][sauv.bl_job]).strip(), cli.stat[sauv.bl_job])
 			self.assertEqual((db[2][sauv.bl_voltransfere]), None)
 		
-		# test ajout avec proprité dans un mauvais format (str - num, num ->str)
-
-		cli.stat = {sauv.bl_date:"2017-06-12 20:26:27", sauv.bl_job:555, sauv.bl_voltransfere:"888888"}
-		sauv.ecriture_bilan(self.config['sauv'], cli)
-		with sauv.dbf.Table(self.rep) as db:
-			self.assertEqual(int(db[2][sauv.bl_job]), int(cli.stat[sauv.bl_job]))
-			self.assertEqual(int(db[1][sauv.bl_voltransfere]), int(cli.stat[sauv.bl_voltransfere]))
-			
+	
 	
 	def test_fichier_errone(self):
 		"""test le retour si le fichier bilan n'est pas du type dbf"""
@@ -2139,7 +2132,7 @@ class Ecriture_Bilan(unittest.TestCase):
 		self.assertRaises( sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
 		
 	
-class calcul_retention(unittest.TestCase):
+class Calcul_Retention(unittest.TestCase):
 	
 	
 	
@@ -2156,7 +2149,7 @@ class calcul_retention(unittest.TestCase):
 		self.config = None
 	
 	def test_fonctionnel(self):
-		"""test fonctionnel de création et écritures de données dans le fichier dbf"""
+		"""test fonctionnel de création des statistique de rétention du cliché en cours"""
 		self.config['sauv'][sauv.cons1] = '5'
 		self.config['sauv'][sauv.cons2] = '30'
 		self.config['sauv'][sauv.cons3] = '90'
@@ -2184,6 +2177,42 @@ class calcul_retention(unittest.TestCase):
 		self.assertEqual(self.cli.stat[sauv.bl_cons2obj], self.config['sauv'][sauv.cons2])
 		self.assertEqual(self.cli.stat[sauv.bl_cons3obj], self.config['sauv'][sauv.cons3])
 		self.assertEqual(self.cli.stat[sauv.bl_consobj], 125)
+	
+	
+	def test_fonctionnel_niveau1_seul(self):
+		"""test fonctionnel de création des statistique si seulement un niveau est défini"""
+		self.config['sauv'][sauv.cons1] = '5'
+
+		
+		arbre = [[], [], []]
+		données = (
+			(0, 12, 5),
+			(0, 11, 28),
+			(0, 11, 26,),
+			(1, 1, 1),
+			(1, 2, 15),
+			(2, 1, 10),
+		)
+		for l1,  mois, jour in données:
+			arbre[l1].append(sauv.rep_sauv(datetime.datetime(year=2017,month=mois, day=jour), "chemin"))
+		maintenant = datetime.datetime.now()
+		
+		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
+		
+		self.assertEqual(self.cli.stat[sauv.bl_cons1], (maintenant - arbre[0][-1].date).total_seconds()//86400)
+		self.assertFalse(sauv.bl_cons2 in self.cli.stat)
+		self.assertFalse(sauv.bl_cons3 in self.cli.stat)
+		self.assertEqual(self.cli.stat[sauv.bl_cons], (maintenant - arbre[0][-1].date).total_seconds()//86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons1obj], self.config['sauv'][sauv.cons1])
+		self.assertFalse(sauv.bl_cons2obj in self.cli.stat)
+		self.assertFalse(sauv.bl_cons3obj in self.cli.stat)
+		self.assertEqual(self.cli.stat[sauv.bl_consobj], 5)
+
+
+
+
+
+
 # Programme principal
 
 if __name__ == '__main__':
