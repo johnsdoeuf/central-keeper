@@ -123,6 +123,12 @@ class rep_sauv():
 		self.taille = 0
 		self.stat = {}
 
+		self.stat[bl_date] = dat.strftime(formatdate)
+
+		self.reussi = None
+		self.signale_erreur = None
+		self.md5 = None
+
 		#définit opérateur d'égalité
 	def __eq__(self, other):
 		if self.date  != other.date:
@@ -134,18 +140,29 @@ class rep_sauv():
 				if self.taille != other.taille:
 					return False
 				else:
-					if len(self.lnoeud) != len(other.lnoeud):
+					if self.reussi != other.reussi:
 						return False
 					else:
-						for clef,val in other.lnoeud.items():
-							if self.lnoeud[clef] != val:
+						if self.signale_erreur != other.signale_erreur:
+							return False
+						else:
+							if self.md5 != other.md5:
 								return False
+							else:
+								if len(self.lnoeud) != len(other.lnoeud):
+									return False
+								else:
+									for clef,val in other.lnoeud.items():
+										if self.lnoeud[clef] != val:
+											return False
 
 		return True
 
 		#définit la méthode d'affichage
 	def __repr__(self):
-		return "<objet rep_sauv date:{}, chemin:{}, taille:{}, noeud:{}>".format(self.date.strftime(formatdate),self.chemin, self.taille, self.lnoeud )
+		return "<objet rep_sauv date:{}, chemin:{}, reussi:{}, signale_erreur:{}, md5:{}, taille:{}, noeud:{}>".format(
+			self.date.strftime(formatdate),self.chemin, self.reussi, self.signale_erreur,
+			self.md5, self.taille, self.lnoeud )
 
 
 	def analyse(self):
@@ -482,7 +499,7 @@ def verifie_arbre(config, branche):
 	# vérifie l'ordre des dates
 # todo - améliorer la programation de ce test
 	old_date = datetime.datetime(1990,1,1)
-	iterateur = iterateur_arbre(arbre)
+	iterateur = iterateur_arbre_inv(arbre)
 	for incr in iterateur:
 		if incr.date <= old_date:
 			logger.warning("un increment de sauvegarde est mal daté ou pas dans le bon niveau :{}, il est supprimé ".format(incr))
@@ -508,7 +525,7 @@ def verifie_arbre(config, branche):
 
 		# complète la sauvegarde avec les données de taille
 		logger.info("commence la reconstruction de la taille des sauvegardes")
-		iterateur = iterateur_arbre( arbre)
+		iterateur = iterateur_arbre_inv( arbre)
 		for incr in iterateur:
 			incr.analyse()
 
@@ -553,16 +570,25 @@ def comparaison_arbre(branche1, branche2):
 	logger.info("Les sauvegardes en mémoire et sur disques sont identiques ")
 	return True
 
-def iterateur_arbre( sauv):
+def iterateur_arbre_inv( sauv):
 	# itérateur pour parcourir arbre[sauv] linéairement du plus ancien au plus récent
 	for lvl in reversed(sauv):
 		for incr in reversed(lvl):
 			yield incr
 
+def iterateur_arbre( sauv):
+	""" itérateur pour parcourir arbre[sauv] linéairement du plus récent au plus ancien
+		entrée :
+		sauv: liste - arbre des sauvegardes passées sous la forme [[], [], []]
+	"""
+	for lvl in sauv:
+		for incr in lvl:
+			yield incr
+
 
 def reduit_inode(branche):
 	# ne conserve les inodes que de la dernière sauvegarde
-	it = iterateur_arbre( branche)
+	it = iterateur_arbre_inv( branche)
 	première = True
 
 	for incr in it:
@@ -637,7 +663,7 @@ def charge_arbre(f_arbre):
 
 # todo - créer tests
 def taille_arbre(arbre):
-	iterateur = iterateur_arbre(arbre)
+	iterateur = iterateur_arbre_inv(arbre)
 	taille = 0
 
 	for incr in iterateur:
@@ -663,6 +689,12 @@ def sauv_arbre(f_arbre, arbre):
 		raise SyntaxError("le chemin n'existe pas")
 
 def commande_ext(commande, verb):
+	""" lance une commande système
+
+		 Paramètres:
+		 commande: commande extérieure sous la forme d'une liste
+		 verb: Boolean définit si le retour de la commande doit etre écrit dans logger
+	"""
 	logger.debug("Lancement de 'commande_ext' avec {}".format(commande))
 	if type(commande)!=list:
 		raise SyntaxError("Le paramètre doit être une liste")
@@ -702,6 +734,8 @@ def commande_ext(commande, verb):
 def copie(config, arbre ):
 	logger.debug("Lancement de 'copie'")
 
+
+
 	source=config[src]
 	if not repertoire_accessible(source):
 #            Si la source n'existe pas
@@ -739,7 +773,8 @@ def copie(config, arbre ):
 	para_md5 = ''
 	nom_md5 = ''
 	sauv_md5=False
-		# si le parametre periondemd5 est défini force la vérification de tous les fichiers
+
+	# si le parametre periondemd5 est défini force la vérification de tous les fichiers
 	if permd5 in config:
 		if md5 in config:
 			dern_md5 = (ref_md5 + datetime.timedelta(days=int(config[md5])))
@@ -772,34 +807,49 @@ def copie(config, arbre ):
 	commande=shlex.split(parametre +' '+ para_md5 + ' '+filtre+ ' '+ reference + ' "'+source+'" "'+destination_temp+'"')
 	logger.debug("Commande:"+str(commande))
 
+	# créé le cliché pour enregistrer le résultat
+	retour = rep_sauv(maintenant, destination)
+	retour.reussi = True
+	retour.md5 = sauv_md5
+
+
 	sortie = commande_ext(commande, verb=True)
+
+
+
 		# si bilan est configuré
 	if bilan in config:
-		fbilan=config[bilan]
-			# ouvre le fichier
-		ret = extrait_bilan(sortie, config.name, sauv_md5 )
-		logger.debug("Ecriture dans le fichier bilan: {}".format(ret))
-		with open (fbilan, 'a', encoding='utf8') as f:
-			try:
-					#écrit la ligne générée par extrait_bilan
-				f.write( ret)
-			except OSError:
-				logger.warning("{}-Impossible de compléter le fichier bilan : {}".format(config.name, fbilan))
+
+		analyse_retour_pour_bilan(sortie, config.name, sauv_md5, retour)
+		# fbilan=config[bilan]
+		# 	# ouvre le fichier
+		# ret = extrait_bilan(sortie, config.name, sauv_md5 )
+		# logger.debug("Ecriture dans le fichier bilan: {}".format(ret))
+		# with open (fbilan, 'a', encoding='utf8') as f:
+		# 	try:
+		# 			#écrit la ligne générée par extrait_bilan
+		# 		f.write( ret)
+		# 	except OSError:
+		# 		logger.warning("{}-Impossible de compléter le fichier bilan : {}".format(config.name, fbilan))
 
 
 	logger.info("renomme {} en {}".format(destination_temp,destination) )
 	try:
 		os.rename(destination_temp,destination)
 	except OSError as exception:
-		logger.warrning("renommer {} en {} a causé une erreur".format(destination_temp,destination))
-		logger.warnning(exception)
-
-	# met à jour la taille des sauvegardes
-	# t = Taille_Increment()
-	# t.Ajout(config[dest], destination)
-	retour = rep_sauv(maintenant, destination)
+		logger.warning("renommer {} en {} a causé une erreur".format(destination_temp,destination))
+		logger.warning(exception)
+		retour.reussi = False
+	
+	if not retour.reussi:
+		iterateur = iterateur_arbre(arbre)
+		ok = False
+		for cli in iterateur[5]:
+			ok = ok or cli.reussi
+		if not ok:
+			logger.error("5 warnings successifs sont intervenus lors de la sauvegarde")
+	# todo renvoi de log à tester
 	retour.analyse()
-
 	return retour
 
 
@@ -1154,23 +1204,23 @@ def reduction(config,arbre):
 			break
 	# if doldest_sav > rep.date:
 	# 	doldest_sav = rep.date
-	# ecrit la taille dans bilan
-	ecriture_taille_sauv(config, taille_arbre(arbre))
 
+	# ecrit la taille dans stat
+	# ecriture_taille_sauv(config, taille_arbre(arbre))
 
-def ecriture_taille_sauv(config, taille):
-	""" ecrit la taille dans le bilan """
-
-	if bilan in config:
-		fbilan = config[bilan]
-		# ouvre le fichier
-		logger.debug("Ecriture dans le fichier bilan: {}".format(taille))
-		with open(fbilan, 'a', encoding='utf8') as f:
-			try:
-				# écrit la ligne générée par extrait_bilan
-				f.write("{:>15}".format(taille))
-			except OSError:
-				logger.warning("{}-Impossible de compléter le fichier bilan : {}".format(config.name, fbilan))
+# def ecriture_taille_sauv(config, taille):
+# 	""" ecrit la taille dans le bilan """
+#
+# 	if bilan in config:
+# 		fbilan = config[bilan]
+# 		# ouvre le fichier
+# 		logger.debug("Ecriture dans le fichier bilan: {}".format(taille))
+# 		with open(fbilan, 'a', encoding='utf8') as f:
+# 			try:
+# 				# écrit la ligne générée par extrait_bilan
+# 				f.write("{:>15}".format(taille))
+# 			except OSError:
+# 				logger.warning("{}-Impossible de compléter le fichier bilan : {}".format(config.name, fbilan))
 
 
 def init_logging(fichier):
@@ -1353,6 +1403,14 @@ def demonte(a_demonter):
 
 
 def repertoire_accessible(rep):
+	"""detecte l'existance d'un répertoire même sur un serveur rsync distant
+		Entrée:
+		rep - str - Chemin complet
+		
+		Sortie:
+		Boolean - True si existe
+	
+	"""
 	logger.debug("Lancement de 'repertoire_accessible' {}".format(rep))
 
 	commande = shlex.split('rsync --list-only "{0}" "{1}"'.format(rep, os.path.split(__file__)[0] ))
@@ -1478,41 +1536,97 @@ def ecriture_bilan(config, cli):
 		with dbf.Table(fbilan) as db:
 			db.open(mode=dbf.READ_WRITE)
 			db.append(cli.stat)
-			
+
+
 def calcul_retention(cli, arbre, config):
-	stat = cli.stat
-	cons = 0
-	# création des objectifs
-	# if cons1 in config:
-	# 	stat[bl_consobj1] = config[cons1]
-	# 	cons += config[cons1]
-	# if cons2 in config:
-	# 	stat[bl_consobj2] = config[cons2]
-	# 	cons += config[cons2]
-	# if cons3 in config:
-	# 	stat[bl_consobj3] = config[cons3]
-	# 	cons += config[cons3]
+	""" Calcule les durées de rétention actuelle et les écrit dans les statistiques du cliché courant
 	
+		entrée:
+		cli: cliché courant
+		arbre: arbre du job [[], [], []]
+		config: la configuration du job
+		
+		sortie:
+		cliché.stat mis à jour (tous les bl_consXXXX)
+		ne créé pas ceux qui ne sont pas connus
+	"""
+	stat = cli.stat
+	
+	# défini les itérateurs
 	cle_conf = (cons1, cons2, cons3)
 	cle_stat = (bl_cons1obj, bl_cons2obj, bl_cons3obj)
+
 	maintenant = datetime.datetime.now()
 	cons = 0
+	# extrait les objectifs de la configuration
 	for a,b in zip(cle_conf, cle_stat):
 		if a in config:
 			stat[b] = config[a]
 			cons += float(config[a])
+	# cumule pour obtenir l'objectif global
 	stat[bl_consobj] = cons
-	
+
 	cle_stat = (bl_cons1, bl_cons2, bl_cons3)
 	base = maintenant
 	date_max = maintenant
+	# extrait les dates au plus loin de l'arbre
 	for	level,b in zip(arbre, cle_stat):
 		if len(level):
 			stat[b] = (base - level[-1].date).total_seconds()//86400
 			base = level[-1].date
 			date_max = min(date_max, level[-1].date)
-			
+	# calcule le résultat global
 	stat[bl_cons] = (maintenant - date_max).total_seconds()//86400
+	# calcule la taille
+	stat[bl_voljob] = taille_arbre(arbre)
+	if qta in config:
+		stat[bl_voljobobj] = config[qta]
+	#todo test pour les deux lignes précédentes
+
+def analyse_retour_pour_bilan(lignes, sauv, md5, cli):
+	"""
+	à partir d'une liste des lignes renvoyées par rsync, extrait les valeurs intéressantes
+	et les mets en forme pour former une seule ligne prête à écrire dans un fichier
+	le formatage se trouve dans la chaine constante format_bilan
+	:param lignes: liste des lignes
+			sauv: le nom de la sauvegarde
+			md5 : booléen si la sauvegarde est avec vérification md5
+			cli: cliché courant, à compléter
+	:return: cli compléter par information du bilan
+	format: bl_date, bl_job: caractère, bl_md5: booléan, reste numérique
+	"""
+	
+	# prépare les deux expressions régulières
+	regex1 = re.compile(r"sent (?P<sent>[0-9,]*) bytes.*received (?P<received>[0-9,]*) bytes")
+	regex2 = re.compile(r"total size is (?P<stot>[0-9,]*) .*speedup is (?P<speed>[0-9.]*)")
+	bechanges = 0
+	btot = 0
+	speed = 0
+	
+	for l in lignes:
+		result = regex1.search(l)
+		if result:
+			cli.stat[bl_voltransfere] = int(re.sub(",", "", result.group("sent"))) + int(re.sub(",", "", result.group("received")))
+			logger.debug("Ligne 'sent received' trouvée ")
+			
+		
+		result = regex2.search(l)
+		if result:
+			cli.stat[bl_volcli] = int(re.sub(",", "", result.group("stot")))
+			cli.stat[bl_debit] = float(result.group("speed"))
+			
+			logger.debug("Ligne total size' trouvée ")
+	
+
+	cli.stat[bl_job] = sauv
+	cli.stat[bl_md5] = bool(md5)
+	
+	
+	# if md5:
+	# 	return format_bilan.format(d, sauv, bechanges, btot, speed, "md5")
+	# else:
+	# 	return format_bilan.format(d, sauv, bechanges, btot, speed, "")
+
 	
 	
 #Début du programme
@@ -1624,12 +1738,22 @@ if __name__ == '__main__':
 		if pas_de_sauv(config[sauv],  arbre[sauv],  args.force):
 			continue
 
+		cliche = None
 		try:
-			arbre[sauv][0].insert(0, copie(config[sauv], arbre[sauv]))
+			cliche = copie(config[sauv], arbre[sauv])
 		except OSError as exception:
 			logger.warning("{}-{}".format(sauv,exception))
 			logger.warning("{}-La sauvegarde  a renvoyée une erreur".format(sauv))
 			continue
+
+		if cliche:
+			calcul_retention(cliche, arbre[sauv], config[sauv])
+			arbre[sauv][0].insert(0, cliche)
+
+			try:
+				ecriture_bilan(config[sauv], cliche)
+			except (FileNotFoundError, dbf.DbfError) as exception:
+				logger.warning("{}-l'écriture du bilan impossible: {}".format(sauv, exception))
 
 		reduit_inode(arbre[sauv])
 
@@ -1639,6 +1763,11 @@ if __name__ == '__main__':
 			logger.warning("{}-{}".format(sauv, exception))
 			logger.warning("{}-La compression de la sauvegarde a renvoyée une erreur".format(sauv))
 			continue
+
+		# ecrit les info de tail et tétention dans stat
+		if cliche:
+			calcul_retention(cliche, arbre[sauv], config[sauv])
+
 
 	demonte(a_demonter)
 

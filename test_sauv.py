@@ -724,6 +724,46 @@ class commande_ext(unittest.TestCase):
 		self.assertRaises(SyntaxError, sauv.commande_ext, "", False)
 
 
+class rep_accessible(unittest.TestCase):
+	
+
+	def setUp(self):
+		config_log()
+	
+	def tearDown(self):
+		pass
+		# try:
+		# 	shutil.rmtree(self.repsauv)
+		# except OSError:
+		# 	pass
+		
+	def test_fonctionnel(self):
+		"""test que le répertoire est bien détecté"""
+		self.repsauv = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'tmp_essài')
+		
+		self.assertFalse(sauv.repertoire_accessible(self.repsauv))
+		
+		try:
+			os.makedirs(self.repsauv, mode=0o777)
+		except OSError:
+			pass
+		
+		self.assertTrue(sauv.repertoire_accessible(self.repsauv))
+	
+	def test_chemin_avec_espace(self):
+		"""test que le répertoire est bien détecté"""
+		self.repsauv = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'tmp espace')
+		
+		self.assertFalse(sauv.repertoire_accessible(self.repsauv))
+		
+		try:
+			os.makedirs(self.repsauv, mode=0o777)
+		except OSError:
+			pass
+		
+		self.assertTrue(sauv.repertoire_accessible(self.repsauv))
+
+
 class charge_arbre(unittest.TestCase):
 	fich = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'essai.hist')
 
@@ -871,6 +911,7 @@ class rep_sauv(unittest.TestCase):
 		resultat2.analyse()
 
 		self.assertEqual(resultat2, resultat)
+		self.assertEqual(resultat.stat[sauv.bl_date], datetime.datetime(2000, 1, 1).strftime(sauv.formatdate) )
 
 	def test_chemin_inexistant(self):
 
@@ -2070,7 +2111,7 @@ class Ecriture_Bilan(unittest.TestCase):
 			self.assertEqual((db[2][sauv.bl_job]).strip(), cli.stat[sauv.bl_job])
 			self.assertEqual((db[2][sauv.bl_voltransfere]), None)
 		
-	
+
 	
 	def test_fichier_errone(self):
 		"""test le retour si le fichier bilan n'est pas du type dbf"""
@@ -2179,7 +2220,7 @@ class Calcul_Retention(unittest.TestCase):
 		self.assertEqual(self.cli.stat[sauv.bl_consobj], 125)
 	
 	
-	def test_fonctionnel_niveau1_seul(self):
+	def test_fonctionnel_niveau1_et_deux(self):
 		"""test fonctionnel de création des statistique si seulement un niveau est défini"""
 		self.config['sauv'][sauv.cons1] = '5'
 
@@ -2189,8 +2230,6 @@ class Calcul_Retention(unittest.TestCase):
 			(0, 12, 5),
 			(0, 11, 28),
 			(0, 11, 26,),
-			(1, 1, 1),
-			(1, 2, 15),
 			(2, 1, 10),
 		)
 		for l1,  mois, jour in données:
@@ -2201,18 +2240,70 @@ class Calcul_Retention(unittest.TestCase):
 		
 		self.assertEqual(self.cli.stat[sauv.bl_cons1], (maintenant - arbre[0][-1].date).total_seconds()//86400)
 		self.assertFalse(sauv.bl_cons2 in self.cli.stat)
-		self.assertFalse(sauv.bl_cons3 in self.cli.stat)
-		self.assertEqual(self.cli.stat[sauv.bl_cons], (maintenant - arbre[0][-1].date).total_seconds()//86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons3], (arbre[0][-1].date - arbre[2][-1].date).total_seconds()//86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons], (maintenant - arbre[2][-1].date).total_seconds()//86400)
 		self.assertEqual(self.cli.stat[sauv.bl_cons1obj], self.config['sauv'][sauv.cons1])
 		self.assertFalse(sauv.bl_cons2obj in self.cli.stat)
 		self.assertFalse(sauv.bl_cons3obj in self.cli.stat)
 		self.assertEqual(self.cli.stat[sauv.bl_consobj], 5)
+	
+	
+	def test_fonctionnel_niveau2_seul(self):
+		"""test fonctionnel de création des statistique si seulement un niveau est défini"""
+		self.config['sauv'][sauv.cons2] = '15'
+		
+		
+		arbre = [[], [], []]
+		données = (
+			(1, 12, 5),
+			(1, 11, 28),
+			(1, 11, 26,),
+			(1, 1, 10),
+		)
+		for l1,  mois, jour in données:
+			arbre[l1].append(sauv.rep_sauv(datetime.datetime(year=2017,month=mois, day=jour), "chemin"))
+		maintenant = datetime.datetime.now()
+		
+		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
+		
+		self.assertFalse(sauv.bl_cons1 in self.cli.stat)
+		self.assertEqual(self.cli.stat[sauv.bl_cons2], (maintenant - arbre[1][-1].date).total_seconds()//86400)
+		self.assertFalse(sauv.bl_cons3 in self.cli.stat)
+		self.assertEqual(self.cli.stat[sauv.bl_cons], (maintenant - arbre[1][-1].date).total_seconds()//86400)
+		
+		self.assertFalse(sauv.bl_cons1obj in self.cli.stat)
+		self.assertEqual(self.cli.stat[sauv.bl_cons2obj], self.config['sauv'][sauv.cons2])
+		self.assertFalse(sauv.bl_cons3obj in self.cli.stat)
+		self.assertEqual(self.cli.stat[sauv.bl_consobj], 15)
 
 
+class analyse_retour_pour_bilan(unittest.TestCase):
+	
+	def setUp(self):
+		config_log()
+		self.cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		
+	def tearDown(self):
+		self.cli = None
+	
+	def test_fonctionnel(self):
+		"""test fonctionnel de création des statistique sur la sauvegarde en cours"""
+		md5 = "ert"
+		job = "sauv"
+		lignes = \
+			["sent 100 bytes.   received 1,502 bytes",
+			"total size is 200 . speedup is 400.5"]
+		avant = datetime.datetime.now().strftime(sauv.formatdate)
+		
+		sauv.analyse_retour_pour_bilan(lignes, job, md5, self.cli)
+		
+		self.assertEqual(self.cli.stat[sauv.bl_job], job)
+		self.assertEqual(self.cli.stat[sauv.bl_md5], bool(md5) )
+		self.assertEqual(self.cli.stat[sauv.bl_debit], 400.5)
+		self.assertEqual(self.cli.stat[sauv.bl_voltransfere], 1602)
+		self.assertEqual(self.cli.stat[sauv.bl_volcli],200)
 
-
-
-
+		
 # Programme principal
 
 if __name__ == '__main__':
