@@ -208,6 +208,9 @@ class my_encoder(json.JSONEncoder):
 			res['chemin'] = obj.chemin
 			res['lnoeud'] = obj.lnoeud
 			res['taille'] = obj.taille
+			res['reussi'] = obj.reussi
+			res['signale'] = obj.signale_erreur
+			res['md5'] = obj.md5
 			res['__class__'] = 'rep_sauv'
 			return res
 
@@ -225,6 +228,9 @@ class my_decoder(json.JSONDecoder):
 					inst = rep_sauv(dat, d['chemin'])
 					inst.taille = d['taille']
 					inst.lnoeud = d['lnoeud']
+					inst.reussi = d['reussi']
+					inst.signale_erreur = d['signale']
+					inst.md5 = d['md5']
 				except (init_erreur, ValueError, KeyError)  as exception:
 					raise json.decoder.JSONDecodeError("rep_sauv n'est pas correct: {}".format(exception),"inconnu",0)
 			else:
@@ -659,7 +665,7 @@ def charge_arbre(f_arbre):
 	else:
 		raise init_erreur("historique non trouvé")
 
-# todo - compléter avec les tests de validité de taille et inodes
+
 
 # todo - créer tests
 def taille_arbre(arbre):
@@ -731,121 +737,115 @@ def commande_ext(commande, verb):
 
 		return sortie_normale
 
-def copie(config, arbre ):
+
+def copie(config, arbre):
 	logger.debug("Lancement de 'copie'")
 
-
-
-	source=config[src]
+	source = config[src]
 	if not repertoire_accessible(source):
-#            Si la source n'existe pas
-		logger.warning ("{}-La source '{}' est introuvable ".format(config.name, source))
+		# Si la source n'existe pas
+		logger.warning("{}-La source '{}' est introuvable ".format(config.name, source))
 		raise OSError("La source est introuvable ")
 
-
 	if para in config:
-		parametre=config[para]     # si les paramètres de rsync sont définis, les utilise
+		parametre = config[para]     # si les paramètres de rsync sont définis, les utilise
 	else:
-		parametre='rsync -rv --delete'    #paramètres par défaut
+		parametre = 'rsync -rv --delete'    # paramètres par défaut
 
-		#défini la sauvegarde de référence
+	# défini la sauvegarde de référence
 	ref_chemin = ""
-		# écrit les différents chemins possible dans l'ordre inverse de priorité
-	for nro in range(2,-1,-1):
+	# écrit les différents chemins possible dans l'ordre inverse de priorité
+	for nro in range(2, -1, -1):
 		try:
 			ref_chemin = arbre[nro][0].chemin
 		except IndexError:
 			pass
 
 	if ref_chemin == "":
-			#        si pas de sauvegarde trouvée
-		reference=''
+		#        si pas de sauvegarde trouvée
+		reference = ''
 	else:
-			# si un autre sauvegarde est trouvée, s'en sert de référence
+		# si un autre sauvegarde est trouvée, s'en sert de référence
 		if not repertoire_accessible(ref_chemin):
-			#Si la reference n'existe pas
-			logger.warning ("{}-La référence est introuvable ".format(config.name))
-			reference=''
+			# Si la reference n'existe pas
+			logger.warning("{}-La référence est introuvable ".format(config.name))
+			reference = ''
 		else:
-			reference=' --link-dest="' + ref_chemin + '"'
+			reference = ' --link-dest="' + ref_chemin + '"'
 
 	maintenant = datetime.datetime.now()
 	para_md5 = ''
 	nom_md5 = ''
-	sauv_md5=False
+	sauv_md5 = False
 
 	# si le parametre periondemd5 est défini force la vérification de tous les fichiers
 	if permd5 in config:
 		if md5 in config:
 			dern_md5 = (ref_md5 + datetime.timedelta(days=int(config[md5])))
-			logger.debug("dernière sauvegarde avec MD5: {}".format(dern_md5) )
-			if (maintenant - dern_md5
-					> datetime.timedelta(days=int(config[permd5])) ):
+			logger.debug("dernière sauvegarde avec MD5: {}".format(dern_md5))
+			if (
+					maintenant - dern_md5
+					> datetime.timedelta(days=int(config[permd5]))
+			):
 				para_md5 = '--checksum'
 				nom_md5 = '_{}'.format((maintenant - ref_md5).days)
 				logger.info("cette sauvegarde base la comparaison sur la somme de controle (MD5)")
-				sauv_md5=True
+				sauv_md5 = True
 		else:
 			para_md5 = '--checksum'
 			nom_md5 = '_{}'.format((maintenant - ref_md5).days)
 			logger.info("cette sauvegarde base la comparaison sur la somme de controle (MD5)")
 
-
-	filtre=''
+	filtre = ''
 	if filt in config:
-		f_filter=os.path.join(os.path.split(__file__)[0],config[filt])
+		f_filter = os.path.join(os.path.split(__file__)[0], config[filt])
 		if not os.path.exists(f_filter):
 			logger.warning("{}-fichier de filtre introuvable,  il est ignoré".format(config.name))
 		else:
-			filtre="--filter='. {}'".format(f_filter)
+			filtre = "--filter='. {}'".format(f_filter)
 
-
-	destination_temp=os.path.join(config[dest], temp )
+	destination_temp = os.path.join(config[dest], temp)
 	destination = os.path.join(config[dest], maintenant.strftime(formatdate) + '_1' + nom_md5)
 
-	logger.info("copie de {0} vers {1}".format(source ,  destination) )
-	commande=shlex.split(parametre +' '+ para_md5 + ' '+filtre+ ' '+ reference + ' "'+source+'" "'+destination_temp+'"')
-	logger.debug("Commande:"+str(commande))
+	logger.info("copie de {0} vers {1}".format(source, destination))
+	commande = shlex.split(
+		parametre + ' ' + para_md5 + ' ' + filtre + ' ' +
+		reference + ' "' + source + '" "' + destination_temp + '"'
+	)
+	logger.debug("Commande:" + str(commande))
 
 	# créé le cliché pour enregistrer le résultat
 	retour = rep_sauv(maintenant, destination)
 	retour.reussi = True
 	retour.md5 = sauv_md5
 
-
 	sortie = commande_ext(commande, verb=True)
 
-
-
-		# si bilan est configuré
+	# si bilan est configuré
 	if bilan in config:
-
 		analyse_retour_pour_bilan(sortie, config.name, sauv_md5, retour)
-		# fbilan=config[bilan]
-		# 	# ouvre le fichier
-		# ret = extrait_bilan(sortie, config.name, sauv_md5 )
-		# logger.debug("Ecriture dans le fichier bilan: {}".format(ret))
-		# with open (fbilan, 'a', encoding='utf8') as f:
-		# 	try:
-		# 			#écrit la ligne générée par extrait_bilan
-		# 		f.write( ret)
-		# 	except OSError:
-		# 		logger.warning("{}-Impossible de compléter le fichier bilan : {}".format(config.name, fbilan))
 
-
-	logger.info("renomme {} en {}".format(destination_temp,destination) )
+	logger.info("renomme {} en {}".format(destination_temp, destination))
 	try:
-		os.rename(destination_temp,destination)
-	except OSError as exception:
-		logger.warning("renommer {} en {} a causé une erreur".format(destination_temp,destination))
-		logger.warning(exception)
+		os.rename(destination_temp, destination)
+	except OSError as erreur:
+		logger.warning("renommer {} en {} a causé une erreur".format(destination_temp, destination))
+		logger.warning(erreur)
 		retour.reussi = False
 	
 	if not retour.reussi:
 		iterateur = iterateur_arbre(arbre)
 		ok = False
-		for cli in iterateur[5]:
+		compteur = 5
+		for cli in iterateur:
 			ok = ok or cli.reussi
+			compteur -= 1
+			if not compteur:
+				break
+		else:
+			# Cas
+			ok = True
+			
 		if not ok:
 			logger.error("5 warnings successifs sont intervenus lors de la sauvegarde")
 	# todo renvoi de log à tester
@@ -1580,8 +1580,8 @@ def calcul_retention(cli, arbre, config):
 	# calcule la taille
 	stat[bl_voljob] = taille_arbre(arbre)
 	if qta in config:
-		stat[bl_voljobobj] = config[qta]
-	#todo test pour les deux lignes précédentes
+		stat[bl_voljobobj] = int(config[qta])
+
 
 def analyse_retour_pour_bilan(lignes, sauv, md5, cli):
 	"""

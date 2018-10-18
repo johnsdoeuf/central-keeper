@@ -658,7 +658,31 @@ class Copie(unittest.TestCase):
 		config = {sauv.src: self.source, sauv.dest: self.dest, sauv.para: '-Z'}
 		# paramètre inexistant
 		self.assertRaises(OSError, sauv.copie, config, arbre)
-
+	
+	def test_retour_error(self):
+		"""teste si plusieur waarning génèrent bien une erreur dans le log"""
+		dest = os.path.join(self.dest, 'essai2')
+		source = os.path.join(self.source, 'Source')
+		fich = os.path.join(source, 'essai.txt')
+		try:
+			os.makedirs(source)
+			os.makedirs(dest)
+			with open(fich, 'w', encoding='utf8') as f:
+				f.write("Lancement d'une sauvegarde le ")
+		except OSError:
+			pass
+		
+		arbre = [[], [], []]
+		config = {sauv.src: source, sauv.dest: dest}
+		
+		# vérifie la sortie de la fonction
+		ret = sauv.copie(config, arbre)
+		self.assertTrue(ret.chemin[0:-12], (self.dest + datetime.datetime.now().strftime(sauv.formatdate))[0:-12])
+		self.assertEqual(ret.date.day, datetime.datetime.now().day)
+		# vérifie la taille
+		arbre[0].insert(0,ret)
+		self.assertEqual(sauv.taille_arbre(arbre), 30)
+# todo test de warning à terminer
 
 class demonte(unittest.TestCase):
 	def setUp(self):
@@ -843,6 +867,10 @@ class charge_arbre(unittest.TestCase):
 		test = sauv.rep_sauv(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		test.taille = 485121
 		test.lnoeud = {'1548255':4548,'45245':452,'45':0}
+		test.reussi = True
+		test.signale_erreur = False
+		test.md5 = None
+		
 		arbre = {'sauv': [[test, test], [test], []]}
 		val = sauv.my_encoder().encode(arbre)
 		try:
@@ -1838,11 +1866,11 @@ class reduction(unittest.TestCase):
 		config['sauv'][sauv.qta] = '0.000000025'
 		config['sauv'][sauv.dest] = self.rep
 
-		sauv.logger = logging.getLogger('main')
+		# sauv.logger = logging.getLogger('main')
 		# lance la fonction et teste le retour de d'un log d'erreur pour supression dans la période de conservation
-		with self.assertLogs(logger=sauv.logger , level=logging.ERROR):
+		with self.assertLogs(logger=sauv.logger, level=logging.ERROR):
 			sauv.reduction(config['sauv'], arbre)
-#todo comprendre l'erreur du test unitaire
+
 		self.assertEqual(arbre, reference)
 		# teste existance entre du second
 		self.assertTrue(os.path.exists(os.path.join(self.rep, test[1][0])))
@@ -2175,8 +2203,6 @@ class Ecriture_Bilan(unittest.TestCase):
 	
 class Calcul_Retention(unittest.TestCase):
 	
-	
-	
 	def setUp(self):
 		config_log()
 		self.cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
@@ -2194,6 +2220,7 @@ class Calcul_Retention(unittest.TestCase):
 		self.config['sauv'][sauv.cons1] = '5'
 		self.config['sauv'][sauv.cons2] = '30'
 		self.config['sauv'][sauv.cons3] = '90'
+		self.config['sauv'][sauv.qta] = '1000'
 		
 		arbre = [[], [], []]
 		données = (
@@ -2218,6 +2245,8 @@ class Calcul_Retention(unittest.TestCase):
 		self.assertEqual(self.cli.stat[sauv.bl_cons2obj], self.config['sauv'][sauv.cons2])
 		self.assertEqual(self.cli.stat[sauv.bl_cons3obj], self.config['sauv'][sauv.cons3])
 		self.assertEqual(self.cli.stat[sauv.bl_consobj], 125)
+		self.assertEqual(self.cli.stat[sauv.bl_voljobobj], 1000)
+		self.assertTrue(sauv.bl_voljob in self.cli.stat)
 	
 	
 	def test_fonctionnel_niveau1_et_deux(self):
