@@ -12,6 +12,7 @@ import glob
 from pathlib import Path
 import unittest.mock
 
+
 def config_log():
 	# logging.config.dictConfig({
 	# 	"version": 1,
@@ -44,105 +45,106 @@ def config_log():
 	# remplace le log par un objet mock
 	sauv.logger = unittest.mock.Mock()
 
+
 def fin_log():
 	sauv.logger = None
 
 
 class Init_para(unittest.TestCase):
 	fich = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'essaiconf.conf')
-
+	
 	def setUp(self):
 		config_log()
-
+	
 	def tearDown(self):
 		fin_log()
 		try:
 			os.remove(self.fich)
 		except OSError:
 			pass
-
+	
 	def test_fichier_absent(self):
 		"""teste si l'absence du fichier ou le fichier vide renvoi une exception"""
 		sauv.logger.info("test_fichier_absent")
 		self.assertRaises(sauv.init_erreur, sauv.init_para,
 						  os.path.join(os.path.split(__file__)[0], 'jytyjtyjtyjtyj.conf'))
-
+	
 	def test_fichier_vide(self):
 		"""Si aucune sauvegarde n'est configurée"""
-
+		
 		with open(self.fich, mode='w') as file:
 			file.write(' ')
 		self.assertRaises(sauv.init_erreur, sauv.init_para, self.fich)
-
+	
 	def test_fichier_erroné(self):
 		"""Si paramètre sans section"""
-
+		
 		with open(self.fich, mode='w') as file:
 			file.write('PERIODE1=0.1')
 		self.assertRaises(sauv.init_erreur, sauv.init_para, self.fich)
-
+	
 	def test_mauvais_format(self):
 		"""teste si du texte est présent """
-
+		
 		with open(self.fich, 'w') as configfile:
 			configfile.write("Bonjour")
 		self.assertRaises(sauv.init_erreur, sauv.init_para, self.fich)
-
+	
 	def test_source(self):
 		"""teste si la section contient une source et éjecte bien les sources invalides"""
-
+		
 		config = sauv.My_configparser()
 		config['dessus'] = {sauv.dest.upper(): '/gg'}
 		with open(self.fich, 'w') as configfile:
 			config.write(configfile)
 		del config['dessus']
 		self.assertEqual(sauv.init_para(self.fich), config)
-
+		
 		config['dessus'] = {sauv.dest: '/gg', sauv.src: '-'}
 		with open(self.fich, 'w') as configfile:
 			config.write(configfile)
 		del config['dessus']
 		self.assertEqual(sauv.init_para(self.fich), config)
-
+		
 		config['dessus'] = {sauv.dest: '/gg', sauv.src: '/ggtr;-;/ffrttt'}
 		with open(self.fich, 'w') as configfile:
 			config.write(configfile)
 		config['dessus'] = {sauv.dest: '/gg', sauv.src: '/ggtr;/ffrttt'}
 		self.assertEqual(sauv.init_para(self.fich), config)
-
+		
 		config['dessus'] = {sauv.dest: '/gg', sauv.src: '-;-;-'}
 		with open(self.fich, 'w') as configfile:
 			config.write(configfile)
 		del config['dessus']
 		self.assertEqual(sauv.init_para(self.fich), config)
-
+		
 		config['dessus'] = {sauv.dest: '/dfgd', sauv.src: '/lll'}
 		with open(self.fich, 'w') as configfile:
 			config.write(configfile)
 		self.assertEqual(sauv.init_para(self.fich), config)
-
+	
 	def test_destination(self):
 		"""teste si la section contient une destination et conserve bien la config 'ref'"""
-
+		
 		config = sauv.My_configparser()
 		config['dessus'] = {sauv.src: '/gg'}
 		config['ref'] = {sauv.src: '/gg', sauv.dest: ' /rrr'}
 		with open(self.fich, 'w') as configfile:
 			config.write(configfile)
 		del config['dessus']
-
+		
 		self.assertEqual(sauv.init_para(self.fich), config)
-
+		
 		config['ref'] = {sauv.src: '/gg', sauv.dest: ' /rrr'}
 		config['dessus'] = {sauv.src: 'gg', sauv.dest: '    '}
 		with open(self.fich, 'w') as configfile:
 			config.write(configfile)
 		del config['dessus']
 		self.assertEqual(sauv.init_para(self.fich), config)
-
+	
 	def test_intervalle_num(self):
 		"""teste si le paramètre per1 est bien un nombre"""
-
+		
 		config = sauv.My_configparser()
 		for para in sauv.l_clenum:
 			config['test'] = {para: 'tt', sauv.src: 'gg', sauv.dest: 'hgg'}
@@ -150,45 +152,45 @@ class Init_para(unittest.TestCase):
 				config.write(configfile)
 			del config['test']
 			self.assertEqual(sauv.init_para(self.fich), config)
-
+	
 	def test_validité_cle(self):
 		"""teste si les clés non valide sont biens supprimées """
-
+		
 		config = sauv.My_configparser()
-
+		
 		config['test'] = {'eerr': 'tt', sauv.src: 'gg', sauv.dest: 'hgg'}
 		with open(self.fich, 'w') as configfile:
 			config.write(configfile)
 		del config['test']['eerr']
 		self.assertEqual(sauv.init_para(self.fich), config)
-
+	
 	def test_source_valide(self):
 		"""Teste si la source est bien un chemin valide"""
 		pass
-
+	
 	def test_destination_valide(self):
 		"""Teste si la destination est bien un chemin valide"""
 		pass
-
+	
 	def test_toutes_les_clés(self):
 		"""Teste que les clés valides ne créées pas d'erreur"""
-
+		
 		config = sauv.My_configparser()
 		config['KKK'] = {cle: '/gg' for cle in sauv.l_cle}
 		a = 0.0
 		for cle in sauv.l_clenum:
 			a += 1
 			config['KKK'][cle] = str(a)
-
+		
 		with open(self.fich, 'w') as configfile:
 			config.write(configfile)
-
+		
 		ggggg = sauv.init_para(self.fich)
 		self.assertEqual(config, ggggg)
-
+	
 	def test_sortie(self):
 		"""teste si le résultat correspond avec deux sauvegardes"""
-
+		
 		config = sauv.My_configparser()
 		config['test'] = {sauv.per1.upper(): '0.2', sauv.src: '/gg', sauv.dest: '/hgg'}
 		config['Films'] = {sauv.src: '/gg', sauv.dest: '/hgg'}
@@ -197,29 +199,27 @@ class Init_para(unittest.TestCase):
 		self.assertEqual(config, sauv.init_para(self.fich))
 
 
-
-
 class verifie_arbre(unittest.TestCase):
 	fichconf = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'essaiconf.conf')
 	repsauv = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'tmp_essai')
 	arbre_null = [[], [], []]
-
+	
 	def setUp(self):
 		config_log()
 		# créé un fichier config
 		self.config = sauv.My_configparser()
 		self.config['dessus'] = {sauv.dest: self.repsauv}
-
+	
 	def tearDown(self):
 		try:
 			shutil.rmtree(self.repsauv)
 		except OSError:
 			pass
-
+	
 	def cree_rep(self, rep):
 		"""fonction de création d'un répertoire"""
 		os.makedirs(os.path.join(self.repsauv, rep), mode=0o777)
-
+	
 	def test_arbre_conforme(self):
 		"""teste la sortie arbre"""
 		arbre = [[], [], []]
@@ -227,7 +227,7 @@ class verifie_arbre(unittest.TestCase):
 			shutil.rmtree(self.repsauv)
 		except OSError:
 			pass
-
+		
 		for rep in ['2016-12-12 15-18_2_2000', '2017-01-02 15-12_1', '2016-12-20 15-50_1', '2017-01-02 15-50_1_45685']:
 			# créé des répertoires
 			self.cree_rep(rep)
@@ -238,14 +238,14 @@ class verifie_arbre(unittest.TestCase):
 			élém.lnoeud = {}
 			# créé l'arbre
 			arbre[int(res[1]) - 1].append(élém)
-
+		
 		tri = lambda p: p.date
 		arbre[0].sort(key=tri, reverse=True)
 		sauv.ref_md5 = datetime.datetime(2010, 1, 1)
-
+		
 		self.assertEqual(sauv.verifie_arbre(self.config['dessus'], self.arbre_null), arbre)
 		self.assertEqual(self.config['dessus'][sauv.md5], '45685')
-
+	
 	def test_arbre_pb_date(self):
 		"""teste le comportement quand un niveau 2 apparait avec une date trop proche
 			Le répertoire doit etre ignoré"""
@@ -254,7 +254,7 @@ class verifie_arbre(unittest.TestCase):
 			shutil.rmtree(self.repsauv)
 		except OSError:
 			pass
-
+		
 		for rep in ['2016-12-12 15-18_2_2000', '2017-01-02 15-12_2', '2016-12-20 15-50_1', '2017-01-02 15-50_1_45685']:
 			# créé des répertoires
 			self.cree_rep(rep)
@@ -266,15 +266,15 @@ class verifie_arbre(unittest.TestCase):
 			# créé l'arbre
 			if rep != '2016-12-20 15-50_1':
 				arbre[int(res[1]) - 1].append(élém)
-
+		
 		tri = lambda p: p.date
 		arbre[0].sort(key=tri, reverse=True)
 		arbre[1].sort(key=tri, reverse=True)
-
+		
 		sauv.ref_md5 = datetime.datetime(2010, 1, 1)
 		resultat = sauv.verifie_arbre(self.config['dessus'], self.arbre_null)
 		self.assertEqual(resultat, arbre)
-
+	
 	def test_conservation_arbre(self):
 		"""teste la sortie arbre"""
 		arbre = [[], [], []]
@@ -282,7 +282,7 @@ class verifie_arbre(unittest.TestCase):
 			shutil.rmtree(self.repsauv)
 		except OSError:
 			pass
-
+		
 		for rep in ['2016-12-12 15-18_2_2000', '2017-01-02 15-12_1', '2016-12-20 15-50_1', '2017-01-02 15-50_1_45685']:
 			# créé des répertoires
 			self.cree_rep(rep)
@@ -293,64 +293,62 @@ class verifie_arbre(unittest.TestCase):
 			# élém.lnoeud = {}
 			# créé l'arbre
 			arbre[int(res[1]) - 1].append(élém)
-
+		
 		tri = lambda p: p.date
 		arbre[0].sort(key=tri, reverse=True)
 		sauv.ref_md5 = datetime.datetime(2010, 1, 1)
-
+		
 		self.assertEqual(sauv.verifie_arbre(self.config['dessus'], arbre), arbre)
 		self.assertEqual(self.config['dessus'][sauv.md5], '45685')
-
-
+	
 	def test_date_nonconforme(self):
 		"""teste le comportement avec des répertoires erronés (minutes >60)"""
-
+		
 		self.cree_rep('1_2017-01-02 15-62-53-555')
 		self.assertEqual(sauv.verifie_arbre(self.config['dessus'], self.arbre_null), self.arbre_null)
-
+	
 	def test_niveau_nonconforme(self):
 		"""teste le comportement avec des répertoires erronés (niveau inexistant)"""
-
+		
 		self.cree_rep('0_2018-01-02 15-02-53-555')
 		self.cree_rep('4_2018-01-02 15-02-53-555')
 		self.assertEqual(sauv.verifie_arbre(self.config['dessus'], self.arbre_null), self.arbre_null)
-
+	
 	def test_répertoire_nonconforme(self):
 		"""teste le comportement avec des répertoires erronés (entête)"""
-
+		
 		self.cree_rep('1rtt')
 		self.cree_rep('.1_2018-01-02 15-02-53-555')
 		self.assertEqual(sauv.verifie_arbre(self.config['dessus'], self.arbre_null), self.arbre_null)
-
+	
 	def test_chemin_absent(self):
 		"""teste si le chemin ne répond pas"""
 		self.config['dessus'] = {sauv.dest: '/ertte/ttt'}
 		self.assertEqual(sauv.verifie_arbre(self.config['dessus'], self.arbre_null), self.arbre_null)
 
 
-
 class Init_log(unittest.TestCase):
 	fichconf = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'essailog.conf')
-
+	
 	def setUp(self):
 		config_log()
-
+	
 	def tearDown(self):
 		try:
 			os.remove(self.fichconf)
 		except OSError:
 			pass
-
+	
 	def test_fichier_erroné(self):
 		"""si fichier de logging n'existe pas """
 		self.assertEqual(type(sauv.init_logging("kkkkkkk")), logging.RootLogger)
-
+	
 	def test_importation(self):
 		"""si la configuration n'est pas au format json """
 		with open(self.fichconf, 'w') as configfile:
 			configfile.write('{ffffff')
 		self.assertRaises(sauv.init_erreur, sauv.init_logging, self.fichconf)
-
+	
 	def test_configuration(self):
 		"""Si la configuration n'est pas accepté par le module logging"""
 		with open(self.fichconf, 'w') as configfile:
@@ -359,81 +357,84 @@ class Init_log(unittest.TestCase):
 				'loggers': {
 					'main': {
 						'level': 'DEBUG',
-					},}
+					}, }
 			}))
 		self.assertRaises(sauv.init_erreur, sauv.init_logging, self.fichconf)
-
+		
 		with open(self.fichconf, 'w') as configfile:
 			configfile.write(json.dumps({
 				'version': 1,
 				'loggers': ['main', 'level']
 			}))
 		self.assertRaises(sauv.init_erreur, sauv.init_logging, self.fichconf)
-
+	
 	def test_mot_clé(self):
 		"""Si la configuration ne contient pas 'logger'"""
-
+		
 		with open(self.fichconf, 'w') as configfile:
 			configfile.write(json.dumps({
 				'version': 1,
 				'logers': {  # erreur sur la clé
 					'main': {
 						'level': 'DEBUG',
-					},}
+					}, }
 			}))
 		self.assertRaises(sauv.init_erreur, sauv.init_logging, self.fichconf)
-
+	
 	def test_handlers(self):
 		"""Si la configuration ne contient pas de handlers"""
-
+		
 		with open(self.fichconf, 'w') as configfile:
 			configfile.write(json.dumps({
 				'version': 1,
 				'loggers': {
 					'main': {
 						'level': 'DEBUG',
-					},}
+					}, }
 			}))
 		self.assertRaises(sauv.init_erreur, sauv.init_logging, self.fichconf)
 
 
 class Verrou(unittest.TestCase):
-
+	
 	def setUp(self):
 		sauv.logger = logging.getLogger(__name__)
-
+	
 	def tearDown(self):
 		try:
 			del os.environ[sauv.var_env_verrou]
 		except KeyError:
 			pass
-
+	
 	def test_fonctionnel(self):
 		"""test fonctionnel de verrouille puis déverrouille"""
-
+		
 		self.assertTrue(sauv.verrouille())
 		self.assertTrue(sauv.var_env_verrou in os.environ)
 		maintenant = (datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds() - 2 * 60 * 60 - 10
 		self.assertLess(maintenant, float(os.environ[sauv.var_env_verrou]))
-
+		
 		sauv.deverrouille()
 		self.assertFalse(sauv.var_env_verrou in os.environ)
-
+	
 	def test_verrou_présent(self):
 		"""test du comportement si un lock existe déjà"""
 		# créé le verrou
-		os.environ[sauv.var_env_verrou] = str((datetime.datetime.now() - datetime.datetime(1970, 1,  1) - datetime.timedelta(
-			hours=4, minutes=3)).total_seconds())
+		os.environ[sauv.var_env_verrou] = str(
+			(datetime.datetime.now() - datetime.datetime(1970, 1, 1) - datetime.timedelta(
+				hours=4, minutes=3)).total_seconds())
 		self.assertFalse(sauv.verrouille())
-
-		os.environ[sauv.var_env_verrou] = str((datetime.datetime.now() - datetime.datetime(1970, 1,  1) - datetime.timedelta(
-			hours=21, minutes=50)).total_seconds())
+		
+		os.environ[sauv.var_env_verrou] = str(
+			(datetime.datetime.now() - datetime.datetime(1970, 1, 1) - datetime.timedelta(
+				hours=21, minutes=50)).total_seconds())
 		self.assertFalse(sauv.verrouille())
 		#
-		os.environ[sauv.var_env_verrou] = str((datetime.datetime.now() - datetime.datetime(1970, 1, 1) - datetime.timedelta(
-			days=2, hours=0, minutes=3)).total_seconds())
+		os.environ[sauv.var_env_verrou] = str(
+			(datetime.datetime.now() - datetime.datetime(1970, 1, 1) - datetime.timedelta(
+				days=2, hours=0, minutes=3)).total_seconds())
 		self.assertTrue(sauv.verrouille())
-
+		
 		# test si un nouveau verrou a bien été créé
 		maintenant = (datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds()
 		self.assertLess(maintenant - float(os.environ[sauv.var_env_verrou]), 5)
@@ -441,69 +442,69 @@ class Verrou(unittest.TestCase):
 
 class monte(unittest.TestCase):
 	repsauv = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'Xedrg5g6')
-
+	
 	def setUp(self):
 		config_log()
-
+	
 	def tearDown(self):
 		fin_log()
 		try:
 			shutil.rmtree(self.repsauv)
 		except OSError:
 			pass
-
+	
 	def test_sens1(self):
 		""" teste qu'il n'y a pas de problème dans le sens destination """
 		config = sauv.My_configparser()
-
+		
 		config['test'] = {sauv.dest: self.repsauv}
 		os.makedirs(os.path.join(self.repsauv, 'non_vide'), mode=0o777)
 		self.assertEqual(sauv.monte(1, config['test']), None)
-
+	
 	def test_sens0(self):
 		""" teste qu'il n'y a pas de problème dans le sens source """
 		config = sauv.My_configparser()
-
+		
 		config['test'] = {sauv.src: self.repsauv}
 		os.makedirs(os.path.join(self.repsauv, 'non_vide'), mode=0o777)
 		self.assertEqual(sauv.monte(0, config['test']), None)
-
+	
 	def test_sens2(self):
 		""" teste avec un sens erroné """
 		config = sauv.My_configparser()
-
+		
 		config['test'] = {sauv.dest: self.repsauv}
 		os.makedirs(os.path.join(self.repsauv, 'non_vide'), mode=0o777)
 		self.assertRaises(ValueError, sauv.monte, 2, config['test'])
-
+	
 	def test_source_inexistante(self):
 		""" teste si la source n'existe pas"""
 		config = sauv.My_configparser()
-
+		
 		config['test'] = {sauv.src: self.repsauv}
-
+		
 		self.assertRaises(OSError, sauv.monte, 0, config['test'])
-
+	
 	def test_source_vide(self):
 		""" teste si la source est vide """
 		config = sauv.My_configparser()
-
+		
 		config['test'] = {sauv.src: self.repsauv}
 		os.makedirs(self.repsauv, mode=0o777)
 		self.assertRaises(OSError, sauv.monte, 0, config['test'])
-
+	
 	def test_seconde_source_OK(self):
 		""" teste si seulement la seconde source est bonne """
 		config = sauv.My_configparser()
-
+		
 		config['test'] = {sauv.src: "/rep_bibon;{}".format(self.repsauv)}
 		os.makedirs(os.path.join(self.repsauv, 'non_vide'), mode=0o777)
 		self.assertEqual(sauv.monte(0, config['test']), None)
-
+	
 	def test_avec_montage(self):
 		""" teste si seulement la seconde source est bonne """
 		config = sauv.My_configparser()
-
+		
 		config['test'] = {
 			sauv.src: "/rep_bibon;{}".format(self.repsauv),
 			sauv.mntsrc: "mkdir {}".format(os.path.join(self.repsauv, 'non_vide')),
@@ -511,28 +512,28 @@ class monte(unittest.TestCase):
 		}
 		os.makedirs(self.repsauv, mode=0o777)
 		self.assertEqual(sauv.monte(0, config['test']), "retour_commande")
-
+	
 	def test_sources_fausses(self):
 		""" teste si toules sources ne fonctionnent pas"""
-
+		
 		config = sauv.My_configparser()
 		config['test'] = {sauv.src: '/ezrte/bidon;/test/bidon'}
-
+		
 		self.assertRaises(OSError, sauv.monte, 0, config['test'])
-
+	
 	def test_sources_fausses_et_montage_faux(self):
 		""" teste si toules sources ne fonctionnent pas"""
-
+		
 		config = sauv.My_configparser()
 		config['test'] = {
 			sauv.dest: '/ezrte/bidon;/test/bidon',
 			sauv.mntsrc: 'cmd_bidon'}
-
+		
 		self.assertRaises(OSError, sauv.monte, 1, config['test'])
-
+	
 	def test_sources_fausses_et_demontage_faux(self):
 		""" teste si toules sources ne fonctionnent pas"""
-
+		
 		config = sauv.My_configparser()
 		config['test'] = {
 			sauv.src: '/ezrte/bidon;/test/bidon',
@@ -545,7 +546,7 @@ class Copie(unittest.TestCase):
 	racine = os.path.split(os.path.abspath(__file__))[0]
 	source = os.path.join(racine, 'rep_essai/')
 	dest = os.path.join(racine, 'sauvegarde')
-
+	
 	def setUp(self):
 		config_log()
 		try:
@@ -553,47 +554,47 @@ class Copie(unittest.TestCase):
 			os.makedirs(self.dest)
 		except OSError:
 			pass
-
+	
 	def tearDown(self):
 		try:
 			shutil.rmtree(self.source)
 			shutil.rmtree(os.path.join(os.path.split(__file__)[0], 'sauvegarde'))
 		except OSError:
 			pass
-
+	
 	def test_source_absente(self):
 		"""teste source absente"""
-
+		
 		arbre = [[], [], []]
 		config = configparser.ConfigParser()
 		config.read_dict({'sauv': {sauv.src: '/dddfffff/ffrfff/erer', sauv.dest: '/'}})
-
+		
 		self.assertRaises(OSError, sauv.copie, config['sauv'], arbre)
-
+	
 	def test_destination_absente(self):
 		"""teste destination absente"""
-
+		
 		arbre = [[], [], []]
 		config = {sauv.src: self.source, sauv.dest: self.dest}
 		shutil.rmtree(os.path.join(os.path.split(__file__)[0], 'sauvegarde'))
-
+		
 		self.assertRaises(OSError, sauv.copie, config, arbre)
-
+	
 	def test_reference_absente(self):
 		"""teste reference_absente"""
 		source2 = os.path.join(os.path.split(self.dest)[0], 'essai2')
-
+		
 		config = configparser.ConfigParser()
 		config.read_dict({'sauv': {sauv.src: self.source, sauv.dest: self.dest}})
-
+		
 		arbre = [[sauv.rep_sauv(datetime.datetime(2017, 5, 3), source2)], [], []]
-
+		
 		ret = sauv.copie(config['sauv'], arbre)
 		self.assertTrue(ret.chemin[0:-12], (self.dest + datetime.datetime.now().strftime(sauv.formatdate))[0:-12])
 		self.assertEqual(ret.date.day, datetime.datetime.now().day)
-
+	
 	#        self.assertEqual( sauv.copie (config, arbre) ,  None )
-
+	
 	def test_espace_dans_chemin(self):
 		"""teste si le programme supporte les espaces et test la copie"""
 		dest = os.path.join(self.dest, 'essai 2')
@@ -606,18 +607,18 @@ class Copie(unittest.TestCase):
 				f.write("Lancement d'une sauvegarde le ")
 		except OSError:
 			pass
-
+		
 		arbre = [[], [], []]
 		config = {sauv.src: source, sauv.dest: dest}
-
+		
 		# vérifie la sortie de la fonction
 		ret = sauv.copie(config, arbre)
 		self.assertTrue(ret.chemin[0:-12], (self.dest + datetime.datetime.now().strftime(sauv.formatdate))[0:-12])
 		self.assertEqual(ret.date.day, datetime.datetime.now().day)
 		# vérifie la taille
-		arbre[0].insert(0,ret)
+		arbre[0].insert(0, ret)
 		self.assertEqual(sauv.taille_arbre(arbre), 30)
-
+	
 	def test_copie_avec_ref(self):
 		"""teste la copie avec lien en dur"""
 		dest = os.path.join(self.dest, 'essai 2')
@@ -634,10 +635,10 @@ class Copie(unittest.TestCase):
 			shutil.copyfile(fich, fichref)
 		except OSError:
 			pass
-
+		
 		rsauv = sauv.rep_sauv(datetime.datetime(2017, 5, 3), ref)
 		rsauv.analyse()
-
+		
 		arbre = [[rsauv], [], []]
 		config = {sauv.src: source, sauv.dest: dest}
 		# Vérifie le retour de la fonction
@@ -649,48 +650,48 @@ class Copie(unittest.TestCase):
 		self.assertTrue(os.path.exists(glob.glob(os.path.join(dest, '*/essai.txt'))[0]))
 		# Vérifie que la taille est bien celle d'un seul fichier'
 		self.assertEqual(sauv.taille_arbre(arbre), 30)
-
+	
 	def test_parametre_erronées(self):
 		"""Essai avec des paramètres erronées"""
 		arbre = [[], [], []]
 		config = {sauv.src: self.source, sauv.dest: self.dest, sauv.para: '--ogfggthth'}
 		# paramètre long inexistant
 		self.assertRaises(OSError, sauv.copie, config, arbre)
-
+		
 		config = {sauv.src: self.source, sauv.dest: self.dest, sauv.para: '-Z'}
 		# paramètre inexistant
 		self.assertRaises(OSError, sauv.copie, config, arbre)
-	
+
 
 class demonte(unittest.TestCase):
 	def setUp(self):
 		config_log()
-
+	
 	def test_set_vide(self):
 		"""Essai avec un set de données vide"""
 		a_dem = set()
 		sauv.demonte(a_dem)
-
+	
 	def test_set_entier(self):
 		"""Essai avec un set contenant un entier"""
 		a_dem = {45}
 		sauv.demonte(a_dem)
-
+	
 	def test_entier(self):
 		"""Essai avec pour paramètre un entier"""
 		a_dem = 45
 		sauv.demonte(a_dem)
-
+	
 	def test_commande_fausse(self):
 		"""Essai avec une commande erronée"""
 		a_dem = {"ddfhfgh"}
 		sauv.demonte(a_dem)
-
+	
 	def test_commande_bonne(self):
 		"""Essai avec une commande existante: ls"""
 		a_dem = {"ls"}
 		sauv.demonte(a_dem)
-
+	
 	def test_null(self):
 		"""Essai avec une valeur null"""
 		a_dem = {None}
@@ -700,27 +701,27 @@ class demonte(unittest.TestCase):
 class commande_ext(unittest.TestCase):
 	def setUp(self):
 		config_log()
-
+	
 	def test_chaine(self):
 		"""teste si une chaine est transmise au lieu d'une liste de paramètres"""
 		self.assertRaises(SyntaxError, sauv.commande_ext, "ls", False)
-
+	
 	def test_liste(self):
 		"""teste si une simple liste est transmise au lieu d'une liste de paramètres"""
 		sauv.commande_ext(["ls"], False)
-
+	
 	def test_liste_unique(self):
 		"""teste le passage de paramètres via une chaîne unique"""
 		self.assertRaises(OSError, sauv.commande_ext, ["ls -l"], False)
-
+	
 	def test_liste_multiple(self):
 		"""teste le passage de paramètres via une chaîne multiple"""
 		sauv.commande_ext(["ls", "-l"], False)
-
+	
 	def test_none(self):
 		"""teste avec un set de None"""
 		self.assertRaises(SyntaxError, sauv.commande_ext, None, False)
-
+	
 	def test_chaine_vide(self):
 		"""teste avec une chaine vide"""
 		self.assertRaises(SyntaxError, sauv.commande_ext, "", False)
@@ -728,17 +729,17 @@ class commande_ext(unittest.TestCase):
 
 class rep_accessible(unittest.TestCase):
 	
-
 	def setUp(self):
 		config_log()
 	
 	def tearDown(self):
 		pass
-		# try:
-		# 	shutil.rmtree(self.repsauv)
-		# except OSError:
-		# 	pass
-		
+	
+	# try:
+	# 	shutil.rmtree(self.repsauv)
+	# except OSError:
+	# 	pass
+	
 	def test_fonctionnel(self):
 		"""test que le répertoire est bien détecté"""
 		self.repsauv = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'tmp_essài')
@@ -768,16 +769,16 @@ class rep_accessible(unittest.TestCase):
 
 class charge_arbre(unittest.TestCase):
 	fich = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'essai.hist')
-
+	
 	def setUp(self):
 		config_log()
-
+	
 	def tearDown(self):
 		try:
 			os.remove(self.fich)
 		except OSError:
 			pass
-
+	
 	def test_fichier_vide(self):
 		"""teste avec un fichier vide"""
 		try:
@@ -785,14 +786,14 @@ class charge_arbre(unittest.TestCase):
 				f.write("")
 		except OSError:
 			pass
-
+		
 		self.assertRaises(SyntaxError, sauv.charge_arbre, self.fich)
-
+	
 	def test_fichier_inexistant(self):
 		"""teste avec unchemin inexistant"""
-
+		
 		self.assertRaises(sauv.init_erreur, sauv.charge_arbre, '/fsddfsdf/dfsdf/sdfsdf.f')
-
+	
 	def test_format_non_json(self):
 		"""teste avec un fichier vide"""
 		try:
@@ -800,9 +801,9 @@ class charge_arbre(unittest.TestCase):
 				f.write("{ ertt[hfghf }dfgrefg]")
 		except OSError:
 			pass
-
+		
 		self.assertRaises(SyntaxError, sauv.charge_arbre, self.fich)
-
+	
 	def test_non_dictionnaire(self):
 		"""teste si premier niveau liste"""
 		val = json.dumps(["sdfgsdfgs"])
@@ -811,9 +812,9 @@ class charge_arbre(unittest.TestCase):
 				f.write(val)
 		except OSError:
 			pass
-
+		
 		self.assertRaises(SyntaxError, sauv.charge_arbre, self.fich)
-
+	
 	def test_taille_liste(self):
 		"""teste avec une liste plus longue"""
 		test = sauv.rep_sauv(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
@@ -824,9 +825,9 @@ class charge_arbre(unittest.TestCase):
 				f.write(val)
 		except OSError:
 			pass
-
+		
 		self.assertRaises(SyntaxError, sauv.charge_arbre, self.fich)
-
+	
 	def test_contenu(self):
 		"""teste de la correspondance résultat"""
 		test = sauv.rep_sauv(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
@@ -837,14 +838,14 @@ class charge_arbre(unittest.TestCase):
 				f.write(val)
 		except OSError:
 			pass
-
+		
 		self.assertRaises(SyntaxError, sauv.charge_arbre, self.fich)
-
+	
 	def test_fonctionnel(self):
 		"""teste de la correspondance résultat"""
 		test = sauv.rep_sauv(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		test.taille = 485121
-		test.lnoeud = {'1548255':4548,'45245':452,'45':0}
+		test.lnoeud = {'1548255': 4548, '45245': 452, '45': 0}
 		test.reussi = True
 		test.signale_erreur = False
 		test.md5 = None
@@ -856,28 +857,27 @@ class charge_arbre(unittest.TestCase):
 				f.write(val)
 		except OSError:
 			pass
-
+		
 		res_arbre = sauv.charge_arbre(self.fich)
 		self.assertEqual(res_arbre, arbre)
-
+	
 	def test_avec_null(self):
 		"""teste avec 'Home_jeux': null"""
-
+		
 		val = '{"Home_jeux": null}'
 		try:
 			with open(self.fich, 'w', encoding='utf8') as f:
 				f.write(val)
 		except OSError:
 			pass
-
+		
 		self.assertRaises(SyntaxError, sauv.charge_arbre, self.fich)
 
 
 class rep_sauv(unittest.TestCase):
-
 	repsauv = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'tmp_essai')
 	repsauv2 = Path(repsauv)
-
+	
 	def setUp(self):
 		config_log()
 		self.sauv = 'clef'
@@ -885,65 +885,63 @@ class rep_sauv(unittest.TestCase):
 			os.makedirs(self.repsauv, mode=0o777)
 		except OSError:
 			pass
-
-
+	
 	def tearDown(self):
 		try:
 			shutil.rmtree(self.repsauv)
 		except OSError:
 			pass
-
+	
 	def test_fonctionnel(self):
 		""" teste si le résultat est conforme dans une situation normale """
-
+		
 		os.makedirs(os.path.join(self.repsauv, 'srep'), mode=0o777)
 		liste_fichier = ["srep/ffffé", "h12222"]
-
+		
 		for fich in liste_fichier:
 			# créé le fichier
-
+			
 			fpremier = os.path.join(self.repsauv, fich)
 			# créé le fichier source
 			with open(fpremier, 'w') as configfile:
 				configfile.write('ffffff')
-
+		
 		info = [os.stat(os.path.join(self.repsauv, f)) for f in liste_fichier]
-
+		
 		resultat = sauv.rep_sauv(datetime.datetime(2000, 1, 1), self.repsauv)
 		resultat.taille = 12
-		resultat.lnoeud = {str(f.st_ino):f.st_size for f in info}
-
+		resultat.lnoeud = {str(f.st_ino): f.st_size for f in info}
+		
 		resultat2 = sauv.rep_sauv(datetime.datetime(2000, 1, 1), self.repsauv)
 		resultat2.analyse()
-
+		
 		self.assertEqual(resultat2, resultat)
-		self.assertEqual(resultat.stat[sauv.bl_date], datetime.datetime(2000, 1, 1).strftime(sauv.formatdate) )
-
+		self.assertEqual(resultat.stat[sauv.bl_date], datetime.datetime(2000, 1, 1).strftime(sauv.formatdate))
+	
 	def test_chemin_inexistant(self):
-
+		
 		resultat = sauv.rep_sauv(datetime.datetime(2000, 1, 1), "/dfdf/dfff")
-		self.assertRaises(sauv.init_erreur,resultat.analyse)
-
-
+		self.assertRaises(sauv.init_erreur, resultat.analyse)
+	
 	def test_vide(self):
 		""" teste si le résultat est conforme dans une situation normale """
-
+		
 		os.makedirs(os.path.join(self.repsauv, 'srep'), mode=0o777)
-
+		
 		resultat = sauv.rep_sauv(datetime.datetime(2000, 1, 1), self.repsauv)
 		resultat.taille = 0
 		resultat.lnoeud = {}
-
+		
 		resultat2 = sauv.rep_sauv(datetime.datetime(2000, 1, 1), self.repsauv)
 		resultat2.analyse()
-
+		
 		self.assertEqual(resultat2, resultat)
-
+	
 	def test_analyse_fichiers_lié(self):
 		"""teste le résultat de la taille avec deux fichiers liés"""
-		liste_rep = ["ffffé", "h12222","rrt"]
+		liste_rep = ["ffffé", "h12222", "rrt"]
 		premier = True
-
+		
 		élément = []
 		for rep in liste_rep:
 			# créé le répertoire
@@ -951,163 +949,159 @@ class rep_sauv(unittest.TestCase):
 				os.makedirs(os.path.join(self.repsauv, rep), mode=0o777)
 			except OSError:
 				pass
-
+			
 			if premier:
 				fpremier = os.path.join(self.repsauv, rep, "fichier.txt")
 				# créé le fichier source
 				with open(fpremier, 'w') as configfile:
 					configfile.write('ffffff')
 				premier = False
-
+			
 			else:
 				# créé un lien dur
 				os.link(fpremier, os.path.join(self.repsauv, rep, "identique.txt"))
-
-			#ajoute un fichier différent de 4 caractères
+			
+			# ajoute un fichier différent de 4 caractères
 			fpremier = os.path.join(self.repsauv, rep, "différent.txt")
 			# créé le fichier source
 			with open(fpremier, 'w') as configfile:
 				configfile.write('ffqq')
-
+			
 			rsauv = sauv.rep_sauv(datetime.datetime(2005, 12, 30), os.path.join(self.repsauv, rep))
 			élément.append(rsauv)
 			rsauv.analyse()
-
+		
 		arbre = [élément, [], []]
 		sauv.reduit_inode(arbre)
-
+		
 		# regarde la taille totale
 		self.assertEqual(sauv.taille_arbre(arbre), 18)
-		self.assertEqual(arbre[0][0].taille, 6+4)
+		self.assertEqual(arbre[0][0].taille, 6 + 4)
 		self.assertEqual(arbre[0][1].taille, 4)
+
 
 class reduit_inode(unittest.TestCase):
 	def setUp(self):
 		config_log()
-
+	
 	def tearDown(self):
 		pass
-
+	
 	def test_fonctionnel(self):
 		"""teste de la correspondance résultat"""
-
+		
 		test = sauv.rep_sauv(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
-		test.lnoeud = {'45':50,'46':20,'47':10}
-
+		test.lnoeud = {'45': 50, '46': 20, '47': 10}
+		
 		test2 = sauv.rep_sauv(datetime.datetime(2006, 1, 1), "/home/ghhhjhjh.n")
 		test2.lnoeud = {'46': 20, '47': 10}
-
-
+		
 		test3 = sauv.rep_sauv(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
-		test3.lnoeud = { '47': 10,'48':5}
-
-		resultat = [[test3, test2], [test],[]]
-
-
+		test3.lnoeud = {'47': 10, '48': 5}
+		
+		resultat = [[test3, test2], [test], []]
+		
 		test21 = sauv.rep_sauv(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
 		test21.lnoeud = {}
 		test21.taille = 50
-
+		
 		test22 = sauv.rep_sauv(datetime.datetime(2006, 1, 1), "/home/ghhhjhjh.n")
 		test22.lnoeud = {}
 		test22.taille = 20
-
+		
 		test23 = sauv.rep_sauv(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
-		test23.lnoeud = { '47': 10,'48':5}
-
-		resultat2 =  [[test23, test22], [test21],[]]
-
+		test23.lnoeud = {'47': 10, '48': 5}
+		
+		resultat2 = [[test23, test22], [test21], []]
+		
 		sauv.reduit_inode(resultat)
 		self.assertEqual(resultat2, resultat)
-
+	
 	def test_fonctionnel2(self):
 		"""teste de la correspondance résultat avec arbre déjà réduit"""
-
+		
 		test = sauv.rep_sauv(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
 		test.lnoeud = {}
 		test.taille = 50
-
+		
 		test2 = sauv.rep_sauv(datetime.datetime(2006, 1, 1), "/home/ghhhjhjh.n")
 		test2.lnoeud = {}
 		test2.taille = 20
-
+		
 		test3 = sauv.rep_sauv(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
 		test3.lnoeud = {'47': 10, '48': 5}
-
-		resultat =  [[test3, test2], [test], []]
-
+		
+		resultat = [[test3, test2], [test], []]
+		
 		test21 = sauv.rep_sauv(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
 		test21.lnoeud = {}
 		test21.taille = 50
-
+		
 		test22 = sauv.rep_sauv(datetime.datetime(2006, 1, 1), "/home/ghhhjhjh.n")
 		test22.lnoeud = {}
 		test22.taille = 20
-
+		
 		test23 = sauv.rep_sauv(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
 		test23.lnoeud = {'47': 10, '48': 5}
-
+		
 		resultat2 = [[test23, test22], [test21], []]
-
+		
 		sauv.reduit_inode(resultat)
 		self.assertEqual(resultat2, resultat)
-
-
+	
 	def test_mauvais_ordre(self):
 		"""teste si l'ordre n'est pas respecté"""
-
-
+		
 		test = sauv.rep_sauv(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
 		test.lnoeud = {'45': 50, '46': 20, '47': 10}
-
+		
 		test2 = sauv.rep_sauv(datetime.datetime(2004, 1, 1), "/home/ghhhjhjh.n")
 		test2.lnoeud = {'46': 20, '47': 10}
-
+		
 		test3 = sauv.rep_sauv(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
 		test3.lnoeud = {'47': 10, '48': 5}
-
-		resultat =  [[test3, test2], [test], []]
-
+		
+		resultat = [[test3, test2], [test], []]
+		
 		self.assertRaises(SyntaxError, sauv.reduit_inode, resultat)
-
 
 
 class sauv_arbre(unittest.TestCase):
 	fich = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'essai.hist')
-
+	
 	def setUp(self):
 		config_log()
-
+	
 	def tearDown(self):
 		try:
 			os.remove(self.fich)
 		except OSError:
 			pass
-
+	
 	def test_fonctionnel(self):
 		"""teste de la correspondance résultat"""
 		test = sauv.rep_sauv(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		arbre = {'sauv': [[test, test], [test], []]}
 		sauv.sauv_arbre(self.fich, arbre)
-
+		
 		self.assertEqual(sauv.charge_arbre(self.fich), arbre)
-
+	
 	def test_mauvais_chemin(self):
 		"""teste si le chemin d'accès n'existe pas"""
 		arbre = {'ert': 56}
 		self.fich = '/tmp/erergererg/ttgh4tg/zerze.f'
 		self.assertRaises(SyntaxError, sauv.sauv_arbre, self.fich, arbre)
-
+	
 	def test_arbre_vide(self):
 		"""teste si l'arbre ne contient rien"""
-
+		
 		self.assertRaises(SyntaxError, sauv.sauv_arbre, self.fich, None)
 
 
 class pas_de_sauv(unittest.TestCase):
 	def setUp(self):
 		config_log()
-
+	
 	def test_fonctionnel(self):
 		"""test si renvoi bien true si les conditions sont réunies"""
 		config = sauv.My_configparser()
@@ -1117,7 +1111,7 @@ class pas_de_sauv(unittest.TestCase):
 		arbre = [[rsauv, rsauv], [], []]
 		force = False
 		self.assertTrue(sauv.pas_de_sauv(config['sauv'], arbre, force))
-
+	
 	def test_fonctionnel2(self):
 		"""test si autorise si la dernière sauvegarde est lointaine"""
 		config = sauv.My_configparser()
@@ -1127,7 +1121,7 @@ class pas_de_sauv(unittest.TestCase):
 		arbre = [[rsauv, rsauv], [], []]
 		force = False
 		self.assertFalse(sauv.pas_de_sauv(config['sauv'], arbre, force))
-
+	
 	def test_fonctionnel3(self):
 		"""teste si trouve bien la date de la sauvegarde de rang 2"""
 		config = sauv.My_configparser()
@@ -1137,7 +1131,7 @@ class pas_de_sauv(unittest.TestCase):
 		arbre = [[], [rsauv], []]
 		force = False
 		self.assertTrue(sauv.pas_de_sauv(config['sauv'], arbre, force))
-
+	
 	def test_fonctionnel4(self):
 		"""teste si trouve bien la date de la sauvegarde de rang 2"""
 		config = sauv.My_configparser()
@@ -1147,7 +1141,7 @@ class pas_de_sauv(unittest.TestCase):
 		arbre = [[], [], [rsauv]]
 		force = False
 		self.assertTrue(sauv.pas_de_sauv(config['sauv'], arbre, force))
-
+	
 	def test_sans_per1(self):
 		"""test si renvoi bien false si periode1 n'existe pas """
 		config = sauv.My_configparser()
@@ -1157,17 +1151,17 @@ class pas_de_sauv(unittest.TestCase):
 		arbre = [[rsauv, rsauv], [], []]
 		force = False
 		self.assertFalse(sauv.pas_de_sauv(config['sauv'], arbre, force))
-
+	
 	def test_sans_arbre(self):
 		"""test si renvoi bien false si l'arbre est vide"""
 		config = sauv.My_configparser()
 		config['sauv'] = {}
 		config['sauv'][sauv.per1] = '4'
-
+		
 		arbre = [[], [], []]
 		force = False
 		self.assertFalse(sauv.pas_de_sauv(config['sauv'], arbre, force))
-
+	
 	def test_avec_force(self):
 		"""test si renvoi bien false quand force est activé"""
 		config = sauv.My_configparser()
@@ -1178,38 +1172,37 @@ class pas_de_sauv(unittest.TestCase):
 		force = True
 		self.assertFalse(sauv.pas_de_sauv(config['sauv'], arbre, force))
 
+
 class fusion_rep(unittest.TestCase):
 	rep = os.path.join(os.path.split(os.path.abspath(__file__))[0], "TruxfgHHHfg45")
-
-
+	
 	def setUp(self):
 		config_log()
 		try:
 			os.makedirs(self.rep)
 		except OSError:
 			pass
-
-
+	
 	def tearDown(self):
 		try:
 			shutil.rmtree(self.rep)
 		except OSError:
 			pass
-
-
+	
 	def test_fonctionnel(self):
 		"""teste si la source disparait et les fichiers se retouvent bien dans dst  """
-
-		test  = ['source/video/fich1.txt','source/video/fich2.txt','destination/video/fich1.txt','destination/video/fich3.txt']
+		
+		test = ['source/video/fich1.txt', 'source/video/fich2.txt', 'destination/video/fich1.txt',
+				'destination/video/fich3.txt']
 		l_rep = [Path(self.rep, rep) for rep in test]
 		for prep in l_rep:
 			prep.parent.mkdir(parents=True, exist_ok=True)
 			with prep.open('w', encoding='utf8') as f:
 				# ecrit le string de test correspondant
 				f.write(test[l_rep.index(prep)])
-
-		sauv.fusion_rep(Path(self.rep,'source'),Path(self.rep,'destination'))
-
+		
+		sauv.fusion_rep(Path(self.rep, 'source'), Path(self.rep, 'destination'))
+		
 		# verifie l'effacement  de la source
 		self.assertFalse(l_rep[0].parent.parent.exists())
 		# verifie que les 3 fichiers existent
@@ -1218,21 +1211,22 @@ class fusion_rep(unittest.TestCase):
 		self.assertTrue(l_rep[2].exists())
 		# regarde si le contenu est bien celui provenant de la source (écrasement)
 		with l_rep[2].open('r', encoding='utf8') as f:
-			self.assertTrue(f.read() == test[0] )
-
+			self.assertTrue(f.read() == test[0])
+	
 	def test_fonctionnel2(self):
 		"""teste si la source disparait et les fichiers se retouvent bien dans dst  """
-
-		test  = ['source/video/fich1.txt','source/fich2.txt','source/tt/hh/fich4.pps','destination/video/fich1.txt','destination/video/fich3.txt','destination/video/JJ/fich5.txt']
+		
+		test = ['source/video/fich1.txt', 'source/fich2.txt', 'source/tt/hh/fich4.pps', 'destination/video/fich1.txt',
+				'destination/video/fich3.txt', 'destination/video/JJ/fich5.txt']
 		l_rep = [Path(self.rep, rep) for rep in test]
 		for prep in l_rep:
 			prep.parent.mkdir(parents=True, exist_ok=True)
 			with prep.open('w', encoding='utf8') as f:
 				# ecrit le string de test correspondant
 				f.write(test[l_rep.index(prep)])
-
-		sauv.fusion_rep(Path(self.rep,'source'),Path(self.rep,'destination'))
-
+		
+		sauv.fusion_rep(Path(self.rep, 'source'), Path(self.rep, 'destination'))
+		
 		# verifie l'effacement  de la source
 		self.assertFalse(l_rep[0].parent.parent.exists())
 		# verifie que les 3 fichiers existent
@@ -1242,33 +1236,33 @@ class fusion_rep(unittest.TestCase):
 		self.assertTrue(l_rep[5].exists())
 		# regarde si le contenu est bien celui provenant de la source (écrasement)
 		with l_rep[3].open('r', encoding='utf8') as f:
-			self.assertTrue(f.read() == test[0] )
-
+			self.assertTrue(f.read() == test[0])
+	
 	def test_fonctionnel3(self):
 		"""teste si la source disparait et les fichiers se retouvent bien dans dst  """
-
-		test  = ['2017-12-25 19-00_2/johannes/.thunderbird/b4wxdk9g.default/datareporting/state.json',
-				 '2018-12-25 19-00_2/johannes/.thunderbird/b4wxdk9g.default/datareporting/state.json']
+		
+		test = ['2017-12-25 19-00_2/johannes/.thunderbird/b4wxdk9g.default/datareporting/state.json',
+				'2018-12-25 19-00_2/johannes/.thunderbird/b4wxdk9g.default/datareporting/state.json']
 		l_rep = [Path(self.rep, rep) for rep in test]
 		for prep in l_rep:
 			prep.parent.mkdir(parents=True, exist_ok=True)
 			with prep.open('w', encoding='utf8') as f:
 				# ecrit le string de test correspondant
 				f.write(test[l_rep.index(prep)])
-
-		sauv.fusion_rep(Path(self.rep,'2017-12-25 19-00_2'),Path(self.rep,'2018-12-25 19-00_2'))
-
+		
+		sauv.fusion_rep(Path(self.rep, '2017-12-25 19-00_2'), Path(self.rep, '2018-12-25 19-00_2'))
+		
 		# verifie l'effacement  de la source
 		self.assertFalse(l_rep[0].parent.parent.parent.parent.parent.exists())
 		# verifie que le fichier existe
 		self.assertTrue(l_rep[1].exists())
 		# regarde si le contenu est bien celui provenant de la source (écrasement)
 		with l_rep[1].open('r', encoding='utf8') as f:
-			self.assertTrue(f.read() == test[0] )
-
+			self.assertTrue(f.read() == test[0])
+	
 	def test_source_non_path(self):
 		"""teste si renvoie bien valuerror si la source n'est pas un path"""
-
+		
 		test = ['dest/vidéo/fich1.txt']
 		l_rep = [Path(self.rep, rep) for rep in test]
 		for prep in l_rep:
@@ -1276,50 +1270,51 @@ class fusion_rep(unittest.TestCase):
 			with prep.open('w', encoding='utf8') as f:
 				# ecrit le string de test correspondant
 				f.write('test')
-
+		
 		self.assertRaises(ValueError, sauv.fusion_rep, 'source', Path(self.rep, 'dest'))
-
-
+	
 	def test_dest_non_path(self):
 		"""teste si renvoie bien valuerror si la source n'est pas un path"""
-
+		
 		test = ['dest/vidéo/fich1.txt']
 		l_rep = [Path(self.rep, rep) for rep in test]
 		for prep in l_rep:
 			prep.parent.mkdir(parents=True, exist_ok=True)
 			with prep.open('w', encoding='utf8') as f:
 				f.write('test')
-
+		
 		self.assertRaises(ValueError, sauv.fusion_rep, Path(self.rep, 'dest'), 'source')
-
+	
 	def test_source_inexistante(self):
 		"""teste si renvoit bien FileNotFoundError lorsque la source n'existe pas  """
-
+		
 		test = ['dest/vidéo/fich1']
 		l_rep = [Path(self.rep, rep) for rep in test]
 		for prep in l_rep:
 			prep.parent.mkdir(parents=True, exist_ok=True)
 			with prep.open('w', encoding='utf8') as f:
 				f.write('test')
-
+		
 		self.assertRaises(FileNotFoundError, sauv.fusion_rep, Path(self.rep, 'source'), Path(self.rep, 'dest'))
-
+	
 	def test_destination_inexistante(self):
 		"""teste si créé bien la destination si elle n'existe pas  """
-
+		
 		test = ['source/vidéo/fich1', 'source/musique/fich1']
 		l_rep = [Path(self.rep, rep) for rep in test]
 		for prep in l_rep:
 			prep.parent.mkdir(parents=True, exist_ok=True)
 			with prep.open('w', encoding='utf8') as f:
 				f.write('test')
-
+		
 		sauv.fusion_rep(Path(self.rep, 'source'), Path(self.rep, 'destination'))
 		# verifie l'effacement  de la source
 		self.assertFalse(l_rep[0].parent.parent.exists())
 		# verifie que les 2 fichiers existent dans la destination
-		self.assertTrue(( Path(self.rep, 'destination') / l_rep[0].parts[-2] / l_rep[0].parts[-1] ).exists())
-		self.assertTrue(( Path(self.rep, 'destination') / l_rep[1].parts[-2] / l_rep[1].parts[-1] ).exists())
+		self.assertTrue((Path(self.rep, 'destination') / l_rep[0].parts[-2] / l_rep[0].parts[-1]).exists())
+		self.assertTrue((Path(self.rep, 'destination') / l_rep[1].parts[-2] / l_rep[1].parts[-1]).exists())
+
+
 '''
 	def test_erreur_fichier(self):
 		"""verifie que renvoie bien une erreur OSError """
@@ -1338,83 +1333,83 @@ class fusion_rep(unittest.TestCase):
 		# verifie l'effacement  de la source
 		self.assertRaises(OSError, sauv.fusion_rep, Path(self.rep,'source'), Path(self.rep,'destination'))
 '''
+
+
 class regroupe(unittest.TestCase):
 	rep = os.path.join(os.path.split(os.path.abspath(__file__))[0], "AZEezrenn568ht")
-
+	
 	def setUp(self):
 		config_log()
 		try:
 			os.makedirs(self.rep)
 		except OSError:
 			pass
-
+	
 	def tearDown(self):
 		try:
 			shutil.rmtree(self.rep)
 		except OSError:
 			pass
-
+	
 	def test_fonctionnel(self):
 		"""teste si renvoi bien l'arbre réduit et le passage au niveau 2 du dernier repertoire """
-
+		
 		cons = 1
 		per_suiv = 10
 		now = datetime.datetime.now()
-
+		
 		arbre = []
 		arbre_origine = []
 		modèle = []
 		test = [('er_1', 5), ('tyëu_1', 23), ('kkk_1', 25), ('dfg_1', 40)]
-
+		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
 				os.mkdir(os.path.join(self.rep, fichier[0], 'musique'))
 			except OSError:
 				logger.error("problème de création de fichier")
-
+			
 			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			arbre.append(rsauv)
 			# fait une copie de arbre
 			rsauv2 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			arbre_origine.append(rsauv2)
-
+			
 			rsauv3 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			modèle.append(rsauv3)
-
-			with open(os.path.join(self.rep,  fichier[0], 'musique', fichier[0]), 'w', encoding='utf8') as f:
-			 	f.write("Lancement d'une sauvegarde")
-
-
+			
+			with open(os.path.join(self.rep, fichier[0], 'musique', fichier[0]), 'w', encoding='utf8') as f:
+				f.write("Lancement d'une sauvegarde")
+		
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[1].chemin)
 		modèle = [[modèle[0]], [modèle[1]], []]
 		modèle[1][0].chemin = os.path.join(che, rep[:-2] + "_2")
 		retour = [list(arbre[0:4]), [], []]
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
-
+		
 		self.assertEqual(modèle, retour)
 		self.assertFalse(os.path.exists(arbre_origine[2].chemin))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[0].chemin)))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, arbre_origine[-1].chemin)))
-
+		
 		self.assertTrue(os.path.exists(os.path.join(che, rep[:-2] + "_2")))
 		# teste que les 3 fichiers sont biens présents
-		self.assertEqual(set(os.listdir(os.path.join(che, rep[:-2] + "_2", 'musique'))),{t[0] for t in test[1:]})
-
-
+		self.assertEqual(set(os.listdir(os.path.join(che, rep[:-2] + "_2", 'musique'))), {t[0] for t in test[1:]})
+	
 	def test_fonctionnel2(self):
 		"""teste si renvoi bien l'arbre de niveau 2 réduit """
-
+		
 		cons = 100
 		per_suiv = 200
 		now = datetime.datetime.now()
-
+		
 		arbre = []
 		arbre_origine = []
 		modèle = []
 		test = [('er', 75), ('tyu', 99), ('kkk', 100), ('dfg', 150), ('niv2', 190)]
-
+		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
@@ -1426,85 +1421,85 @@ class regroupe(unittest.TestCase):
 			arbre.append(rsauv)
 			# fait une copie de arbre
 			rsauv2 = sauv.rep_sauv(now - datetime.timedelta(days=fichier[1], hours=23),
-								  os.path.join(self.rep, fichier[0]))
+								   os.path.join(self.rep, fichier[0]))
 			arbre_origine.append(rsauv2)
-
+			
 			rsauv3 = sauv.rep_sauv(now - datetime.timedelta(days=fichier[1], hours=23),
-								  os.path.join(self.rep, fichier[0]))
+								   os.path.join(self.rep, fichier[0]))
 			modèle.append(rsauv3)
-
+		
 		# création de la liste source et de reférence
-
+		
 		modèle = [[], list(modèle[0:2]), [modèle[-1]]]
 		retour = [[], list(arbre[0:4]), [arbre[-1]]]
 		sauv.regroupe(cons, per_suiv, retour, 1, now)
-
+		
 		self.assertEqual(modèle, retour)
 		self.assertFalse(os.path.exists(os.path.join(self.rep, arbre_origine[2].chemin)))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[1].chemin)))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[-1].chemin)))
-
+	
 	def test_fonctionnel_avecmd5(self):
 		"""teste si le md5 est bien préservé """
-
+		
 		cons = 1
 		per_suiv = 10
 		now = datetime.datetime.now()
-
+		
 		arbre = []
 		arbre_origine = []
 		modèle = []
 		test = [('er_1', 5), ('tyëu_1', 23), ('kkk_1_78', 25), ('dfg_1_50', 40)]
-
+		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-
+			
 			except OSError:
 				logger.error("problème de création de fichier")
 			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
-
+			
 			# fait une copie de arbre
 			rsauv2 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			arbre_origine.append(rsauv2)
-
+			
 			rsauv3 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			modèle.append(rsauv3)
-
-			# fait une copie de arbre
-
+		
+		# fait une copie de arbre
+		
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[1].chemin)
 		modèle = [[modèle[0]], [modèle[1]], []]
 		modèle[1][0].chemin = os.path.join(che, rep[:-2] + "_2_78")
 		retour = [list(arbre[0:4]), [], []]
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
-
+		
 		self.assertEqual(modèle, retour)
 		self.assertFalse(os.path.exists(arbre_origine[2].chemin))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[0].chemin)))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, arbre_origine[-1].chemin)))
-
+		
 		self.assertTrue(os.path.exists(os.path.join(che, rep[:-2] + "_2_78")))
-
+	
 	def test_fonctionnel_avec2md5(self):
 		"""teste si le md5 le plus récent est bien préservé """
-
+		
 		cons = 1
 		per_suiv = 10
 		now = datetime.datetime.now()
-
+		
 		arbre = []
 		arbre_origine = []
 		modèle = []
 		test = [('er_1', 5), ('tyëu_1_100', 23), ('kkk_1_78', 25), ('dfg_1', 40)]
-
+		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-
+			
 			except OSError:
 				logger.error("problème de création de fichier")
 			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
@@ -1513,252 +1508,252 @@ class regroupe(unittest.TestCase):
 			# fait une copie de arbre
 			rsauv2 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			arbre_origine.append(rsauv2)
-
+			
 			rsauv3 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			modèle.append(rsauv3)
-
+		
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[1].chemin)
 		modèle = [[modèle[0]], [modèle[1]], []]
 		modèle[1][0].chemin = os.path.join(che, rep.split('_')[0] + "_2_100")
 		retour = [list(arbre[0:4]), [], []]
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
-
+		
 		self.assertEqual(modèle, retour)
 		self.assertFalse(os.path.exists(arbre_origine[2].chemin))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[0].chemin)))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, arbre_origine[-1].chemin)))
-
+		
 		self.assertTrue(os.path.exists(os.path.join(che, rep.split('_')[0] + "_2_100")))
-
+	
 	def test_un_seul_repertoire(self):
 		"""teste la promotion d'un seul répertoire """
-
+		
 		cons = 10
 		per_suiv = 10
 		now = datetime.datetime.now()
-
+		
 		arbre = []
 		test = [('répertoire_1', 5)]
-
+		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-
+			
 			except OSError:
 				logger.error("problème de création de fichier")
 			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
-
-			# fait une copie de arbre
+		
+		# fait une copie de arbre
 		arbre_origine = list(arbre)
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[0].chemin)
 		retour = [list(arbre[0:1]), [], []]
 		modèle = [[], [sauv.rep_sauv(arbre[0].date, os.path.join(che, rep[:-2] + "_2"))], []]
-
+		
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
-
+		
 		self.assertEqual(modèle, retour)
 		self.assertFalse(os.path.exists(os.path.join(che, rep)))
-
+		
 		self.assertTrue(os.path.exists(os.path.join(che, rep[:-2] + "_2")))
-
+	
 	def test_conservation_passe(self):
 		"""teste la promotion d'un seul répertoire """
-
+		
 		cons = 10
 		per_suiv = 10
 		now = datetime.datetime.now()
-
+		
 		arbre = []
 		test = [('ertr ter_1', 15)]
-
+		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-
+			
 			except OSError:
 				logger.error("problème de création de fichier")
 			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			arbre.append(rsauv)
-
-			# fait une copie de arbre
+		
+		# fait une copie de arbre
 		arbre_origine = list(arbre)
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[0].chemin)
 		retour = [list(arbre[0:1]), [], []]
 		modèle = [[], [sauv.rep_sauv(arbre[0].date, os.path.join(che, rep[:-2] + "_2"))], []]
-
+		
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
-
+		
 		self.assertEqual(modèle, retour)
 		self.assertFalse(os.path.exists(os.path.join(che, rep)))
-
+		
 		self.assertTrue(os.path.exists(os.path.join(che, rep[:-2] + "_2")))
-
+	
 	def test_avec_erreur_déplacement(self):
 		"""teste si saute bien le répertoire avec erreur """
-
+		
 		cons = 1
 		per_suiv = 10
 		now = datetime.datetime.now()
-
+		
 		arbre = []
 		test = [('er_1', 5), ('tyëu_1', 23), ('kkk_1', 25), ('dfg_1', 40)]
-
+		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-
+			
 			except OSError:
 				logger.error("problème de création de fichier")
 			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
-
-			# fait une copie de arbre
+		
+		# fait une copie de arbre
 		arbre_origine = list(arbre)
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[1].chemin)
 		modèle = [list(arbre[0:2]), [], []]
 		modèle[0].append(arbre[3])
 		retour = [list(arbre[0:4]), [], []]
-
+		
 		# suprimme le troisième pour générer une erreur
 		shutil.rmtree(arbre[3].chemin)
-
+		
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
-
+		
 		self.assertEqual(modèle, retour)
 		self.assertFalse(os.path.exists(arbre_origine[2].chemin))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[1].chemin)))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[0].chemin)))
-
+	
 	def test_supérieur_non_vide(self):
 		"""teste si la promotion s'incorpore correctement si le supérieur hiérarchique n'est pas vide """
-
+		
 		cons = 1
 		per_suiv = 10
 		now = datetime.datetime.now()
-
+		
 		arbre = []
 		test = [('kkk_1', 25), ('dfg_2', 500), ('gggg_2', 600)]
-
+		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-
+			
 			except OSError:
 				logger.error("problème de création de fichier")
 			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
-
-			# fait une copie de arbre
+		
+		# fait une copie de arbre
 		arbre_origine = list(arbre)
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[0].chemin)
 		retour = [list(arbre[0:1]), list(arbre[1:3]), []]
 		modèle = [[], [sauv.rep_sauv(arbre[0].date, os.path.join(che, rep[:-2] + "_2")), ], []]
 		modèle[1].extend(list(arbre[1:3]))
-
+		
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
-
+		
 		self.assertEqual(modèle, retour)
 		self.assertTrue(os.path.exists(arbre_origine[1].chemin))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[2].chemin)))
 		self.assertFalse(os.path.exists(os.path.join(che, rep)))
-
+		
 		self.assertTrue(os.path.exists(os.path.join(che, rep[:-2] + "_2")))
-
+	
 	def test_supérieur_non_vide2(self):
 		"""teste si tout reste inchangé """
-
+		
 		cons = 1
 		per_suiv = 10
 		now = datetime.datetime.now()
-
+		
 		arbre = []
 		test = [('1_kkk', 25), ('2_dfg', 200), ('2_gggg', 600)]
-
+		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-
+			
 			except OSError:
 				logger.error("problème de création de fichier")
 			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
-
-			# fait une copie de arbre
+		
+		# fait une copie de arbre
 		arbre_origine = list(arbre)
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[0].chemin)
 		retour = [list(arbre[0:1]), list(arbre[1:3]), []]
 		modèle = [list(arbre[0:1]), list(arbre[1:3]), []]
-
+		
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
-
+		
 		self.assertEqual(modèle, retour)
 		self.assertTrue(os.path.exists(arbre_origine[1].chemin))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[2].chemin)))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[0].chemin)))
-
+	
 	def test_cons_negatif(self):
 		"""teste si renvoi bien l'arbre réduit et le passage au niveau 2 du dernier repertoire """
-
+		
 		cons = -1
 		per_suiv = 10
 		now = datetime.datetime.now()
-
+		
 		arbre = []
 		test = [('er_1', 5), ('tyu_1', 23), ('kkk_1', 25), ('dfg_1', 40)]
-
+		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-
+			
 			except OSError:
 				logger.error("problème de création de fichier")
 			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
-
-			# fait une copie de arbre
+		
+		# fait une copie de arbre
 		arbre_origine = list(arbre)
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[0].chemin)
 		modèle = [[], [sauv.rep_sauv(arbre[0].date, os.path.join(che, rep[:-2] + "_2")), ], []]
 		retour = [list(arbre[0:4]), [], []]
-
+		
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
-
+		
 		self.assertEqual(modèle, retour)
 		self.assertFalse(os.path.exists(arbre_origine[2].chemin))
 		self.assertFalse(os.path.exists(os.path.join(che, rep)))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, arbre_origine[-1].chemin)))
-
+		
 		self.assertTrue(os.path.exists(os.path.join(che, rep[:-2] + "_2")))
-
+	
 	def test_per_suiv_negatif(self):
 		"""teste si renvoi bien l'arbre réduit et le passage au niveau 2 du dernier repertoire """
-
+		
 		cons = 1
 		per_suiv = -10
 		now = datetime.datetime.now()
-
+		
 		arbre = []
 		arbre_origine = []
 		modèle = []
 		test = [('er_1', 5), ('tyu_1', 23), ('kkk_1', 25), ('dfg_1', 40)]
-
+		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-
+			
 			except OSError:
 				logger.error("problème de création de fichier")
 			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
@@ -1767,30 +1762,32 @@ class regroupe(unittest.TestCase):
 			# fait une copie de arbre
 			rsauv2 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			arbre_origine.append(rsauv2)
-
+			
 			rsauv3 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			modèle.append(rsauv3)
-
+		
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[1].chemin)
 		modèle = [[modèle[0]], [modèle[1]], []]
 		modèle[1][0].chemin = os.path.join(che, rep[:-2] + "_2")
 		retour = [list(arbre[0:4]), [], []]
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
-
+		
 		self.assertEqual(modèle, retour)
 		self.assertFalse(os.path.exists(arbre_origine[2].chemin))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[0].chemin)))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, arbre_origine[-1].chemin)))
-
+		
 		self.assertTrue(os.path.exists(os.path.join(che, rep[:-2] + "_2")))
+
+
 # todo - ajouter un test de conservation de taille
 
 
 class reduction(unittest.TestCase):
 	rep = os.path.join(os.path.split(os.path.abspath(__file__))[0], "K45kjioyuG")
 	now = datetime.datetime.now()
-
+	
 	def setUp(self):
 		config_log()
 		try:
@@ -1801,13 +1798,13 @@ class reduction(unittest.TestCase):
 			os.makedirs(self.rep)
 		except OSError:
 			pass
-
+	
 	def tearDown(self):
 		try:
 			shutil.rmtree(self.rep)
 		except OSError:
 			pass
-
+	
 	def test_fonctionnel(self):
 		"""teste si renvoi bien l'arbre réduit pour le niveau 1 """
 		# légendes des données: nom de répertoire, niveau, jour
@@ -1818,10 +1815,10 @@ class reduction(unittest.TestCase):
 			# créé les répertoires avec un fichier
 			try:
 				os.mkdir(os.path.join(self.rep, rep[0]))
-
+			
 			except OSError:
 				sauv.logger.error("problème de création de fichier")
-
+			
 			fichier = os.path.join(self.rep, rep[0], "essai")
 			with open(fichier, mode='w') as file:
 				file.write('hello boys')
@@ -1830,11 +1827,11 @@ class reduction(unittest.TestCase):
 			rsauv.analyse()
 			arbre[rep[1] - 1].append(rsauv)
 			reference[rep[1] - 1].append(rsauv)
-
-			# apportes les modifications du résultat
+		
+		# apportes les modifications du résultat
 		del (reference[1][0])
 		del (reference[0][-1])
-
+		
 		# Créé la configuration
 		config = sauv.My_configparser()
 		config['sauv'] = {}
@@ -1843,7 +1840,7 @@ class reduction(unittest.TestCase):
 		config['sauv'][sauv.cons3] = '500'
 		config['sauv'][sauv.qta] = '0.000000025'
 		config['sauv'][sauv.dest] = self.rep
-
+		
 		# sauv.logger = logging.getLogger('main')
 		# lance la fonction et teste le retour de d'un log d'erreur pour supression dans la période de conservation
 		sauv.reduction(config['sauv'], arbre)
@@ -1851,12 +1848,12 @@ class reduction(unittest.TestCase):
 		
 		# with self.assertLogs(logger=sauv.logger, level=logging.ERROR):
 		# 	sauv.reduction(config['sauv'], arbre)
-
+		
 		self.assertEqual(arbre, reference)
 		# teste existance entre du second
 		self.assertTrue(os.path.exists(os.path.join(self.rep, test[1][0])))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, test[2][0])))
-
+	
 	def test_conservation_une_sauv(self):
 		"""teste si une sauvegarde est bien conservée si Qta très faible """
 		# légendes des données: nom de répertoire, niveau, jour
@@ -1867,10 +1864,10 @@ class reduction(unittest.TestCase):
 			# créé les répertoires avec un fichier
 			try:
 				os.mkdir(os.path.join(self.rep, rep[0]))
-
+			
 			except OSError:
 				logger.error("problème de création de fichier")
-
+			
 			fichier = os.path.join(self.rep, rep[0], "essai")
 			with open(fichier, mode='w') as file:
 				file.write('hello boys')
@@ -1879,12 +1876,12 @@ class reduction(unittest.TestCase):
 			rsauv.analyse()
 			arbre[rep[1] - 1].append(rsauv)
 			reference[rep[1] - 1].append(rsauv)
-
-			# apportes les modifications du résultat
+		
+		# apportes les modifications du résultat
 		del (reference[1][0])
 		del (reference[0][-1])
 		del (reference[0][-1])
-
+		
 		# Créé la configuration
 		config = sauv.My_configparser()
 		config['sauv'] = {}
@@ -1893,15 +1890,15 @@ class reduction(unittest.TestCase):
 		config['sauv'][sauv.cons3] = '500'
 		config['sauv'][sauv.qta] = '0.000000001'
 		config['sauv'][sauv.dest] = self.rep
-
+		
 		# lance la fonction
 		sauv.reduction(config['sauv'], arbre)
-
+		
 		self.assertEqual(arbre, reference)
 		# teste existance entre du second
 		self.assertTrue(os.path.exists(os.path.join(self.rep, test[0][0])))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, test[1][0])))
-
+	
 	def test_erreur_deffacement(self):
 		"""teste l'erreur d'effacement et la protection du niveau 1"""
 		# légendes des données de test: nom de répertoire, niveau, jour
@@ -1912,22 +1909,22 @@ class reduction(unittest.TestCase):
 			# créé les répertoires avec un fichier
 			try:
 				os.mkdir(os.path.join(self.rep, rep[0]))
-
+			
 			except OSError:
 				print("problème de création de fichier :{}".format(rep[0]))
-
+			
 			fichier = os.path.join(self.rep, rep[0], "essai")
 			with open(fichier, mode='w') as file:
 				file.write('hello boys')
-				# créé les arbres
+			# créé les arbres
 			rsauv = sauv.rep_sauv(self.now - datetime.timedelta(days=rep[2]), os.path.join(self.rep, rep[0]))
 			rsauv.analyse()
 			arbre[rep[1] - 1].append(rsauv)
 			reference[rep[1] - 1].append(rsauv)
-
-			# apportes les modifications du résultat
+		
+		# apportes les modifications du résultat
 		del (reference[1][0])
-
+		
 		# Créé la configuration
 		config = sauv.My_configparser()
 		config['sauv'] = {}
@@ -1936,19 +1933,19 @@ class reduction(unittest.TestCase):
 		config['sauv'][sauv.cons3] = '500'
 		config['sauv'][sauv.qta] = '0.000000025'
 		config['sauv'][sauv.dest] = self.rep
-
+		
 		# modifie le dernier répertoire
 		os.rename(os.path.join(self.rep, test[-1][0]), os.path.join(self.rep, test[-1][0][:5]))
 		# lance la fonction
 		sauv.reduction(config['sauv'], arbre)
-
+		
 		self.assertEqual(arbre, reference)
 		# teste existance entre du second
 		self.assertTrue(os.path.exists(os.path.join(self.rep, test[1][0])))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, test[2][0])))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, test[3][0])))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, test[4][0][:5])))
-
+	
 	def test_niveau2et3(self):
 		"""teste si renvoi bien l'arbre réduit pour le niveau 1 """
 		# légendes des données: nom de répertoire, niveau, jour
@@ -1959,10 +1956,10 @@ class reduction(unittest.TestCase):
 			# créé les répertoires avec un fichier
 			try:
 				os.mkdir(os.path.join(self.rep, rep[0]))
-
+			
 			except OSError:
 				print("problème de création de fichier :{}".format(rep[0]))
-
+			
 			fichier = os.path.join(self.rep, rep[0], "essai")
 			with open(fichier, mode='w') as file:
 				file.write('hello boys')
@@ -1971,11 +1968,11 @@ class reduction(unittest.TestCase):
 			rsauv.analyse()
 			arbre[rep[1] - 1].append(rsauv)
 			reference[rep[1] - 1].append(rsauv)
-
-			# apportes les modifications du résultat
+		
+		# apportes les modifications du résultat
 		del (reference[2][-1])
 		del (reference[2][-1])
-
+		
 		# Créé la configuration
 		config = sauv.My_configparser()
 		config['sauv'] = {}
@@ -1984,18 +1981,18 @@ class reduction(unittest.TestCase):
 		config['sauv'][sauv.cons3] = '500'
 		config['sauv'][sauv.qta] = '0.000000025'
 		config['sauv'][sauv.dest] = self.rep
-
+		
 		# lance la fonction
 		sauv.reduction(config['sauv'], arbre)
-
+		
 		self.assertEqual(arbre, reference)
 		# teste existance entre du second
 		self.assertTrue(os.path.exists(os.path.join(self.rep, test[1][0])))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, test[2][0])))
-
+	
 	def test_conservation2_vide(self):
 		"""teste l'absence de cons2"""
-
+		
 		arbre = [[], [], []]
 		reference = [[], [], []]
 		test = [('1_er', 1, 2), ('1_tyu', 1, 4), ('1_kkk', 1, 25), ('1_dfg', 2, 40)]
@@ -2003,23 +2000,23 @@ class reduction(unittest.TestCase):
 			# créé les répertoires avec un fichier
 			try:
 				os.mkdir(os.path.join(self.rep, rep[0]))
-
+			
 			except OSError:
 				print("problème de création de fichier :{}".format(rep[0]))
-
+			
 			fichier = os.path.join(self.rep, rep[0], "essai")
 			with open(fichier, mode='w') as file:
 				file.write('hello boys')
-				# créé les arbres
+			# créé les arbres
 			rsauv = sauv.rep_sauv(self.now - datetime.timedelta(days=rep[2]), os.path.join(self.rep, rep[0]))
 			rsauv.analyse()
 			arbre[rep[1] - 1].append(rsauv)
 			reference[rep[1] - 1].append(rsauv)
-
-			# apporte les modifications du résultat
+		
+		# apporte les modifications du résultat
 		del (reference[1][0])
 		del (reference[0][-1])
-
+		
 		# Créé la configuration
 		config = sauv.My_configparser()
 		config['sauv'] = {}
@@ -2027,10 +2024,10 @@ class reduction(unittest.TestCase):
 		config['sauv'][sauv.cons3] = '60'
 		config['sauv'][sauv.qta] = '0.000000025'
 		config['sauv'][sauv.dest] = self.rep
-
+		
 		# lance la fonction
 		sauv.reduction(config['sauv'], arbre)
-
+		
 		self.assertEqual(arbre, reference)
 		# teste existance entre du second
 		self.assertTrue(os.path.exists(os.path.join(self.rep, test[1][0])))
@@ -2040,24 +2037,24 @@ class reduction(unittest.TestCase):
 class En_Decode_Json(unittest.TestCase):
 	def setUp(self):
 		config_log()
-
+	
 	def test_en_decode(self):
 		""" Encode puis décode un objet rep_sauv"""
 		rsauv = sauv.rep_sauv(datetime.datetime(2017, 10, 5), "/ertert/erte")
 		arbre = [[], [rsauv]]
-
+		
 		# try:
 		fichier = sauv.my_encoder().encode(arbre)
 		# except json.decoder.JSONDecodeError as exception:
 		# 	pass
-
+		
 		# try:
 		resultat = sauv.my_decoder().decode(fichier)
 		# except json.decoder.JSONDecodeError as exception:
 		# 	pass
-
+		
 		self.assertEqual(arbre, resultat)
-
+	
 	def test_decode_errone(self):
 		""" Encode puis décode un objet rep_sauv"""
 		l_entree = (
@@ -2067,14 +2064,13 @@ class En_Decode_Json(unittest.TestCase):
 			'{"date": "2017-10-05 00-00",  "__class__": "rep_sauv"}',
 			'{"date": "2017-10-05 00-00", "chemin": ["dffdggdfg"], "__class__": "rep_sauv"}'
 		)
-
+		
 		for entree in l_entree:
 			self.assertRaises(json.decoder.JSONDecodeError, sauv.my_decoder().decode, entree)
 
 
 class Ecriture_Bilan(unittest.TestCase):
 	rep = os.path.join(os.path.split(os.path.abspath(__file__))[0], "K45gdgt6ioyuG", "bdd.dbf")
-
 	
 	def setUp(self):
 		config_log()
@@ -2086,7 +2082,7 @@ class Ecriture_Bilan(unittest.TestCase):
 		# Créé la configuration
 		self.config = sauv.My_configparser()
 		self.config['sauv'] = {}
-
+	
 	def tearDown(self):
 		try:
 			shutil.rmtree(os.path.split(self.rep)[0])
@@ -2100,27 +2096,24 @@ class Ecriture_Bilan(unittest.TestCase):
 		self.config['sauv'][sauv.bilan] = self.rep
 		
 		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
-		cli.stat = {sauv.bl_date:"2017-06-10 19:26:27", sauv.bl_job:"internet", sauv.bl_voltransfere:4589655}
+		cli.stat = {sauv.bl_date: "2017-06-10 19:26:27", sauv.bl_job: "internet", sauv.bl_voltransfere: 4589655}
 		sauv.ecriture_bilan(self.config['sauv'], cli)
 		# test de création
 		self.assertTrue(os.path.exists(self.rep))
 		with sauv.dbf.Table(self.rep) as db:
 			self.assertEqual(db[0][sauv.bl_date], cli.stat[sauv.bl_date])
 		
-
 		# test ajout
-		cli.stat = {sauv.bl_date:"2017-06-11 20:26:27", sauv.bl_job:"internet", sauv.bl_voltransfere:10000}
+		cli.stat = {sauv.bl_date: "2017-06-11 20:26:27", sauv.bl_job: "internet", sauv.bl_voltransfere: 10000}
 		sauv.ecriture_bilan(self.config['sauv'], cli)
 		with sauv.dbf.Table(self.rep) as db:
 			self.assertEqual(db[1][sauv.bl_voltransfere], cli.stat[sauv.bl_voltransfere])
 		# test ajout avec propriété manquante
-		cli.stat = {sauv.bl_date:"2017-06-12 20:26:27", sauv.bl_job:"home"}
+		cli.stat = {sauv.bl_date: "2017-06-12 20:26:27", sauv.bl_job: "home"}
 		sauv.ecriture_bilan(self.config['sauv'], cli)
 		with sauv.dbf.Table(self.rep) as db:
 			self.assertEqual((db[2][sauv.bl_job]).strip(), cli.stat[sauv.bl_job])
 			self.assertEqual((db[2][sauv.bl_voltransfere]), None)
-		
-
 	
 	def test_fichier_errone(self):
 		"""test le retour si le fichier bilan n'est pas du type dbf"""
@@ -2130,21 +2123,20 @@ class Ecriture_Bilan(unittest.TestCase):
 			file.write('cnimporte quoi')
 		
 		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
-		cli.stat = {sauv.bl_date:"2017-06-10 19:26:27", sauv.bl_job:"internet", sauv.bl_voltransfere:4589655}
-		self.assertRaises( sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
-	
+		cli.stat = {sauv.bl_date: "2017-06-10 19:26:27", sauv.bl_job: "internet", sauv.bl_voltransfere: 4589655}
+		self.assertRaises(sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
 	
 	def test_fichier_corrompu(self):
 		"""test le retour si le fichier bilan est endommagé"""
 		self.config['sauv'][sauv.bilan] = self.rep
 		
 		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
-		cli.stat = {sauv.bl_date:"2017-06-10 19:26:27", sauv.bl_job:"internet", sauv.bl_voltransfere:4589655}
+		cli.stat = {sauv.bl_date: "2017-06-10 19:26:27", sauv.bl_job: "internet", sauv.bl_voltransfere: 4589655}
 		sauv.ecriture_bilan(self.config['sauv'], cli)
 		with open(self.rep, mode='w') as file:
 			file.write('cnimporte quoi')
 		
-		self.assertRaises( sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
+		self.assertRaises(sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
 	
 	def test_mauvais_type_données(self):
 		"""test de l'erreur si le type de donnée fourni n'est pas bon """
@@ -2152,7 +2144,7 @@ class Ecriture_Bilan(unittest.TestCase):
 		self.config['sauv'][sauv.bilan] = self.rep
 		
 		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
-		cli.stat = {sauv.bl_date:"2017-06-10 19:26:27", sauv.bl_job:"internet", sauv.bl_voltransfere:"erreur"}
+		cli.stat = {sauv.bl_date: "2017-06-10 19:26:27", sauv.bl_job: "internet", sauv.bl_voltransfere: "erreur"}
 		self.assertRaises(sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
 	
 	def test_stat_manquant(self):
@@ -2162,7 +2154,7 @@ class Ecriture_Bilan(unittest.TestCase):
 		
 		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
 		sauv.ecriture_bilan(self.config['sauv'], cli)
-
+	
 	def test_stat_vide(self):
 		"""test de l'erreur si le type de donnée fourni n'est pas bon """
 		
@@ -2171,23 +2163,23 @@ class Ecriture_Bilan(unittest.TestCase):
 		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
 		cli.stat = {}
 		sauv.ecriture_bilan(self.config['sauv'], cli)
-		
+	
 	def test_mauvais_champs_données(self):
 		"""test de l'erreur si un champs non déclaré est utilisé dans stat """
 		
 		self.config['sauv'][sauv.bilan] = self.rep
 		
 		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
-		cli.stat = {'gdfgdfgg':"2017-06-10 19:26:27", sauv.bl_job:"internet", sauv.bl_voltransfere:555555}
-		self.assertRaises( sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
-		
-	
+		cli.stat = {'gdfgdfgg': "2017-06-10 19:26:27", sauv.bl_job: "internet", sauv.bl_voltransfere: 555555}
+		self.assertRaises(sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
+
+
 class Calcul_Retention(unittest.TestCase):
 	
 	def setUp(self):
 		config_log()
 		self.cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
-
+		
 		# Créé la configuration
 		self.config = sauv.My_configparser()
 		self.config['sauv'] = {}
@@ -2212,16 +2204,16 @@ class Calcul_Retention(unittest.TestCase):
 			(1, 2, 15),
 			(2, 1, 10),
 		)
-		for l1,  mois, jour in données:
-			arbre[l1].append(sauv.rep_sauv(datetime.datetime(year=2017,month=mois, day=jour), "chemin"))
+		for l1, mois, jour in données:
+			arbre[l1].append(sauv.rep_sauv(datetime.datetime(year=2017, month=mois, day=jour), "chemin"))
 		maintenant = datetime.datetime.now()
 		
 		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
 		
-		self.assertEqual(self.cli.stat[sauv.bl_cons1], (maintenant - arbre[0][-1].date).total_seconds()//86400)
-		self.assertEqual(self.cli.stat[sauv.bl_cons2], (arbre[0][-1].date - arbre[1][-1].date).total_seconds()//86400)
-		self.assertEqual(self.cli.stat[sauv.bl_cons3], (arbre[1][-1].date - arbre[2][-1].date).total_seconds()//86400)
-		self.assertEqual(self.cli.stat[sauv.bl_cons], (maintenant - arbre[2][-1].date).total_seconds()//86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons1], (maintenant - arbre[0][-1].date).total_seconds() // 86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons2], (arbre[0][-1].date - arbre[1][-1].date).total_seconds() // 86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons3], (arbre[1][-1].date - arbre[2][-1].date).total_seconds() // 86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons], (maintenant - arbre[2][-1].date).total_seconds() // 86400)
 		self.assertEqual(self.cli.stat[sauv.bl_cons1obj], self.config['sauv'][sauv.cons1])
 		self.assertEqual(self.cli.stat[sauv.bl_cons2obj], self.config['sauv'][sauv.cons2])
 		self.assertEqual(self.cli.stat[sauv.bl_cons3obj], self.config['sauv'][sauv.cons3])
@@ -2229,11 +2221,9 @@ class Calcul_Retention(unittest.TestCase):
 		self.assertEqual(self.cli.stat[sauv.bl_voljobobj], 1000)
 		self.assertTrue(sauv.bl_voljob in self.cli.stat)
 	
-	
 	def test_fonctionnel_niveau1_et_deux(self):
 		"""test fonctionnel de création des statistique si seulement un niveau est défini"""
 		self.config['sauv'][sauv.cons1] = '5'
-
 		
 		arbre = [[], [], []]
 		données = (
@@ -2242,26 +2232,24 @@ class Calcul_Retention(unittest.TestCase):
 			(0, 11, 26,),
 			(2, 1, 10),
 		)
-		for l1,  mois, jour in données:
-			arbre[l1].append(sauv.rep_sauv(datetime.datetime(year=2017,month=mois, day=jour), "chemin"))
+		for l1, mois, jour in données:
+			arbre[l1].append(sauv.rep_sauv(datetime.datetime(year=2017, month=mois, day=jour), "chemin"))
 		maintenant = datetime.datetime.now()
 		
 		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
 		
-		self.assertEqual(self.cli.stat[sauv.bl_cons1], (maintenant - arbre[0][-1].date).total_seconds()//86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons1], (maintenant - arbre[0][-1].date).total_seconds() // 86400)
 		self.assertFalse(sauv.bl_cons2 in self.cli.stat)
-		self.assertEqual(self.cli.stat[sauv.bl_cons3], (arbre[0][-1].date - arbre[2][-1].date).total_seconds()//86400)
-		self.assertEqual(self.cli.stat[sauv.bl_cons], (maintenant - arbre[2][-1].date).total_seconds()//86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons3], (arbre[0][-1].date - arbre[2][-1].date).total_seconds() // 86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons], (maintenant - arbre[2][-1].date).total_seconds() // 86400)
 		self.assertEqual(self.cli.stat[sauv.bl_cons1obj], self.config['sauv'][sauv.cons1])
 		self.assertFalse(sauv.bl_cons2obj in self.cli.stat)
 		self.assertFalse(sauv.bl_cons3obj in self.cli.stat)
 		self.assertEqual(self.cli.stat[sauv.bl_consobj], 5)
 	
-	
 	def test_fonctionnel_niveau2_seul(self):
 		"""test fonctionnel de création des statistique si seulement un niveau est défini"""
 		self.config['sauv'][sauv.cons2] = '15'
-		
 		
 		arbre = [[], [], []]
 		données = (
@@ -2270,16 +2258,16 @@ class Calcul_Retention(unittest.TestCase):
 			(1, 11, 26,),
 			(1, 1, 10),
 		)
-		for l1,  mois, jour in données:
-			arbre[l1].append(sauv.rep_sauv(datetime.datetime(year=2017,month=mois, day=jour), "chemin"))
+		for l1, mois, jour in données:
+			arbre[l1].append(sauv.rep_sauv(datetime.datetime(year=2017, month=mois, day=jour), "chemin"))
 		maintenant = datetime.datetime.now()
 		
 		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
 		
 		self.assertFalse(sauv.bl_cons1 in self.cli.stat)
-		self.assertEqual(self.cli.stat[sauv.bl_cons2], (maintenant - arbre[1][-1].date).total_seconds()//86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons2], (maintenant - arbre[1][-1].date).total_seconds() // 86400)
 		self.assertFalse(sauv.bl_cons3 in self.cli.stat)
-		self.assertEqual(self.cli.stat[sauv.bl_cons], (maintenant - arbre[1][-1].date).total_seconds()//86400)
+		self.assertEqual(self.cli.stat[sauv.bl_cons], (maintenant - arbre[1][-1].date).total_seconds() // 86400)
 		
 		self.assertFalse(sauv.bl_cons1obj in self.cli.stat)
 		self.assertEqual(self.cli.stat[sauv.bl_cons2obj], self.config['sauv'][sauv.cons2])
@@ -2290,7 +2278,6 @@ class Calcul_Retention(unittest.TestCase):
 		"""test fonctionnel de renvoi d'un log d'erreur si 5 non réussi sont détectés"""
 		self.config['sauv'][sauv.cons2] = '15'
 		
-		
 		arbre = [[], [], []]
 		données = (
 			(0, 12, 5, False),
@@ -2300,16 +2287,16 @@ class Calcul_Retention(unittest.TestCase):
 			(2, 8, 10, False),
 			(2, 7, 9, True),
 		)
-		for l1,  mois, jour, reussi in données:
-			cliche = sauv.rep_sauv(datetime.datetime(year=2017,month=mois, day=jour), "chemin")
+		for l1, mois, jour, reussi in données:
+			cliche = sauv.rep_sauv(datetime.datetime(year=2017, month=mois, day=jour), "chemin")
 			cliche.reussi = reussi
 			arbre[l1].append(cliche)
 		
 		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
 		sauv.logger.error.assert_called()
-		
-		# with self.assertLogs(logger=sauv.logger, level=logging.ERROR):
-		# 	sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
+	
+	# with self.assertLogs(logger=sauv.logger, level=logging.ERROR):
+	# 	sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
 	
 	def test_envoi_pas_erreur(self):
 		"""test fonctionnel de non renvoi d'un log d'erreur si 4 non réussi sont détectés"""
@@ -2325,14 +2312,14 @@ class Calcul_Retention(unittest.TestCase):
 			(2, 8, 10, True),
 			(2, 7, 9, True),
 		)
-		for l1,  mois, jour, reussi in données:
-			cliche = sauv.rep_sauv(datetime.datetime(year=2017,month=mois, day=jour), "chemin")
+		for l1, mois, jour, reussi in données:
+			cliche = sauv.rep_sauv(datetime.datetime(year=2017, month=mois, day=jour), "chemin")
 			cliche.reussi = reussi
 			arbre[l1].append(cliche)
 		
 		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
 		sauv.logger.error.assert_not_called()
-
+	
 	def test_envoi_pas_erreur2(self):
 		"""test fonctionnel de non renvoi d'un log d'erreur si seulement 4 cliché existes"""
 		
@@ -2345,31 +2332,31 @@ class Calcul_Retention(unittest.TestCase):
 			(0, 11, 26, False),
 			(1, 10, 25, False),
 		)
-		for l1,  mois, jour, reussi in données:
-			cliche = sauv.rep_sauv(datetime.datetime(year=2017,month=mois, day=jour), "chemin")
+		for l1, mois, jour, reussi in données:
+			cliche = sauv.rep_sauv(datetime.datetime(year=2017, month=mois, day=jour), "chemin")
 			cliche.reussi = reussi
 			arbre[l1].append(cliche)
 		
 		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
 		sauv.logger.error.assert_not_called()
-
+	
 	def test_arbre_vide(self):
 		"""test fonctionnel si l'arbre est vide"""
-	
+		
 		sauv.logger = unittest.mock.MagicMock()
 		
 		arbre = [[], [], []]
-	
+		
 		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
 		sauv.logger.error.assert_not_called()
-	
-	
+
+
 class analyse_retour_pour_bilan(unittest.TestCase):
 	
 	def setUp(self):
 		config_log()
 		self.cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
-		
+	
 	def tearDown(self):
 		self.cli = None
 	
@@ -2379,21 +2366,19 @@ class analyse_retour_pour_bilan(unittest.TestCase):
 		job = "sauv"
 		lignes = \
 			["sent 100 bytes.   received 1,502 bytes",
-			"total size is 200 . speedup is 400.5"]
+			 "total size is 200 . speedup is 400.5"]
 		avant = datetime.datetime.now().strftime(sauv.formatdate)
 		
 		sauv.analyse_retour_pour_bilan(lignes, job, md5, self.cli)
 		
 		self.assertEqual(self.cli.stat[sauv.bl_job], job)
-		self.assertEqual(self.cli.stat[sauv.bl_md5], bool(md5) )
+		self.assertEqual(self.cli.stat[sauv.bl_md5], bool(md5))
 		self.assertEqual(self.cli.stat[sauv.bl_debit], 400.5)
 		self.assertEqual(self.cli.stat[sauv.bl_voltransfere], 1602)
-		self.assertEqual(self.cli.stat[sauv.bl_volcli],200)
+		self.assertEqual(self.cli.stat[sauv.bl_volcli], 200)
 
-		
+
 # Programme principal
 
 if __name__ == '__main__':
-
-
 	unittest.main()
