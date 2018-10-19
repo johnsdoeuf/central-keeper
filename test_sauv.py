@@ -10,39 +10,41 @@ import json
 import subprocess
 import glob
 from pathlib import Path
+import unittest.mock
 
 def config_log():
-	logging.config.dictConfig({
-		"version": 1,
-		"formatters": {
-			"simple": {
-				"format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
-			}
-		},
-
-		"handlers": {
-			"console_handler": {
-				"level": "DEBUG",
-				"class": "logging.StreamHandler",
-				"formatter": "simple"
-			}
-		},
-
-		"loggers": {
-			"main": {
-				"handlers": ["console_handler"],
-				"level": "DEBUG"
-			}
-		}
-	})
-
-	sauv.logger = logging.getLogger('main')
-	sauv.logger.info("")
-	sauv.logger.info("*************** Début du test unitaire *************")
-
+	# logging.config.dictConfig({
+	# 	"version": 1,
+	# 	"formatters": {
+	# 		"simple": {
+	# 			"format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+	# 		}
+	# 	},
+	#
+	# 	"handlers": {
+	# 		"console_handler": {
+	# 			"level": "DEBUG",
+	# 			"class": "logging.StreamHandler",
+	# 			"formatter": "simple"
+	# 		}
+	# 	},
+	#
+	# 	"loggers": {
+	# 		"main": {
+	# 			"handlers": ["console_handler"],
+	# 			"level": "DEBUG"
+	# 		}
+	# 	}
+	# })
+	#
+	# sauv.logger = logging.getLogger('main')
+	# sauv.logger.info("")
+	# sauv.logger.info("*************** Début du test unitaire *************")
+	
+	# remplace le log par un objet mock
+	sauv.logger = unittest.mock.Mock()
 
 def fin_log():
-	sauv.logger.info("*************** Fin du test unitaire *************")
 	sauv.logger = None
 
 
@@ -659,30 +661,6 @@ class Copie(unittest.TestCase):
 		# paramètre inexistant
 		self.assertRaises(OSError, sauv.copie, config, arbre)
 	
-	def test_retour_error(self):
-		"""teste si plusieur waarning génèrent bien une erreur dans le log"""
-		dest = os.path.join(self.dest, 'essai2')
-		source = os.path.join(self.source, 'Source')
-		fich = os.path.join(source, 'essai.txt')
-		try:
-			os.makedirs(source)
-			os.makedirs(dest)
-			with open(fich, 'w', encoding='utf8') as f:
-				f.write("Lancement d'une sauvegarde le ")
-		except OSError:
-			pass
-		
-		arbre = [[], [], []]
-		config = {sauv.src: source, sauv.dest: dest}
-		
-		# vérifie la sortie de la fonction
-		ret = sauv.copie(config, arbre)
-		self.assertTrue(ret.chemin[0:-12], (self.dest + datetime.datetime.now().strftime(sauv.formatdate))[0:-12])
-		self.assertEqual(ret.date.day, datetime.datetime.now().day)
-		# vérifie la taille
-		arbre[0].insert(0,ret)
-		self.assertEqual(sauv.taille_arbre(arbre), 30)
-# todo test de warning à terminer
 
 class demonte(unittest.TestCase):
 	def setUp(self):
@@ -1868,8 +1846,11 @@ class reduction(unittest.TestCase):
 
 		# sauv.logger = logging.getLogger('main')
 		# lance la fonction et teste le retour de d'un log d'erreur pour supression dans la période de conservation
-		with self.assertLogs(logger=sauv.logger, level=logging.ERROR):
-			sauv.reduction(config['sauv'], arbre)
+		sauv.reduction(config['sauv'], arbre)
+		sauv.logger.error.assert_called()
+		
+		# with self.assertLogs(logger=sauv.logger, level=logging.ERROR):
+		# 	sauv.reduction(config['sauv'], arbre)
 
 		self.assertEqual(arbre, reference)
 		# teste existance entre du second
@@ -2304,7 +2285,53 @@ class Calcul_Retention(unittest.TestCase):
 		self.assertEqual(self.cli.stat[sauv.bl_cons2obj], self.config['sauv'][sauv.cons2])
 		self.assertFalse(sauv.bl_cons3obj in self.cli.stat)
 		self.assertEqual(self.cli.stat[sauv.bl_consobj], 15)
-
+	
+	def test_envoi_erreur_warning_consecutif(self):
+		"""test fonctionnel de renvoi d'un log d'erreur si 5 non réussi sont détectés"""
+		self.config['sauv'][sauv.cons2] = '15'
+		
+		
+		arbre = [[], [], []]
+		données = (
+			(0, 12, 5, False),
+			(0, 11, 28, False),
+			(0, 11, 26, False),
+			(1, 10, 25, False),
+			(2, 8, 10, False),
+			(2, 7, 9, True),
+		)
+		for l1,  mois, jour, reussi in données:
+			cliche = sauv.rep_sauv(datetime.datetime(year=2017,month=mois, day=jour), "chemin")
+			cliche.reussi = reussi
+			arbre[l1].append(cliche)
+		
+		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
+		sauv.logger.error.assert_called()
+		
+		# with self.assertLogs(logger=sauv.logger, level=logging.ERROR):
+		# 	sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
+	
+	def test_envoi_pas_erreur(self):
+		"""test fonctionnel de renvoi d'un log d'erreur si 5 non réussi sont détectés"""
+		
+		sauv.logger = unittest.mock.MagicMock()
+		
+		arbre = [[], [], []]
+		données = (
+			(0, 12, 5, False),
+			(0, 11, 28, False),
+			(0, 11, 26, False),
+			(1, 10, 25, False),
+			(2, 8, 10, True),
+			(2, 7, 9, True),
+		)
+		for l1,  mois, jour, reussi in données:
+			cliche = sauv.rep_sauv(datetime.datetime(year=2017,month=mois, day=jour), "chemin")
+			cliche.reussi = reussi
+			arbre[l1].append(cliche)
+		
+		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
+		sauv.logger.error.assert_not_called()
 
 class analyse_retour_pour_bilan(unittest.TestCase):
 	

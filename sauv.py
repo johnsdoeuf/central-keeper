@@ -833,22 +833,6 @@ def copie(config, arbre):
 		logger.warning(erreur)
 		retour.reussi = False
 	
-	if not retour.reussi:
-		iterateur = iterateur_arbre(arbre)
-		ok = False
-		compteur = 5
-		for cli in iterateur:
-			ok = ok or cli.reussi
-			compteur -= 1
-			if not compteur:
-				break
-		else:
-			# Cas
-			ok = True
-			
-		if not ok:
-			logger.error("5 warnings successifs sont intervenus lors de la sauvegarde")
-	# todo renvoi de log à tester
 	retour.analyse()
 	return retour
 
@@ -1581,7 +1565,23 @@ def calcul_retention(cli, arbre, config):
 	stat[bl_voljob] = taille_arbre(arbre)
 	if qta in config:
 		stat[bl_voljobobj] = int(config[qta])
+		
+	if not cli.reussi:
+		iterateur = iterateur_arbre(arbre)
+		ok = False
+		compteur = 5
+		for cli in iterateur:
+			ok = ok or cli.reussi
+			compteur -= 1
+			if not compteur:
+				break
+		else:
+			# Cas
+			ok = True
 
+		if not ok:
+			logger.error("5 warnings successifs sont intervenus lors de la sauvegarde")
+# todo renvoi de log à tester
 
 def analyse_retour_pour_bilan(lignes, sauv, md5, cli):
 	"""
