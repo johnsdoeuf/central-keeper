@@ -7,42 +7,12 @@ import shutil
 import logging.config
 import logging
 import json
-import subprocess
 import glob
 from pathlib import Path
 import unittest.mock
 
 
 def config_log():
-	# logging.config.dictConfig({
-	# 	"version": 1,
-	# 	"formatters": {
-	# 		"simple": {
-	# 			"format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
-	# 		}
-	# 	},
-	#
-	# 	"handlers": {
-	# 		"console_handler": {
-	# 			"level": "DEBUG",
-	# 			"class": "logging.StreamHandler",
-	# 			"formatter": "simple"
-	# 		}
-	# 	},
-	#
-	# 	"loggers": {
-	# 		"main": {
-	# 			"handlers": ["console_handler"],
-	# 			"level": "DEBUG"
-	# 		}
-	# 	}
-	# })
-	#
-	# sauv.logger = logging.getLogger('main')
-	# sauv.logger.info("")
-	# sauv.logger.info("*************** Début du test unitaire *************")
-	
-	# remplace le log par un objet mock
 	sauv.logger = unittest.mock.Mock()
 
 
@@ -50,7 +20,7 @@ def fin_log():
 	sauv.logger = None
 
 
-class Init_para(unittest.TestCase):
+class InitPara(unittest.TestCase):
 	fich = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'essaiconf.conf')
 	
 	def setUp(self):
@@ -65,30 +35,30 @@ class Init_para(unittest.TestCase):
 	
 	def test_fichier_absent(self):
 		"""teste si l'absence du fichier ou le fichier vide renvoi une exception"""
-		sauv.logger.info("test_fichier_absent")
-		self.assertRaises(sauv.init_erreur, sauv.init_para,
-						  os.path.join(os.path.split(__file__)[0], 'jytyjtyjtyjtyj.conf'))
+		
+		self.assertRaises(sauv.InitErreur, sauv.init_para,
+				os.path.join(os.path.split(__file__)[0], 'jytyjtyjtyjtyj.conf'))
 	
 	def test_fichier_vide(self):
 		"""Si aucune sauvegarde n'est configurée"""
 		
 		with open(self.fich, mode='w') as file:
 			file.write(' ')
-		self.assertRaises(sauv.init_erreur, sauv.init_para, self.fich)
+		self.assertRaises(sauv.InitErreur, sauv.init_para, self.fich)
 	
-	def test_fichier_erroné(self):
+	def test_fichier_errone(self):
 		"""Si paramètre sans section"""
 		
 		with open(self.fich, mode='w') as file:
 			file.write('PERIODE1=0.1')
-		self.assertRaises(sauv.init_erreur, sauv.init_para, self.fich)
+		self.assertRaises(sauv.InitErreur, sauv.init_para, self.fich)
 	
 	def test_mauvais_format(self):
 		"""teste si du texte est présent """
 		
 		with open(self.fich, 'w') as configfile:
 			configfile.write("Bonjour")
-		self.assertRaises(sauv.init_erreur, sauv.init_para, self.fich)
+		self.assertRaises(sauv.InitErreur, sauv.init_para, self.fich)
 	
 	def test_source(self):
 		"""teste si la section contient une source et éjecte bien les sources invalides"""
@@ -172,7 +142,7 @@ class Init_para(unittest.TestCase):
 		"""Teste si la destination est bien un chemin valide"""
 		pass
 	
-	def test_toutes_les_clés(self):
+	def test_toutes_les_cles(self):
 		"""Teste que les clés valides ne créées pas d'erreur"""
 		
 		config = sauv.My_configparser()
@@ -233,11 +203,11 @@ class verifie_arbre(unittest.TestCase):
 			self.cree_rep(rep)
 			res = rep.split('_')
 			# créé l'élément
-			élém = sauv.rep_sauv(datetime.datetime.strptime(res[0], sauv.formatdate), os.path.join(self.repsauv, rep))
-			élém.taille = 0
-			élém.lnoeud = {}
+			elem = sauv.Cliche(datetime.datetime.strptime(res[0], sauv.formatdate), os.path.join(self.repsauv, rep))
+			elem.taille = 0
+			elem.lnoeud = {}
 			# créé l'arbre
-			arbre[int(res[1]) - 1].append(élém)
+			arbre[int(res[1]) - 1].append(elem)
 		
 		tri = lambda p: p.date
 		arbre[0].sort(key=tri, reverse=True)
@@ -260,12 +230,12 @@ class verifie_arbre(unittest.TestCase):
 			self.cree_rep(rep)
 			res = rep.split('_')
 			# créé l'élément
-			élém = sauv.rep_sauv(datetime.datetime.strptime(res[0], sauv.formatdate), os.path.join(self.repsauv, rep))
-			élém.taille = 0
-			élém.lnoeud = {}
+			elem = sauv.Cliche(datetime.datetime.strptime(res[0], sauv.formatdate), os.path.join(self.repsauv, rep))
+			elem.taille = 0
+			elem.lnoeud = {}
 			# créé l'arbre
 			if rep != '2016-12-20 15-50_1':
-				arbre[int(res[1]) - 1].append(élém)
+				arbre[int(res[1]) - 1].append(elem)
 		
 		tri = lambda p: p.date
 		arbre[0].sort(key=tri, reverse=True)
@@ -288,11 +258,11 @@ class verifie_arbre(unittest.TestCase):
 			self.cree_rep(rep)
 			res = rep.split('_')
 			# créé l'élément
-			élém = sauv.rep_sauv(datetime.datetime.strptime(res[0], sauv.formatdate), os.path.join(self.repsauv, rep))
-			# élém.taille = 0
-			# élém.lnoeud = {}
+			elem = sauv.Cliche(datetime.datetime.strptime(res[0], sauv.formatdate), os.path.join(self.repsauv, rep))
+			# elem.taille = 0
+			# elem.lnoeud = {}
 			# créé l'arbre
-			arbre[int(res[1]) - 1].append(élém)
+			arbre[int(res[1]) - 1].append(elem)
 		
 		tri = lambda p: p.date
 		arbre[0].sort(key=tri, reverse=True)
@@ -347,7 +317,7 @@ class Init_log(unittest.TestCase):
 		"""si la configuration n'est pas au format json """
 		with open(self.fichconf, 'w') as configfile:
 			configfile.write('{ffffff')
-		self.assertRaises(sauv.init_erreur, sauv.init_logging, self.fichconf)
+		self.assertRaises(sauv.InitErreur, sauv.init_logging, self.fichconf)
 	
 	def test_configuration(self):
 		"""Si la configuration n'est pas accepté par le module logging"""
@@ -359,14 +329,14 @@ class Init_log(unittest.TestCase):
 						'level': 'DEBUG',
 					}, }
 			}))
-		self.assertRaises(sauv.init_erreur, sauv.init_logging, self.fichconf)
+		self.assertRaises(sauv.InitErreur, sauv.init_logging, self.fichconf)
 		
 		with open(self.fichconf, 'w') as configfile:
 			configfile.write(json.dumps({
 				'version': 1,
 				'loggers': ['main', 'level']
 			}))
-		self.assertRaises(sauv.init_erreur, sauv.init_logging, self.fichconf)
+		self.assertRaises(sauv.InitErreur, sauv.init_logging, self.fichconf)
 	
 	def test_mot_clé(self):
 		"""Si la configuration ne contient pas 'logger'"""
@@ -379,7 +349,7 @@ class Init_log(unittest.TestCase):
 						'level': 'DEBUG',
 					}, }
 			}))
-		self.assertRaises(sauv.init_erreur, sauv.init_logging, self.fichconf)
+		self.assertRaises(sauv.InitErreur, sauv.init_logging, self.fichconf)
 	
 	def test_handlers(self):
 		"""Si la configuration ne contient pas de handlers"""
@@ -392,7 +362,7 @@ class Init_log(unittest.TestCase):
 						'level': 'DEBUG',
 					}, }
 			}))
-		self.assertRaises(sauv.init_erreur, sauv.init_logging, self.fichconf)
+		self.assertRaises(sauv.InitErreur, sauv.init_logging, self.fichconf)
 
 
 class Verrou(unittest.TestCase):
@@ -587,7 +557,7 @@ class Copie(unittest.TestCase):
 		config = configparser.ConfigParser()
 		config.read_dict({'sauv': {sauv.src: self.source, sauv.dest: self.dest}})
 		
-		arbre = [[sauv.rep_sauv(datetime.datetime(2017, 5, 3), source2)], [], []]
+		arbre = [[sauv.Cliche(datetime.datetime(2017, 5, 3), source2)], [], []]
 		
 		ret = sauv.copie(config['sauv'], arbre)
 		self.assertTrue(ret.chemin[0:-12], (self.dest + datetime.datetime.now().strftime(sauv.formatdate))[0:-12])
@@ -636,7 +606,7 @@ class Copie(unittest.TestCase):
 		except OSError:
 			pass
 		
-		rsauv = sauv.rep_sauv(datetime.datetime(2017, 5, 3), ref)
+		rsauv = sauv.Cliche(datetime.datetime(2017, 5, 3), ref)
 		rsauv.analyse()
 		
 		arbre = [[rsauv], [], []]
@@ -645,7 +615,7 @@ class Copie(unittest.TestCase):
 		ret = sauv.copie(config, arbre)
 		self.assertTrue(ret.chemin[0:-12], (self.dest + datetime.datetime.now().strftime(sauv.formatdate))[0:-12])
 		self.assertEqual(ret.date.day, datetime.datetime.now().day)
-		#        self.assertEqual( sauv.copie (config, arbre) ,  sauv.rep_sauv(datetime.datetime(2017, 5, 3), ref) )
+		#        self.assertEqual( sauv.copie (config, arbre) ,  sauv.Cliche(datetime.datetime(2017, 5, 3), ref) )
 		# Vérifie que le fichier est bien copié
 		self.assertTrue(os.path.exists(glob.glob(os.path.join(dest, '*/essai.txt'))[0]))
 		# Vérifie que la taille est bien celle d'un seul fichier'
@@ -792,7 +762,7 @@ class charge_arbre(unittest.TestCase):
 	def test_fichier_inexistant(self):
 		"""teste avec unchemin inexistant"""
 		
-		self.assertRaises(sauv.init_erreur, sauv.charge_arbre, '/fsddfsdf/dfsdf/sdfsdf.f')
+		self.assertRaises(sauv.InitErreur, sauv.charge_arbre, '/fsddfsdf/dfsdf/sdfsdf.f')
 	
 	def test_format_non_json(self):
 		"""teste avec un fichier vide"""
@@ -817,7 +787,7 @@ class charge_arbre(unittest.TestCase):
 	
 	def test_taille_liste(self):
 		"""teste avec une liste plus longue"""
-		test = sauv.rep_sauv(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
+		test = sauv.Cliche(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		arbre = {'sauv': [[test, test], [5], [], [test, test]]}
 		val = sauv.my_encoder().encode(arbre)
 		try:
@@ -830,7 +800,7 @@ class charge_arbre(unittest.TestCase):
 	
 	def test_contenu(self):
 		"""teste de la correspondance résultat"""
-		test = sauv.rep_sauv(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
+		test = sauv.Cliche(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		arbre = {'sauv': [[test, test], [5], []]}
 		val = sauv.my_encoder().encode(arbre)
 		try:
@@ -843,7 +813,7 @@ class charge_arbre(unittest.TestCase):
 	
 	def test_fonctionnel(self):
 		"""teste de la correspondance résultat"""
-		test = sauv.rep_sauv(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
+		test = sauv.Cliche(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		test.taille = 485121
 		test.lnoeud = {'1548255': 4548, '45245': 452, '45': 0}
 		test.reussi = True
@@ -874,7 +844,7 @@ class charge_arbre(unittest.TestCase):
 		self.assertRaises(SyntaxError, sauv.charge_arbre, self.fich)
 
 
-class rep_sauv(unittest.TestCase):
+class Cliche(unittest.TestCase):
 	repsauv = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'tmp_essai')
 	repsauv2 = Path(repsauv)
 	
@@ -908,11 +878,11 @@ class rep_sauv(unittest.TestCase):
 		
 		info = [os.stat(os.path.join(self.repsauv, f)) for f in liste_fichier]
 		
-		resultat = sauv.rep_sauv(datetime.datetime(2000, 1, 1), self.repsauv)
+		resultat = sauv.Cliche(datetime.datetime(2000, 1, 1), self.repsauv)
 		resultat.taille = 12
 		resultat.lnoeud = {str(f.st_ino): f.st_size for f in info}
 		
-		resultat2 = sauv.rep_sauv(datetime.datetime(2000, 1, 1), self.repsauv)
+		resultat2 = sauv.Cliche(datetime.datetime(2000, 1, 1), self.repsauv)
 		resultat2.analyse()
 		
 		self.assertEqual(resultat2, resultat)
@@ -920,19 +890,19 @@ class rep_sauv(unittest.TestCase):
 	
 	def test_chemin_inexistant(self):
 		
-		resultat = sauv.rep_sauv(datetime.datetime(2000, 1, 1), "/dfdf/dfff")
-		self.assertRaises(sauv.init_erreur, resultat.analyse)
+		resultat = sauv.Cliche(datetime.datetime(2000, 1, 1), "/dfdf/dfff")
+		self.assertRaises(sauv.InitErreur, resultat.analyse)
 	
 	def test_vide(self):
 		""" teste si le résultat est conforme dans une situation normale """
 		
 		os.makedirs(os.path.join(self.repsauv, 'srep'), mode=0o777)
 		
-		resultat = sauv.rep_sauv(datetime.datetime(2000, 1, 1), self.repsauv)
+		resultat = sauv.Cliche(datetime.datetime(2000, 1, 1), self.repsauv)
 		resultat.taille = 0
 		resultat.lnoeud = {}
 		
-		resultat2 = sauv.rep_sauv(datetime.datetime(2000, 1, 1), self.repsauv)
+		resultat2 = sauv.Cliche(datetime.datetime(2000, 1, 1), self.repsauv)
 		resultat2.analyse()
 		
 		self.assertEqual(resultat2, resultat)
@@ -942,7 +912,7 @@ class rep_sauv(unittest.TestCase):
 		liste_rep = ["ffffé", "h12222", "rrt"]
 		premier = True
 		
-		élément = []
+		element = []
 		for rep in liste_rep:
 			# créé le répertoire
 			try:
@@ -967,11 +937,11 @@ class rep_sauv(unittest.TestCase):
 			with open(fpremier, 'w') as configfile:
 				configfile.write('ffqq')
 			
-			rsauv = sauv.rep_sauv(datetime.datetime(2005, 12, 30), os.path.join(self.repsauv, rep))
-			élément.append(rsauv)
+			rsauv = sauv.Cliche(datetime.datetime(2005, 12, 30), os.path.join(self.repsauv, rep))
+			element.append(rsauv)
 			rsauv.analyse()
 		
-		arbre = [élément, [], []]
+		arbre = [element, [], []]
 		sauv.reduit_inode(arbre)
 		
 		# regarde la taille totale
@@ -990,26 +960,26 @@ class reduit_inode(unittest.TestCase):
 	def test_fonctionnel(self):
 		"""teste de la correspondance résultat"""
 		
-		test = sauv.rep_sauv(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
+		test = sauv.Cliche(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
 		test.lnoeud = {'45': 50, '46': 20, '47': 10}
 		
-		test2 = sauv.rep_sauv(datetime.datetime(2006, 1, 1), "/home/ghhhjhjh.n")
+		test2 = sauv.Cliche(datetime.datetime(2006, 1, 1), "/home/ghhhjhjh.n")
 		test2.lnoeud = {'46': 20, '47': 10}
 		
-		test3 = sauv.rep_sauv(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
+		test3 = sauv.Cliche(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
 		test3.lnoeud = {'47': 10, '48': 5}
 		
 		resultat = [[test3, test2], [test], []]
 		
-		test21 = sauv.rep_sauv(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
+		test21 = sauv.Cliche(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
 		test21.lnoeud = {}
 		test21.taille = 50
 		
-		test22 = sauv.rep_sauv(datetime.datetime(2006, 1, 1), "/home/ghhhjhjh.n")
+		test22 = sauv.Cliche(datetime.datetime(2006, 1, 1), "/home/ghhhjhjh.n")
 		test22.lnoeud = {}
 		test22.taille = 20
 		
-		test23 = sauv.rep_sauv(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
+		test23 = sauv.Cliche(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
 		test23.lnoeud = {'47': 10, '48': 5}
 		
 		resultat2 = [[test23, test22], [test21], []]
@@ -1020,28 +990,28 @@ class reduit_inode(unittest.TestCase):
 	def test_fonctionnel2(self):
 		"""teste de la correspondance résultat avec arbre déjà réduit"""
 		
-		test = sauv.rep_sauv(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
+		test = sauv.Cliche(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
 		test.lnoeud = {}
 		test.taille = 50
 		
-		test2 = sauv.rep_sauv(datetime.datetime(2006, 1, 1), "/home/ghhhjhjh.n")
+		test2 = sauv.Cliche(datetime.datetime(2006, 1, 1), "/home/ghhhjhjh.n")
 		test2.lnoeud = {}
 		test2.taille = 20
 		
-		test3 = sauv.rep_sauv(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
+		test3 = sauv.Cliche(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
 		test3.lnoeud = {'47': 10, '48': 5}
 		
 		resultat = [[test3, test2], [test], []]
 		
-		test21 = sauv.rep_sauv(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
+		test21 = sauv.Cliche(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
 		test21.lnoeud = {}
 		test21.taille = 50
 		
-		test22 = sauv.rep_sauv(datetime.datetime(2006, 1, 1), "/home/ghhhjhjh.n")
+		test22 = sauv.Cliche(datetime.datetime(2006, 1, 1), "/home/ghhhjhjh.n")
 		test22.lnoeud = {}
 		test22.taille = 20
 		
-		test23 = sauv.rep_sauv(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
+		test23 = sauv.Cliche(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
 		test23.lnoeud = {'47': 10, '48': 5}
 		
 		resultat2 = [[test23, test22], [test21], []]
@@ -1052,13 +1022,13 @@ class reduit_inode(unittest.TestCase):
 	def test_mauvais_ordre(self):
 		"""teste si l'ordre n'est pas respecté"""
 		
-		test = sauv.rep_sauv(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
+		test = sauv.Cliche(datetime.datetime(2005, 1, 1), "/home/ghhhjhjh.n")
 		test.lnoeud = {'45': 50, '46': 20, '47': 10}
 		
-		test2 = sauv.rep_sauv(datetime.datetime(2004, 1, 1), "/home/ghhhjhjh.n")
+		test2 = sauv.Cliche(datetime.datetime(2004, 1, 1), "/home/ghhhjhjh.n")
 		test2.lnoeud = {'46': 20, '47': 10}
 		
-		test3 = sauv.rep_sauv(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
+		test3 = sauv.Cliche(datetime.datetime(2006, 3, 1), "/home/ghhhjhjh.n")
 		test3.lnoeud = {'47': 10, '48': 5}
 		
 		resultat = [[test3, test2], [test], []]
@@ -1080,7 +1050,7 @@ class sauv_arbre(unittest.TestCase):
 	
 	def test_fonctionnel(self):
 		"""teste de la correspondance résultat"""
-		test = sauv.rep_sauv(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
+		test = sauv.Cliche(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		arbre = {'sauv': [[test, test], [test], []]}
 		sauv.sauv_arbre(self.fich, arbre)
 		
@@ -1107,7 +1077,7 @@ class pas_de_sauv(unittest.TestCase):
 		config = sauv.My_configparser()
 		config['sauv'] = {}
 		config['sauv'][sauv.per1] = '4'
-		rsauv = sauv.rep_sauv(datetime.datetime.now() - datetime.timedelta(hours=5), '/rerg/gdfdfhdtuip')
+		rsauv = sauv.Cliche(datetime.datetime.now() - datetime.timedelta(hours=5), '/rerg/gdfdfhdtuip')
 		arbre = [[rsauv, rsauv], [], []]
 		force = False
 		self.assertTrue(sauv.pas_de_sauv(config['sauv'], arbre, force))
@@ -1117,7 +1087,7 @@ class pas_de_sauv(unittest.TestCase):
 		config = sauv.My_configparser()
 		config['sauv'] = {}
 		config['sauv'][sauv.per1] = '4'
-		rsauv = sauv.rep_sauv(datetime.datetime.now() - datetime.timedelta(days=5), '/rerg/gdfdfhdtuip')
+		rsauv = sauv.Cliche(datetime.datetime.now() - datetime.timedelta(days=5), '/rerg/gdfdfhdtuip')
 		arbre = [[rsauv, rsauv], [], []]
 		force = False
 		self.assertFalse(sauv.pas_de_sauv(config['sauv'], arbre, force))
@@ -1127,7 +1097,7 @@ class pas_de_sauv(unittest.TestCase):
 		config = sauv.My_configparser()
 		config['sauv'] = {}
 		config['sauv'][sauv.per1] = '4'
-		rsauv = sauv.rep_sauv(datetime.datetime.now() - datetime.timedelta(days=3), '/rerg/gdfdfhdtuip')
+		rsauv = sauv.Cliche(datetime.datetime.now() - datetime.timedelta(days=3), '/rerg/gdfdfhdtuip')
 		arbre = [[], [rsauv], []]
 		force = False
 		self.assertTrue(sauv.pas_de_sauv(config['sauv'], arbre, force))
@@ -1137,7 +1107,7 @@ class pas_de_sauv(unittest.TestCase):
 		config = sauv.My_configparser()
 		config['sauv'] = {}
 		config['sauv'][sauv.per1] = '4'
-		rsauv = sauv.rep_sauv(datetime.datetime.now() - datetime.timedelta(days=3), '/rerg/gdfdfhdtuip')
+		rsauv = sauv.Cliche(datetime.datetime.now() - datetime.timedelta(days=3), '/rerg/gdfdfhdtuip')
 		arbre = [[], [], [rsauv]]
 		force = False
 		self.assertTrue(sauv.pas_de_sauv(config['sauv'], arbre, force))
@@ -1147,7 +1117,7 @@ class pas_de_sauv(unittest.TestCase):
 		config = sauv.My_configparser()
 		config['sauv'] = {}
 		config['sauv'][sauv.dest] = '4'
-		rsauv = sauv.rep_sauv(datetime.datetime.now() - datetime.timedelta(hours=5), '/rerg/gdfdfhdtuip')
+		rsauv = sauv.Cliche(datetime.datetime.now() - datetime.timedelta(hours=5), '/rerg/gdfdfhdtuip')
 		arbre = [[rsauv, rsauv], [], []]
 		force = False
 		self.assertFalse(sauv.pas_de_sauv(config['sauv'], arbre, force))
@@ -1167,7 +1137,7 @@ class pas_de_sauv(unittest.TestCase):
 		config = sauv.My_configparser()
 		config['sauv'] = {}
 		config['sauv'][sauv.per1] = '4'
-		rsauv = sauv.rep_sauv(datetime.datetime.now() - datetime.timedelta(hours=5), '/rerg/gdfdfhdtuip')
+		rsauv = sauv.Cliche(datetime.datetime.now() - datetime.timedelta(hours=5), '/rerg/gdfdfhdtuip')
 		arbre = [[rsauv, rsauv], [], []]
 		force = True
 		self.assertFalse(sauv.pas_de_sauv(config['sauv'], arbre, force))
@@ -1360,7 +1330,7 @@ class regroupe(unittest.TestCase):
 		
 		arbre = []
 		arbre_origine = []
-		modèle = []
+		modele = []
 		test = [('er_1', 5), ('tyëu_1', 23), ('kkk_1', 25), ('dfg_1', 40)]
 		
 		for fichier in test:
@@ -1368,28 +1338,28 @@ class regroupe(unittest.TestCase):
 				os.mkdir(os.path.join(self.rep, fichier[0]))
 				os.mkdir(os.path.join(self.rep, fichier[0], 'musique'))
 			except OSError:
-				logger.error("problème de création de fichier")
+				pass
 			
-			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+			rsauv = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			arbre.append(rsauv)
 			# fait une copie de arbre
-			rsauv2 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+			rsauv2 = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			arbre_origine.append(rsauv2)
 			
-			rsauv3 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
-			modèle.append(rsauv3)
+			rsauv3 = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+			modele.append(rsauv3)
 			
 			with open(os.path.join(self.rep, fichier[0], 'musique', fichier[0]), 'w', encoding='utf8') as f:
 				f.write("Lancement d'une sauvegarde")
 		
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[1].chemin)
-		modèle = [[modèle[0]], [modèle[1]], []]
-		modèle[1][0].chemin = os.path.join(che, rep[:-2] + "_2")
+		modele = [[modele[0]], [modele[1]], []]
+		modele[1][0].chemin = os.path.join(che, rep[:-2] + "_2")
 		retour = [list(arbre[0:4]), [], []]
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
 		
-		self.assertEqual(modèle, retour)
+		self.assertEqual(modele, retour)
 		self.assertFalse(os.path.exists(arbre_origine[2].chemin))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[0].chemin)))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, arbre_origine[-1].chemin)))
@@ -1407,34 +1377,34 @@ class regroupe(unittest.TestCase):
 		
 		arbre = []
 		arbre_origine = []
-		modèle = []
+		modele = []
 		test = [('er', 75), ('tyu', 99), ('kkk', 100), ('dfg', 150), ('niv2', 190)]
 		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
 			except OSError:
-				logger.error("problème de création de fichier")
-			rsauv = sauv.rep_sauv(now - datetime.timedelta(days=fichier[1], hours=23),
-								  os.path.join(self.rep, fichier[0]))
+				pass
+			rsauv = sauv.Cliche(now - datetime.timedelta(days=fichier[1], hours=23),
+								os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
 			# fait une copie de arbre
-			rsauv2 = sauv.rep_sauv(now - datetime.timedelta(days=fichier[1], hours=23),
-								   os.path.join(self.rep, fichier[0]))
+			rsauv2 = sauv.Cliche(now - datetime.timedelta(days=fichier[1], hours=23),
+								os.path.join(self.rep, fichier[0]))
 			arbre_origine.append(rsauv2)
 			
-			rsauv3 = sauv.rep_sauv(now - datetime.timedelta(days=fichier[1], hours=23),
-								   os.path.join(self.rep, fichier[0]))
-			modèle.append(rsauv3)
+			rsauv3 = sauv.Cliche(now - datetime.timedelta(days=fichier[1], hours=23),
+								os.path.join(self.rep, fichier[0]))
+			modele.append(rsauv3)
 		
 		# création de la liste source et de reférence
 		
-		modèle = [[], list(modèle[0:2]), [modèle[-1]]]
+		modele = [[], list(modele[0:2]), [modele[-1]]]
 		retour = [[], list(arbre[0:4]), [arbre[-1]]]
 		sauv.regroupe(cons, per_suiv, retour, 1, now)
 		
-		self.assertEqual(modèle, retour)
+		self.assertEqual(modele, retour)
 		self.assertFalse(os.path.exists(os.path.join(self.rep, arbre_origine[2].chemin)))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[1].chemin)))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[-1].chemin)))
@@ -1448,36 +1418,35 @@ class regroupe(unittest.TestCase):
 		
 		arbre = []
 		arbre_origine = []
-		modèle = []
+		modele = []
 		test = [('er_1', 5), ('tyëu_1', 23), ('kkk_1_78', 25), ('dfg_1_50', 40)]
 		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-			
 			except OSError:
-				logger.error("problème de création de fichier")
-			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+				pass
+			rsauv = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
 			
 			# fait une copie de arbre
-			rsauv2 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+			rsauv2 = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			arbre_origine.append(rsauv2)
 			
-			rsauv3 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
-			modèle.append(rsauv3)
+			rsauv3 = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+			modele.append(rsauv3)
 		
 		# fait une copie de arbre
 		
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[1].chemin)
-		modèle = [[modèle[0]], [modèle[1]], []]
-		modèle[1][0].chemin = os.path.join(che, rep[:-2] + "_2_78")
+		modele = [[modele[0]], [modele[1]], []]
+		modele[1][0].chemin = os.path.join(che, rep[:-2] + "_2_78")
 		retour = [list(arbre[0:4]), [], []]
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
 		
-		self.assertEqual(modèle, retour)
+		self.assertEqual(modele, retour)
 		self.assertFalse(os.path.exists(arbre_origine[2].chemin))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[0].chemin)))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, arbre_origine[-1].chemin)))
@@ -1493,33 +1462,32 @@ class regroupe(unittest.TestCase):
 		
 		arbre = []
 		arbre_origine = []
-		modèle = []
+		modele = []
 		test = [('er_1', 5), ('tyëu_1_100', 23), ('kkk_1_78', 25), ('dfg_1', 40)]
 		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-			
 			except OSError:
-				logger.error("problème de création de fichier")
-			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+				pass
+			rsauv = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
 			# fait une copie de arbre
-			rsauv2 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+			rsauv2 = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			arbre_origine.append(rsauv2)
 			
-			rsauv3 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
-			modèle.append(rsauv3)
+			rsauv3 = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+			modele.append(rsauv3)
 		
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[1].chemin)
-		modèle = [[modèle[0]], [modèle[1]], []]
-		modèle[1][0].chemin = os.path.join(che, rep.split('_')[0] + "_2_100")
+		modele = [[modele[0]], [modele[1]], []]
+		modele[1][0].chemin = os.path.join(che, rep.split('_')[0] + "_2_100")
 		retour = [list(arbre[0:4]), [], []]
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
 		
-		self.assertEqual(modèle, retour)
+		self.assertEqual(modele, retour)
 		self.assertFalse(os.path.exists(arbre_origine[2].chemin))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[0].chemin)))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, arbre_origine[-1].chemin)))
@@ -1539,10 +1507,9 @@ class regroupe(unittest.TestCase):
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-			
 			except OSError:
-				logger.error("problème de création de fichier")
-			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+				pass
+			rsauv = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
 		
@@ -1551,11 +1518,11 @@ class regroupe(unittest.TestCase):
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[0].chemin)
 		retour = [list(arbre[0:1]), [], []]
-		modèle = [[], [sauv.rep_sauv(arbre[0].date, os.path.join(che, rep[:-2] + "_2"))], []]
+		modele = [[], [sauv.Cliche(arbre[0].date, os.path.join(che, rep[:-2] + "_2"))], []]
 		
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
 		
-		self.assertEqual(modèle, retour)
+		self.assertEqual(modele, retour)
 		self.assertFalse(os.path.exists(os.path.join(che, rep)))
 		
 		self.assertTrue(os.path.exists(os.path.join(che, rep[:-2] + "_2")))
@@ -1573,10 +1540,9 @@ class regroupe(unittest.TestCase):
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-			
 			except OSError:
-				logger.error("problème de création de fichier")
-			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+				pass
+			rsauv = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			arbre.append(rsauv)
 		
 		# fait une copie de arbre
@@ -1584,11 +1550,11 @@ class regroupe(unittest.TestCase):
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[0].chemin)
 		retour = [list(arbre[0:1]), [], []]
-		modèle = [[], [sauv.rep_sauv(arbre[0].date, os.path.join(che, rep[:-2] + "_2"))], []]
+		modele = [[], [sauv.Cliche(arbre[0].date, os.path.join(che, rep[:-2] + "_2"))], []]
 		
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
 		
-		self.assertEqual(modèle, retour)
+		self.assertEqual(modele, retour)
 		self.assertFalse(os.path.exists(os.path.join(che, rep)))
 		
 		self.assertTrue(os.path.exists(os.path.join(che, rep[:-2] + "_2")))
@@ -1606,10 +1572,9 @@ class regroupe(unittest.TestCase):
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-			
 			except OSError:
-				logger.error("problème de création de fichier")
-			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+				pass
+			rsauv = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
 		
@@ -1617,8 +1582,8 @@ class regroupe(unittest.TestCase):
 		arbre_origine = list(arbre)
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[1].chemin)
-		modèle = [list(arbre[0:2]), [], []]
-		modèle[0].append(arbre[3])
+		modele = [list(arbre[0:2]), [], []]
+		modele[0].append(arbre[3])
 		retour = [list(arbre[0:4]), [], []]
 		
 		# suprimme le troisième pour générer une erreur
@@ -1626,7 +1591,7 @@ class regroupe(unittest.TestCase):
 		
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
 		
-		self.assertEqual(modèle, retour)
+		self.assertEqual(modele, retour)
 		self.assertFalse(os.path.exists(arbre_origine[2].chemin))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[1].chemin)))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[0].chemin)))
@@ -1644,10 +1609,9 @@ class regroupe(unittest.TestCase):
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-			
 			except OSError:
-				logger.error("problème de création de fichier")
-			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+				pass
+			rsauv = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
 		
@@ -1656,12 +1620,12 @@ class regroupe(unittest.TestCase):
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[0].chemin)
 		retour = [list(arbre[0:1]), list(arbre[1:3]), []]
-		modèle = [[], [sauv.rep_sauv(arbre[0].date, os.path.join(che, rep[:-2] + "_2")), ], []]
-		modèle[1].extend(list(arbre[1:3]))
+		modele = [[], [sauv.Cliche(arbre[0].date, os.path.join(che, rep[:-2] + "_2")), ], []]
+		modele[1].extend(list(arbre[1:3]))
 		
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
 		
-		self.assertEqual(modèle, retour)
+		self.assertEqual(modele, retour)
 		self.assertTrue(os.path.exists(arbre_origine[1].chemin))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[2].chemin)))
 		self.assertFalse(os.path.exists(os.path.join(che, rep)))
@@ -1681,10 +1645,9 @@ class regroupe(unittest.TestCase):
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-			
 			except OSError:
-				logger.error("problème de création de fichier")
-			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+				pass
+			rsauv = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
 		
@@ -1693,11 +1656,11 @@ class regroupe(unittest.TestCase):
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[0].chemin)
 		retour = [list(arbre[0:1]), list(arbre[1:3]), []]
-		modèle = [list(arbre[0:1]), list(arbre[1:3]), []]
+		modele = [list(arbre[0:1]), list(arbre[1:3]), []]
 		
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
 		
-		self.assertEqual(modèle, retour)
+		self.assertEqual(modele, retour)
 		self.assertTrue(os.path.exists(arbre_origine[1].chemin))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[2].chemin)))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[0].chemin)))
@@ -1715,10 +1678,9 @@ class regroupe(unittest.TestCase):
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-			
 			except OSError:
-				logger.error("problème de création de fichier")
-			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+				pass
+			rsauv = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
 		
@@ -1726,12 +1688,12 @@ class regroupe(unittest.TestCase):
 		arbre_origine = list(arbre)
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[0].chemin)
-		modèle = [[], [sauv.rep_sauv(arbre[0].date, os.path.join(che, rep[:-2] + "_2")), ], []]
+		modele = [[], [sauv.Cliche(arbre[0].date, os.path.join(che, rep[:-2] + "_2")), ], []]
 		retour = [list(arbre[0:4]), [], []]
 		
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
 		
-		self.assertEqual(modèle, retour)
+		self.assertEqual(modele, retour)
 		self.assertFalse(os.path.exists(arbre_origine[2].chemin))
 		self.assertFalse(os.path.exists(os.path.join(che, rep)))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, arbre_origine[-1].chemin)))
@@ -1747,33 +1709,32 @@ class regroupe(unittest.TestCase):
 		
 		arbre = []
 		arbre_origine = []
-		modèle = []
+		modele = []
 		test = [('er_1', 5), ('tyu_1', 23), ('kkk_1', 25), ('dfg_1', 40)]
 		
 		for fichier in test:
 			try:
 				os.mkdir(os.path.join(self.rep, fichier[0]))
-			
 			except OSError:
-				logger.error("problème de création de fichier")
-			rsauv = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+				pass
+			rsauv = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			rsauv.analyse()
 			arbre.append(rsauv)
 			# fait une copie de arbre
-			rsauv2 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+			rsauv2 = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
 			arbre_origine.append(rsauv2)
 			
-			rsauv3 = sauv.rep_sauv(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
-			modèle.append(rsauv3)
+			rsauv3 = sauv.Cliche(now - datetime.timedelta(hours=fichier[1]), os.path.join(self.rep, fichier[0]))
+			modele.append(rsauv3)
 		
 		# création de la liste source et de reférence
 		che, rep = os.path.split(arbre_origine[1].chemin)
-		modèle = [[modèle[0]], [modèle[1]], []]
-		modèle[1][0].chemin = os.path.join(che, rep[:-2] + "_2")
+		modele = [[modele[0]], [modele[1]], []]
+		modele[1][0].chemin = os.path.join(che, rep[:-2] + "_2")
 		retour = [list(arbre[0:4]), [], []]
 		sauv.regroupe(cons, per_suiv, retour, 0, now)
 		
-		self.assertEqual(modèle, retour)
+		self.assertEqual(modele, retour)
 		self.assertFalse(os.path.exists(arbre_origine[2].chemin))
 		self.assertTrue(os.path.exists(os.path.join(self.rep, arbre_origine[0].chemin)))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, arbre_origine[-1].chemin)))
@@ -1815,15 +1776,14 @@ class reduction(unittest.TestCase):
 			# créé les répertoires avec un fichier
 			try:
 				os.mkdir(os.path.join(self.rep, rep[0]))
-			
 			except OSError:
-				sauv.logger.error("problème de création de fichier")
+				pass
 			
 			fichier = os.path.join(self.rep, rep[0], "essai")
 			with open(fichier, mode='w') as file:
 				file.write('hello boys')
 			# créé les arbres
-			rsauv = sauv.rep_sauv(self.now - datetime.timedelta(days=rep[2]), os.path.join(self.rep, rep[0]))
+			rsauv = sauv.Cliche(self.now - datetime.timedelta(days=rep[2]), os.path.join(self.rep, rep[0]))
 			rsauv.analyse()
 			arbre[rep[1] - 1].append(rsauv)
 			reference[rep[1] - 1].append(rsauv)
@@ -1841,13 +1801,10 @@ class reduction(unittest.TestCase):
 		config['sauv'][sauv.qta] = '0.000000025'
 		config['sauv'][sauv.dest] = self.rep
 		
-		# sauv.logger = logging.getLogger('main')
+		
 		# lance la fonction et teste le retour de d'un log d'erreur pour supression dans la période de conservation
 		sauv.reduction(config['sauv'], arbre)
 		sauv.logger.error.assert_called()
-		
-		# with self.assertLogs(logger=sauv.logger, level=logging.ERROR):
-		# 	sauv.reduction(config['sauv'], arbre)
 		
 		self.assertEqual(arbre, reference)
 		# teste existance entre du second
@@ -1864,15 +1821,14 @@ class reduction(unittest.TestCase):
 			# créé les répertoires avec un fichier
 			try:
 				os.mkdir(os.path.join(self.rep, rep[0]))
-			
 			except OSError:
-				logger.error("problème de création de fichier")
+				pass
 			
 			fichier = os.path.join(self.rep, rep[0], "essai")
 			with open(fichier, mode='w') as file:
 				file.write('hello boys')
 			# créé les arbres
-			rsauv = sauv.rep_sauv(self.now - datetime.timedelta(days=rep[2]), os.path.join(self.rep, rep[0]))
+			rsauv = sauv.Cliche(self.now - datetime.timedelta(days=rep[2]), os.path.join(self.rep, rep[0]))
 			rsauv.analyse()
 			arbre[rep[1] - 1].append(rsauv)
 			reference[rep[1] - 1].append(rsauv)
@@ -1917,7 +1873,7 @@ class reduction(unittest.TestCase):
 			with open(fichier, mode='w') as file:
 				file.write('hello boys')
 			# créé les arbres
-			rsauv = sauv.rep_sauv(self.now - datetime.timedelta(days=rep[2]), os.path.join(self.rep, rep[0]))
+			rsauv = sauv.Cliche(self.now - datetime.timedelta(days=rep[2]), os.path.join(self.rep, rep[0]))
 			rsauv.analyse()
 			arbre[rep[1] - 1].append(rsauv)
 			reference[rep[1] - 1].append(rsauv)
@@ -1964,7 +1920,7 @@ class reduction(unittest.TestCase):
 			with open(fichier, mode='w') as file:
 				file.write('hello boys')
 			# créé les arbres
-			rsauv = sauv.rep_sauv(self.now - datetime.timedelta(days=rep[2]), os.path.join(self.rep, rep[0]))
+			rsauv = sauv.Cliche(self.now - datetime.timedelta(days=rep[2]), os.path.join(self.rep, rep[0]))
 			rsauv.analyse()
 			arbre[rep[1] - 1].append(rsauv)
 			reference[rep[1] - 1].append(rsauv)
@@ -2008,7 +1964,7 @@ class reduction(unittest.TestCase):
 			with open(fichier, mode='w') as file:
 				file.write('hello boys')
 			# créé les arbres
-			rsauv = sauv.rep_sauv(self.now - datetime.timedelta(days=rep[2]), os.path.join(self.rep, rep[0]))
+			rsauv = sauv.Cliche(self.now - datetime.timedelta(days=rep[2]), os.path.join(self.rep, rep[0]))
 			rsauv.analyse()
 			arbre[rep[1] - 1].append(rsauv)
 			reference[rep[1] - 1].append(rsauv)
@@ -2039,8 +1995,8 @@ class En_Decode_Json(unittest.TestCase):
 		config_log()
 	
 	def test_en_decode(self):
-		""" Encode puis décode un objet rep_sauv"""
-		rsauv = sauv.rep_sauv(datetime.datetime(2017, 10, 5), "/ertert/erte")
+		""" Encode puis décode un objet Cliche"""
+		rsauv = sauv.Cliche(datetime.datetime(2017, 10, 5), "/ertert/erte")
 		arbre = [[], [rsauv]]
 		
 		# try:
@@ -2056,13 +2012,13 @@ class En_Decode_Json(unittest.TestCase):
 		self.assertEqual(arbre, resultat)
 	
 	def test_decode_errone(self):
-		""" Encode puis décode un objet rep_sauv"""
+		""" Encode puis décode un objet Cliche"""
 		l_entree = (
-			'{"date": "2017-10-05 00-0045", "chemin": "/ertert/erte", "__class__": "rep_sauv"}',
-			'{"date": "55-10-05 00-00", "chemin": "/ertert/erte", "__class__": "rep_sauv"}',
-			'{"date": "2016-10-05 00-00", "chemin": 5, "__class__": "rep_sauv"}',
-			'{"date": "2017-10-05 00-00",  "__class__": "rep_sauv"}',
-			'{"date": "2017-10-05 00-00", "chemin": ["dffdggdfg"], "__class__": "rep_sauv"}'
+			'{"date": "2017-10-05 00-0045", "chemin": "/ertert/erte", "__class__": "Cliche"}',
+			'{"date": "55-10-05 00-00", "chemin": "/ertert/erte", "__class__": "Cliche"}',
+			'{"date": "2016-10-05 00-00", "chemin": 5, "__class__": "Cliche"}',
+			'{"date": "2017-10-05 00-00",  "__class__": "Cliche"}',
+			'{"date": "2017-10-05 00-00", "chemin": ["dffdggdfg"], "__class__": "Cliche"}'
 		)
 		
 		for entree in l_entree:
@@ -2095,7 +2051,7 @@ class Ecriture_Bilan(unittest.TestCase):
 		
 		self.config['sauv'][sauv.bilan] = self.rep
 		
-		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		cli = sauv.Cliche(datetime.datetime(2017, 3, 1), "chemin")
 		cli.stat = {sauv.bl_date: "2017-06-10 19:26:27", sauv.bl_job: "internet", sauv.bl_voltransfere: 4589655}
 		sauv.ecriture_bilan(self.config['sauv'], cli)
 		# test de création
@@ -2122,7 +2078,7 @@ class Ecriture_Bilan(unittest.TestCase):
 		with open(self.rep, mode='w') as file:
 			file.write('cnimporte quoi')
 		
-		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		cli = sauv.Cliche(datetime.datetime(2017, 3, 1), "chemin")
 		cli.stat = {sauv.bl_date: "2017-06-10 19:26:27", sauv.bl_job: "internet", sauv.bl_voltransfere: 4589655}
 		self.assertRaises(sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
 	
@@ -2130,7 +2086,7 @@ class Ecriture_Bilan(unittest.TestCase):
 		"""test le retour si le fichier bilan est endommagé"""
 		self.config['sauv'][sauv.bilan] = self.rep
 		
-		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		cli = sauv.Cliche(datetime.datetime(2017, 3, 1), "chemin")
 		cli.stat = {sauv.bl_date: "2017-06-10 19:26:27", sauv.bl_job: "internet", sauv.bl_voltransfere: 4589655}
 		sauv.ecriture_bilan(self.config['sauv'], cli)
 		with open(self.rep, mode='w') as file:
@@ -2143,7 +2099,7 @@ class Ecriture_Bilan(unittest.TestCase):
 		
 		self.config['sauv'][sauv.bilan] = self.rep
 		
-		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		cli = sauv.Cliche(datetime.datetime(2017, 3, 1), "chemin")
 		cli.stat = {sauv.bl_date: "2017-06-10 19:26:27", sauv.bl_job: "internet", sauv.bl_voltransfere: "erreur"}
 		self.assertRaises(sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
 	
@@ -2152,7 +2108,7 @@ class Ecriture_Bilan(unittest.TestCase):
 		
 		self.config['sauv'][sauv.bilan] = self.rep
 		
-		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		cli = sauv.Cliche(datetime.datetime(2017, 3, 1), "chemin")
 		sauv.ecriture_bilan(self.config['sauv'], cli)
 	
 	def test_stat_vide(self):
@@ -2160,7 +2116,7 @@ class Ecriture_Bilan(unittest.TestCase):
 		
 		self.config['sauv'][sauv.bilan] = self.rep
 		
-		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		cli = sauv.Cliche(datetime.datetime(2017, 3, 1), "chemin")
 		cli.stat = {}
 		sauv.ecriture_bilan(self.config['sauv'], cli)
 	
@@ -2169,7 +2125,7 @@ class Ecriture_Bilan(unittest.TestCase):
 		
 		self.config['sauv'][sauv.bilan] = self.rep
 		
-		cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		cli = sauv.Cliche(datetime.datetime(2017, 3, 1), "chemin")
 		cli.stat = {'gdfgdfgg': "2017-06-10 19:26:27", sauv.bl_job: "internet", sauv.bl_voltransfere: 555555}
 		self.assertRaises(sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
 
@@ -2178,7 +2134,7 @@ class Calcul_Retention(unittest.TestCase):
 	
 	def setUp(self):
 		config_log()
-		self.cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		self.cli = sauv.Cliche(datetime.datetime(2017, 3, 1), "chemin")
 		
 		# Créé la configuration
 		self.config = sauv.My_configparser()
@@ -2205,7 +2161,7 @@ class Calcul_Retention(unittest.TestCase):
 			(2, 1, 10),
 		)
 		for l1, mois, jour in données:
-			arbre[l1].append(sauv.rep_sauv(datetime.datetime(year=2017, month=mois, day=jour), "chemin"))
+			arbre[l1].append(sauv.Cliche(datetime.datetime(year=2017, month=mois, day=jour), "chemin"))
 		maintenant = datetime.datetime.now()
 		
 		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
@@ -2233,7 +2189,7 @@ class Calcul_Retention(unittest.TestCase):
 			(2, 1, 10),
 		)
 		for l1, mois, jour in données:
-			arbre[l1].append(sauv.rep_sauv(datetime.datetime(year=2017, month=mois, day=jour), "chemin"))
+			arbre[l1].append(sauv.Cliche(datetime.datetime(year=2017, month=mois, day=jour), "chemin"))
 		maintenant = datetime.datetime.now()
 		
 		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
@@ -2259,7 +2215,7 @@ class Calcul_Retention(unittest.TestCase):
 			(1, 1, 10),
 		)
 		for l1, mois, jour in données:
-			arbre[l1].append(sauv.rep_sauv(datetime.datetime(year=2017, month=mois, day=jour), "chemin"))
+			arbre[l1].append(sauv.Cliche(datetime.datetime(year=2017, month=mois, day=jour), "chemin"))
 		maintenant = datetime.datetime.now()
 		
 		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
@@ -2288,20 +2244,16 @@ class Calcul_Retention(unittest.TestCase):
 			(2, 7, 9, True),
 		)
 		for l1, mois, jour, reussi in données:
-			cliche = sauv.rep_sauv(datetime.datetime(year=2017, month=mois, day=jour), "chemin")
+			cliche = sauv.Cliche(datetime.datetime(year=2017, month=mois, day=jour), "chemin")
 			cliche.reussi = reussi
 			arbre[l1].append(cliche)
 		
 		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
 		sauv.logger.error.assert_called()
 	
-	# with self.assertLogs(logger=sauv.logger, level=logging.ERROR):
-	# 	sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
 	
 	def test_envoi_pas_erreur(self):
 		"""test fonctionnel de non renvoi d'un log d'erreur si 4 non réussi sont détectés"""
-		
-		sauv.logger = unittest.mock.MagicMock()
 		
 		arbre = [[], [], []]
 		données = (
@@ -2313,7 +2265,7 @@ class Calcul_Retention(unittest.TestCase):
 			(2, 7, 9, True),
 		)
 		for l1, mois, jour, reussi in données:
-			cliche = sauv.rep_sauv(datetime.datetime(year=2017, month=mois, day=jour), "chemin")
+			cliche = sauv.Cliche(datetime.datetime(year=2017, month=mois, day=jour), "chemin")
 			cliche.reussi = reussi
 			arbre[l1].append(cliche)
 		
@@ -2323,8 +2275,6 @@ class Calcul_Retention(unittest.TestCase):
 	def test_envoi_pas_erreur2(self):
 		"""test fonctionnel de non renvoi d'un log d'erreur si seulement 4 cliché existes"""
 		
-		sauv.logger = unittest.mock.MagicMock()
-		
 		arbre = [[], [], []]
 		données = (
 			(0, 12, 5, False),
@@ -2333,7 +2283,7 @@ class Calcul_Retention(unittest.TestCase):
 			(1, 10, 25, False),
 		)
 		for l1, mois, jour, reussi in données:
-			cliche = sauv.rep_sauv(datetime.datetime(year=2017, month=mois, day=jour), "chemin")
+			cliche = sauv.Cliche(datetime.datetime(year=2017, month=mois, day=jour), "chemin")
 			cliche.reussi = reussi
 			arbre[l1].append(cliche)
 		
@@ -2342,8 +2292,6 @@ class Calcul_Retention(unittest.TestCase):
 	
 	def test_arbre_vide(self):
 		"""test fonctionnel si l'arbre est vide"""
-		
-		sauv.logger = unittest.mock.MagicMock()
 		
 		arbre = [[], [], []]
 		
@@ -2355,7 +2303,7 @@ class analyse_retour_pour_bilan(unittest.TestCase):
 	
 	def setUp(self):
 		config_log()
-		self.cli = sauv.rep_sauv(datetime.datetime(2017, 3, 1), "chemin")
+		self.cli = sauv.Cliche(datetime.datetime(2017, 3, 1), "chemin")
 	
 	def tearDown(self):
 		self.cli = None

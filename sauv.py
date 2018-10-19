@@ -54,6 +54,25 @@ version = 0.31  # suppression log de fusion et verifie_arbre
 #				# détecte la suppression de sauvegarde dans la période de conservation
 # le verrou par fichier est remplacé par une variable d'environnement qui sera perdu à chaque coupure électrique
 
+import argparse
+import os
+import shlex
+import subprocess
+import datetime
+import sys
+import signal
+import logging
+from logging.config import dictConfig
+import json
+import shutil
+import re
+import itertools
+import pickle
+import time
+from pathlib import Path
+# from StringIO import StringIO
+import configparser
+import dbf
 
 # clé du fichier de configuration (en minucule)
 per1 = 'periode1'
@@ -101,7 +120,7 @@ f_arbre = 'historique.sauv'
 process_en_cours = None
 
 
-class init_erreur(Exception):
+class InitErreur(Exception):
 	def __init__(self, valeur):
 		self.valeur = valeur
 	
@@ -109,23 +128,21 @@ class init_erreur(Exception):
 		return self.valeur
 
 
-class rep_sauv():
+class Cliche:
 	def __init__(self, dat, che):
 		if type(dat) == datetime.datetime:
 			self.date = dat
 		else:
-			raise init_erreur("Type de donnée incorrecte pour la date")
+			raise InitErreur("Type de donnée incorrecte pour la date")
 		
 		if type(che) == str:
 			self.chemin = che
 		else:
-			raise init_erreur("Type de donnée incorrecte pour le chemin")
+			raise InitErreur("Type de donnée incorrecte pour le chemin")
 		
 		self.lnoeud = {}
 		self.taille = 0
-		self.stat = {}
-		
-		self.stat[bl_date] = dat.strftime(formatdate)
+		self.stat = {bl_date: dat.strftime(formatdate)}
 		
 		self.reussi = None
 		self.signale_erreur = None
@@ -162,7 +179,7 @@ class rep_sauv():
 	
 	# définit la méthode d'affichage
 	def __repr__(self):
-		return "<objet rep_sauv date:{}, chemin:{}, reussi:{}, signale_erreur:{}, md5:{}, taille:{}, noeud:{}>".format(
+		return "<objet Cliche date:{}, chemin:{}, reussi:{}, signale_erreur:{}, md5:{}, taille:{}, noeud:{}>".format(
 			self.date.strftime(formatdate), self.chemin, self.reussi, self.signale_erreur,
 			self.md5, self.taille, self.lnoeud)
 	
@@ -174,7 +191,7 @@ class rep_sauv():
 		logger.info("analyse de {}".format(che_path))
 		
 		if not che_path.exists():
-			raise init_erreur("Répertoire inexistant: {}".format(che_path))
+			raise InitErreur("Répertoire inexistant: {}".format(che_path))
 		
 		id_incr = {}
 		nv_taille = 0
@@ -192,7 +209,8 @@ class rep_sauv():
 		self.taille = nv_taille
 		self.lnoeud = id_incr
 
-# définition du decodeur et du codeur json pour l'objet rep_sauv
+
+# définition du decodeur et du codeur json pour l'objet Cliche
 # Appel par:
 # res=my_encoder().encode(objet)
 # obj2=my_decoder().decode(res)
@@ -206,15 +224,10 @@ class my_encoder(json.JSONEncoder):
 	def default(self, obj):
 		# Convert objects to a dictionary of their representation
 		
-		if isinstance(obj, rep_sauv):
-			res = {'date': obj.date.strftime(formatdate)}
-			res['chemin'] = obj.chemin
-			res['lnoeud'] = obj.lnoeud
-			res['taille'] = obj.taille
-			res['reussi'] = obj.reussi
-			res['signale'] = obj.signale_erreur
-			res['md5'] = obj.md5
-			res['__class__'] = 'rep_sauv'
+		if isinstance(obj, Cliche):
+			res = {'date': obj.date.strftime(formatdate), 'chemin': obj.chemin, 'lnoeud': obj.lnoeud,
+				   'taille': obj.taille, 'reussi': obj.reussi, 'signale': obj.signale_erreur, 'md5': obj.md5,
+				   '__class__': 'Cliche'}
 			return res
 		
 		return json.JSONEncoder.default(self, obj)
@@ -224,27 +237,25 @@ class my_decoder(json.JSONDecoder):
 	def __init__(self):
 		json.JSONDecoder.__init__(self, object_hook=self.dict_to_object)
 	
-	def dict_to_object(self, d):
+	@staticmethod
+	def dict_to_object(d):
 		if '__class__' in d:
-			if d['__class__'] == 'rep_sauv':
+			if d['__class__'] == 'Cliche':
 				try:
 					dat = datetime.datetime.strptime(d['date'], formatdate)
-					inst = rep_sauv(dat, d['chemin'])
+					inst = Cliche(dat, d['chemin'])
 					inst.taille = d['taille']
 					inst.lnoeud = d['lnoeud']
 					inst.reussi = d['reussi']
 					inst.signale_erreur = d['signale']
 					inst.md5 = d['md5']
-				except (init_erreur, ValueError, KeyError)  as exception:
-					raise json.decoder.JSONDecodeError("rep_sauv n'est pas correct: {}".format(exception), "inconnu", 0)
+				except (InitErreur, ValueError, KeyError)  as exception:
+					raise json.decoder.JSONDecodeError("Cliche n'est pas correct: {}".format(exception), "inconnu", 0)
 			else:
 				inst = d
 		else:
 			inst = d
 		return inst
-
-
-import configparser
 
 
 class My_configparser(configparser.ConfigParser):
@@ -339,15 +350,15 @@ def init_para(chemin):
 	except configparser.MissingSectionHeaderError as exception:
 		logger.error("Le fichier de configuration ""{}""est erroné \n{}".format(chemin, exception))
 		
-		raise init_erreur(exception)
+		raise InitErreur(exception)
 	
 	if len(config.sections()) == 0:
-		raise init_erreur("fichier d'initialisation vide ou absent")
+		raise InitErreur("fichier d'initialisation vide ou absent")
 	
 	for sauv in config.sections():
 		
 		# teste la validité de la destination
-		if not src in config[sauv]:
+		if src not in config[sauv]:
 			logger.error("{}-La source de n'existe pas. La sauvegarde est abandonnée".format(sauv))
 			del config[sauv]
 			continue
@@ -377,7 +388,7 @@ def init_para(chemin):
 					del config[sauv]
 					rester = False
 					break
-			# permet de sortir de la boucle principale aussi
+		# permet de sortir de la boucle principale aussi
 		if not rester:
 			continue
 		
@@ -493,21 +504,22 @@ def verifie_arbre(config, branche):
 			
 			logger.info("Répertoire '{}' validé".format(rep.name))
 			
-			item = rep_sauv(dat, os.path.join(config[dest], rep.name))
+			item = Cliche(dat, os.path.join(config[dest], rep.name))
 			logger.debug(item)
 			
 			# Insertion dans l'arbre pour obtenir une liste triée par date
 			a = 0
-			trouvé = False
+			# noinspection NonAsciiCharacters,NonAsciiCharacters
+			trouve = False
 			
 			while len(arbre[lvl]) > a:
 				if arbre[lvl][a].date < dat:
 					arbre[lvl].insert(a, item)
-					trouvé = True
+					trouve = True
 					break
 				a += 1
 			# si pas d'insertion dans la boucle alors, insertion à la fin
-			if not trouvé:
+			if not trouve:
 				arbre[lvl].append(item)
 	# vérifie l'ordre des dates
 	# todo - améliorer la programation de ce test
@@ -610,31 +622,31 @@ def iterateur_arbre(sauv):
 def reduit_inode(branche):
 	# ne conserve les inodes que de la dernière sauvegarde
 	it = iterateur_arbre_inv(branche)
-	première = True
+	premiere = True
 	
 	for incr in it:
 		
-		if not première:
+		if not premiere:
 			# vérification de l'ordre
 			logger.debug("Test de date: {} >= {}".format(date, incr.date))
 			if date > incr.date:
 				raise SyntaxError("L'ordre des sauvegardes est incorrect")
 			
-			anc_id_incr = précédent.lnoeud
+			anc_id_incr = precedent.lnoeud
 			if len(anc_id_incr):
 				
 				taille = 0
-				# cherche les id seulement dans anc_id_incr
-				for id, ta in anc_id_incr.items():
-					if not id in incr.lnoeud:
+				# cherche les ids seulement dans anc_id_incr
+				for idd, ta in anc_id_incr.items():
+					if not idd in incr.lnoeud:
 						taille += ta
-				# mise à jour du précédent
-				précédent.taille = taille
-				précédent.lnoeud = {}
+				# mise à jour du precedent
+				precedent.taille = taille
+				precedent.lnoeud = {}
 		
-		première = False
+		premiere = False
 		date = incr.date
-		précédent = incr
+		precedent = incr
 
 
 def charge_arbre(f_arbre):
@@ -665,7 +677,7 @@ def charge_arbre(f_arbre):
 			# Vérification du contenu
 			for niveau in sauv:
 				for hsauv in niveau:
-					if type(hsauv) != rep_sauv:
+					if type(hsauv) != Cliche:
 						raise SyntaxError(
 							"Au moins un élément d'historique de '{0}' n'est pas valide : {1}".format(hsauv, clef))
 		
@@ -673,7 +685,7 @@ def charge_arbre(f_arbre):
 		return arbre
 	
 	else:
-		raise init_erreur("historique non trouvé")
+		raise InitErreur("historique non trouvé")
 
 
 # todo - créer tests
@@ -690,7 +702,7 @@ def taille_arbre(arbre):
 def sauv_arbre(f_arbre, arbre):
 	logger.debug("Lancement de 'sauv_arbre'")
 	
-	if arbre == None:
+	if arbre is None:
 		raise SyntaxError("l'arbre est vide")
 	
 	if os.path.exists(os.path.split(f_arbre)[0]):
@@ -824,7 +836,7 @@ def copie(config, arbre):
 	logger.debug("Commande:" + str(commande))
 	
 	# créé le cliché pour enregistrer le résultat
-	retour = rep_sauv(maintenant, destination)
+	retour = Cliche(maintenant, destination)
 	retour.reussi = True
 	retour.md5 = sauv_md5
 	
@@ -851,9 +863,10 @@ def extrait_bilan(lignes, sauv, md5):
 	à partir d'une liste des lignes renvoyées par rsync, extrait les valeurs intéressantes
 	et les mets en forme pour former une seule ligne prête à écrire dans un fichier
 	le formatage se trouve dans la chaine constante format_bilan
+	 md5: 
 	:param lignes: liste des lignes
-			sauv: le nom de la sauvegarde
-			md5 : booléen si la sauvegarde est avec vérification md5
+	:param	sauv: le nom de la sauvegarde
+	:param	md5 : booléen si la sauvegarde est avec vérification md5
 	:return: str formaté par la chaîne format_bilan
 	"""
 	# prépare les deux expressions régulières
@@ -1026,30 +1039,30 @@ def fusion_rep(src, dst):
 	except AttributeError:
 		raise ValueError("La source n'est pas du type Path")
 	
-	for élém in liste:
+	for elem in liste:
 		
-		# logger.debug("boucle de traitement de : '{}'".format(élém))
+		# logger.debug("boucle de traitement de : '{}'".format(elem))
 		liste_aff = src.iterdir()
 		for a in liste_aff:
 			logger.debug("     {}".format(a))
 		
-		sdst = dst / élém.name
-		if élém.is_dir():
+		sdst = dst / elem.name
+		if elem.is_dir():
 			if sdst.exists():
 				# regarde le niveau supérieur
-				fusion_rep(élém, sdst)
+				fusion_rep(elem, sdst)
 			else:
 				# déplace le répertoire
 				try:
-					os.renames(str(élém), str(sdst))
+					os.renames(str(elem), str(sdst))
 				except OSError as exception:
-					logger.error("erreur de déplacement du répertoire: {} dans '{}'".format(str(élém), str(sdst)))
+					logger.error("erreur de déplacement du répertoire: {} dans '{}'".format(str(elem), str(sdst)))
 					logger.error("erreur: {}".format(exception))
 					raise OSError("erreur de déplacement du répertoire: {}".format(exception))
 		
 		else:
 			# déplace le fichier
-			# logger.debug("déplacement du fichier: {} dans '{}'".format(str(élém), str(sdst)))
+			# logger.debug("déplacement du fichier: {} dans '{}'".format(str(elem), str(sdst)))
 			if sdst.exists():
 				try:
 					os.remove(str(sdst))
@@ -1059,9 +1072,9 @@ def fusion_rep(src, dst):
 					raise OSError("erreur de supression du fichier: {}".format(exception))
 			try:
 				
-				os.rename(str(élém), str(sdst))
+				os.rename(str(elem), str(sdst))
 			except OSError as exception:
-				logger.error("erreur de déplacement du fichier: {} dans '{}'".format(str(élém), str(sdst)))
+				logger.error("erreur de déplacement du fichier: {} dans '{}'".format(str(elem), str(sdst)))
 				logger.error("erreur: {}".format(exception))
 				raise OSError("erreur de déplacement du fichier: {}".format(exception))
 	# supprime le répertoire vidé
@@ -1142,7 +1155,7 @@ def reduction(config, arbre):
 		except NameError:
 			pass
 		# évite les valeurs à none
-		if limite_cons == None:
+		if limite_cons is None:
 			limite_cons = 10000.0
 		
 		# pour toutes les sauvegardes
@@ -1236,21 +1249,21 @@ def init_logging(fichier):
 		try:
 			logging_config = json.load(f)
 		except json.decoder.JSONDecodeError:
-			raise init_erreur("fichier de configuration erroné")
+			raise InitErreur("fichier de configuration erroné")
 	
 	# interprète le fichier de configuration
 	try:
 		dictConfig(logging_config)
 	except (ValueError, TypeError, AttributeError, ImportError, KeyError) as err:
-		raise init_erreur("Le ficher de configuration du journal est erronée - {0}".format(err))
+		raise InitErreur("Le ficher de configuration du journal est erronée - {0}".format(err))
 	if 'loggers' in logging_config:
 		for a in logging_config['loggers']: pass
 	else:
-		raise init_erreur("La clé 'loggers' ne se trouve pas dans la configuration")
+		raise InitErreur("La clé 'loggers' ne se trouve pas dans la configuration")
 	
 	logger = logging.getLogger(a)
 	if not logger.hasHandlers():
-		raise init_erreur("Le journal d'événement n'est pas configuré")
+		raise InitErreur("Le journal d'événement n'est pas configuré")
 	return logger
 
 
@@ -1259,15 +1272,15 @@ def verrouille():
 	
 	if var_env_verrou in os.environ:
 		# calcule le temps en heure depuis sa création. un décalage de une heure apparait en fonction des décalages
-		délai_h = ((datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds() - float(
+		delai_h = ((datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds() - float(
 			os.environ[var_env_verrou])) / 3600
 		# si une autre sauvegarde n'est pas terminée
-		if délai_h < 14:
-			logger.info("une sauvegarde est déjà en cours depuis {0:.1f} heures".format(délai_h))
+		if delai_h < 14:
+			logger.info("une sauvegarde est déjà en cours depuis {0:.1f} heures".format(delai_h))
 			return False
 		else:
 			# si une autre sauvegarde date de plus d'un jour
-			if délai_h > 2 * 24:
+			if delai_h > 2 * 24:
 				logger.error("Un verrou de plus de deux jours est détecté. force la sauvegarde")
 				deverrouille()
 				return verrouille()
@@ -1478,8 +1491,6 @@ def pas_de_sauv(config, arbre, force):
 	return False
 
 
-import dbf
-
 bl_date = "datecliche"
 bl_job = "job"
 bl_voltransfere = "vtransfere"
@@ -1523,7 +1534,7 @@ def ecriture_bilan(config, cli):
 		
 		entrée:
 		Config, objet configparser
-		cli, objet rep_sauv avec un dictionnaire de statistique à écrire
+		cli, objet Cliche avec un dictionnaire de statistique à écrire
 		
 		retour:
 		FileNotFoundError si l'écriture n'est pas possible
@@ -1603,9 +1614,9 @@ def analyse_retour_pour_bilan(lignes, sauv, md5, cli):
 	et les mets en forme pour former une seule ligne prête à écrire dans un fichier
 	le formatage se trouve dans la chaine constante format_bilan
 	:param lignes: liste des lignes
-			sauv: le nom de la sauvegarde
-			md5 : booléen si la sauvegarde est avec vérification md5
-			cli: cliché courant, à compléter
+	:param	sauv: le nom de la sauvegarde
+	:param	md5 : booléen si la sauvegarde est avec vérification md5
+	:param 	cli: cliché courant, à compléter
 	:return: cli compléter par information du bilan
 	format: bl_date, bl_job: caractère, bl_md5: booléan, reste numérique
 	"""
@@ -1642,25 +1653,6 @@ def analyse_retour_pour_bilan(lignes, sauv, md5, cli):
 
 
 # Début du programme
-import argparse
-import os
-import shlex
-import subprocess
-import datetime
-import sys
-import signal
-import logging
-from logging.config import dictConfig
-import json
-import shutil
-import re
-import itertools
-import pickle
-import time
-from pathlib import Path
-
-# from StringIO import StringIO
-
 if __name__ == '__main__':
 	
 	# fichier de configuration du journal
@@ -1671,7 +1663,7 @@ if __name__ == '__main__':
 	# initialisation du journal
 	try:
 		logger = init_logging(flogconf)
-	except init_erreur as inst:
+	except InitErreur as inst:
 		logging.error("Erreur d'initialisation - " + inst.valeur)
 		sys.exit()
 	
@@ -1695,7 +1687,7 @@ if __name__ == '__main__':
 	# Lecture des paramètres de sauvegarde
 	try:
 		config = init_para(os.path.join(os.path.split(os.path.abspath(__file__))[0], conf_sauv))
-	except init_erreur as inst:
+	except InitErreur as inst:
 		logger.error("Erreur d'initialisation - " + inst.valeur)
 		sys.exit()
 	
@@ -1705,7 +1697,7 @@ if __name__ == '__main__':
 	arbre = {}
 	try:
 		arbre = charge_arbre(chemin_arbre)
-	except (SyntaxError, init_erreur) as exception:
+	except (SyntaxError, InitErreur) as exception:
 		logger.warning(exception)
 	
 	# si l'argument ignore_verrou est demandé, supprime le verrou antérieur
@@ -1724,7 +1716,7 @@ if __name__ == '__main__':
 			-------------------------  Début de sauvegarde [{0}] --------------------------------------------------""".format(
 			sauv))
 		# créé une branche vide pour l'arbre si elle n'existe pas
-		if not sauv in arbre:
+		if sauv not in arbre:
 			arbre[sauv] = [[], [], []]
 		
 		# regarde si une sauvegarde est nécessaire
