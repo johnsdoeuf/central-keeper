@@ -2312,7 +2312,7 @@ class Calcul_Retention(unittest.TestCase):
 		# 	sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
 	
 	def test_envoi_pas_erreur(self):
-		"""test fonctionnel de renvoi d'un log d'erreur si 5 non réussi sont détectés"""
+		"""test fonctionnel de non renvoi d'un log d'erreur si 4 non réussi sont détectés"""
 		
 		sauv.logger = unittest.mock.MagicMock()
 		
@@ -2333,6 +2333,37 @@ class Calcul_Retention(unittest.TestCase):
 		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
 		sauv.logger.error.assert_not_called()
 
+	def test_envoi_pas_erreur2(self):
+		"""test fonctionnel de non renvoi d'un log d'erreur si seulement 4 cliché existes"""
+		
+		sauv.logger = unittest.mock.MagicMock()
+		
+		arbre = [[], [], []]
+		données = (
+			(0, 12, 5, False),
+			(0, 11, 28, False),
+			(0, 11, 26, False),
+			(1, 10, 25, False),
+		)
+		for l1,  mois, jour, reussi in données:
+			cliche = sauv.rep_sauv(datetime.datetime(year=2017,month=mois, day=jour), "chemin")
+			cliche.reussi = reussi
+			arbre[l1].append(cliche)
+		
+		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
+		sauv.logger.error.assert_not_called()
+
+	def test_arbre_vide(self):
+		"""test fonctionnel si l'arbre est vide"""
+	
+		sauv.logger = unittest.mock.MagicMock()
+		
+		arbre = [[], [], []]
+	
+		sauv.calcul_retention(self.cli, arbre, self.config['sauv'])
+		sauv.logger.error.assert_not_called()
+	
+	
 class analyse_retour_pour_bilan(unittest.TestCase):
 	
 	def setUp(self):

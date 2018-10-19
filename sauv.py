@@ -1566,23 +1566,19 @@ def calcul_retention(cli, arbre, config):
 	if qta in config:
 		stat[bl_voljobobj] = int(config[qta])
 		
-	if not cli.reussi:
-		iterateur = iterateur_arbre(arbre)
-		ok = False
-		compteur = 5
-		for cli in iterateur:
-			ok = ok or cli.reussi
-			compteur -= 1
-			if not compteur:
-				break
-		else:
-			# Cas
-			ok = True
-
-		if not ok:
-			logger.error("5 warnings successifs sont intervenus lors de la sauvegarde")
-# todo renvoi de log à tester
-
+	# Détecte 5 warning consecutifs
+	gene = iterateur_arbre(arbre)
+	for a in range(5):
+		try:
+			c = gene.__next__()
+		except StopIteration:
+			break
+		if c.reussi:
+			break
+	else:
+		logger.error("5 warnings successifs sont intervenus lors de la sauvegarde")
+			
+			
 def analyse_retour_pour_bilan(lignes, sauv, md5, cli):
 	"""
 	à partir d'une liste des lignes renvoyées par rsync, extrait les valeurs intéressantes
