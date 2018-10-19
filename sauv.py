@@ -1646,11 +1646,16 @@ def analyse_retour_pour_bilan(lignes, sauv, md5, cli):
 	cli.stat[bl_md5] = bool(md5)
 
 
-# if md5:
-# 	return format_bilan.format(d, sauv, bechanges, btot, speed, "md5")
-# else:
-# 	return format_bilan.format(d, sauv, bechanges, btot, speed, "")
-
+def cherche_delai_trop_long(arbre, config):
+	gene = iterateur_arbre()
+	dernier = gene.__next__()
+	
+	delai = (datetime.datetime.now() - dernier.date).total_seconds()//86400
+	per = int(config[cons2])
+	
+	if delai == per or delai == 2*per or delai == 3*per:
+		logger.error("La sauvegarde [{}] n'a pas été faite depuis {} jours ".format(config.name, per))
+# todo à tester
 
 # Début du programme
 if __name__ == '__main__':
