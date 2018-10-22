@@ -1426,10 +1426,11 @@ def repertoire_accessible(rep):
 	
 	"""
 	logger.debug("Lancement de 'repertoire_accessible' {}".format(rep))
-	
-	commande = shlex.split('rsync --list-only "{0}" "{1}"'.format(rep, os.path.split(__file__)[0]))
+	print('rsync --list-only "{0}" '.format(rep))
+	commande = shlex.split('rsync --list-only "{0}" '.format(rep))
+	commande = ['rsync', '--list-only', '"{0}"'.format(rep)]
 	logger.debug(commande)
-	
+	print(commande)
 	try:
 		commande_ext(commande, verb=False)
 	except OSError:

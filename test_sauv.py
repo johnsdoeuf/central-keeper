@@ -703,12 +703,10 @@ class rep_accessible(unittest.TestCase):
 		config_log()
 	
 	def tearDown(self):
-		pass
-	
-	# try:
-	# 	shutil.rmtree(self.repsauv)
-	# except OSError:
-	# 	pass
+		try:
+			shutil.rmtree(self.repsauv)
+		except OSError:
+			pass
 	
 	def test_fonctionnel(self):
 		"""test que le répertoire est bien détecté"""
@@ -720,13 +718,13 @@ class rep_accessible(unittest.TestCase):
 			os.makedirs(self.repsauv, mode=0o777)
 		except OSError:
 			pass
-		
+		print(sauv.repertoire_accessible(self.repsauv))
 		self.assertTrue(sauv.repertoire_accessible(self.repsauv))
 	
 	def test_chemin_avec_espace(self):
 		"""test que le répertoire est bien détecté"""
 		self.repsauv = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'tmp espace')
-		
+		print(self.repsauv)
 		self.assertFalse(sauv.repertoire_accessible(self.repsauv))
 		
 		try:
