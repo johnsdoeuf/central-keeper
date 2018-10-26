@@ -787,7 +787,8 @@ class charge_arbre(unittest.TestCase):
 		"""teste avec une liste plus longue"""
 		test = sauv.Cliche(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		arbre = {'sauv': [[test, test], [5], [], [test, test]]}
-		val = sauv.my_encoder().encode(arbre)
+		donnees = {'arbre':arbre, 'rappel':{}}
+		val = sauv.my_encoder().encode(donnees)
 		try:
 			with open(self.fich, 'w', encoding='utf8') as f:
 				f.write(val)
@@ -800,7 +801,8 @@ class charge_arbre(unittest.TestCase):
 		"""teste de la correspondance résultat"""
 		test = sauv.Cliche(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		arbre = {'sauv': [[test, test], [5], []]}
-		val = sauv.my_encoder().encode(arbre)
+		donnees = {'arbre':arbre, 'rappel':{}}
+		val = sauv.my_encoder().encode(donnees)
 		try:
 			with open(self.fich, 'w', encoding='utf8') as f:
 				f.write(val)
@@ -819,6 +821,29 @@ class charge_arbre(unittest.TestCase):
 		test.md5 = None
 		
 		arbre = {'sauv': [[test, test], [test], []]}
+		rappel = {'sauv':datetime.datetime(2000, 1, 20)}
+		donnees = {'arbre':arbre, 'rappel':rappel}
+		val = sauv.my_encoder().encode(donnees)
+		try:
+			with open(self.fich, 'w', encoding='utf8') as f:
+				f.write(val)
+		except OSError:
+			pass
+		
+		res_arbre, res_rappel = sauv.charge_arbre(self.fich)
+		self.assertEqual(res_arbre, arbre)
+		self.assertEqual(res_rappel, rappel)
+
+	def test_fonctionnel2(self):
+		"""teste de la correspondance résultat avec l'ancien format"""
+		test = sauv.Cliche(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
+		test.taille = 485121
+		test.lnoeud = {'1548255': 4548, '45245': 452, '45': 0}
+		test.reussi = True
+		test.signale_erreur = False
+		test.md5 = None
+		
+		arbre = {'sauv': [[test, test], [test], []]}
 		val = sauv.my_encoder().encode(arbre)
 		try:
 			with open(self.fich, 'w', encoding='utf8') as f:
@@ -827,7 +852,7 @@ class charge_arbre(unittest.TestCase):
 			pass
 		
 		res_arbre = sauv.charge_arbre(self.fich)
-		self.assertEqual(res_arbre, arbre)
+		self.assertEqual(res_arbre, (arbre, {}))
 	
 	def test_avec_null(self):
 		"""teste avec 'Home_jeux': null"""
@@ -1046,24 +1071,33 @@ class sauv_arbre(unittest.TestCase):
 		except OSError:
 			pass
 	
-	def test_fonctionnel(self):
+	# def test_fonctionnel(self):
+	# 	"""teste de la correspondance résultat avec ancien format"""
+	# 	test = sauv.Cliche(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
+	# 	arbre = {'sauv': [[test, test], [test], []]}
+	# 	sauv.sauv_arbre(self.fich, arbre)
+	#
+	# 	self.assertEqual(sauv.charge_arbre(self.fich), arbre)
+	
+	def test_fonctionnel2(self):
 		"""teste de la correspondance résultat"""
 		test = sauv.Cliche(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		arbre = {'sauv': [[test, test], [test], []]}
-		sauv.sauv_arbre(self.fich, arbre)
+		rappel = {'sauv':datetime.datetime(2000, 3, 1)}
+		sauv.sauv_arbre(self.fich, arbre, rappel)
 		
-		self.assertEqual(sauv.charge_arbre(self.fich), arbre)
+		self.assertEqual(sauv.charge_arbre(self.fich), (arbre, rappel))
 	
 	def test_mauvais_chemin(self):
 		"""teste si le chemin d'accès n'existe pas"""
 		arbre = {'ert': 56}
 		self.fich = '/tmp/erergererg/ttgh4tg/zerze.f'
-		self.assertRaises(SyntaxError, sauv.sauv_arbre, self.fich, arbre)
+		self.assertRaises(SyntaxError, sauv.sauv_arbre, self.fich, arbre, {})
 	
 	def test_arbre_vide(self):
 		"""teste si l'arbre ne contient rien"""
 		
-		self.assertRaises(SyntaxError, sauv.sauv_arbre, self.fich, None)
+		self.assertRaises(SyntaxError, sauv.sauv_arbre, self.fich, None, None)
 
 
 class pas_de_sauv(unittest.TestCase):
@@ -2323,6 +2357,82 @@ class analyse_retour_pour_bilan(unittest.TestCase):
 		self.assertEqual(self.cli.stat[sauv.bl_voltransfere], 1602)
 		self.assertEqual(self.cli.stat[sauv.bl_volcli], 200)
 
+class gestion_des_rappels(unittest.TestCase):
+	def setUp(self):
+		config_log()
+		
+		self.config = sauv.My_configparser()
+		self.config['sauv'] = {}
+		self.conf_job = self.config['sauv']
+		
+		self.maintenant = datetime.datetime.now()
+	
+	def tearDown(self):
+		self.cli = None
+
+	def test_fonctionnel(self):
+		"""teste le renvoi d'une erreur, l'effacement des deux derniers rappels et de l'ajout de celui envoyé"""
+		self.conf_job[sauv.cons2] = '30'
+		
+		rappel = [self.maintenant - datetime.timedelta(days=25), self.maintenant - datetime.timedelta(days=36), self.maintenant - datetime.timedelta(days=80)]
+		arbre = [[sauv.Cliche(self.maintenant - datetime.timedelta(days=35), "chemin")], [], []]
+		
+		sauv.gestion_des_rappels(self.conf_job, arbre, rappel)
+		sauv.logger.error.assert_called()
+		self.assertEqual(len(rappel), 2)
+		self.assertLessEqual(self.maintenant, rappel[0])
+		self.assertLessEqual(self.maintenant - datetime.timedelta(days=25), rappel[1])
+	
+	def test_fonctionnel_rappel(self):
+		""" teste le rappel avec dernier clicé et rappel + 1 jour"""
+		self.conf_job[sauv.cons3] = '30'
+		
+		rappel = [self.maintenant - datetime.timedelta(days=8)]
+		arbre = [[sauv.Cliche(self.maintenant - datetime.timedelta(days=31), "chemin")], [], []]
+		
+		sauv.gestion_des_rappels(self.conf_job, arbre, rappel)
+		sauv.logger.error.assert_called()
+	
+	def test_sans_erreur(self):
+		"""teste l'absence de rappel et le non ajout du rappel dans la liste si la dernier cliché n'est pas assez vieux"""
+		self.conf_job[sauv.cons3] = '30'
+		
+		rappel = [self.maintenant - datetime.timedelta(days=60)]
+		arbre = [[sauv.Cliche(self.maintenant - datetime.timedelta(days=29), "chemin")], [], []]
+		
+		sauv.gestion_des_rappels(self.conf_job, arbre, rappel)
+		sauv.logger.error.assert_not_called()
+		self.assertEqual(len(rappel) , 0)
+		
+	def test_fonctionnel_sans_rappel(self):
+		"""teste l'absence de rappel si un autre date de moins de 7 jours"""
+		self.conf_job[sauv.cons2] = '30'
+		
+		rappel = [self.maintenant - datetime.timedelta(days=6)]
+		arbre = [[sauv.Cliche(self.maintenant - datetime.timedelta(days=46), "chemin")], [], []]
+		
+		sauv.gestion_des_rappels(self.conf_job, arbre, rappel)
+		sauv.logger.error.assert_not_called()
+	
+	def test_fonctionnel_sans_cons(self):
+		"""teste l'absence de rappel si consX non configuré"""
+		
+		rappel = [self.maintenant - datetime.timedelta(days=80)]
+		arbre = [[sauv.Cliche(self.maintenant - datetime.timedelta(days=1000), "chemin")], [], []]
+		
+		sauv.gestion_des_rappels(self.conf_job, arbre, rappel)
+		sauv.logger.error.assert_not_called()
+	
+	def test_priorite_cons2_sur_3(self):
+		"""teste l'absence de rappel si cons 2 est bien pris en compte"""
+		self.conf_job[sauv.cons2] = '30'
+		self.conf_job[sauv.cons2] = '50'
+		
+		rappel = []
+		arbre = [[sauv.Cliche(self.maintenant - datetime.timedelta(days=46), "chemin")], [], []]
+		
+		sauv.gestion_des_rappels(self.conf_job, arbre, rappel)
+		sauv.logger.error.assert_not_called()
 
 # Programme principal
 
