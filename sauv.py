@@ -50,9 +50,13 @@
 version = 0.31  # suppression log de fusion et verifie_arbre
 # 20-01-2018
 
-# version = 0.32 # modifie hiérarchie log
-#				# détecte la suppression de sauvegarde dans la période de conservation
-# le verrou par fichier est remplacé par une variable d'environnement qui sera perdu à chaque coupure électrique
+version = 0.4 # modifie hiérarchie log
+# 02-11-2018	# détecte la suppression de sauvegarde dans la période de conservation
+# 				le verrou par fichier est remplacé par une variable d'environnement qui sera perdu à chaque coupure électrique
+#				remplacement du bilan au format texte par le format dbf, extension de bilan
+#				enregistrement des rappels
+#				erreur lorsque 5 warning sont envoyés et lorque la dernière sauvegarde est trop ancienne
+
 
 import argparse
 import os
