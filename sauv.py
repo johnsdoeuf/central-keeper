@@ -230,6 +230,10 @@ class my_encoder(json.JSONEncoder):
 				   '__class__': 'Cliche'}
 			return res
 		
+		if isinstance(obj, datetime.datetime):
+			res = {'date': obj.strftime(formatdate), '__class__':'datetime.datetime'}
+			return res
+		
 		return json.JSONEncoder.default(self, obj)
 
 
@@ -252,7 +256,13 @@ class my_decoder(json.JSONDecoder):
 				except (InitErreur, ValueError, KeyError)  as exception:
 					raise json.decoder.JSONDecodeError("Cliche n'est pas correct: {}".format(exception), "inconnu", 0)
 			else:
-				inst = d
+				if d['__class__'] == 'datetime.datetime':
+					try:
+						inst = datetime.datetime.strptime(d['date'], formatdate)
+					except (InitErreur, ValueError, KeyError)  as exception:
+						raise json.decoder.JSONDecodeError("Cliche n'est pas correct: {}".format(exception), "inconnu", 0)
+				else:
+					inst = d
 		else:
 			inst = d
 		return inst
@@ -655,13 +665,20 @@ def charge_arbre(f_arbre):
 	if os.path.exists(f_arbre):
 		with  open(f_arbre, 'r', encoding='utf8') as f:
 			try:
-				arbre = my_decoder().decode(f.read())
+				donnees = my_decoder().decode(f.read())
 			
 			except json.decoder.JSONDecodeError as exception:
 				raise SyntaxError("le fichier historique n'est pas un format json: {}".format(exception))
 		
-		if type(arbre) != dict:
+		if type(donnees) != dict:
 			raise SyntaxError("le fichier historique n'est pas au format 'dictionnaire'")
+		
+		if 'arbre' in donnees:
+			arbre = donnees['arbre']
+			rappel = donnees['rappel']
+		else:
+			arbre = donnees
+			rappel = {}
 		
 		# Pour toutes les sauvegardes
 		for clef, sauv in arbre.items():
@@ -682,7 +699,7 @@ def charge_arbre(f_arbre):
 							"Au moins un élément d'historique de '{0}' n'est pas valide : {1}".format(hsauv, clef))
 		
 		# renvoi l'arbre valide
-		return arbre
+		return arbre, rappel
 	
 	else:
 		raise InitErreur("historique non trouvé")
@@ -699,16 +716,18 @@ def taille_arbre(arbre):
 	return taille
 
 
-def sauv_arbre(f_arbre, arbre):
+def sauv_arbre(f_arbre, arbre , rappel):
 	logger.debug("Lancement de 'sauv_arbre'")
 	
 	if arbre is None:
 		raise SyntaxError("l'arbre est vide")
 	
+	donnees = {'arbre':arbre, 'rappel':rappel}
+	
 	if os.path.exists(os.path.split(f_arbre)[0]):
 		with  open(f_arbre, 'w', encoding='utf8') as f:
 			try:
-				f.write(my_encoder().encode(arbre))
+				f.write(my_encoder().encode(donnees))
 			
 			except json.decoder.JSONDecodeError as exception:
 				raise SyntaxError("l'arbre des historiques ne peut pas être traduit: {}".format(exception))
@@ -1470,15 +1489,18 @@ def pas_de_sauv(config, arbre, force):
 		return False
 	
 	# trouve un niveau non vide
-	for niv in range(0, 3):
-		if len(arbre[niv]) > 0:
-			break
-	
-	logger.debug("niveau:{}".format(niv))
+	gene = iterateur_arbre(arbre)
+	dernier_cli = gene.__next__()
+	# for niv in range(0, 3):
+	# 	if len(arbre[niv]) > 0:
+	# 		break
+	#
+	# logger.debug("niveau:{}".format(niv))
 	
 	# saute cette sauvegarde si  periode1 définie et délai entre deux sauvegardes pas atteint
 	if per1 in config:
-		limite = arbre[niv][0].date + datetime.timedelta(hours=config.getfloat(per1) * 24 * .9)
+		# limite = arbre[niv][0].date + datetime.timedelta(hours=config.getfloat(per1) * 24 * .9)
+		limite = dernier_cli.date + datetime.timedelta(hours=config.getfloat(per1) * 24 * .9)
 		if datetime.datetime.now() < limite:
 			logger.info("La sauvegarde est sautée car il est trop tôt")
 			logger.debug("limite:{}".format(limite))
@@ -1658,6 +1680,63 @@ def cherche_delai_trop_long(arbre, config):
 		logger.error("La sauvegarde [{}] n'a pas été faite depuis {} jours ".format(config.name, per))
 # todo à tester
 
+def gestion_des_rappels(config, arbre, rappel):
+	"""Envoi une erreur si le dernier clivhé est plus ancien que per2
+	met à jour rappel
+	efface les rappels plus ancien que l plus ancien cliché
+	paramètres:
+		config: objet xxx, configuration de sauv
+		arbre: [[],[],[]], arbre de sauv
+		rappel: [datatime.datetime],  listes de date classée du plus récent au plus ancien
+	sortie: None
+	"""
+
+	
+	# recherche le cliché le plus ancien
+	gene = iterateur_arbre_inv(arbre)
+	try:
+		ancien_cliche = gene.__next__().date
+	except:
+		pass
+	else:
+		# si il existe, supprime les rappels plus anciens
+		for r in rappel[::-1]:
+			if r < ancien_cliche:
+				rappel.remove(r)
+			else:
+				# arrête lorsque des plus récents sont trouvés
+				break
+	# extrait cons2 ou à défaut cons3
+	if cons2 in config:
+		delai = float(config[cons2])
+	else:
+		if cons3 in config:
+			delai = float(config[cons3])
+		else:
+			return
+	
+	maintenant = datetime.datetime.now()
+	#recherche le dernier rappel
+	try:
+		dernier_rappel = rappel[0]
+	except IndexError:
+		dernier_rappel = maintenant
+	
+	# recherche le dernier cliché
+	gene = iterateur_arbre(arbre)
+	try:
+		dernier_cliche = gene.__next__().date
+	except StopIteration:
+		return
+	
+	# teste si la dernière sauvegarde est trop ancienne ou le rappel date de moins de 7 jours
+	if maintenant - datetime.timedelta(days=delai) > dernier_cliche and maintenant - datetime.timedelta(days=7) > dernier_rappel:
+		logger.error("[{}] n'a pas été sauvegardé depuis {},(maximum admis: {}"
+					 .format(config.name, maintenant - dernier_cliche, delai))
+		rappel.insert(0, maintenant)
+
+		
+	
 # Début du programme
 if __name__ == '__main__':
 	
@@ -1702,7 +1781,7 @@ if __name__ == '__main__':
 	chemin_arbre = os.path.join(os.path.split(os.path.abspath(__file__))[0], f_arbre)
 	arbre = {}
 	try:
-		arbre = charge_arbre(chemin_arbre)
+		arbre, rappel = charge_arbre(chemin_arbre)
 	except (SyntaxError, InitErreur) as exception:
 		logger.warning(exception)
 	
@@ -1724,6 +1803,8 @@ if __name__ == '__main__':
 		# créé une branche vide pour l'arbre si elle n'existe pas
 		if sauv not in arbre:
 			arbre[sauv] = [[], [], []]
+		if sauv not in rappel:
+			rappel[sauv] = []
 		
 		# regarde si une sauvegarde est nécessaire
 		if pas_de_sauv(config[sauv], arbre[sauv], args.force):
@@ -1736,6 +1817,8 @@ if __name__ == '__main__':
 		except OSError as exception:
 			logger.info(exception)
 			logger.warning("{}-La sauvegarde  est abandonnée, les répertoires ne sont pas accessibles".format(sauv))
+			
+			gestion_des_rappels(config[sauv], arbre[sauv], rappel[sauv])
 			# saute à la sauvegarde suivante
 			continue
 		
@@ -1780,7 +1863,7 @@ if __name__ == '__main__':
 	demonte(a_demonter)
 	
 	try:
-		sauv_arbre(chemin_arbre, arbre)
+		sauv_arbre(chemin_arbre, arbre, rappel)
 	except SyntaxError as exception:
 		logger.warning(exception)
 	
