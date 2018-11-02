@@ -10,7 +10,7 @@ import json
 import glob
 from pathlib import Path
 import unittest.mock
-
+import time
 
 def config_log():
 	sauv.logger = unittest.mock.Mock()
@@ -718,13 +718,13 @@ class rep_accessible(unittest.TestCase):
 			os.makedirs(self.repsauv, mode=0o777)
 		except OSError:
 			pass
-		print(sauv.repertoire_accessible(self.repsauv))
+
 		self.assertTrue(sauv.repertoire_accessible(self.repsauv))
 	
 	def test_chemin_avec_espace(self):
 		"""test que le répertoire est bien détecté"""
 		self.repsauv = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'tmp espace')
-		print(self.repsauv)
+
 		self.assertFalse(sauv.repertoire_accessible(self.repsauv))
 		
 		try:
@@ -2021,6 +2021,46 @@ class reduction(unittest.TestCase):
 		self.assertTrue(os.path.exists(os.path.join(self.rep, test[1][0])))
 		self.assertFalse(os.path.exists(os.path.join(self.rep, test[2][0])))
 
+	def test_pas_de_reduction(self):
+		"""teste si conserve bien l'arbre quand pas besoin """
+		# légendes des données: nom de répertoire, niveau, jour
+		arbre = [[], [], []]
+		reference = [[], [], []]
+		test = [('er_1', 1, 2), ('tyu_1', 1, 4), ('kkk_1', 1, 25), ('dfg_2', 2, 40)]
+		for rep in test:
+			# créé les répertoires avec un fichier
+			try:
+				os.mkdir(os.path.join(self.rep, rep[0]))
+			except OSError:
+				pass
+
+			fichier = os.path.join(self.rep, rep[0], "essai")
+			with open(fichier, mode='w') as file:
+				file.write('hello boys')
+			# créé les arbres
+			rsauv = sauv.Cliche(self.now - datetime.timedelta(days=rep[2]), os.path.join(self.rep, rep[0]))
+			rsauv.analyse()
+			arbre[rep[1] - 1].append(rsauv)
+			reference[rep[1] - 1].append(rsauv)
+
+
+		# Créé la configuration
+		config = sauv.My_configparser()
+		config['sauv'] = {}
+		config['sauv'][sauv.cons1] = '1'
+		config['sauv'][sauv.cons2] = '50'
+		config['sauv'][sauv.cons3] = '500'
+		config['sauv'][sauv.qta] = '0.000000050'
+		config['sauv'][sauv.dest] = self.rep
+
+		# lance la fonction et teste le retour de d'un log d'erreur pour supression dans la période de conservation
+		sauv.reduction(config['sauv'], arbre)
+		sauv.logger.info.assert_called()
+
+		self.assertEqual(arbre, reference)
+		# teste existance entre du second
+		self.assertTrue(os.path.exists(os.path.join(self.rep, test[1][0])))
+		self.assertTrue(os.path.exists(os.path.join(self.rep, test[2][0])))
 
 class En_Decode_Json(unittest.TestCase):
 	def setUp(self):
