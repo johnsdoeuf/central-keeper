@@ -5524,3 +5524,1335 @@ Fin anormale du programme
 2018-01-15 21:31:27,857 [DEBUG] deverrouille: Lancement de 'deverrouille'
 2018-01-15 21:31:27,857 [INFO] deverrouille: suppression du verrou de la sauvegarde
 2018-01-15 21:31:27,857 [INFO] <module>: --------------- Fin de la sauvegarde ------------------
+2018-11-01 20:04:43,549 [INFO] <module>:  
+2018-11-01 20:04:43,549 [INFO] <module>: Sauv.py version 0.31
+2018-11-01 20:04:43,549 [INFO] <module>: --------------- Début de la sauvegarde ------------------
+2018-11-01 20:04:43,549 [DEBUG] init_args: Lancement de 'init_args'
+2018-11-01 20:04:43,550 [DEBUG] init_args: résultat des arguments
+2018-11-01 20:04:43,550 [DEBUG] init_args: Namespace(force=True, ignore_verrou=True)
+2018-11-01 20:04:43,550 [DEBUG] init_para: Lancement de 'init_para'
+2018-11-01 20:04:43,550 [INFO] init_para: Début de lecture du fichier de configuration sauv.conf
+2018-11-01 20:04:43,551 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:04:43,551 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:04:43,551 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:04:43,551 [INFO] init_para: Sortie normale de l'analyse des paramètres de sauvegarde 'essai'
+2018-11-01 20:04:43,552 [DEBUG] charge_arbre: Lancement de 'charge_arbre'
+2018-11-01 20:04:43,552 [WARNING] <module>: Au moins un élément d'historique de '{'taille': 406352493, 'lnoeud': {'60296': 3368071, '60322': 3247992, '60306': 3443879, '60299': 2909987, '60293': 2082428, '60317': 3458094, '60301': 2593174, '60303': 1062610, '60325': 2979109, '60329': 3504745, '60290': 2608639, '60302': 961886, '60304': 1433565, '60315': 3255098, '60316': 3281137, '60310': 3720288, '60305': 3246865, '60324': 3455008, '60318': 3734623, '60319': 3463659, '60327': 3238923, '60308': 3161893, '60287': 3149480, '60295': 3036630, '60323': 3362639, '60330': 3831171, '60331': 3062962, '60309': 3333800, '60332': 4218202, '60286': 2160587, '60294': 3388845, '60307': 3509499, '60288': 2981334, '60326': 4145633, '60282': 3169540, '60313': 2869185, '60328': 3138613, '60300': 2218683, '60291': 3601712, '60292': 2195153, '60298': 2598608, '60320': 2980916, '60297': 261138758, '60314': 4552151, '60321': 3366975, '60312': 3295086, '60289': 3365021, '60311': 3469637}, 'date': '2018-01-15 21-30', '__class__': 'rep_sauv', 'chemin': '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1'}' n'est pas valide : essai
+2018-11-01 20:04:43,552 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2018-11-01 20:04:43,552 [INFO] deverrouille: le fichier verrou n'existe pas
+2018-11-01 20:04:43,552 [DEBUG] verrouille: Lancement de 'verrouille'
+2018-11-01 20:04:43,552 [INFO] <module>: ----------------------------------------------------------------------------------------------------
+
+			-------------------------  Début de sauvegarde [essai] --------------------------------------------------
+2018-11-01 20:04:43,552 [CRITICAL] attrape_exceptions: ['  File "/home/johannes/Programme/centralkeeper/sauv.py", line 1805, in <module>\n    if sauv not in rappel:\n']
+<class 'type'>: name 'rappel' is not defined 
+Fin anormale du programme
+2018-11-01 20:08:37,412 [INFO] <module>:  
+2018-11-01 20:08:37,412 [INFO] <module>: Sauv.py version 0.31
+2018-11-01 20:08:37,412 [INFO] <module>: --------------- Début de la sauvegarde ------------------
+2018-11-01 20:08:37,413 [DEBUG] init_args: Lancement de 'init_args'
+2018-11-01 20:08:37,415 [DEBUG] init_args: résultat des arguments
+2018-11-01 20:08:37,415 [DEBUG] init_args: Namespace(force=True, ignore_verrou=True)
+2018-11-01 20:08:37,415 [DEBUG] init_para: Lancement de 'init_para'
+2018-11-01 20:08:37,415 [INFO] init_para: Début de lecture du fichier de configuration sauv.conf
+2018-11-01 20:08:37,417 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:08:37,418 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:08:37,418 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:08:37,418 [INFO] init_para: Sortie normale de l'analyse des paramètres de sauvegarde 'essai'
+2018-11-01 20:08:37,418 [DEBUG] charge_arbre: Lancement de 'charge_arbre'
+2018-11-01 20:08:37,418 [WARNING] <module>: Au moins un élément d'historique de '{'taille': 406352493, 'lnoeud': {'60296': 3368071, '60322': 3247992, '60306': 3443879, '60299': 2909987, '60293': 2082428, '60317': 3458094, '60301': 2593174, '60303': 1062610, '60325': 2979109, '60329': 3504745, '60290': 2608639, '60302': 961886, '60304': 1433565, '60315': 3255098, '60316': 3281137, '60310': 3720288, '60305': 3246865, '60324': 3455008, '60318': 3734623, '60319': 3463659, '60327': 3238923, '60308': 3161893, '60287': 3149480, '60295': 3036630, '60323': 3362639, '60330': 3831171, '60331': 3062962, '60309': 3333800, '60332': 4218202, '60286': 2160587, '60294': 3388845, '60307': 3509499, '60288': 2981334, '60326': 4145633, '60282': 3169540, '60313': 2869185, '60328': 3138613, '60300': 2218683, '60291': 3601712, '60292': 2195153, '60298': 2598608, '60320': 2980916, '60297': 261138758, '60314': 4552151, '60321': 3366975, '60312': 3295086, '60289': 3365021, '60311': 3469637}, 'date': '2018-01-15 21-30', '__class__': 'rep_sauv', 'chemin': '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1'}' n'est pas valide : essai
+2018-11-01 20:08:37,419 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2018-11-01 20:08:37,419 [INFO] deverrouille: le fichier verrou n'existe pas
+2018-11-01 20:08:37,419 [DEBUG] verrouille: Lancement de 'verrouille'
+2018-11-01 20:09:01,253 [INFO] <module>: ----------------------------------------------------------------------------------------------------
+
+			-------------------------  Début de sauvegarde [essai] --------------------------------------------------
+2018-11-01 20:09:01,258 [CRITICAL] attrape_exceptions: ['  File "/home/johannes/.IdeaIC2018.2/config/plugins/python-ce/helpers/pydev/pydevd.py", line 1664, in <module>\n    main()\n', '  File "/home/johannes/.IdeaIC2018.2/config/plugins/python-ce/helpers/pydev/pydevd.py", line 1658, in main\n    globals = debugger.run(setup[\'file\'], None, None, is_module)\n', '  File "/home/johannes/.IdeaIC2018.2/config/plugins/python-ce/helpers/pydev/pydevd.py", line 1068, in run\n    pydev_imports.execfile(file, globals, locals)  # execute the script\n', '  File "/home/johannes/.IdeaIC2018.2/config/plugins/python-ce/helpers/pydev/_pydev_imps/_pydev_execfile.py", line 18, in execfile\n    exec(compile(contents+"\\n", file, \'exec\'), glob, loc)\n', '  File "/home/johannes/Programme/centralkeeper/sauv.py", line 1805, in <module>\n    if sauv not in rappel:\n']
+<class 'type'>: name 'rappel' is not defined 
+Fin anormale du programme
+2018-11-01 20:09:58,380 [INFO] <module>:  
+2018-11-01 20:09:58,381 [INFO] <module>: Sauv.py version 0.31
+2018-11-01 20:09:58,381 [INFO] <module>: --------------- Début de la sauvegarde ------------------
+2018-11-01 20:09:58,381 [DEBUG] init_args: Lancement de 'init_args'
+2018-11-01 20:09:58,381 [DEBUG] init_args: résultat des arguments
+2018-11-01 20:09:58,381 [DEBUG] init_args: Namespace(force=True, ignore_verrou=True)
+2018-11-01 20:09:58,382 [DEBUG] init_para: Lancement de 'init_para'
+2018-11-01 20:09:58,382 [INFO] init_para: Début de lecture du fichier de configuration sauv.conf
+2018-11-01 20:09:58,382 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:09:58,382 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:09:58,382 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:09:58,382 [INFO] init_para: Sortie normale de l'analyse des paramètres de sauvegarde 'essai'
+2018-11-01 20:09:58,382 [DEBUG] charge_arbre: Lancement de 'charge_arbre'
+2018-11-01 20:09:58,383 [WARNING] <module>: Au moins un élément d'historique de '{'taille': 406352493, 'lnoeud': {'60296': 3368071, '60322': 3247992, '60306': 3443879, '60299': 2909987, '60293': 2082428, '60317': 3458094, '60301': 2593174, '60303': 1062610, '60325': 2979109, '60329': 3504745, '60290': 2608639, '60302': 961886, '60304': 1433565, '60315': 3255098, '60316': 3281137, '60310': 3720288, '60305': 3246865, '60324': 3455008, '60318': 3734623, '60319': 3463659, '60327': 3238923, '60308': 3161893, '60287': 3149480, '60295': 3036630, '60323': 3362639, '60330': 3831171, '60331': 3062962, '60309': 3333800, '60332': 4218202, '60286': 2160587, '60294': 3388845, '60307': 3509499, '60288': 2981334, '60326': 4145633, '60282': 3169540, '60313': 2869185, '60328': 3138613, '60300': 2218683, '60291': 3601712, '60292': 2195153, '60298': 2598608, '60320': 2980916, '60297': 261138758, '60314': 4552151, '60321': 3366975, '60312': 3295086, '60289': 3365021, '60311': 3469637}, 'date': '2018-01-15 21-30', '__class__': 'rep_sauv', 'chemin': '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1'}' n'est pas valide : essai
+2018-11-01 20:09:58,383 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2018-11-01 20:09:58,383 [INFO] deverrouille: le fichier verrou n'existe pas
+2018-11-01 20:09:58,383 [DEBUG] verrouille: Lancement de 'verrouille'
+2018-11-01 20:09:58,383 [INFO] <module>: ----------------------------------------------------------------------------------------------------
+
+			-------------------------  Début de sauvegarde [essai] --------------------------------------------------
+2018-11-01 20:09:58,383 [CRITICAL] attrape_exceptions: ['  File "/home/johannes/Programme/centralkeeper/sauv.py", line 1805, in <module>\n    if sauv not in rappel:\n']
+<class 'type'>: name 'rappel' is not defined 
+Fin anormale du programme
+2018-11-01 20:10:06,852 [INFO] <module>:  
+2018-11-01 20:10:06,853 [INFO] <module>: Sauv.py version 0.31
+2018-11-01 20:10:06,853 [INFO] <module>: --------------- Début de la sauvegarde ------------------
+2018-11-01 20:10:06,853 [DEBUG] init_args: Lancement de 'init_args'
+2018-11-01 20:10:06,856 [DEBUG] init_args: résultat des arguments
+2018-11-01 20:10:06,856 [DEBUG] init_args: Namespace(force=True, ignore_verrou=True)
+2018-11-01 20:10:06,856 [DEBUG] init_para: Lancement de 'init_para'
+2018-11-01 20:10:06,856 [INFO] init_para: Début de lecture du fichier de configuration sauv.conf
+2018-11-01 20:10:06,868 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:10:06,868 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:10:06,868 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:10:06,869 [INFO] init_para: Sortie normale de l'analyse des paramètres de sauvegarde 'essai'
+2018-11-01 20:10:06,869 [DEBUG] charge_arbre: Lancement de 'charge_arbre'
+2018-11-01 20:12:25,774 [WARNING] <module>: Au moins un élément d'historique de '{'taille': 406352493, 'lnoeud': {'60296': 3368071, '60322': 3247992, '60306': 3443879, '60299': 2909987, '60293': 2082428, '60317': 3458094, '60301': 2593174, '60303': 1062610, '60325': 2979109, '60329': 3504745, '60290': 2608639, '60302': 961886, '60304': 1433565, '60315': 3255098, '60316': 3281137, '60310': 3720288, '60305': 3246865, '60324': 3455008, '60318': 3734623, '60319': 3463659, '60327': 3238923, '60308': 3161893, '60287': 3149480, '60295': 3036630, '60323': 3362639, '60330': 3831171, '60331': 3062962, '60309': 3333800, '60332': 4218202, '60286': 2160587, '60294': 3388845, '60307': 3509499, '60288': 2981334, '60326': 4145633, '60282': 3169540, '60313': 2869185, '60328': 3138613, '60300': 2218683, '60291': 3601712, '60292': 2195153, '60298': 2598608, '60320': 2980916, '60297': 261138758, '60314': 4552151, '60321': 3366975, '60312': 3295086, '60289': 3365021, '60311': 3469637}, 'date': '2018-01-15 21-30', '__class__': 'rep_sauv', 'chemin': '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1'}' n'est pas valide : essai
+2018-11-01 20:12:25,775 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2018-11-01 20:12:25,775 [INFO] deverrouille: le fichier verrou n'existe pas
+2018-11-01 20:12:25,775 [DEBUG] verrouille: Lancement de 'verrouille'
+2018-11-01 20:12:25,776 [INFO] <module>: ----------------------------------------------------------------------------------------------------
+
+			-------------------------  Début de sauvegarde [essai] --------------------------------------------------
+2018-11-01 20:12:25,778 [CRITICAL] attrape_exceptions: ['  File "/home/johannes/.IdeaIC2018.2/config/plugins/python-ce/helpers/pydev/pydevd.py", line 1664, in <module>\n    main()\n', '  File "/home/johannes/.IdeaIC2018.2/config/plugins/python-ce/helpers/pydev/pydevd.py", line 1658, in main\n    globals = debugger.run(setup[\'file\'], None, None, is_module)\n', '  File "/home/johannes/.IdeaIC2018.2/config/plugins/python-ce/helpers/pydev/pydevd.py", line 1068, in run\n    pydev_imports.execfile(file, globals, locals)  # execute the script\n', '  File "/home/johannes/.IdeaIC2018.2/config/plugins/python-ce/helpers/pydev/_pydev_imps/_pydev_execfile.py", line 18, in execfile\n    exec(compile(contents+"\\n", file, \'exec\'), glob, loc)\n', '  File "/home/johannes/Programme/centralkeeper/sauv.py", line 1805, in <module>\n    if sauv not in rappel:\n']
+<class 'type'>: name 'rappel' is not defined 
+Fin anormale du programme
+2018-11-01 20:12:32,916 [INFO] <module>:  
+2018-11-01 20:12:32,916 [INFO] <module>: Sauv.py version 0.31
+2018-11-01 20:12:32,916 [INFO] <module>: --------------- Début de la sauvegarde ------------------
+2018-11-01 20:12:32,916 [DEBUG] init_args: Lancement de 'init_args'
+2018-11-01 20:12:32,917 [DEBUG] init_args: résultat des arguments
+2018-11-01 20:12:32,917 [DEBUG] init_args: Namespace(force=True, ignore_verrou=True)
+2018-11-01 20:12:32,917 [DEBUG] init_para: Lancement de 'init_para'
+2018-11-01 20:12:32,917 [INFO] init_para: Début de lecture du fichier de configuration sauv.conf
+2018-11-01 20:12:32,918 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:12:32,918 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:12:32,918 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:12:32,918 [INFO] init_para: Sortie normale de l'analyse des paramètres de sauvegarde 'essai'
+2018-11-01 20:12:32,918 [DEBUG] charge_arbre: Lancement de 'charge_arbre'
+2018-11-01 20:12:32,918 [WARNING] <module>: Au moins un élément d'historique de '{'taille': 406352493, 'lnoeud': {'60296': 3368071, '60322': 3247992, '60306': 3443879, '60299': 2909987, '60293': 2082428, '60317': 3458094, '60301': 2593174, '60303': 1062610, '60325': 2979109, '60329': 3504745, '60290': 2608639, '60302': 961886, '60304': 1433565, '60315': 3255098, '60316': 3281137, '60310': 3720288, '60305': 3246865, '60324': 3455008, '60318': 3734623, '60319': 3463659, '60327': 3238923, '60308': 3161893, '60287': 3149480, '60295': 3036630, '60323': 3362639, '60330': 3831171, '60331': 3062962, '60309': 3333800, '60332': 4218202, '60286': 2160587, '60294': 3388845, '60307': 3509499, '60288': 2981334, '60326': 4145633, '60282': 3169540, '60313': 2869185, '60328': 3138613, '60300': 2218683, '60291': 3601712, '60292': 2195153, '60298': 2598608, '60320': 2980916, '60297': 261138758, '60314': 4552151, '60321': 3366975, '60312': 3295086, '60289': 3365021, '60311': 3469637}, 'date': '2018-01-15 21-30', '__class__': 'rep_sauv', 'chemin': '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1'}' n'est pas valide : essai
+2018-11-01 20:12:32,918 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2018-11-01 20:12:32,918 [INFO] deverrouille: le fichier verrou n'existe pas
+2018-11-01 20:12:32,918 [DEBUG] verrouille: Lancement de 'verrouille'
+2018-11-01 20:12:32,918 [INFO] <module>: ----------------------------------------------------------------------------------------------------
+
+			-------------------------  Début de sauvegarde [essai] --------------------------------------------------
+2018-11-01 20:12:32,918 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2018-11-01 20:12:32,918 [INFO] pas_de_sauv: L'arbre est vide
+2018-11-01 20:12:32,918 [DEBUG] monte: Lancement de 'monte' /home/isabelle;192.168.1.29::internet_home/isabelle/Musique
+2018-11-01 20:12:32,918 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /home/isabelle
+2018-11-01 20:12:32,919 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/home/isabelle']
+2018-11-01 20:12:32,919 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/home/isabelle']
+2018-11-01 20:12:32,961 [DEBUG] repertoire_accessible: Répertoire '/home/isabelle' non trouvé
+2018-11-01 20:12:32,961 [DEBUG] monte: Le répertoire /home/isabelle n'est pas accessible
+2018-11-01 20:12:32,961 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2018-11-01 20:12:32,961 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-01 20:12:32,961 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-01 20:12:33,104 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2018-11-01 20:12:33,104 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé 
+2018-11-01 20:12:33,104 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '192.168.1.29::internet_home/isabelle/Musique/']
+2018-11-01 20:12:33,252 [DEBUG] monte: ['drwxr-xr-x          4,096 2017/05/14 15:47:28 .', '-rw-r--r--      3,169,540 2017/03/08 11:48:06 Amir - On dirait (Clip officiel).mp3', "-rw-r-----      2,160,587 2015/03/15 13:59:57 Au chant de l'alouette.mp3", '-rw-r-----      3,149,480 2015/03/01 13:47:35 Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3', '-rw-r--r--      2,981,334 2013/09/28 13:00:46 Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3', "-rw-r-----      3,365,021 2015/03/01 13:49:51 Indochine - J'Ai Demandé A La Lune.mp3", '-rw-rw-r--      2,608,639 2017/01/14 09:56:37 Je suis Vaiana (Le chant des ancêtres).mp3', '-rw-r-----      3,601,712 2015/03/08 10:05:09 La reine des neiges - Libérée, délivrée (Instrumental).mp3', "-rw-r--r--      2,195,153 2013/09/28 13:02:34 Les Choristes - Caresse Sur L'Océan.mp3", '-rw-rw-r--      2,082,428 2017/01/14 10:01:18 Logo Te Pate.mp3', '-rw-r--r--      3,388,845 2013/11/11 10:34:52 Lorie - Sur Un Air Latino.mp3', '-rw-r--r--      3,036,630 2013/09/28 12:59:08 Mucho - El Sol De Maria.mp3', '-rw-rw-r--      3,368,071 2017/01/14 09:59:49 Notre terre.mp3', '-rw-r-----    261,138,758 2015/02/06 15:17:34 Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar', '-rw-rw-r--      2,598,608 2017/01/14 09:58:55 VAIANA - Pour les hommes (clip entier).mp3', '-rw-rw-r--      2,909,987 2017/01/14 10:00:35 Vaiana - Bling bling (lyrics).mp3', "-rw-rw-r--      2,218,683 2017/01/14 09:57:40 Vaiana - L'explorateur (lyrics).mp3", '-rw-rw-r--      2,593,174 2017/01/14 09:58:17 Vaiana - Le bleu lumière (lyrics).mp3', 'drwx------          4,096 2017/05/14 15:47:25 Musiques de gym', 'drwxrwxr-x          4,096 2015/07/31 09:32:07 Nouveau dossier', '']
+2018-11-01 20:12:33,252 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé avec 21 sous-répertoires ou fichiers
+2018-11-01 20:12:33,252 [DEBUG] monte: Lancement de 'monte' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2018-11-01 20:12:33,252 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2018-11-01 20:12:33,253 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2018-11-01 20:12:33,253 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2018-11-01 20:12:33,377 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet' non trouvé
+2018-11-01 20:12:33,377 [DEBUG] monte: Le répertoire /media/johannes/Extension/Temp/sauvegarde/home_internet n'est pas accessible
+2018-11-01 20:12:33,377 [INFO] <module>: essai-Le répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet' n'est pas accessible et aucune instruction de montage
+			n'est disponible
+2018-11-01 20:12:33,377 [WARNING] <module>: essai-La sauvegarde  est abandonnée, les répertoires ne sont pas accessibles
+2018-11-01 20:12:33,378 [DEBUG] demonte: Lancement de 'demonte'
+2018-11-01 20:12:33,378 [DEBUG] demonte: {None}
+2018-11-01 20:12:33,378 [DEBUG] sauv_arbre: Lancement de 'sauv_arbre'
+2018-11-01 20:12:33,378 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2018-11-01 20:12:33,378 [INFO] deverrouille: suppression du verrou de la sauvegarde
+2018-11-01 20:12:33,378 [INFO] <module>: --------------- Fin de la sauvegarde ------------------
+2018-11-01 20:15:35,194 [INFO] <module>:  
+2018-11-01 20:15:35,194 [INFO] <module>: Sauv.py version 0.31
+2018-11-01 20:15:35,195 [INFO] <module>: --------------- Début de la sauvegarde ------------------
+2018-11-01 20:15:35,195 [DEBUG] init_args: Lancement de 'init_args'
+2018-11-01 20:15:35,195 [DEBUG] init_args: résultat des arguments
+2018-11-01 20:15:35,195 [DEBUG] init_args: Namespace(force=True, ignore_verrou=True)
+2018-11-01 20:15:35,196 [DEBUG] init_para: Lancement de 'init_para'
+2018-11-01 20:15:35,196 [INFO] init_para: Début de lecture du fichier de configuration sauv.conf
+2018-11-01 20:15:35,196 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:15:35,196 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:15:35,196 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:15:35,196 [INFO] init_para: Sortie normale de l'analyse des paramètres de sauvegarde 'essai'
+2018-11-01 20:15:35,196 [DEBUG] charge_arbre: Lancement de 'charge_arbre'
+2018-11-01 20:15:35,197 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2018-11-01 20:15:35,197 [INFO] deverrouille: le fichier verrou n'existe pas
+2018-11-01 20:15:35,197 [DEBUG] verrouille: Lancement de 'verrouille'
+2018-11-01 20:15:35,197 [INFO] <module>: ----------------------------------------------------------------------------------------------------
+
+			-------------------------  Début de sauvegarde [essai] --------------------------------------------------
+2018-11-01 20:15:35,197 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2018-11-01 20:15:35,197 [INFO] pas_de_sauv: L'arbre est vide
+2018-11-01 20:15:35,197 [DEBUG] monte: Lancement de 'monte' /home/isabelle;192.168.1.29::internet_home/isabelle/Musique
+2018-11-01 20:15:35,197 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /home/isabelle
+2018-11-01 20:15:35,197 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/home/isabelle']
+2018-11-01 20:15:35,197 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/home/isabelle']
+2018-11-01 20:15:35,239 [DEBUG] repertoire_accessible: Répertoire '/home/isabelle' non trouvé
+2018-11-01 20:15:35,239 [DEBUG] monte: Le répertoire /home/isabelle n'est pas accessible
+2018-11-01 20:15:35,239 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2018-11-01 20:15:35,240 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-01 20:15:35,240 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-01 20:15:35,380 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2018-11-01 20:15:35,380 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé 
+2018-11-01 20:15:35,380 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '192.168.1.29::internet_home/isabelle/Musique/']
+2018-11-01 20:15:35,524 [DEBUG] monte: ['drwxr-xr-x          4,096 2017/05/14 15:47:28 .', '-rw-r--r--      3,169,540 2017/03/08 11:48:06 Amir - On dirait (Clip officiel).mp3', "-rw-r-----      2,160,587 2015/03/15 13:59:57 Au chant de l'alouette.mp3", '-rw-r-----      3,149,480 2015/03/01 13:47:35 Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3', '-rw-r--r--      2,981,334 2013/09/28 13:00:46 Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3', "-rw-r-----      3,365,021 2015/03/01 13:49:51 Indochine - J'Ai Demandé A La Lune.mp3", '-rw-rw-r--      2,608,639 2017/01/14 09:56:37 Je suis Vaiana (Le chant des ancêtres).mp3', '-rw-r-----      3,601,712 2015/03/08 10:05:09 La reine des neiges - Libérée, délivrée (Instrumental).mp3', "-rw-r--r--      2,195,153 2013/09/28 13:02:34 Les Choristes - Caresse Sur L'Océan.mp3", '-rw-rw-r--      2,082,428 2017/01/14 10:01:18 Logo Te Pate.mp3', '-rw-r--r--      3,388,845 2013/11/11 10:34:52 Lorie - Sur Un Air Latino.mp3', '-rw-r--r--      3,036,630 2013/09/28 12:59:08 Mucho - El Sol De Maria.mp3', '-rw-rw-r--      3,368,071 2017/01/14 09:59:49 Notre terre.mp3', '-rw-r-----    261,138,758 2015/02/06 15:17:34 Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar', '-rw-rw-r--      2,598,608 2017/01/14 09:58:55 VAIANA - Pour les hommes (clip entier).mp3', '-rw-rw-r--      2,909,987 2017/01/14 10:00:35 Vaiana - Bling bling (lyrics).mp3', "-rw-rw-r--      2,218,683 2017/01/14 09:57:40 Vaiana - L'explorateur (lyrics).mp3", '-rw-rw-r--      2,593,174 2017/01/14 09:58:17 Vaiana - Le bleu lumière (lyrics).mp3', 'drwx------          4,096 2017/05/14 15:47:25 Musiques de gym', 'drwxrwxr-x          4,096 2015/07/31 09:32:07 Nouveau dossier', '']
+2018-11-01 20:15:35,524 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé avec 21 sous-répertoires ou fichiers
+2018-11-01 20:15:35,524 [DEBUG] monte: Lancement de 'monte' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2018-11-01 20:15:35,524 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2018-11-01 20:15:35,524 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2018-11-01 20:15:35,525 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2018-11-01 20:15:35,568 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet' trouvé
+2018-11-01 20:15:35,568 [DEBUG] monte: /media/johannes/Extension/Temp/sauvegarde/home_internet est trouvé 
+2018-11-01 20:15:35,568 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '/media/johannes/Extension/Temp/sauvegarde/home_internet/']
+2018-11-01 20:15:35,641 [DEBUG] monte: ['drwxrwxrwx          4,096 2018/03/12 10:10:14 .', 'drwxrwxrwx              0 2017/10/11 22:17:28 2017-10-11 22-17_2', 'drwxrwxrwx              0 2018/03/12 10:10:31 2018-01-12 20-25_2', 'drwxrwxrwx              0 2018/01/15 21:30:35 2018-01-15 21-30_1', '']
+2018-11-01 20:15:35,642 [DEBUG] monte: /media/johannes/Extension/Temp/sauvegarde/home_internet est trouvé avec 5 sous-répertoires ou fichiers
+2018-11-01 20:15:35,642 [DEBUG] verifie_arbre: Lancement de 'verifie_arbre'
+2018-11-01 20:15:35,642 [DEBUG] verifie_arbre: début d'analyse de l'historique des sauvegardes de essai
+2018-11-01 20:15:35,642 [DEBUG] verifie_arbre: Analyse du répertoire'2017-10-11 22-17_2'
+2018-11-01 20:15:35,644 [INFO] verifie_arbre: Répertoire '2017-10-11 22-17_2' validé
+2018-11-01 20:15:35,644 [DEBUG] verifie_arbre: <objet Cliche date:2017-10-11 22-17, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2017-10-11 22-17_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-01 20:15:35,644 [DEBUG] verifie_arbre: Analyse du répertoire'2018-01-12 20-25_2'
+2018-11-01 20:15:35,644 [INFO] verifie_arbre: Répertoire '2018-01-12 20-25_2' validé
+2018-11-01 20:15:35,644 [DEBUG] verifie_arbre: <objet Cliche date:2018-01-12 20-25, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-12 20-25_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-01 20:15:35,645 [DEBUG] verifie_arbre: Analyse du répertoire'2018-01-15 21-30_1'
+2018-11-01 20:15:35,645 [INFO] verifie_arbre: Répertoire '2018-01-15 21-30_1' validé
+2018-11-01 20:15:35,645 [DEBUG] verifie_arbre: <objet Cliche date:2018-01-15 21-30, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-01 20:15:35,645 [WARNING] comparaison_arbre: Les sauvegardes en mémoire et sur disques sont différentes dans leur taille
+2018-11-01 20:15:35,645 [WARNING] verifie_arbre: essai-Le fichier d'historique ne correspond pas au répertoires trouvé avec 'verifie_arbre'
+2018-11-01 20:15:35,645 [INFO] verifie_arbre: commence la reconstruction de la taille des sauvegardes
+2018-11-01 20:15:35,645 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2017-10-11 22-17_2
+2018-11-01 20:15:36,046 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-12 20-25_2
+2018-11-01 20:15:36,277 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1
+2018-11-01 20:15:36,328 [DEBUG] reduit_inode: Test de date: 2017-10-11 22:17:00 >= 2018-01-12 20:25:00
+2018-11-01 20:15:36,328 [DEBUG] reduit_inode: Test de date: 2018-01-12 20:25:00 >= 2018-01-15 21:30:00
+2018-11-01 20:15:36,328 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2018-11-01 20:15:36,328 [INFO] pas_de_sauv: sauvegarde forcée
+2018-11-01 20:15:36,328 [DEBUG] copie: Lancement de 'copie'
+2018-11-01 20:15:36,328 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2018-11-01 20:15:36,329 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-01 20:15:36,329 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-01 20:15:36,472 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2018-11-01 20:15:36,472 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1
+2018-11-01 20:15:36,472 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1']
+2018-11-01 20:15:36,472 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1']
+2018-11-01 20:15:36,515 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1' trouvé
+2018-11-01 20:15:36,515 [WARNING] copie: essai-fichier de filtre introuvable,  il est ignoré
+2018-11-01 20:15:36,515 [INFO] copie: copie de 192.168.1.29::internet_home/isabelle/Musique vers /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_1
+2018-11-01 20:15:36,516 [DEBUG] copie: Commande:['rsync', '-rv', '--delete', '--link-dest=/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1', '192.168.1.29::internet_home/isabelle/Musique', '/media/johannes/Extension/Temp/sauvegarde/home_internet/temp']
+2018-11-01 20:15:36,516 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '-rv', '--delete', '--link-dest=/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1', '192.168.1.29::internet_home/isabelle/Musique', '/media/johannes/Extension/Temp/sauvegarde/home_internet/temp']
+2018-11-01 20:15:46,824 [INFO] commande_ext: Retour de la commande:
+2018-11-01 20:15:46,825 [INFO] commande_ext: receiving incremental file list
+2018-11-01 20:15:46,825 [INFO] commande_ext: created directory /media/johannes/Extension/Temp/sauvegarde/home_internet/temp
+2018-11-01 20:15:46,825 [INFO] commande_ext: Musique/Amir - On dirait (Clip officiel).mp3
+2018-11-01 20:15:46,825 [INFO] commande_ext: Musique/Au chant de l'alouette.mp3
+2018-11-01 20:15:46,825 [INFO] commande_ext: Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3
+2018-11-01 20:15:46,825 [INFO] commande_ext: Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3
+2018-11-01 20:15:46,825 [INFO] commande_ext: Musique/Indochine - J'Ai Demandé A La Lune.mp3
+2018-11-01 20:15:46,825 [INFO] commande_ext: Musique/Je suis Vaiana (Le chant des ancêtres).mp3
+2018-11-01 20:15:46,825 [INFO] commande_ext: Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3
+2018-11-01 20:15:46,825 [INFO] commande_ext: Musique/Les Choristes - Caresse Sur L'Océan.mp3
+2018-11-01 20:15:46,825 [INFO] commande_ext: Musique/Logo Te Pate.mp3
+2018-11-01 20:15:46,825 [INFO] commande_ext: Musique/Lorie - Sur Un Air Latino.mp3
+2018-11-01 20:15:46,825 [INFO] commande_ext: Musique/Mucho - El Sol De Maria.mp3
+2018-11-01 20:15:46,825 [INFO] commande_ext: Musique/Notre terre.mp3
+2018-11-01 20:15:46,825 [INFO] commande_ext: Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Musiques de gym/Floor Music Gymnastics- Tosca Fantasy (1 Minute).mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Musiques de gym/Floor music - Narnia Voyage of the Dawn.mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Musiques de gym/mambo5.mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Amour d'été (Clip Officiel).mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Nouveau dossier/Aux arbres citoyens.mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Nouveau dossier/Becky G - Shower (Audio).mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Nouveau dossier/Black M - Je garde le sourire.mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:15:46,826 [INFO] commande_ext: Musique/Nouveau dossier/Kendji Girac - Mon Univers [OFFICIEL] [ALBUM].mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/France Gall - Cézanne peint - (1985) - HQ!.mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/Le Cirque   Yves Duteil.mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3
+2018-11-01 20:15:46,827 [INFO] commande_ext: 
+2018-11-01 20:15:46,827 [INFO] commande_ext: sent 607,108 bytes  received 397,892 bytes  95,714.29 bytes/sec
+2018-11-01 20:15:46,827 [INFO] commande_ext: total size is 406,352,493  speedup is 404.33
+2018-11-01 20:15:46,828 [INFO] commande_ext: 
+2018-11-01 20:15:46,828 [DEBUG] analyse_retour_pour_bilan: Ligne 'sent received' trouvée 
+2018-11-01 20:15:46,829 [DEBUG] analyse_retour_pour_bilan: Ligne total size' trouvée 
+2018-11-01 20:15:46,829 [INFO] copie: renomme /media/johannes/Extension/Temp/sauvegarde/home_internet/temp en /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_1
+2018-11-01 20:15:46,829 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_1
+2018-11-01 20:15:46,840 [WARNING] <module>: essai-l'écriture du bilan impossible: [Errno 2] No such file or directory: '/home/johannes/Programme/sauvegarde/bilan.log.dbf'
+2018-11-01 20:15:46,840 [DEBUG] reduit_inode: Test de date: 2017-10-11 22:17:00 >= 2018-01-12 20:25:00
+2018-11-01 20:15:46,840 [DEBUG] reduit_inode: Test de date: 2018-01-12 20:25:00 >= 2018-01-15 21:30:00
+2018-11-01 20:15:46,840 [DEBUG] reduit_inode: Test de date: 2018-01-15 21:30:00 >= 2018-11-01 20:15:36.515629
+2018-11-01 20:15:46,840 [DEBUG] analyse_repertoire: Lancement de 'analyse_repertoire'
+2018-11-01 20:15:46,840 [DEBUG] regroupe: Lancement de 'regroupe'
+2018-11-01 20:15:46,840 [DEBUG] regroupe: Déplacement de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1 dans /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_1
+2018-11-01 20:15:46,841 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique
+2018-11-01 20:15:46,841 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Amir - On dirait (Clip officiel).mp3
+2018-11-01 20:15:46,841 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Au chant de l'alouette.mp3
+2018-11-01 20:15:46,841 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Indochine - J'Ai Demandé A La Lune.mp3
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Je suis Vaiana (Le chant des ancêtres).mp3
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Les Choristes - Caresse Sur L'Océan.mp3
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Logo Te Pate.mp3
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Lorie - Sur Un Air Latino.mp3
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Mucho - El Sol De Maria.mp3
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Notre terre.mp3
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,842 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Au chant de l'alouette.mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Indochine - J'Ai Demandé A La Lune.mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Je suis Vaiana (Le chant des ancêtres).mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Les Choristes - Caresse Sur L'Océan.mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Logo Te Pate.mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Lorie - Sur Un Air Latino.mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Mucho - El Sol De Maria.mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Notre terre.mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,844 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,845 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3
+2018-11-01 20:15:46,845 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3
+2018-11-01 20:15:46,845 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Indochine - J'Ai Demandé A La Lune.mp3
+2018-11-01 20:15:46,845 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Je suis Vaiana (Le chant des ancêtres).mp3
+2018-11-01 20:15:46,845 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3
+2018-11-01 20:15:46,845 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Les Choristes - Caresse Sur L'Océan.mp3
+2018-11-01 20:15:46,846 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Logo Te Pate.mp3
+2018-11-01 20:15:46,846 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Lorie - Sur Un Air Latino.mp3
+2018-11-01 20:15:46,846 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Mucho - El Sol De Maria.mp3
+2018-11-01 20:15:46,846 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym
+2018-11-01 20:15:46,846 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Notre terre.mp3
+2018-11-01 20:15:46,846 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier
+2018-11-01 20:15:46,846 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,846 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,846 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,846 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,846 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,847 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3
+2018-11-01 20:15:46,847 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Indochine - J'Ai Demandé A La Lune.mp3
+2018-11-01 20:15:46,847 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Je suis Vaiana (Le chant des ancêtres).mp3
+2018-11-01 20:15:46,847 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3
+2018-11-01 20:15:46,847 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Les Choristes - Caresse Sur L'Océan.mp3
+2018-11-01 20:15:46,847 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Logo Te Pate.mp3
+2018-11-01 20:15:46,847 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Lorie - Sur Un Air Latino.mp3
+2018-11-01 20:15:46,847 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Mucho - El Sol De Maria.mp3
+2018-11-01 20:15:46,847 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym
+2018-11-01 20:15:46,847 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Notre terre.mp3
+2018-11-01 20:15:46,847 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier
+2018-11-01 20:15:46,847 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,848 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,848 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,848 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,848 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Indochine - J'Ai Demandé A La Lune.mp3
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Je suis Vaiana (Le chant des ancêtres).mp3
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Les Choristes - Caresse Sur L'Océan.mp3
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Logo Te Pate.mp3
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Lorie - Sur Un Air Latino.mp3
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Mucho - El Sol De Maria.mp3
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Notre terre.mp3
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,849 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,850 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Je suis Vaiana (Le chant des ancêtres).mp3
+2018-11-01 20:15:46,850 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3
+2018-11-01 20:15:46,850 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Les Choristes - Caresse Sur L'Océan.mp3
+2018-11-01 20:15:46,851 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Logo Te Pate.mp3
+2018-11-01 20:15:46,851 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Lorie - Sur Un Air Latino.mp3
+2018-11-01 20:15:46,851 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Mucho - El Sol De Maria.mp3
+2018-11-01 20:15:46,851 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym
+2018-11-01 20:15:46,851 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Notre terre.mp3
+2018-11-01 20:15:46,851 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier
+2018-11-01 20:15:46,851 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,851 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,851 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,851 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,851 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,852 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3
+2018-11-01 20:15:46,853 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Les Choristes - Caresse Sur L'Océan.mp3
+2018-11-01 20:15:46,853 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Logo Te Pate.mp3
+2018-11-01 20:15:46,853 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Lorie - Sur Un Air Latino.mp3
+2018-11-01 20:15:46,853 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Mucho - El Sol De Maria.mp3
+2018-11-01 20:15:46,853 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym
+2018-11-01 20:15:46,853 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Notre terre.mp3
+2018-11-01 20:15:46,853 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier
+2018-11-01 20:15:46,853 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,853 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,853 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,853 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,853 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,854 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Les Choristes - Caresse Sur L'Océan.mp3
+2018-11-01 20:15:46,854 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Logo Te Pate.mp3
+2018-11-01 20:15:46,854 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Lorie - Sur Un Air Latino.mp3
+2018-11-01 20:15:46,854 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Mucho - El Sol De Maria.mp3
+2018-11-01 20:15:46,854 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym
+2018-11-01 20:15:46,854 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Notre terre.mp3
+2018-11-01 20:15:46,854 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier
+2018-11-01 20:15:46,854 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,854 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,854 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,854 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,854 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,855 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Logo Te Pate.mp3
+2018-11-01 20:15:46,855 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Lorie - Sur Un Air Latino.mp3
+2018-11-01 20:15:46,855 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Mucho - El Sol De Maria.mp3
+2018-11-01 20:15:46,855 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym
+2018-11-01 20:15:46,855 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Notre terre.mp3
+2018-11-01 20:15:46,856 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier
+2018-11-01 20:15:46,856 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,856 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,856 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,856 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,856 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,857 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Lorie - Sur Un Air Latino.mp3
+2018-11-01 20:15:46,857 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Mucho - El Sol De Maria.mp3
+2018-11-01 20:15:46,857 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym
+2018-11-01 20:15:46,857 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Notre terre.mp3
+2018-11-01 20:15:46,857 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier
+2018-11-01 20:15:46,857 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,857 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,857 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,857 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,857 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,858 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Mucho - El Sol De Maria.mp3
+2018-11-01 20:15:46,858 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym
+2018-11-01 20:15:46,858 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Notre terre.mp3
+2018-11-01 20:15:46,858 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier
+2018-11-01 20:15:46,858 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,858 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,858 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,858 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,858 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,859 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym
+2018-11-01 20:15:46,859 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Notre terre.mp3
+2018-11-01 20:15:46,859 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier
+2018-11-01 20:15:46,859 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,859 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,860 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,860 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,860 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,860 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym/Floor music - Narnia Voyage of the Dawn.mp3
+2018-11-01 20:15:46,860 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym/Floor Music Gymnastics- Tosca Fantasy (1 Minute).mp3
+2018-11-01 20:15:46,860 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym/mambo5.mp3
+2018-11-01 20:15:46,861 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym/Floor Music Gymnastics- Tosca Fantasy (1 Minute).mp3
+2018-11-01 20:15:46,861 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym/mambo5.mp3
+2018-11-01 20:15:46,862 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Musiques de gym/mambo5.mp3
+2018-11-01 20:15:46,889 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Notre terre.mp3
+2018-11-01 20:15:46,889 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier
+2018-11-01 20:15:46,889 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,889 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,889 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,889 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,889 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,890 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier
+2018-11-01 20:15:46,890 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,890 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,890 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,890 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,890 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Kendji Girac - Mon Univers [OFFICIEL] [ALBUM].mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/ADICT - Amour d'été (Clip Officiel).mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Aux arbres citoyens.mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Becky G - Shower (Audio).mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - Je garde le sourire.mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,891 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,892 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,892 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,892 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,892 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,892 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,892 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,892 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/ADICT - Amour d'été (Clip Officiel).mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Aux arbres citoyens.mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Becky G - Shower (Audio).mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - Je garde le sourire.mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,893 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,894 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,894 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:15:46,894 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3
+2018-11-01 20:15:46,894 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3
+2018-11-01 20:15:46,894 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Aux arbres citoyens.mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Becky G - Shower (Audio).mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - Je garde le sourire.mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,895 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,896 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:15:46,896 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3
+2018-11-01 20:15:46,896 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Aux arbres citoyens.mp3
+2018-11-01 20:15:46,896 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Becky G - Shower (Audio).mp3
+2018-11-01 20:15:46,896 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - Je garde le sourire.mp3
+2018-11-01 20:15:46,896 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3
+2018-11-01 20:15:46,896 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2018-11-01 20:15:46,896 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2018-11-01 20:15:46,896 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-01 20:15:46,896 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:15:46,896 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,896 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,897 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,897 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,897 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,897 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,897 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,897 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,897 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,897 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,897 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,897 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,897 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Aux arbres citoyens.mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Becky G - Shower (Audio).mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - Je garde le sourire.mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,899 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,900 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:15:46,900 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Becky G - Shower (Audio).mp3
+2018-11-01 20:15:46,900 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - Je garde le sourire.mp3
+2018-11-01 20:15:46,900 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3
+2018-11-01 20:15:46,900 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2018-11-01 20:15:46,900 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,901 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - Je garde le sourire.mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,902 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,903 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,903 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,903 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,903 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,904 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,905 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,906 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,906 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,906 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,906 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:15:46,906 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2018-11-01 20:15:46,906 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-01 20:15:46,906 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:15:46,907 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,907 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,907 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,907 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,907 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,907 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,907 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,907 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,907 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,907 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,907 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,907 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,907 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,908 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,910 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:15:46,910 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:15:46,910 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,910 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,910 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,910 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,910 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,910 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,910 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,910 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,910 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,910 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,910 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,910 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,911 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,914 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:15:46,914 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,914 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,914 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,914 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,914 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,914 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,914 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,914 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,914 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,914 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,914 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,915 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,915 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,916 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:15:46,916 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,916 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,916 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,916 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,916 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,916 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,916 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,916 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,916 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,916 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,916 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,916 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,917 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:15:46,917 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,917 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,917 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,917 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,917 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,917 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,917 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,917 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,917 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,917 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,917 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,918 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau
+2018-11-01 20:15:46,918 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,918 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,918 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,918 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,918 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,918 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,918 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,918 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,918 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,918 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,919 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau/France Gall - Cézanne peint - (1985) - HQ!.mp3
+2018-11-01 20:15:46,919 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau/Le Cirque   Yves Duteil.mp3
+2018-11-01 20:15:46,919 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3
+2018-11-01 20:15:46,920 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau/Le Cirque   Yves Duteil.mp3
+2018-11-01 20:15:46,920 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3
+2018-11-01 20:15:46,921 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3
+2018-11-01 20:15:46,927 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:15:46,927 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,927 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,928 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,928 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,928 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,928 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,928 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,928 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,928 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,928 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:15:46,928 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,929 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,929 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,929 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,929 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,929 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,929 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,929 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,929 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:15:46,930 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,930 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,930 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,930 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,930 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,930 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,930 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,930 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:15:46,931 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,931 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,931 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,931 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,931 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,931 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,931 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:15:46,931 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,932 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,932 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,932 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,932 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,932 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:15:46,932 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,932 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,932 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,932 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,933 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:15:46,933 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,933 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,933 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,934 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:15:46,934 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,934 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,935 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:15:46,935 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,936 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:15:46,936 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:15:46,936 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,936 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,936 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,937 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,953 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:15:46,953 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,953 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,953 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,954 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:15:46,954 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,954 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,955 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:15:46,955 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,955 [DEBUG] fusion_rep:      /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-15 21-30_1/Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:15:46,956 [INFO] regroupe: Renomme le répertoire 2018-11-01 20-15_1 
+2018-11-01 20:15:46,956 [INFO] regroupe: en 2018-11-01 20-15_2 
+2018-11-01 20:15:46,956 [DEBUG] regroupe: renomme /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_1 en /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2
+2018-11-01 20:15:46,982 [INFO] reduction: Objectif: 30,000,000,000
+2018-11-01 20:15:46,983 [INFO] reduction: Pas besoin de réduction
+2018-11-01 20:15:46,983 [CRITICAL] attrape_exceptions: ['  File "/home/johannes/Programme/centralkeeper/sauv.py", line 1853, in <module>\n    arbre[sauv] = analyse_repertoire(config[sauv], arbre[sauv])\n', '  File "/home/johannes/Programme/centralkeeper/sauv.py", line 937, in analyse_repertoire\n    reduction(config, arbre)\n', '  File "/home/johannes/Programme/centralkeeper/sauv.py", line 1117, in reduction\n    ecriture_taille_sauv(config, taille_sauvegarde)\n']
+<class 'type'>: name 'ecriture_taille_sauv' is not defined 
+Fin anormale du programme
+2018-11-01 20:21:42,961 [INFO] <module>:  
+2018-11-01 20:21:42,961 [INFO] <module>: Sauv.py version 0.31
+2018-11-01 20:21:42,962 [INFO] <module>: --------------- Début de la sauvegarde ------------------
+2018-11-01 20:21:42,962 [DEBUG] init_args: Lancement de 'init_args'
+2018-11-01 20:21:42,964 [DEBUG] init_args: résultat des arguments
+2018-11-01 20:21:42,964 [DEBUG] init_args: Namespace(force=True, ignore_verrou=True)
+2018-11-01 20:21:42,964 [DEBUG] init_para: Lancement de 'init_para'
+2018-11-01 20:21:42,964 [INFO] init_para: Début de lecture du fichier de configuration sauv.conf
+2018-11-01 20:21:42,966 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:21:42,966 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:21:42,966 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:21:42,966 [INFO] init_para: Sortie normale de l'analyse des paramètres de sauvegarde 'essai'
+2018-11-01 20:21:42,967 [DEBUG] charge_arbre: Lancement de 'charge_arbre'
+2018-11-01 20:21:48,296 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2018-11-01 20:21:48,296 [INFO] deverrouille: le fichier verrou n'existe pas
+2018-11-01 20:21:48,297 [DEBUG] verrouille: Lancement de 'verrouille'
+2018-11-01 20:21:48,297 [INFO] <module>: ----------------------------------------------------------------------------------------------------
+
+			-------------------------  Début de sauvegarde [essai] --------------------------------------------------
+2018-11-01 20:21:48,297 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2018-11-01 20:21:48,297 [INFO] pas_de_sauv: L'arbre est vide
+2018-11-01 20:21:48,298 [DEBUG] monte: Lancement de 'monte' /home/isabelle;192.168.1.29::internet_home/isabelle/Musique
+2018-11-01 20:21:48,298 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /home/isabelle
+2018-11-01 20:21:48,298 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/home/isabelle']
+2018-11-01 20:21:48,298 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/home/isabelle']
+2018-11-01 20:21:48,344 [DEBUG] repertoire_accessible: Répertoire '/home/isabelle' non trouvé
+2018-11-01 20:21:48,344 [DEBUG] monte: Le répertoire /home/isabelle n'est pas accessible
+2018-11-01 20:21:48,344 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2018-11-01 20:21:48,344 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-01 20:21:48,345 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-01 20:21:48,492 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2018-11-01 20:21:48,492 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé 
+2018-11-01 20:21:48,493 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '192.168.1.29::internet_home/isabelle/Musique/']
+2018-11-01 20:21:48,636 [DEBUG] monte: ['drwxr-xr-x          4,096 2017/05/14 15:47:28 .', '-rw-r--r--      3,169,540 2017/03/08 11:48:06 Amir - On dirait (Clip officiel).mp3', "-rw-r-----      2,160,587 2015/03/15 13:59:57 Au chant de l'alouette.mp3", '-rw-r-----      3,149,480 2015/03/01 13:47:35 Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3', '-rw-r--r--      2,981,334 2013/09/28 13:00:46 Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3', "-rw-r-----      3,365,021 2015/03/01 13:49:51 Indochine - J'Ai Demandé A La Lune.mp3", '-rw-rw-r--      2,608,639 2017/01/14 09:56:37 Je suis Vaiana (Le chant des ancêtres).mp3', '-rw-r-----      3,601,712 2015/03/08 10:05:09 La reine des neiges - Libérée, délivrée (Instrumental).mp3', "-rw-r--r--      2,195,153 2013/09/28 13:02:34 Les Choristes - Caresse Sur L'Océan.mp3", '-rw-rw-r--      2,082,428 2017/01/14 10:01:18 Logo Te Pate.mp3', '-rw-r--r--      3,388,845 2013/11/11 10:34:52 Lorie - Sur Un Air Latino.mp3', '-rw-r--r--      3,036,630 2013/09/28 12:59:08 Mucho - El Sol De Maria.mp3', '-rw-rw-r--      3,368,071 2017/01/14 09:59:49 Notre terre.mp3', '-rw-r-----    261,138,758 2015/02/06 15:17:34 Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar', '-rw-rw-r--      2,598,608 2017/01/14 09:58:55 VAIANA - Pour les hommes (clip entier).mp3', '-rw-rw-r--      2,909,987 2017/01/14 10:00:35 Vaiana - Bling bling (lyrics).mp3', "-rw-rw-r--      2,218,683 2017/01/14 09:57:40 Vaiana - L'explorateur (lyrics).mp3", '-rw-rw-r--      2,593,174 2017/01/14 09:58:17 Vaiana - Le bleu lumière (lyrics).mp3', 'drwx------          4,096 2017/05/14 15:47:25 Musiques de gym', 'drwxrwxr-x          4,096 2015/07/31 09:32:07 Nouveau dossier', '']
+2018-11-01 20:21:48,636 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé avec 21 sous-répertoires ou fichiers
+2018-11-01 20:21:48,637 [DEBUG] monte: Lancement de 'monte' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2018-11-01 20:21:48,637 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2018-11-01 20:21:48,637 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2018-11-01 20:21:48,637 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2018-11-01 20:21:48,681 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet' trouvé
+2018-11-01 20:21:48,681 [DEBUG] monte: /media/johannes/Extension/Temp/sauvegarde/home_internet est trouvé 
+2018-11-01 20:21:48,682 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '/media/johannes/Extension/Temp/sauvegarde/home_internet/']
+2018-11-01 20:21:48,726 [DEBUG] monte: ['drwxrwxrwx          4,096 2018/11/01 20:15:46 .', 'drwxrwxrwx              0 2017/10/11 22:17:28 2017-10-11 22-17_2', 'drwxrwxrwx              0 2018/03/12 10:10:31 2018-01-12 20-25_2', 'drwxrwxrwx            144 2018/11/01 20:15:36 2018-11-01 20-15_2', '']
+2018-11-01 20:21:48,726 [DEBUG] monte: /media/johannes/Extension/Temp/sauvegarde/home_internet est trouvé avec 5 sous-répertoires ou fichiers
+2018-11-01 20:21:48,727 [DEBUG] verifie_arbre: Lancement de 'verifie_arbre'
+2018-11-01 20:21:48,727 [DEBUG] verifie_arbre: début d'analyse de l'historique des sauvegardes de essai
+2018-11-01 20:21:48,727 [DEBUG] verifie_arbre: Analyse du répertoire'2017-10-11 22-17_2'
+2018-11-01 20:21:48,732 [INFO] verifie_arbre: Répertoire '2017-10-11 22-17_2' validé
+2018-11-01 20:21:48,732 [DEBUG] verifie_arbre: <objet Cliche date:2017-10-11 22-17, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2017-10-11 22-17_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-01 20:21:48,732 [DEBUG] verifie_arbre: Analyse du répertoire'2018-01-12 20-25_2'
+2018-11-01 20:21:48,732 [INFO] verifie_arbre: Répertoire '2018-01-12 20-25_2' validé
+2018-11-01 20:21:48,733 [DEBUG] verifie_arbre: <objet Cliche date:2018-01-12 20-25, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-12 20-25_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-01 20:21:48,733 [DEBUG] verifie_arbre: Analyse du répertoire'2018-11-01 20-15_2'
+2018-11-01 20:21:48,733 [INFO] verifie_arbre: Répertoire '2018-11-01 20-15_2' validé
+2018-11-01 20:21:48,733 [DEBUG] verifie_arbre: <objet Cliche date:2018-11-01 20-15, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-01 20:21:48,733 [WARNING] comparaison_arbre: Les sauvegardes en mémoire et sur disques sont différentes dans leur taille
+2018-11-01 20:21:48,733 [WARNING] verifie_arbre: essai-Le fichier d'historique ne correspond pas au répertoires trouvé avec 'verifie_arbre'
+2018-11-01 20:21:48,733 [INFO] verifie_arbre: commence la reconstruction de la taille des sauvegardes
+2018-11-01 20:21:48,734 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2017-10-11 22-17_2
+2018-11-01 20:21:48,801 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-12 20-25_2
+2018-11-01 20:21:48,806 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2
+2018-11-01 20:21:48,810 [DEBUG] reduit_inode: Test de date: 2017-10-11 22:17:00 >= 2018-01-12 20:25:00
+2018-11-01 20:21:48,811 [DEBUG] reduit_inode: Test de date: 2018-01-12 20:25:00 >= 2018-11-01 20:15:00
+2018-11-01 20:21:48,811 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2018-11-01 20:21:48,811 [INFO] pas_de_sauv: sauvegarde forcée
+2018-11-01 20:21:48,811 [DEBUG] copie: Lancement de 'copie'
+2018-11-01 20:21:48,811 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2018-11-01 20:21:48,811 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-01 20:21:48,811 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-01 20:21:48,956 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2018-11-01 20:21:48,956 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2
+2018-11-01 20:21:48,957 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2']
+2018-11-01 20:21:48,957 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2']
+2018-11-01 20:21:49,001 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2' trouvé
+2018-11-01 20:21:49,001 [WARNING] copie: essai-fichier de filtre introuvable,  il est ignoré
+2018-11-01 20:21:49,001 [INFO] copie: copie de 192.168.1.29::internet_home/isabelle/Musique vers /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-21_1
+2018-11-01 20:21:49,002 [DEBUG] copie: Commande:['rsync', '-rv', '--delete', '--link-dest=/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2', '192.168.1.29::internet_home/isabelle/Musique', '/media/johannes/Extension/Temp/sauvegarde/home_internet/temp']
+2018-11-01 20:21:49,002 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '-rv', '--delete', '--link-dest=/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2', '192.168.1.29::internet_home/isabelle/Musique', '/media/johannes/Extension/Temp/sauvegarde/home_internet/temp']
+2018-11-01 20:21:53,224 [INFO] commande_ext: Retour de la commande:
+2018-11-01 20:21:53,224 [INFO] commande_ext: receiving incremental file list
+2018-11-01 20:21:53,225 [INFO] commande_ext: created directory /media/johannes/Extension/Temp/sauvegarde/home_internet/temp
+2018-11-01 20:21:53,225 [INFO] commande_ext: Musique/Amir - On dirait (Clip officiel).mp3
+2018-11-01 20:21:53,225 [INFO] commande_ext: Musique/Au chant de l'alouette.mp3
+2018-11-01 20:21:53,225 [INFO] commande_ext: Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3
+2018-11-01 20:21:53,225 [INFO] commande_ext: Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3
+2018-11-01 20:21:53,225 [INFO] commande_ext: Musique/Indochine - J'Ai Demandé A La Lune.mp3
+2018-11-01 20:21:53,225 [INFO] commande_ext: Musique/Je suis Vaiana (Le chant des ancêtres).mp3
+2018-11-01 20:21:53,225 [INFO] commande_ext: Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3
+2018-11-01 20:21:53,225 [INFO] commande_ext: Musique/Les Choristes - Caresse Sur L'Océan.mp3
+2018-11-01 20:21:53,226 [INFO] commande_ext: Musique/Logo Te Pate.mp3
+2018-11-01 20:21:53,226 [INFO] commande_ext: Musique/Lorie - Sur Un Air Latino.mp3
+2018-11-01 20:21:53,226 [INFO] commande_ext: Musique/Mucho - El Sol De Maria.mp3
+2018-11-01 20:21:53,226 [INFO] commande_ext: Musique/Notre terre.mp3
+2018-11-01 20:21:53,226 [INFO] commande_ext: Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:21:53,226 [INFO] commande_ext: Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:21:53,226 [INFO] commande_ext: Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:21:53,226 [INFO] commande_ext: Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:21:53,226 [INFO] commande_ext: Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:21:53,226 [INFO] commande_ext: Musique/Musiques de gym/Floor Music Gymnastics- Tosca Fantasy (1 Minute).mp3
+2018-11-01 20:21:53,227 [INFO] commande_ext: Musique/Musiques de gym/Floor music - Narnia Voyage of the Dawn.mp3
+2018-11-01 20:21:53,227 [INFO] commande_ext: Musique/Musiques de gym/mambo5.mp3
+2018-11-01 20:21:53,227 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Amour d'été (Clip Officiel).mp3
+2018-11-01 20:21:53,227 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3
+2018-11-01 20:21:53,227 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3
+2018-11-01 20:21:53,227 [INFO] commande_ext: Musique/Nouveau dossier/Aux arbres citoyens.mp3
+2018-11-01 20:21:53,227 [INFO] commande_ext: Musique/Nouveau dossier/Becky G - Shower (Audio).mp3
+2018-11-01 20:21:53,228 [INFO] commande_ext: Musique/Nouveau dossier/Black M - Je garde le sourire.mp3
+2018-11-01 20:21:53,228 [INFO] commande_ext: Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3
+2018-11-01 20:21:53,228 [INFO] commande_ext: Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2018-11-01 20:21:53,228 [INFO] commande_ext: Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2018-11-01 20:21:53,228 [INFO] commande_ext: Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-01 20:21:53,228 [INFO] commande_ext: Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:21:53,228 [INFO] commande_ext: Musique/Nouveau dossier/Kendji Girac - Mon Univers [OFFICIEL] [ALBUM].mp3
+2018-11-01 20:21:53,228 [INFO] commande_ext: Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:21:53,228 [INFO] commande_ext: Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:21:53,228 [INFO] commande_ext: Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:21:53,228 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:21:53,229 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:21:53,229 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:21:53,229 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:21:53,229 [INFO] commande_ext: Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:21:53,229 [INFO] commande_ext: Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:21:53,229 [INFO] commande_ext: Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:21:53,229 [INFO] commande_ext: Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:21:53,229 [INFO] commande_ext: Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:21:53,229 [INFO] commande_ext: Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:21:53,229 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/France Gall - Cézanne peint - (1985) - HQ!.mp3
+2018-11-01 20:21:53,229 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/Le Cirque   Yves Duteil.mp3
+2018-11-01 20:21:53,230 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3
+2018-11-01 20:21:53,230 [INFO] commande_ext: 
+2018-11-01 20:21:53,230 [INFO] commande_ext: sent 607,112 bytes  received 397,888 bytes  182,727.27 bytes/sec
+2018-11-01 20:21:53,230 [INFO] commande_ext: total size is 406,352,493  speedup is 404.33
+2018-11-01 20:21:53,230 [INFO] commande_ext: 
+2018-11-01 20:21:53,231 [DEBUG] analyse_retour_pour_bilan: Ligne 'sent received' trouvée 
+2018-11-01 20:21:53,232 [DEBUG] analyse_retour_pour_bilan: Ligne total size' trouvée 
+2018-11-01 20:21:53,232 [INFO] copie: renomme /media/johannes/Extension/Temp/sauvegarde/home_internet/temp en /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-21_1
+2018-11-01 20:21:53,232 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-21_1
+2018-11-01 20:21:53,241 [WARNING] <module>: essai-l'écriture du bilan impossible: [Errno 2] No such file or directory: '/home/johannes/Programme/sauvegarde/bilan.log.dbf'
+2018-11-01 20:21:53,241 [DEBUG] reduit_inode: Test de date: 2017-10-11 22:17:00 >= 2018-01-12 20:25:00
+2018-11-01 20:21:53,241 [DEBUG] reduit_inode: Test de date: 2018-01-12 20:25:00 >= 2018-11-01 20:15:00
+2018-11-01 20:21:53,241 [DEBUG] reduit_inode: Test de date: 2018-11-01 20:15:00 >= 2018-11-01 20:21:49.001537
+2018-11-01 20:21:53,241 [DEBUG] analyse_repertoire: Lancement de 'analyse_repertoire'
+2018-11-01 20:21:53,242 [DEBUG] regroupe: Lancement de 'regroupe'
+2018-11-01 20:21:53,242 [INFO] reduction: Objectif: 30,000,000,000
+2018-11-01 20:21:53,242 [INFO] reduction: Pas besoin de réduction
+2018-11-01 20:24:25,246 [INFO] fermer_programme: fermeture du programme demandée
+2018-11-01 20:24:25,247 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2018-11-01 20:24:25,247 [INFO] deverrouille: suppression du verrou de la sauvegarde
+2018-11-01 20:24:25,247 [DEBUG] demonte: Lancement de 'demonte'
+2018-11-01 20:24:25,247 [DEBUG] demonte: {None}
+2018-11-01 20:24:25,247 [INFO] fermer_programme: --------------------------- fin du programme de sauvegarde ---------------------------
+2018-11-01 20:24:30,210 [INFO] <module>:  
+2018-11-01 20:24:30,210 [INFO] <module>: Sauv.py version 0.31
+2018-11-01 20:24:30,210 [INFO] <module>: --------------- Début de la sauvegarde ------------------
+2018-11-01 20:24:30,211 [DEBUG] init_args: Lancement de 'init_args'
+2018-11-01 20:24:30,213 [DEBUG] init_args: résultat des arguments
+2018-11-01 20:24:30,213 [DEBUG] init_args: Namespace(force=True, ignore_verrou=True)
+2018-11-01 20:24:30,213 [DEBUG] init_para: Lancement de 'init_para'
+2018-11-01 20:24:30,213 [INFO] init_para: Début de lecture du fichier de configuration sauv.conf
+2018-11-01 20:24:30,216 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:24:30,216 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:24:30,216 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-01 20:24:30,216 [INFO] init_para: Sortie normale de l'analyse des paramètres de sauvegarde 'essai'
+2018-11-01 20:24:30,216 [DEBUG] charge_arbre: Lancement de 'charge_arbre'
+2018-11-01 20:24:30,216 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2018-11-01 20:24:30,217 [INFO] deverrouille: le fichier verrou n'existe pas
+2018-11-01 20:24:30,217 [DEBUG] verrouille: Lancement de 'verrouille'
+2018-11-01 20:24:30,217 [INFO] <module>: ----------------------------------------------------------------------------------------------------
+
+			-------------------------  Début de sauvegarde [essai] --------------------------------------------------
+2018-11-01 20:24:30,217 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2018-11-01 20:24:30,217 [INFO] pas_de_sauv: L'arbre est vide
+2018-11-01 20:24:30,217 [DEBUG] monte: Lancement de 'monte' /home/isabelle;192.168.1.29::internet_home/isabelle/Musique
+2018-11-01 20:24:30,217 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /home/isabelle
+2018-11-01 20:24:30,218 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/home/isabelle']
+2018-11-01 20:24:30,218 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/home/isabelle']
+2018-11-01 20:24:30,263 [DEBUG] repertoire_accessible: Répertoire '/home/isabelle' non trouvé
+2018-11-01 20:24:30,263 [DEBUG] monte: Le répertoire /home/isabelle n'est pas accessible
+2018-11-01 20:24:30,264 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2018-11-01 20:24:30,264 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-01 20:24:30,264 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-01 20:24:30,416 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2018-11-01 20:24:30,416 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé 
+2018-11-01 20:24:30,417 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '192.168.1.29::internet_home/isabelle/Musique/']
+2018-11-01 20:24:30,572 [DEBUG] monte: ['drwxr-xr-x          4,096 2017/05/14 15:47:28 .', '-rw-r--r--      3,169,540 2017/03/08 11:48:06 Amir - On dirait (Clip officiel).mp3', "-rw-r-----      2,160,587 2015/03/15 13:59:57 Au chant de l'alouette.mp3", '-rw-r-----      3,149,480 2015/03/01 13:47:35 Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3', '-rw-r--r--      2,981,334 2013/09/28 13:00:46 Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3', "-rw-r-----      3,365,021 2015/03/01 13:49:51 Indochine - J'Ai Demandé A La Lune.mp3", '-rw-rw-r--      2,608,639 2017/01/14 09:56:37 Je suis Vaiana (Le chant des ancêtres).mp3', '-rw-r-----      3,601,712 2015/03/08 10:05:09 La reine des neiges - Libérée, délivrée (Instrumental).mp3', "-rw-r--r--      2,195,153 2013/09/28 13:02:34 Les Choristes - Caresse Sur L'Océan.mp3", '-rw-rw-r--      2,082,428 2017/01/14 10:01:18 Logo Te Pate.mp3', '-rw-r--r--      3,388,845 2013/11/11 10:34:52 Lorie - Sur Un Air Latino.mp3', '-rw-r--r--      3,036,630 2013/09/28 12:59:08 Mucho - El Sol De Maria.mp3', '-rw-rw-r--      3,368,071 2017/01/14 09:59:49 Notre terre.mp3', '-rw-r-----    261,138,758 2015/02/06 15:17:34 Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar', '-rw-rw-r--      2,598,608 2017/01/14 09:58:55 VAIANA - Pour les hommes (clip entier).mp3', '-rw-rw-r--      2,909,987 2017/01/14 10:00:35 Vaiana - Bling bling (lyrics).mp3', "-rw-rw-r--      2,218,683 2017/01/14 09:57:40 Vaiana - L'explorateur (lyrics).mp3", '-rw-rw-r--      2,593,174 2017/01/14 09:58:17 Vaiana - Le bleu lumière (lyrics).mp3', 'drwx------          4,096 2017/05/14 15:47:25 Musiques de gym', 'drwxrwxr-x          4,096 2015/07/31 09:32:07 Nouveau dossier', '']
+2018-11-01 20:24:30,573 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé avec 21 sous-répertoires ou fichiers
+2018-11-01 20:24:30,573 [DEBUG] monte: Lancement de 'monte' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2018-11-01 20:24:30,573 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2018-11-01 20:24:30,573 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2018-11-01 20:24:30,574 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2018-11-01 20:24:30,637 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet' trouvé
+2018-11-01 20:24:30,638 [DEBUG] monte: /media/johannes/Extension/Temp/sauvegarde/home_internet est trouvé 
+2018-11-01 20:24:30,638 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '/media/johannes/Extension/Temp/sauvegarde/home_internet/']
+2018-11-01 20:24:30,696 [DEBUG] monte: ['drwxrwxrwx          4,096 2018/11/01 20:21:53 .', 'drwxrwxrwx              0 2017/10/11 22:17:28 2017-10-11 22-17_2', 'drwxrwxrwx              0 2018/03/12 10:10:31 2018-01-12 20-25_2', 'drwxrwxrwx              0 2018/11/01 20:15:36 2018-11-01 20-15_2', 'drwxrwxrwx            144 2018/11/01 20:21:49 2018-11-01 20-21_1', '']
+2018-11-01 20:24:30,696 [DEBUG] monte: /media/johannes/Extension/Temp/sauvegarde/home_internet est trouvé avec 6 sous-répertoires ou fichiers
+2018-11-01 20:24:30,697 [DEBUG] verifie_arbre: Lancement de 'verifie_arbre'
+2018-11-01 20:24:30,697 [DEBUG] verifie_arbre: début d'analyse de l'historique des sauvegardes de essai
+2018-11-01 20:24:30,697 [DEBUG] verifie_arbre: Analyse du répertoire'2017-10-11 22-17_2'
+2018-11-01 20:24:30,704 [INFO] verifie_arbre: Répertoire '2017-10-11 22-17_2' validé
+2018-11-01 20:24:30,704 [DEBUG] verifie_arbre: <objet Cliche date:2017-10-11 22-17, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2017-10-11 22-17_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-01 20:24:30,704 [DEBUG] verifie_arbre: Analyse du répertoire'2018-01-12 20-25_2'
+2018-11-01 20:24:30,705 [INFO] verifie_arbre: Répertoire '2018-01-12 20-25_2' validé
+2018-11-01 20:24:30,705 [DEBUG] verifie_arbre: <objet Cliche date:2018-01-12 20-25, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-12 20-25_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-01 20:24:30,705 [DEBUG] verifie_arbre: Analyse du répertoire'2018-11-01 20-15_2'
+2018-11-01 20:24:30,705 [INFO] verifie_arbre: Répertoire '2018-11-01 20-15_2' validé
+2018-11-01 20:24:30,705 [DEBUG] verifie_arbre: <objet Cliche date:2018-11-01 20-15, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-01 20:24:30,705 [DEBUG] verifie_arbre: Analyse du répertoire'2018-11-01 20-21_1'
+2018-11-01 20:24:30,706 [INFO] verifie_arbre: Répertoire '2018-11-01 20-21_1' validé
+2018-11-01 20:24:30,706 [DEBUG] verifie_arbre: <objet Cliche date:2018-11-01 20-21, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-21_1, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-01 20:24:30,711 [WARNING] comparaison_arbre: Les sauvegardes en mémoire et sur disques sont différentes dans leur taille
+2018-11-01 20:24:30,712 [WARNING] verifie_arbre: essai-Le fichier d'historique ne correspond pas au répertoires trouvé avec 'verifie_arbre'
+2018-11-01 20:24:30,712 [INFO] verifie_arbre: commence la reconstruction de la taille des sauvegardes
+2018-11-01 20:24:30,712 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2017-10-11 22-17_2
+2018-11-01 20:24:30,805 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-12 20-25_2
+2018-11-01 20:24:30,810 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2
+2018-11-01 20:24:30,815 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-21_1
+2018-11-01 20:24:30,820 [DEBUG] reduit_inode: Test de date: 2017-10-11 22:17:00 >= 2018-01-12 20:25:00
+2018-11-01 20:24:30,821 [DEBUG] reduit_inode: Test de date: 2018-01-12 20:25:00 >= 2018-11-01 20:15:00
+2018-11-01 20:24:30,821 [DEBUG] reduit_inode: Test de date: 2018-11-01 20:15:00 >= 2018-11-01 20:21:00
+2018-11-01 20:24:30,821 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2018-11-01 20:24:30,821 [INFO] pas_de_sauv: sauvegarde forcée
+2018-11-01 20:24:30,821 [DEBUG] copie: Lancement de 'copie'
+2018-11-01 20:24:30,821 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2018-11-01 20:24:30,822 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-01 20:24:30,822 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-01 20:24:30,968 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2018-11-01 20:24:30,968 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-21_1
+2018-11-01 20:24:30,969 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-21_1']
+2018-11-01 20:24:30,969 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-21_1']
+2018-11-01 20:24:31,014 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-21_1' trouvé
+2018-11-01 20:24:31,014 [WARNING] copie: essai-fichier de filtre introuvable,  il est ignoré
+2018-11-01 20:24:31,015 [INFO] copie: copie de 192.168.1.29::internet_home/isabelle/Musique vers /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-24_1
+2018-11-01 20:24:31,015 [DEBUG] copie: Commande:['rsync', '-rv', '--delete', '--link-dest=/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-21_1', '192.168.1.29::internet_home/isabelle/Musique', '/media/johannes/Extension/Temp/sauvegarde/home_internet/temp']
+2018-11-01 20:24:31,015 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '-rv', '--delete', '--link-dest=/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-21_1', '192.168.1.29::internet_home/isabelle/Musique', '/media/johannes/Extension/Temp/sauvegarde/home_internet/temp']
+2018-11-01 20:24:35,204 [INFO] commande_ext: Retour de la commande:
+2018-11-01 20:24:35,204 [INFO] commande_ext: receiving incremental file list
+2018-11-01 20:24:35,205 [INFO] commande_ext: created directory /media/johannes/Extension/Temp/sauvegarde/home_internet/temp
+2018-11-01 20:24:35,205 [INFO] commande_ext: Musique/Amir - On dirait (Clip officiel).mp3
+2018-11-01 20:24:35,205 [INFO] commande_ext: Musique/Au chant de l'alouette.mp3
+2018-11-01 20:24:35,205 [INFO] commande_ext: Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3
+2018-11-01 20:24:35,205 [INFO] commande_ext: Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3
+2018-11-01 20:24:35,205 [INFO] commande_ext: Musique/Indochine - J'Ai Demandé A La Lune.mp3
+2018-11-01 20:24:35,205 [INFO] commande_ext: Musique/Je suis Vaiana (Le chant des ancêtres).mp3
+2018-11-01 20:24:35,206 [INFO] commande_ext: Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3
+2018-11-01 20:24:35,206 [INFO] commande_ext: Musique/Les Choristes - Caresse Sur L'Océan.mp3
+2018-11-01 20:24:35,206 [INFO] commande_ext: Musique/Logo Te Pate.mp3
+2018-11-01 20:24:35,206 [INFO] commande_ext: Musique/Lorie - Sur Un Air Latino.mp3
+2018-11-01 20:24:35,206 [INFO] commande_ext: Musique/Mucho - El Sol De Maria.mp3
+2018-11-01 20:24:35,206 [INFO] commande_ext: Musique/Notre terre.mp3
+2018-11-01 20:24:35,206 [INFO] commande_ext: Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-01 20:24:35,206 [INFO] commande_ext: Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-01 20:24:35,207 [INFO] commande_ext: Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-01 20:24:35,207 [INFO] commande_ext: Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-01 20:24:35,207 [INFO] commande_ext: Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-01 20:24:35,207 [INFO] commande_ext: Musique/Musiques de gym/Floor Music Gymnastics- Tosca Fantasy (1 Minute).mp3
+2018-11-01 20:24:35,207 [INFO] commande_ext: Musique/Musiques de gym/Floor music - Narnia Voyage of the Dawn.mp3
+2018-11-01 20:24:35,207 [INFO] commande_ext: Musique/Musiques de gym/mambo5.mp3
+2018-11-01 20:24:35,207 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Amour d'été (Clip Officiel).mp3
+2018-11-01 20:24:35,207 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3
+2018-11-01 20:24:35,208 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3
+2018-11-01 20:24:35,208 [INFO] commande_ext: Musique/Nouveau dossier/Aux arbres citoyens.mp3
+2018-11-01 20:24:35,208 [INFO] commande_ext: Musique/Nouveau dossier/Becky G - Shower (Audio).mp3
+2018-11-01 20:24:35,208 [INFO] commande_ext: Musique/Nouveau dossier/Black M - Je garde le sourire.mp3
+2018-11-01 20:24:35,208 [INFO] commande_ext: Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3
+2018-11-01 20:24:35,208 [INFO] commande_ext: Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2018-11-01 20:24:35,208 [INFO] commande_ext: Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2018-11-01 20:24:35,208 [INFO] commande_ext: Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-01 20:24:35,209 [INFO] commande_ext: Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-01 20:24:35,209 [INFO] commande_ext: Musique/Nouveau dossier/Kendji Girac - Mon Univers [OFFICIEL] [ALBUM].mp3
+2018-11-01 20:24:35,209 [INFO] commande_ext: Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-01 20:24:35,209 [INFO] commande_ext: Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-01 20:24:35,209 [INFO] commande_ext: Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-01 20:24:35,209 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-01 20:24:35,209 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-01 20:24:35,209 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-01 20:24:35,209 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-01 20:24:35,210 [INFO] commande_ext: Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-01 20:24:35,210 [INFO] commande_ext: Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-01 20:24:35,210 [INFO] commande_ext: Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-01 20:24:35,210 [INFO] commande_ext: Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-01 20:24:35,210 [INFO] commande_ext: Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-01 20:24:35,210 [INFO] commande_ext: Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-01 20:24:35,210 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/France Gall - Cézanne peint - (1985) - HQ!.mp3
+2018-11-01 20:24:35,210 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/Le Cirque   Yves Duteil.mp3
+2018-11-01 20:24:35,211 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3
+2018-11-01 20:24:35,211 [INFO] commande_ext: 
+2018-11-01 20:24:35,211 [INFO] commande_ext: sent 607,112 bytes  received 397,888 bytes  223,333.33 bytes/sec
+2018-11-01 20:24:35,211 [INFO] commande_ext: total size is 406,352,493  speedup is 404.33
+2018-11-01 20:24:35,211 [INFO] commande_ext: 
+2018-11-01 20:24:35,213 [DEBUG] analyse_retour_pour_bilan: Ligne 'sent received' trouvée 
+2018-11-01 20:24:35,213 [DEBUG] analyse_retour_pour_bilan: Ligne total size' trouvée 
+2018-11-01 20:24:35,213 [INFO] copie: renomme /media/johannes/Extension/Temp/sauvegarde/home_internet/temp en /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-24_1
+2018-11-01 20:24:35,214 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-24_1
+2018-11-01 20:24:35,223 [WARNING] <module>: essai-l'écriture du bilan impossible: [Errno 2] No such file or directory: '/home/johannes/Programme/sauvegarde/bilan.log.dbf'
+2018-11-01 20:24:35,223 [DEBUG] reduit_inode: Test de date: 2017-10-11 22:17:00 >= 2018-01-12 20:25:00
+2018-11-01 20:24:35,224 [DEBUG] reduit_inode: Test de date: 2018-01-12 20:25:00 >= 2018-11-01 20:15:00
+2018-11-01 20:24:35,224 [DEBUG] reduit_inode: Test de date: 2018-11-01 20:15:00 >= 2018-11-01 20:21:00
+2018-11-01 20:24:35,224 [DEBUG] reduit_inode: Test de date: 2018-11-01 20:21:00 >= 2018-11-01 20:24:31.014601
+2018-11-01 20:24:35,224 [DEBUG] analyse_repertoire: Lancement de 'analyse_repertoire'
+2018-11-01 20:24:35,224 [DEBUG] regroupe: Lancement de 'regroupe'
+2018-11-01 20:24:35,224 [INFO] reduction: Objectif: 30,000,000,000
+2018-11-01 20:24:35,225 [INFO] reduction: Pas besoin de réduction
+2018-11-01 20:24:48,869 [CRITICAL] attrape_exceptions:   File "/home/johannes/.IdeaIC2018.2/config/plugins/python-ce/helpers/pydev/pydevd.py", line 1664, in <module>
+    main()
+  File "/home/johannes/.IdeaIC2018.2/config/plugins/python-ce/helpers/pydev/pydevd.py", line 1658, in main
+    globals = debugger.run(setup['file'], None, None, is_module)
+  File "/home/johannes/.IdeaIC2018.2/config/plugins/python-ce/helpers/pydev/pydevd.py", line 1068, in run
+    pydev_imports.execfile(file, globals, locals)  # execute the script
+  File "/home/johannes/.IdeaIC2018.2/config/plugins/python-ce/helpers/pydev/_pydev_imps/_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "/home/johannes/Programme/centralkeeper/sauv.py", line 1856, in <module>
+    arbre[sauv] = analyse_repertoire(config[sauv], arbre[sauv])
+  File "/home/johannes/Programme/centralkeeper/sauv.py", line 940, in analyse_repertoire
+    reduction(config, arbre)
+  File "/home/johannes/Programme/centralkeeper/sauv.py", line 1120, in reduction
+    ecriture_taille_sauv(config, taille_sauvegarde)
+
+<class 'type'>: name 'ecriture_taille_sauv' is not defined 
+Fin anormale du programme
+2018-11-02 17:32:35,378 [INFO] <module>:  
+2018-11-02 17:32:35,380 [INFO] <module>: Sauv.py version 0.31
+2018-11-02 17:32:35,380 [INFO] <module>: --------------- Début de la sauvegarde ------------------
+2018-11-02 17:32:35,380 [DEBUG] init_args: Lancement de 'init_args'
+2018-11-02 17:32:35,382 [DEBUG] init_args: résultat des arguments
+2018-11-02 17:32:35,382 [DEBUG] init_args: Namespace(force=True, ignore_verrou=True)
+2018-11-02 17:32:35,382 [DEBUG] init_para: Lancement de 'init_para'
+2018-11-02 17:32:35,382 [INFO] init_para: Début de lecture du fichier de configuration sauv.conf
+2018-11-02 17:32:35,387 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-02 17:32:35,388 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-02 17:32:35,388 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2018-11-02 17:32:35,388 [INFO] init_para: Sortie normale de l'analyse des paramètres de sauvegarde 'essai'
+2018-11-02 17:32:35,388 [DEBUG] charge_arbre: Lancement de 'charge_arbre'
+2018-11-02 17:32:35,388 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2018-11-02 17:32:35,388 [INFO] deverrouille: le fichier verrou n'existe pas
+2018-11-02 17:32:35,388 [DEBUG] verrouille: Lancement de 'verrouille'
+2018-11-02 17:32:35,388 [INFO] <module>: ----------------------------------------------------------------------------------------------------
+
+			-------------------------  Début de sauvegarde [essai] --------------------------------------------------
+2018-11-02 17:32:35,388 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2018-11-02 17:32:35,388 [INFO] pas_de_sauv: L'arbre est vide
+2018-11-02 17:32:35,388 [DEBUG] monte: Lancement de 'monte' /home/isabelle;192.168.1.29::internet_home/isabelle/Musique
+2018-11-02 17:32:35,388 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /home/isabelle
+2018-11-02 17:32:35,388 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/home/isabelle']
+2018-11-02 17:32:35,388 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/home/isabelle']
+2018-11-02 17:32:35,432 [DEBUG] repertoire_accessible: Répertoire '/home/isabelle' non trouvé
+2018-11-02 17:32:35,432 [DEBUG] monte: Le répertoire /home/isabelle n'est pas accessible
+2018-11-02 17:32:35,432 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2018-11-02 17:32:35,432 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-02 17:32:35,432 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-02 17:32:35,575 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2018-11-02 17:32:35,575 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé 
+2018-11-02 17:32:35,575 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '192.168.1.29::internet_home/isabelle/Musique/']
+2018-11-02 17:32:35,715 [DEBUG] monte: ['drwxr-xr-x          4,096 2017/05/14 15:47:28 .', '-rw-r--r--      3,169,540 2017/03/08 11:48:06 Amir - On dirait (Clip officiel).mp3', "-rw-r-----      2,160,587 2015/03/15 13:59:57 Au chant de l'alouette.mp3", '-rw-r-----      3,149,480 2015/03/01 13:47:35 Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3', '-rw-r--r--      2,981,334 2013/09/28 13:00:46 Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3', "-rw-r-----      3,365,021 2015/03/01 13:49:51 Indochine - J'Ai Demandé A La Lune.mp3", '-rw-rw-r--      2,608,639 2017/01/14 09:56:37 Je suis Vaiana (Le chant des ancêtres).mp3', '-rw-r-----      3,601,712 2015/03/08 10:05:09 La reine des neiges - Libérée, délivrée (Instrumental).mp3', "-rw-r--r--      2,195,153 2013/09/28 13:02:34 Les Choristes - Caresse Sur L'Océan.mp3", '-rw-rw-r--      2,082,428 2017/01/14 10:01:18 Logo Te Pate.mp3', '-rw-r--r--      3,388,845 2013/11/11 10:34:52 Lorie - Sur Un Air Latino.mp3', '-rw-r--r--      3,036,630 2013/09/28 12:59:08 Mucho - El Sol De Maria.mp3', '-rw-rw-r--      3,368,071 2017/01/14 09:59:49 Notre terre.mp3', '-rw-r-----    261,138,758 2015/02/06 15:17:34 Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar', '-rw-rw-r--      2,598,608 2017/01/14 09:58:55 VAIANA - Pour les hommes (clip entier).mp3', '-rw-rw-r--      2,909,987 2017/01/14 10:00:35 Vaiana - Bling bling (lyrics).mp3', "-rw-rw-r--      2,218,683 2017/01/14 09:57:40 Vaiana - L'explorateur (lyrics).mp3", '-rw-rw-r--      2,593,174 2017/01/14 09:58:17 Vaiana - Le bleu lumière (lyrics).mp3', 'drwx------          4,096 2017/05/14 15:47:25 Musiques de gym', 'drwxrwxr-x          4,096 2015/07/31 09:32:07 Nouveau dossier', '']
+2018-11-02 17:32:35,715 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé avec 21 sous-répertoires ou fichiers
+2018-11-02 17:32:35,716 [DEBUG] monte: Lancement de 'monte' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2018-11-02 17:32:35,716 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2018-11-02 17:32:35,716 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2018-11-02 17:32:35,716 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2018-11-02 17:32:35,758 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet' trouvé
+2018-11-02 17:32:35,759 [DEBUG] monte: /media/johannes/Extension/Temp/sauvegarde/home_internet est trouvé 
+2018-11-02 17:32:35,759 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '/media/johannes/Extension/Temp/sauvegarde/home_internet/']
+2018-11-02 17:32:35,841 [DEBUG] monte: ['drwxrwxrwx          4,096 2018/11/01 20:24:35 .', 'drwxrwxrwx              0 2017/10/11 22:17:28 2017-10-11 22-17_2', 'drwxrwxrwx              0 2018/03/12 10:10:31 2018-01-12 20-25_2', 'drwxrwxrwx              0 2018/11/01 20:15:36 2018-11-01 20-15_2', 'drwxrwxrwx              0 2018/11/01 20:21:49 2018-11-01 20-21_1', 'drwxrwxrwx              0 2018/11/01 20:24:31 2018-11-01 20-24_1', '']
+2018-11-02 17:32:35,841 [DEBUG] monte: /media/johannes/Extension/Temp/sauvegarde/home_internet est trouvé avec 7 sous-répertoires ou fichiers
+2018-11-02 17:32:35,841 [DEBUG] verifie_arbre: Lancement de 'verifie_arbre'
+2018-11-02 17:32:35,841 [DEBUG] verifie_arbre: début d'analyse de l'historique des sauvegardes de essai
+2018-11-02 17:32:35,842 [DEBUG] verifie_arbre: Analyse du répertoire'2017-10-11 22-17_2'
+2018-11-02 17:32:35,843 [INFO] verifie_arbre: Répertoire '2017-10-11 22-17_2' validé
+2018-11-02 17:32:35,844 [DEBUG] verifie_arbre: <objet Cliche date:2017-10-11 22-17, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2017-10-11 22-17_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-02 17:32:35,844 [DEBUG] verifie_arbre: Analyse du répertoire'2018-01-12 20-25_2'
+2018-11-02 17:32:35,844 [INFO] verifie_arbre: Répertoire '2018-01-12 20-25_2' validé
+2018-11-02 17:32:35,844 [DEBUG] verifie_arbre: <objet Cliche date:2018-01-12 20-25, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-12 20-25_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-02 17:32:35,844 [DEBUG] verifie_arbre: Analyse du répertoire'2018-11-01 20-15_2'
+2018-11-02 17:32:35,844 [INFO] verifie_arbre: Répertoire '2018-11-01 20-15_2' validé
+2018-11-02 17:32:35,844 [DEBUG] verifie_arbre: <objet Cliche date:2018-11-01 20-15, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-02 17:32:35,844 [DEBUG] verifie_arbre: Analyse du répertoire'2018-11-01 20-21_1'
+2018-11-02 17:32:35,844 [INFO] verifie_arbre: Répertoire '2018-11-01 20-21_1' validé
+2018-11-02 17:32:35,844 [DEBUG] verifie_arbre: <objet Cliche date:2018-11-01 20-21, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-21_1, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-02 17:32:35,844 [DEBUG] verifie_arbre: Analyse du répertoire'2018-11-01 20-24_1'
+2018-11-02 17:32:35,844 [INFO] verifie_arbre: Répertoire '2018-11-01 20-24_1' validé
+2018-11-02 17:32:35,844 [DEBUG] verifie_arbre: <objet Cliche date:2018-11-01 20-24, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-24_1, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2018-11-02 17:32:35,844 [WARNING] comparaison_arbre: Les sauvegardes en mémoire et sur disques sont différentes dans leur taille
+2018-11-02 17:32:35,844 [WARNING] verifie_arbre: essai-Le fichier d'historique ne correspond pas au répertoires trouvé avec 'verifie_arbre'
+2018-11-02 17:32:35,844 [INFO] verifie_arbre: commence la reconstruction de la taille des sauvegardes
+2018-11-02 17:32:35,844 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2017-10-11 22-17_2
+2018-11-02 17:32:36,266 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-12 20-25_2
+2018-11-02 17:32:36,480 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2
+2018-11-02 17:32:36,570 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-21_1
+2018-11-02 17:32:36,630 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-24_1
+2018-11-02 17:32:36,689 [DEBUG] reduit_inode: Test de date: 2017-10-11 22:17:00 >= 2018-01-12 20:25:00
+2018-11-02 17:32:36,689 [DEBUG] reduit_inode: Test de date: 2018-01-12 20:25:00 >= 2018-11-01 20:15:00
+2018-11-02 17:32:36,689 [DEBUG] reduit_inode: Test de date: 2018-11-01 20:15:00 >= 2018-11-01 20:21:00
+2018-11-02 17:32:36,689 [DEBUG] reduit_inode: Test de date: 2018-11-01 20:21:00 >= 2018-11-01 20:24:00
+2018-11-02 17:32:36,689 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2018-11-02 17:32:36,689 [INFO] pas_de_sauv: sauvegarde forcée
+2018-11-02 17:32:36,689 [DEBUG] copie: Lancement de 'copie'
+2018-11-02 17:32:36,689 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2018-11-02 17:32:36,689 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-02 17:32:36,690 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2018-11-02 17:32:36,831 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2018-11-02 17:32:36,831 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-24_1
+2018-11-02 17:32:36,831 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-24_1']
+2018-11-02 17:32:36,831 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-24_1']
+2018-11-02 17:32:36,874 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-24_1' trouvé
+2018-11-02 17:32:36,874 [WARNING] copie: essai-fichier de filtre introuvable,  il est ignoré
+2018-11-02 17:32:36,876 [INFO] copie: copie de 192.168.1.29::internet_home/isabelle/Musique vers /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 17-32_1
+2018-11-02 17:32:36,876 [DEBUG] copie: Commande:['rsync', '-rv', '--delete', '--link-dest=/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-24_1', '192.168.1.29::internet_home/isabelle/Musique', '/media/johannes/Extension/Temp/sauvegarde/home_internet/temp']
+2018-11-02 17:32:36,876 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '-rv', '--delete', '--link-dest=/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-24_1', '192.168.1.29::internet_home/isabelle/Musique', '/media/johannes/Extension/Temp/sauvegarde/home_internet/temp']
+2018-11-02 17:32:46,383 [INFO] commande_ext: Retour de la commande:
+2018-11-02 17:32:46,383 [INFO] commande_ext: receiving incremental file list
+2018-11-02 17:32:46,383 [INFO] commande_ext: created directory /media/johannes/Extension/Temp/sauvegarde/home_internet/temp
+2018-11-02 17:32:46,383 [INFO] commande_ext: Musique/Amir - On dirait (Clip officiel).mp3
+2018-11-02 17:32:46,383 [INFO] commande_ext: Musique/Au chant de l'alouette.mp3
+2018-11-02 17:32:46,383 [INFO] commande_ext: Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3
+2018-11-02 17:32:46,383 [INFO] commande_ext: Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3
+2018-11-02 17:32:46,383 [INFO] commande_ext: Musique/Indochine - J'Ai Demandé A La Lune.mp3
+2018-11-02 17:32:46,383 [INFO] commande_ext: Musique/Je suis Vaiana (Le chant des ancêtres).mp3
+2018-11-02 17:32:46,383 [INFO] commande_ext: Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3
+2018-11-02 17:32:46,383 [INFO] commande_ext: Musique/Les Choristes - Caresse Sur L'Océan.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Logo Te Pate.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Lorie - Sur Un Air Latino.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Mucho - El Sol De Maria.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Notre terre.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/VAIANA - Pour les hommes (clip entier).mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Vaiana - Bling bling (lyrics).mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Vaiana - L'explorateur (lyrics).mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Musiques de gym/Floor Music Gymnastics- Tosca Fantasy (1 Minute).mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Musiques de gym/Floor music - Narnia Voyage of the Dawn.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Musiques de gym/mambo5.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Amour d'été (Clip Officiel).mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/Aux arbres citoyens.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/Becky G - Shower (Audio).mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/Black M - Je garde le sourire.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/Indila - Love Story.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/Kendji Girac - Mon Univers [OFFICIEL] [ALBUM].mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2018-11-02 17:32:46,384 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2018-11-02 17:32:46,385 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2018-11-02 17:32:46,385 [INFO] commande_ext: Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2018-11-02 17:32:46,385 [INFO] commande_ext: Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2018-11-02 17:32:46,385 [INFO] commande_ext: Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2018-11-02 17:32:46,385 [INFO] commande_ext: Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2018-11-02 17:32:46,385 [INFO] commande_ext: Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2018-11-02 17:32:46,385 [INFO] commande_ext: Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2018-11-02 17:32:46,385 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/France Gall - Cézanne peint - (1985) - HQ!.mp3
+2018-11-02 17:32:46,385 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/Le Cirque   Yves Duteil.mp3
+2018-11-02 17:32:46,385 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3
+2018-11-02 17:32:46,385 [INFO] commande_ext: 
+2018-11-02 17:32:46,385 [INFO] commande_ext: sent 607,112 bytes  received 397,884 bytes  95,713.90 bytes/sec
+2018-11-02 17:32:46,385 [INFO] commande_ext: total size is 406,352,493  speedup is 404.33
+2018-11-02 17:32:46,385 [INFO] commande_ext: 
+2018-11-02 17:32:46,386 [DEBUG] analyse_retour_pour_bilan: Ligne 'sent received' trouvée 
+2018-11-02 17:32:46,386 [DEBUG] analyse_retour_pour_bilan: Ligne total size' trouvée 
+2018-11-02 17:32:46,386 [INFO] copie: renomme /media/johannes/Extension/Temp/sauvegarde/home_internet/temp en /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 17-32_1
+2018-11-02 17:32:46,386 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 17-32_1
+2018-11-02 17:32:46,390 [ERROR] calcul_retention: 5 warnings successifs sont intervenus lors de la sauvegarde
+2018-11-02 17:32:46,391 [WARNING] <module>: essai-l'écriture du bilan impossible: [Errno 2] No such file or directory: '/home/johannes/Programme/sauvegarde/bilan.log.dbf'
+2018-11-02 17:32:46,391 [DEBUG] reduit_inode: Test de date: 2017-10-11 22:17:00 >= 2018-01-12 20:25:00
+2018-11-02 17:32:46,392 [DEBUG] reduit_inode: Test de date: 2018-01-12 20:25:00 >= 2018-11-01 20:15:00
+2018-11-02 17:32:46,392 [DEBUG] reduit_inode: Test de date: 2018-11-01 20:15:00 >= 2018-11-01 20:21:00
+2018-11-02 17:32:46,392 [DEBUG] reduit_inode: Test de date: 2018-11-01 20:21:00 >= 2018-11-01 20:24:00
+2018-11-02 17:32:46,392 [DEBUG] reduit_inode: Test de date: 2018-11-01 20:24:00 >= 2018-11-02 17:32:36.874396
+2018-11-02 17:32:46,392 [DEBUG] analyse_repertoire: Lancement de 'analyse_repertoire'
+2018-11-02 17:32:46,392 [DEBUG] regroupe: Lancement de 'regroupe'
+2018-11-02 17:32:46,392 [INFO] reduction: Objectif: 30,000,000,000
+2018-11-02 17:32:46,392 [INFO] reduction: Pas besoin de réduction
+2018-11-02 17:32:46,392 [DEBUG] demonte: Lancement de 'demonte'
+2018-11-02 17:32:46,392 [DEBUG] demonte: {None}
+2018-11-02 17:32:46,392 [DEBUG] sauv_arbre: Lancement de 'sauv_arbre'
+2018-11-02 17:32:46,392 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2018-11-02 17:32:46,392 [INFO] deverrouille: suppression du verrou de la sauvegarde
+2018-11-02 17:32:46,392 [INFO] <module>: --------------- Fin de la sauvegarde ------------------

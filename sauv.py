@@ -119,6 +119,41 @@ f_arbre = 'historique.sauv'
 # définit un variable globale pour conserver la trace des processus extérieur lancé et les fermer si nécessaire
 process_en_cours = None
 
+bl_date = "datecliche"
+bl_job = "job"
+bl_voltransfere = "vtransfere"
+bl_volcli = "vcliche"
+bl_voljob = "vsauvegard"
+bl_voljobobj = "ovsauvegar"
+bl_debit = "debit"
+bl_md5 = "avec_hash"
+bl_md5dern = "duree_hash"
+bl_md5dernobj = "odureehash"
+bl_cons1 = "duree1"
+bl_cons1obj = "oduree1"
+bl_cons2 = "duree2"
+bl_cons2obj = "oduree2"
+bl_cons3 = "duree3"
+bl_cons3obj = "oduree3"
+bl_cons = "dureeg"
+bl_consobj = "odureeg"
+
+dbf_structure = """{} C(19);{} C(18);
+	{} N(15,0);{} N(15,0);{} N(15,0);{} N(15,0);
+	{} N(8,2);{} L;{} N(5,0);{} N(5,0);
+	{} N(5,0);{} N(5,0);
+	{} N(5,0);{} N(5,0);
+	{} N(5,0);{} N(5,0);
+	{} N(5,0);{} N(5,0);""".format(
+	bl_date, bl_job,
+	bl_voltransfere, bl_volcli, bl_voljob, bl_voljobobj,
+	bl_debit, bl_md5, bl_md5dern, bl_md5dernobj,
+	bl_cons1, bl_cons1obj,
+	bl_cons2, bl_cons2obj,
+	bl_cons3, bl_cons3obj,
+	bl_cons, bl_consobj
+)
+
 
 class InitErreur(Exception):
 	def __init__(self, valeur):
@@ -323,7 +358,10 @@ def attrape_exceptions(typ, value, tback):
 	"""
 	import traceback
 	l_tb = traceback.format_tb(tback, limit=None)
-	logger.critical("{}\n{}: {} \nFin anormale du programme".format(l_tb, type(typ), value))
+	sortie = ""
+	for s in l_tb:
+		sortie = sortie + s
+	logger.critical("{}\n{}: {} \nFin anormale du programme".format(sortie, type(typ), value))
 	
 	print("Fin anormale du programme")
 
@@ -1114,7 +1152,6 @@ def reduction(config, arbre):
 		logger.info("Objectif: {:,}".format(int(config.getfloat(qta) * 1000000000)))
 		if objectif > taille_sauvegarde:
 			logger.info("Pas besoin de réduction")
-			ecriture_taille_sauv(config, taille_sauvegarde)
 			return
 	
 	else:
@@ -1122,10 +1159,8 @@ def reduction(config, arbre):
 		disque_pr = shutil.disk_usage(config[dest])
 		if disque_pr.free < disque_pr.total * .05:
 			logger.warning(
-				"{}-Le disque de destination de capacité {0} est presque plein, il reste {1} ".format(config.name,
-																									  disque_pr.total,
-																									  disque_pr.free))
-			ecriture_taille_sauv(config, taille_sauvegarde)
+				"{}-Le disque de destination de capacité {0} est presque plein, il reste {1} "
+					.format(config.name, disque_pr.total, disque_pr.free))
 			return
 	
 	logger.info("réduction nécessaire")
@@ -1445,11 +1480,10 @@ def repertoire_accessible(rep):
 	
 	"""
 	logger.debug("Lancement de 'repertoire_accessible' {}".format(rep))
-	print('rsync --list-only "{0}" '.format(rep))
+
 	commande = shlex.split('rsync --list-only "{0}" '.format(rep))
-	commande = ['rsync', '--list-only', '"{0}"'.format(rep)]
 	logger.debug(commande)
-	print(commande)
+
 	try:
 		commande_ext(commande, verb=False)
 	except OSError:
@@ -1489,18 +1523,18 @@ def pas_de_sauv(config, arbre, force):
 		return False
 	
 	# trouve un niveau non vide
-	gene = iterateur_arbre(arbre)
-	dernier_cli = gene.__next__()
-	# for niv in range(0, 3):
-	# 	if len(arbre[niv]) > 0:
-	# 		break
-	#
-	# logger.debug("niveau:{}".format(niv))
+	# gene = iterateur_arbre(arbre)
+	# dernier_cli = gene.__next__()
+	for niv in range(0, 3):
+		if len(arbre[niv]) > 0:
+			break
+
+	logger.debug("niveau:{}".format(niv))
 	
 	# saute cette sauvegarde si  periode1 définie et délai entre deux sauvegardes pas atteint
 	if per1 in config:
-		# limite = arbre[niv][0].date + datetime.timedelta(hours=config.getfloat(per1) * 24 * .9)
-		limite = dernier_cli.date + datetime.timedelta(hours=config.getfloat(per1) * 24 * .9)
+		limite = arbre[niv][0].date + datetime.timedelta(hours=config.getfloat(per1) * 24 * .9)
+		# limite = dernier_cli.date + datetime.timedelta(hours=config.getfloat(per1) * 24 * .9)
 		if datetime.datetime.now() < limite:
 			logger.info("La sauvegarde est sautée car il est trop tôt")
 			logger.debug("limite:{}".format(limite))
@@ -1513,41 +1547,6 @@ def pas_de_sauv(config, arbre, force):
 	
 	return False
 
-
-bl_date = "datecliche"
-bl_job = "job"
-bl_voltransfere = "vtransfere"
-bl_volcli = "vcliche"
-bl_voljob = "vsauvegard"
-bl_voljobobj = "ovsauvegar"
-bl_debit = "debit"
-bl_md5 = "avec_hash"
-bl_md5dern = "duree_hash"
-bl_md5dernobj = "odureehash"
-bl_cons1 = "duree1"
-bl_cons1obj = "oduree1"
-bl_cons2 = "duree2"
-bl_cons2obj = "oduree2"
-bl_cons3 = "duree3"
-bl_cons3obj = "oduree3"
-bl_cons = "dureeg"
-bl_consobj = "odureeg"
-
-dbf_structure = """{} C(19);{} C(18);
-	{} N(15,0);{} N(15,0);{} N(15,0);{} N(15,0);
-	{} N(8,2);{} L;{} N(5,0);{} N(5,0);
-	{} N(5,0);{} N(5,0);
-	{} N(5,0);{} N(5,0);
-	{} N(5,0);{} N(5,0);
-	{} N(5,0);{} N(5,0);""".format(
-	bl_date, bl_job,
-	bl_voltransfere, bl_volcli, bl_voljob, bl_voljobobj,
-	bl_debit, bl_md5, bl_md5dern, bl_md5dernobj,
-	bl_cons1, bl_cons1obj,
-	bl_cons2, bl_cons2obj,
-	bl_cons3, bl_cons3obj,
-	bl_cons, bl_consobj
-)
 
 
 def ecriture_bilan(config, cli):
@@ -1780,6 +1779,7 @@ if __name__ == '__main__':
 	
 	chemin_arbre = os.path.join(os.path.split(os.path.abspath(__file__))[0], f_arbre)
 	arbre = {}
+	rappel = {}
 	try:
 		arbre, rappel = charge_arbre(chemin_arbre)
 	except (SyntaxError, InitErreur) as exception:
