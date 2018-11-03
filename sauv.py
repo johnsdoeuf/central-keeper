@@ -47,15 +47,17 @@
 # version = 0.30 # ajout de l'effacement avant de renommer dans fusion_rep
 # 15-01-2018
 
-version = 0.31  # suppression log de fusion et verifie_arbre
+#version = 0.31  # suppression log de fusion et verifie_arbre
 # 20-01-2018
 
-version = 0.4 # modifie hiérarchie log
+#version = 0.4 # modifie hiérarchie log
 # 02-11-2018	# détecte la suppression de sauvegarde dans la période de conservation
 # 				le verrou par fichier est remplacé par une variable d'environnement qui sera perdu à chaque coupure électrique
 #				remplacement du bilan au format texte par le format dbf, extension de bilan
 #				enregistrement des rappels
 #				erreur lorsque 5 warning sont envoyés et lorque la dernière sauvegarde est trop ancienne
+
+#version = 0.41 # ajout de log
 
 
 import argparse
@@ -1566,8 +1568,11 @@ def ecriture_bilan(config, cli):
 		FileNotFoundError si l'écriture n'est pas possible
 		dbf.DbfError si le ficher est corrompu, ou l'enregistrement à écrire mal formé
 	"""
-	
+
 	if bilan in config:
+		logger.info("ecriture des données dans {}".format(config[bilan]))
+		logger.debug(cli.stat)
+
 		fbilan = config[bilan]
 		if not os.path.exists(fbilan):
 			dbf.Table(fbilan, dbf_structure)
@@ -1860,7 +1865,7 @@ if __name__ == '__main__':
 			logger.warning("{}-La compression de la sauvegarde a renvoyée une erreur".format(sauv))
 			continue
 		
-		# ecrit les info de tail et tétention dans stat
+		# ecrit les info de taille et rétention dans stat
 		if cliche:
 			calcul_retention(cliche, arbre[sauv], config[sauv])
 	
