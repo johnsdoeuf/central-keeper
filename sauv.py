@@ -57,10 +57,13 @@
 #				enregistrement des rappels
 #				erreur lorsque 5 warning sont envoyés et lorque la dernière sauvegarde est trop ancienne
 
-version = 0.41 # ajout de log
+#version = 0.41 # ajout de log
 
-version = 0.42 # réorganisation de l'écriture de bilan
+#version = 0.42 # réorganisation de l'écriture de bilan
 # 07-11-2018
+
+version = 0.43 # 07-11-2018
+#voir modification dans les commit
 
 import argparse
 import os
@@ -1599,6 +1602,7 @@ def calcul_retention(cli, arbre, config):
 		cliché.stat mis à jour (tous les bl_consXXXX)
 		ne créé pas ceux qui ne sont pas connus
 	"""
+	logger.debug("entrée dans calcul_rétention")
 	stat = cli.stat
 	
 	# défini les itérateurs
@@ -1632,16 +1636,19 @@ def calcul_retention(cli, arbre, config):
 		stat[bl_voljobobj] = int(config[qta])
 	
 	# Détecte 5 warning consecutifs
+	logger.debug("recherche 5 warning consécutifs")
 	gene = iterateur_arbre(arbre)
 	for a in range(5):
+		logger.debug("{}:.......................................".format(str(a)))
 		try:
 			c = gene.__next__()
 		except StopIteration:
 			break
+		logger.debug(c)
 		if c.reussi:
 			break
 	else:
-		logger.error("5 warnings successifs sont intervenus lors de la sauvegarde")
+		logger.error("5 warnings successifs sont intervenus lors de la sauvegarde '{}'".format(config.name))
 
 
 def analyse_retour_pour_bilan(lignes, sauv, md5, cli):
