@@ -57,8 +57,10 @@
 #				enregistrement des rappels
 #				erreur lorsque 5 warning sont envoyés et lorque la dernière sauvegarde est trop ancienne
 
-#version = 0.41 # ajout de log
+version = 0.41 # ajout de log
 
+version = 0.42 # réorganisation de l'écriture de bilan
+# 07-11-2018
 
 import argparse
 import os
@@ -960,6 +962,9 @@ def extrait_bilan(lignes, sauv, md5):
 
 
 def analyse_repertoire(config, arbre):
+	""" Regroupe les répertoires d'un niveau vers le niveau supérieur
+	 	puis suprime(réduit) les plus anciens clichés de manière à entrer sans qta
+	"""
 	logger.debug("Lancement de 'analyse_repertoire'")
 	
 	# Regroupement du niveau 1
@@ -1847,15 +1852,6 @@ if __name__ == '__main__':
 			logger.warning("{}-La sauvegarde  a renvoyée une erreur".format(sauv))
 			continue
 		
-		if cliche:
-			calcul_retention(cliche, arbre[sauv], config[sauv])
-			arbre[sauv][0].insert(0, cliche)
-			
-			try:
-				ecriture_bilan(config[sauv], cliche)
-			except (FileNotFoundError, dbf.DbfError) as exception:
-				logger.warning("{}-l'écriture du bilan impossible: {}".format(sauv, exception))
-		
 		reduit_inode(arbre[sauv])
 		
 		try:
@@ -1863,11 +1859,16 @@ if __name__ == '__main__':
 		except OSError as exception:
 			logger.warning("{}-{}".format(sauv, exception))
 			logger.warning("{}-La compression de la sauvegarde a renvoyée une erreur".format(sauv))
-			continue
 		
 		# ecrit les info de taille et rétention dans stat
 		if cliche:
 			calcul_retention(cliche, arbre[sauv], config[sauv])
+			arbre[sauv][0].insert(0, cliche)
+
+			try:
+				ecriture_bilan(config[sauv], cliche)
+			except (FileNotFoundError, dbf.DbfError) as exception:
+				logger.warning("{}-l'écriture du bilan impossible: {}".format(sauv, exception))
 	
 	demonte(a_demonter)
 	
