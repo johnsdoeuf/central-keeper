@@ -1112,10 +1112,10 @@ def fusion_rep(src, dst):
 	
 	for elem in liste:
 		
-		# logger.debug("boucle de traitement de : '{}'".format(elem))
+		logger.debug("boucle de traitement de : '{}'".format(elem))
 		liste_aff = src.iterdir()
-		for a in liste_aff:
-			logger.debug("     {}".format(a))
+		# for a in liste_aff:
+		# 	logger.debug("     {}".format(a))
 		
 		sdst = dst / elem.name
 		if elem.is_dir():
@@ -1133,7 +1133,7 @@ def fusion_rep(src, dst):
 		
 		else:
 			# déplace le fichier
-			# logger.debug("déplacement du fichier: {} dans '{}'".format(str(elem), str(sdst)))
+			logger.debug("déplacement du fichier: {} dans '{}'".format(str(elem), str(sdst)))
 			if sdst.exists():
 				try:
 					os.remove(str(sdst))
