@@ -62,8 +62,8 @@
 #version = 0.42 # réorganisation de l'écriture de bilan
 # 07-11-2018
 
-version = 0.43 # 07-11-2018
-#voir modification dans les commit
+version = 0.45
+#voir modification dans les commits
 
 import argparse
 import os
@@ -966,7 +966,7 @@ def extrait_bilan(lignes, sauv, md5):
 
 def analyse_repertoire(config, arbre):
 	""" Regroupe les répertoires d'un niveau vers le niveau supérieur
-	 	puis suprime(réduit) les plus anciens clichés de manière à entrer sans qta
+	 	puis suprime(réduit) les plus anciens clichés de manière à entrer dans qta
 	"""
 	logger.debug("Lancement de 'analyse_repertoire'")
 	
@@ -1858,7 +1858,12 @@ if __name__ == '__main__':
 			logger.warning("{}-{}".format(sauv, exception))
 			logger.warning("{}-La sauvegarde  a renvoyée une erreur".format(sauv))
 			continue
-		
+
+		if cliche:
+			arbre[sauv][0].insert(0, cliche)
+			logger.debug("nouveau cliché ajouté à l'arbre de {}:".format(sauv))
+			logger.debug(cliche)
+
 		reduit_inode(arbre[sauv])
 		
 		try:
@@ -1870,7 +1875,6 @@ if __name__ == '__main__':
 		# ecrit les info de taille et rétention dans stat
 		if cliche:
 			calcul_retention(cliche, arbre[sauv], config[sauv])
-			arbre[sauv][0].insert(0, cliche)
 
 			try:
 				ecriture_bilan(config[sauv], cliche)
