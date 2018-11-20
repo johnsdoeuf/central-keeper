@@ -62,7 +62,7 @@
 #version = 0.42 # réorganisation de l'écriture de bilan
 # 07-11-2018
 
-version = 0.45
+version = 0.46
 #voir modification dans les commits
 
 import argparse
@@ -884,7 +884,8 @@ def copie(config, arbre):
 			para_md5 = '--checksum'
 			nom_md5 = '_{}'.format((maintenant - ref_md5).days)
 			logger.info("cette sauvegarde base la comparaison sur la somme de controle (MD5)")
-	
+			sauv_md5 = True
+
 	filtre = ''
 	if filt in config:
 		f_filter = os.path.join(os.path.split(__file__)[0], config[filt])
@@ -922,7 +923,9 @@ def copie(config, arbre):
 		logger.warning(erreur)
 		retour.reussi = False
 	
-	retour.analyse()
+	if retour.reussi:
+		retour.analyse()
+
 	return retour
 
 
@@ -1854,7 +1857,7 @@ if __name__ == '__main__':
 		cliche = None
 		try:
 			cliche = copie(config[sauv], arbre[sauv])
-		except OSError as exception:
+		except (OSError, InitErreur) as exception:
 			logger.warning("{}-{}".format(sauv, exception))
 			logger.warning("{}-La sauvegarde  a renvoyée une erreur".format(sauv))
 			continue
