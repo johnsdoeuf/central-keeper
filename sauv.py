@@ -62,7 +62,7 @@
 #version = 0.42 # réorganisation de l'écriture de bilan
 # 07-11-2018
 
-version = 0.46
+version = 0.47
 #voir modification dans les commits
 
 import argparse
@@ -151,7 +151,7 @@ bl_consobj = "odureeg"
 
 dbf_structure = """{} C(19);{} C(18);
 	{} N(15,0);{} N(15,0);{} N(15,0);{} N(15,0);
-	{} N(8,2);{} L;{} N(5,0);{} N(5,0);
+	{} N(10,2);{} L;{} N(5,0);{} N(5,0);
 	{} N(5,0);{} N(5,0);
 	{} N(5,0);{} N(5,0);
 	{} N(5,0);{} N(5,0);
