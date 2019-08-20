@@ -2201,6 +2201,14 @@ class Ecriture_Bilan(unittest.TestCase):
 		cli.stat = {'gdfgdfgg': "2017-06-10 19:26:27", sauv.bl_job: "internet", sauv.bl_voltransfere: 555555}
 		self.assertRaises(sauv.dbf.DbfError, sauv.ecriture_bilan, self.config['sauv'], cli)
 
+	def test_valeur_acceptable_debit(self):
+		"""test de l'erreur si un champs non déclaré est utilisé dans stat """
+
+		self.config['sauv'][sauv.bilan] = self.rep
+
+		cli = sauv.Cliche(datetime.datetime(2017, 3, 1), "chemin")
+		cli.stat = {sauv.bl_date: "2017-06-10 19:26:27", sauv.bl_job: "internet", sauv.bl_debit: 9999999.0}
+		sauv.ecriture_bilan(self.config['sauv'], cli)
 
 class Calcul_Retention(unittest.TestCase):
 	
@@ -2396,6 +2404,19 @@ class analyse_retour_pour_bilan(unittest.TestCase):
 		self.assertEqual(self.cli.stat[sauv.bl_debit], 400.5)
 		self.assertEqual(self.cli.stat[sauv.bl_voltransfere], 1602)
 		self.assertEqual(self.cli.stat[sauv.bl_volcli], 200)
+
+	def test_depassement_debit(self):
+		"""test l'arrondi si débit dépasse la valeur maxi d'enregistrement """
+		md5 = "ert"
+		job = "sauv"
+		lignes = \
+			["sent 100 bytes.   received 1,502 bytes",
+			 "total size is 200 . speedup is 100000000,0"]
+
+		sauv.analyse_retour_pour_bilan(lignes, job, md5, self.cli)
+
+		self.assertEqual(self.cli.stat[sauv.bl_debit], 9999999.0)
+
 
 class gestion_des_rappels(unittest.TestCase):
 	def setUp(self):

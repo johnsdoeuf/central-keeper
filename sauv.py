@@ -62,7 +62,7 @@
 #version = 0.42 # réorganisation de l'écriture de bilan
 # 07-11-2018
 
-version = 0.47
+version = 0.48
 #voir modification dans les commits
 
 import argparse
@@ -628,6 +628,11 @@ def comparaison_arbre(branche1, branche2):
 	# vérifie la taille du premier niveau
 	if len(branche1) != len(branche2):
 		logger.warning("Les sauvegardes en mémoire et sur disques sont différentes dans leur taille")
+		logger.warning("Sur disque :{}, Dans historique.sauv:{}".format(len(branche1),len(branche2)))
+		# recherche où apparait la différence
+		logger.warning(branche1)
+		logger.warning(branche2)
+
 		return False
 	
 	for lnv, lenr in zip(branche1, branche2):
@@ -1684,8 +1689,8 @@ def analyse_retour_pour_bilan(lignes, sauv, md5, cli):
 		result = regex2.search(l)
 		if result:
 			cli.stat[bl_volcli] = int(re.sub(",", "", result.group("stot")))
-			cli.stat[bl_debit] = float(result.group("speed"))
-			
+			cli.stat[bl_debit] = min(float(result.group("speed")), 9999999.)
+
 			logger.debug("Ligne total size' trouvée ")
 	
 	cli.stat[bl_job] = sauv
