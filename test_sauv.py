@@ -801,7 +801,8 @@ class charge_arbre(unittest.TestCase):
 		"""teste de la correspondance résultat"""
 		test = sauv.Cliche(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		arbre = {'sauv': [[test, test], [5], []]}
-		donnees = {'arbre':arbre, 'rappel':{}}
+		err_prec = {'sauv':{'err_nombre':2, 'err_dernier_texte':"blabla"}}
+		donnees = {'arbre':arbre, 'rappel':{}, 'err_prec':err_prec}
 		val = sauv.my_encoder().encode(donnees)
 		try:
 			with open(self.fich, 'w', encoding='utf8') as f:
@@ -822,7 +823,9 @@ class charge_arbre(unittest.TestCase):
 		
 		arbre = {'sauv': [[test, test], [test], []]}
 		rappel = {'sauv':datetime.datetime(2000, 1, 20)}
-		donnees = {'arbre':arbre, 'rappel':rappel}
+		err_prec = {'sauv': {'err_nombre': 2, 'err_dernier_texte': "blabla"}}
+		donnees = {'arbre': arbre, 'rappel': rappel, 'err_prec': err_prec}
+
 		val = sauv.my_encoder().encode(donnees)
 		try:
 			with open(self.fich, 'w', encoding='utf8') as f:
@@ -830,12 +833,13 @@ class charge_arbre(unittest.TestCase):
 		except OSError:
 			pass
 		
-		res_arbre, res_rappel = sauv.charge_arbre(self.fich)
+		res_arbre, res_rappel, res_err_prec = sauv.charge_arbre(self.fich)
 		self.assertEqual(res_arbre, arbre)
 		self.assertEqual(res_rappel, rappel)
+		self.assertEqual(res_err_prec, err_prec)
 
 	def test_fonctionnel2(self):
-		"""teste de la correspondance résultat avec l'ancien format"""
+		"""teste de la correspondance résultat si rappel et err_perc manquent"""
 		test = sauv.Cliche(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		test.taille = 485121
 		test.lnoeud = {'1548255': 4548, '45245': 452, '45': 0}
@@ -844,16 +848,19 @@ class charge_arbre(unittest.TestCase):
 		test.md5 = None
 		
 		arbre = {'sauv': [[test, test], [test], []]}
-		val = sauv.my_encoder().encode(arbre)
+		donnees = {'arbre': arbre}
+		val = sauv.my_encoder().encode(donnees)
 		try:
 			with open(self.fich, 'w', encoding='utf8') as f:
 				f.write(val)
 		except OSError:
 			pass
 		
-		res_arbre = sauv.charge_arbre(self.fich)
-		self.assertEqual(res_arbre, (arbre, {}))
-	
+		res_arbre, res_rappel, res_err_prec = sauv.charge_arbre(self.fich)
+		self.assertEqual(res_arbre, arbre)
+		self.assertEqual(res_rappel, {})
+		self.assertEqual(res_err_prec, {})
+
 	def test_avec_null(self):
 		"""teste avec 'Home_jeux': null"""
 		
@@ -1084,20 +1091,21 @@ class sauv_arbre(unittest.TestCase):
 		test = sauv.Cliche(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		arbre = {'sauv': [[test, test], [test], []]}
 		rappel = {'sauv':datetime.datetime(2000, 3, 1)}
-		sauv.sauv_arbre(self.fich, arbre, rappel)
+		err_prec = {'sauv': {'err_nombre': 5}}
+		sauv.sauv_arbre(self.fich, arbre, rappel, err_prec)
 		
-		self.assertEqual(sauv.charge_arbre(self.fich), (arbre, rappel))
+		self.assertEqual(sauv.charge_arbre(self.fich), (arbre, rappel, err_prec))
 	
 	def test_mauvais_chemin(self):
 		"""teste si le chemin d'accès n'existe pas"""
 		arbre = {'ert': 56}
 		self.fich = '/tmp/erergererg/ttgh4tg/zerze.f'
-		self.assertRaises(SyntaxError, sauv.sauv_arbre, self.fich, arbre, {})
+		self.assertRaises(SyntaxError, sauv.sauv_arbre, self.fich, arbre, {}, {})
 	
 	def test_arbre_vide(self):
 		"""teste si l'arbre ne contient rien"""
 		
-		self.assertRaises(SyntaxError, sauv.sauv_arbre, self.fich, None, None)
+		self.assertRaises(SyntaxError, sauv.sauv_arbre, self.fich, None, None, None)
 
 
 class pas_de_sauv(unittest.TestCase):
@@ -2494,6 +2502,61 @@ class gestion_des_rappels(unittest.TestCase):
 		
 		sauv.gestion_des_rappels(self.conf_job, arbre, rappel)
 		sauv.logger.error.assert_not_called()
+
+
+class Gestion_Des_Alertes(unittest.TestCase):
+	def setUp(self):
+		config_log()
+
+	def tearDown(self):
+		None
+
+	def test_fonctionnel(self):
+		"""test le masquage des premières erreurs"""
+
+		err_cour = "message d'erreur"
+		err_prec = {'err_nombre':sauv.nbr_err_muette-1, 'err_dernier_texte':""}
+		n_sauv = "partage"
+
+		sauv.gestion_des_alertes(err_cour, err_prec, n_sauv)
+		sauv.logger.warning.assert_not_called()
+		self.assertEqual(err_prec['err_nombre'], sauv.nbr_err_muette)
+		self.assertEqual(err_prec['err_dernier_texte'], err_cour)
+
+	def test_fonctionnel2(self):
+		"""test le masquage des premières erreurs"""
+
+		err_cour = "message d'erreur"
+		err_prec = {'err_nombre':sauv.nbr_err_muette, 'err_dernier_texte':""}
+		n_sauv = "partage"
+
+		sauv.gestion_des_alertes(err_cour, err_prec, n_sauv)
+		sauv.logger.warning.assert_called()
+		self.assertEqual(err_prec['err_nombre'], sauv.nbr_err_muette+1)
+		self.assertEqual(err_prec['err_dernier_texte'], "")
+
+	def test_fonctionnel3(self):
+		"""test le masquage des premières erreurs"""
+
+		err_cour = "message d'erreur"
+		err_prec = {'err_nombre':sauv.nbr_err_muette+1, 'err_dernier_texte':""}
+		n_sauv = "partage"
+
+		sauv.gestion_des_alertes(err_cour, err_prec, n_sauv)
+		sauv.logger.warning.assert_called()
+		self.assertEqual(err_prec['err_nombre'], sauv.nbr_err_muette+2)
+
+	def test_si_err_prec_vide(self):
+		"""test le masquage des premières erreurs"""
+
+		err_cour = "message d'erreur"
+		err_prec = {}
+		n_sauv = "partage"
+
+		sauv.gestion_des_alertes(err_cour, err_prec, n_sauv)
+		sauv.logger.warning.assert_not_called()
+		self.assertEqual(err_prec['err_nombre'], 1)
+		self.assertEqual(err_prec['err_dernier_texte'], err_cour)
 
 # Programme principal
 

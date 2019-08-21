@@ -9978,3 +9978,416 @@ Fin anormale du programme
 2018-11-07 19:23:25,760 [DEBUG] deverrouille: Lancement de 'deverrouille'
 2018-11-07 19:23:25,760 [INFO] deverrouille: suppression du verrou de la sauvegarde
 2018-11-07 19:23:25,760 [INFO] <module>: --------------- Fin de la sauvegarde ------------------
+2019-08-21 16:21:32,928 [INFO] <module>:  
+2019-08-21 16:21:32,929 [INFO] <module>: Sauv.py version 0.49
+2019-08-21 16:21:32,929 [INFO] <module>: --------------- Début de la sauvegarde ------------------
+2019-08-21 16:21:32,929 [DEBUG] init_args: Lancement de 'init_args'
+2019-08-21 16:21:32,930 [DEBUG] init_args: résultat des arguments
+2019-08-21 16:21:32,930 [DEBUG] init_args: Namespace(force=True, ignore_verrou=True)
+2019-08-21 16:21:32,930 [DEBUG] init_para: Lancement de 'init_para'
+2019-08-21 16:21:32,930 [INFO] init_para: Début de lecture du fichier de configuration sauv.conf
+2019-08-21 16:21:32,931 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2019-08-21 16:21:32,931 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2019-08-21 16:21:32,931 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2019-08-21 16:21:32,931 [INFO] init_para: Sortie normale de l'analyse des paramètres de sauvegarde 'essai'
+2019-08-21 16:21:32,931 [DEBUG] charge_arbre: Lancement de 'charge_arbre'
+2019-08-21 16:21:32,933 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2019-08-21 16:21:32,933 [INFO] deverrouille: le fichier verrou n'existe pas
+2019-08-21 16:21:32,933 [DEBUG] verrouille: Lancement de 'verrouille'
+2019-08-21 16:21:32,933 [INFO] <module>: ----------------------------------------------------------------------------------------------------
+
+			-------------------------  Début de sauvegarde [essai] --------------------------------------------------
+2019-08-21 16:21:32,933 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2019-08-21 16:21:32,933 [INFO] pas_de_sauv: sauvegarde forcée
+2019-08-21 16:21:32,934 [DEBUG] monte: Lancement de 'monte' /home/isabelle;192.168.1.29::internet_home/isabelle/Musique
+2019-08-21 16:21:32,934 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /home/isabelle
+2019-08-21 16:21:32,934 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/home/isabelle']
+2019-08-21 16:21:32,934 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/home/isabelle']
+2019-08-21 16:21:32,960 [DEBUG] repertoire_accessible: Répertoire '/home/isabelle' non trouvé
+2019-08-21 16:21:32,960 [DEBUG] monte: Le répertoire /home/isabelle n'est pas accessible
+2019-08-21 16:21:32,960 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2019-08-21 16:21:32,960 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2019-08-21 16:21:32,960 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2019-08-21 16:21:33,103 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2019-08-21 16:21:33,103 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé 
+2019-08-21 16:21:33,103 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '192.168.1.29::internet_home/isabelle/Musique/']
+2019-08-21 16:21:33,263 [DEBUG] monte: ['drwxr-xr-x          4,096 2019/04/06 09:50:22 .', '-rw-r--r--      3,169,540 2017/03/08 11:48:06 Amir - On dirait (Clip officiel).mp3', "-rw-r-----      2,160,587 2015/03/15 13:59:57 Au chant de l'alouette.mp3", '-rw-r-----      3,149,480 2015/03/01 13:47:35 Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3', '-rw-r--r--      2,981,334 2013/09/28 13:00:46 Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3', "-rw-r-----      3,365,021 2015/03/01 13:49:51 Indochine - J'Ai Demandé A La Lune.mp3", '-rw-rw-r--      2,608,639 2017/01/14 09:56:37 Je suis Vaiana (Le chant des ancêtres).mp3', '-rw-r-----      3,601,712 2015/03/08 10:05:09 La reine des neiges - Libérée, délivrée (Instrumental).mp3', "-rw-r--r--      2,195,153 2013/09/28 13:02:34 Les Choristes - Caresse Sur L'Océan.mp3", '-rw-rw-r--      2,082,428 2017/01/14 10:01:18 Logo Te Pate.mp3', '-rw-r--r--      3,388,845 2013/11/11 10:34:52 Lorie - Sur Un Air Latino.mp3', '-rw-r--r--      3,036,630 2013/09/28 12:59:08 Mucho - El Sol De Maria.mp3', '-rw-rw-r--      3,368,071 2017/01/14 09:59:49 Notre terre.mp3', '-rw-r-----    261,138,758 2015/02/06 15:17:34 Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar', '-rw-rw-r--      2,598,608 2017/01/14 09:58:55 VAIANA - Pour les hommes (clip entier).mp3', '-rw-rw-r--      2,909,987 2017/01/14 10:00:35 Vaiana - Bling bling (lyrics).mp3', "-rw-rw-r--      2,218,683 2017/01/14 09:57:40 Vaiana - L'explorateur (lyrics).mp3", '-rw-rw-r--      2,593,174 2017/01/14 09:58:17 Vaiana - Le bleu lumière (lyrics).mp3', 'drwx------          4,096 2017/05/14 15:47:25 Musiques de gym', 'drwxrwxr-x          4,096 2015/07/31 09:32:07 Nouveau dossier', '']
+2019-08-21 16:21:33,263 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé avec 21 sous-répertoires ou fichiers
+2019-08-21 16:21:33,263 [DEBUG] monte: Lancement de 'monte' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2019-08-21 16:21:33,264 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2019-08-21 16:21:33,264 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2019-08-21 16:21:33,264 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2019-08-21 16:21:33,389 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet' non trouvé
+2019-08-21 16:21:33,389 [DEBUG] monte: Le répertoire /media/johannes/Extension/Temp/sauvegarde/home_internet n'est pas accessible
+2019-08-21 16:21:33,389 [INFO] <module>: essai-Le répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet' n'est pas accessible et aucune instruction de montage
+			n'est disponible
+2019-08-21 16:21:33,389 [WARNING] <module>: essai-La sauvegarde  est abandonnée, les répertoires ne sont pas accessibles
+2019-08-21 16:21:33,389 [DEBUG] demonte: Lancement de 'demonte'
+2019-08-21 16:21:33,389 [DEBUG] demonte: {None}
+2019-08-21 16:21:33,389 [DEBUG] sauv_arbre: Lancement de 'sauv_arbre'
+2019-08-21 16:21:33,390 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2019-08-21 16:21:33,390 [INFO] deverrouille: suppression du verrou de la sauvegarde
+2019-08-21 16:21:33,391 [INFO] <module>: --------------- Fin de la sauvegarde ------------------
+2019-08-21 16:26:11,682 [INFO] <module>:  
+2019-08-21 16:26:11,682 [INFO] <module>: Sauv.py version 0.49
+2019-08-21 16:26:11,682 [INFO] <module>: --------------- Début de la sauvegarde ------------------
+2019-08-21 16:26:11,682 [DEBUG] init_args: Lancement de 'init_args'
+2019-08-21 16:26:11,683 [DEBUG] init_args: résultat des arguments
+2019-08-21 16:26:11,684 [DEBUG] init_args: Namespace(force=True, ignore_verrou=True)
+2019-08-21 16:26:11,684 [DEBUG] init_para: Lancement de 'init_para'
+2019-08-21 16:26:11,684 [INFO] init_para: Début de lecture du fichier de configuration sauv.conf
+2019-08-21 16:26:11,688 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2019-08-21 16:26:11,688 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2019-08-21 16:26:11,688 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2019-08-21 16:26:11,688 [INFO] init_para: Sortie normale de l'analyse des paramètres de sauvegarde 'essai'
+2019-08-21 16:26:11,688 [DEBUG] charge_arbre: Lancement de 'charge_arbre'
+2019-08-21 16:26:11,691 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2019-08-21 16:26:11,691 [INFO] deverrouille: le fichier verrou n'existe pas
+2019-08-21 16:26:11,691 [DEBUG] verrouille: Lancement de 'verrouille'
+2019-08-21 16:26:11,691 [INFO] <module>: ----------------------------------------------------------------------------------------------------
+
+			-------------------------  Début de sauvegarde [essai] --------------------------------------------------
+2019-08-21 16:26:11,692 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2019-08-21 16:26:11,692 [INFO] pas_de_sauv: sauvegarde forcée
+2019-08-21 16:26:11,692 [DEBUG] monte: Lancement de 'monte' /home/isabelle;192.168.1.29::internet_home/isabelle/Musique
+2019-08-21 16:26:11,692 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /home/isabelle
+2019-08-21 16:26:11,692 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/home/isabelle']
+2019-08-21 16:26:11,692 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/home/isabelle']
+2019-08-21 16:26:11,699 [DEBUG] repertoire_accessible: Répertoire '/home/isabelle' non trouvé
+2019-08-21 16:26:11,700 [DEBUG] monte: Le répertoire /home/isabelle n'est pas accessible
+2019-08-21 16:26:11,700 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2019-08-21 16:26:11,700 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2019-08-21 16:26:11,700 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2019-08-21 16:26:11,839 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2019-08-21 16:26:11,839 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé 
+2019-08-21 16:26:11,839 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '192.168.1.29::internet_home/isabelle/Musique/']
+2019-08-21 16:26:11,987 [DEBUG] monte: ['drwxr-xr-x          4,096 2019/04/06 09:50:22 .', '-rw-r--r--      3,169,540 2017/03/08 11:48:06 Amir - On dirait (Clip officiel).mp3', "-rw-r-----      2,160,587 2015/03/15 13:59:57 Au chant de l'alouette.mp3", '-rw-r-----      3,149,480 2015/03/01 13:47:35 Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3', '-rw-r--r--      2,981,334 2013/09/28 13:00:46 Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3', "-rw-r-----      3,365,021 2015/03/01 13:49:51 Indochine - J'Ai Demandé A La Lune.mp3", '-rw-rw-r--      2,608,639 2017/01/14 09:56:37 Je suis Vaiana (Le chant des ancêtres).mp3', '-rw-r-----      3,601,712 2015/03/08 10:05:09 La reine des neiges - Libérée, délivrée (Instrumental).mp3', "-rw-r--r--      2,195,153 2013/09/28 13:02:34 Les Choristes - Caresse Sur L'Océan.mp3", '-rw-rw-r--      2,082,428 2017/01/14 10:01:18 Logo Te Pate.mp3', '-rw-r--r--      3,388,845 2013/11/11 10:34:52 Lorie - Sur Un Air Latino.mp3', '-rw-r--r--      3,036,630 2013/09/28 12:59:08 Mucho - El Sol De Maria.mp3', '-rw-rw-r--      3,368,071 2017/01/14 09:59:49 Notre terre.mp3', '-rw-r-----    261,138,758 2015/02/06 15:17:34 Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar', '-rw-rw-r--      2,598,608 2017/01/14 09:58:55 VAIANA - Pour les hommes (clip entier).mp3', '-rw-rw-r--      2,909,987 2017/01/14 10:00:35 Vaiana - Bling bling (lyrics).mp3', "-rw-rw-r--      2,218,683 2017/01/14 09:57:40 Vaiana - L'explorateur (lyrics).mp3", '-rw-rw-r--      2,593,174 2017/01/14 09:58:17 Vaiana - Le bleu lumière (lyrics).mp3', 'drwx------          4,096 2017/05/14 15:47:25 Musiques de gym', 'drwxrwxr-x          4,096 2015/07/31 09:32:07 Nouveau dossier', '']
+2019-08-21 16:26:11,987 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé avec 21 sous-répertoires ou fichiers
+2019-08-21 16:26:11,987 [DEBUG] monte: Lancement de 'monte' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2019-08-21 16:26:11,987 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2019-08-21 16:26:11,988 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2019-08-21 16:26:11,988 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2019-08-21 16:26:12,015 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet' trouvé
+2019-08-21 16:26:12,015 [DEBUG] monte: /media/johannes/Extension/Temp/sauvegarde/home_internet est trouvé 
+2019-08-21 16:26:12,015 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '/media/johannes/Extension/Temp/sauvegarde/home_internet/']
+2019-08-21 16:26:12,046 [DEBUG] monte: ['drwxrwxrwx          4,096 2018/11/07 19:23:25 .', 'drwxrwxrwx              0 2017/10/11 22:17:28 2017-10-11 22-17_2', 'drwxrwxrwx              0 2018/03/12 10:10:31 2018-01-12 20-25_2', 'drwxrwxrwx              0 2018/11/01 20:15:36 2018-11-01 20-15_2', 'drwxrwxrwx              0 2018/11/02 19:00:57 2018-11-02 19-00_1', 'drwxrwxrwx              0 2018/11/07 19:23:15 2018-11-07 19-23_1', '']
+2019-08-21 16:26:12,046 [DEBUG] monte: /media/johannes/Extension/Temp/sauvegarde/home_internet est trouvé avec 7 sous-répertoires ou fichiers
+2019-08-21 16:26:12,046 [DEBUG] verifie_arbre: Lancement de 'verifie_arbre'
+2019-08-21 16:26:12,046 [DEBUG] verifie_arbre: début d'analyse de l'historique des sauvegardes de essai
+2019-08-21 16:26:12,046 [DEBUG] verifie_arbre: Analyse du répertoire'2017-10-11 22-17_2'
+2019-08-21 16:26:12,046 [INFO] verifie_arbre: Répertoire '2017-10-11 22-17_2' validé
+2019-08-21 16:26:12,047 [DEBUG] verifie_arbre: <objet Cliche date:2017-10-11 22-17, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2017-10-11 22-17_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2019-08-21 16:26:12,047 [DEBUG] verifie_arbre: Analyse du répertoire'2018-01-12 20-25_2'
+2019-08-21 16:26:12,047 [INFO] verifie_arbre: Répertoire '2018-01-12 20-25_2' validé
+2019-08-21 16:26:12,047 [DEBUG] verifie_arbre: <objet Cliche date:2018-01-12 20-25, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-12 20-25_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2019-08-21 16:26:12,047 [DEBUG] verifie_arbre: Analyse du répertoire'2018-11-01 20-15_2'
+2019-08-21 16:26:12,047 [INFO] verifie_arbre: Répertoire '2018-11-01 20-15_2' validé
+2019-08-21 16:26:12,047 [DEBUG] verifie_arbre: <objet Cliche date:2018-11-01 20-15, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2019-08-21 16:26:12,047 [DEBUG] verifie_arbre: Analyse du répertoire'2018-11-02 19-00_1'
+2019-08-21 16:26:12,047 [INFO] verifie_arbre: Répertoire '2018-11-02 19-00_1' validé
+2019-08-21 16:26:12,047 [DEBUG] verifie_arbre: <objet Cliche date:2018-11-02 19-00, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2019-08-21 16:26:12,047 [DEBUG] verifie_arbre: Analyse du répertoire'2018-11-07 19-23_1'
+2019-08-21 16:26:12,047 [INFO] verifie_arbre: Répertoire '2018-11-07 19-23_1' validé
+2019-08-21 16:26:12,047 [DEBUG] verifie_arbre: <objet Cliche date:2018-11-07 19-23, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2019-08-21 16:26:12,047 [INFO] comparaison_arbre: Les sauvegardes en mémoire et sur disques sont identiques 
+2019-08-21 16:26:12,047 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2019-08-21 16:26:12,047 [INFO] pas_de_sauv: sauvegarde forcée
+2019-08-21 16:26:12,047 [DEBUG] copie: Lancement de 'copie'
+2019-08-21 16:26:12,047 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2019-08-21 16:26:12,048 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2019-08-21 16:26:12,048 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2019-08-21 16:26:12,199 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2019-08-21 16:26:12,199 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1
+2019-08-21 16:26:12,199 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1']
+2019-08-21 16:26:12,199 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1']
+2019-08-21 16:26:12,202 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1' trouvé
+2019-08-21 16:26:12,203 [INFO] copie: copie de 192.168.1.29::internet_home/isabelle/Musique vers /media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1
+2019-08-21 16:26:12,203 [DEBUG] copie: Commande:['rsync', '-rv', '--delete', '--filter=. /home/johannes/programme/centralkeeper/filter.conf', '--link-dest=/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1', '192.168.1.29::internet_home/isabelle/Musique', '/media/johannes/Extension/Temp/sauvegarde/home_internet/temp']
+2019-08-21 16:26:12,203 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '-rv', '--delete', '--filter=. /home/johannes/programme/centralkeeper/filter.conf', '--link-dest=/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1', '192.168.1.29::internet_home/isabelle/Musique', '/media/johannes/Extension/Temp/sauvegarde/home_internet/temp']
+2019-08-21 16:26:18,628 [INFO] commande_ext: Retour de la commande:
+2019-08-21 16:26:18,628 [INFO] commande_ext: receiving incremental file list
+2019-08-21 16:26:18,628 [INFO] commande_ext: created directory /media/johannes/Extension/Temp/sauvegarde/home_internet/temp
+2019-08-21 16:26:18,629 [INFO] commande_ext: Musique/Amir - On dirait (Clip officiel).mp3
+2019-08-21 16:26:18,629 [INFO] commande_ext: Musique/Au chant de l'alouette.mp3
+2019-08-21 16:26:18,629 [INFO] commande_ext: Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3
+2019-08-21 16:26:18,629 [INFO] commande_ext: Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3
+2019-08-21 16:26:18,629 [INFO] commande_ext: Musique/Indochine - J'Ai Demandé A La Lune.mp3
+2019-08-21 16:26:18,629 [INFO] commande_ext: Musique/Je suis Vaiana (Le chant des ancêtres).mp3
+2019-08-21 16:26:18,629 [INFO] commande_ext: Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3
+2019-08-21 16:26:18,629 [INFO] commande_ext: Musique/Les Choristes - Caresse Sur L'Océan.mp3
+2019-08-21 16:26:18,629 [INFO] commande_ext: Musique/Logo Te Pate.mp3
+2019-08-21 16:26:18,630 [INFO] commande_ext: Musique/Lorie - Sur Un Air Latino.mp3
+2019-08-21 16:26:18,630 [INFO] commande_ext: Musique/Mucho - El Sol De Maria.mp3
+2019-08-21 16:26:18,630 [INFO] commande_ext: Musique/Notre terre.mp3
+2019-08-21 16:26:18,630 [INFO] commande_ext: Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2019-08-21 16:26:18,630 [INFO] commande_ext: Musique/VAIANA - Pour les hommes (clip entier).mp3
+2019-08-21 16:26:18,630 [INFO] commande_ext: Musique/Vaiana - Bling bling (lyrics).mp3
+2019-08-21 16:26:18,630 [INFO] commande_ext: Musique/Vaiana - L'explorateur (lyrics).mp3
+2019-08-21 16:26:18,630 [INFO] commande_ext: Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2019-08-21 16:26:18,630 [INFO] commande_ext: Musique/Musiques de gym/Floor Music Gymnastics- Tosca Fantasy (1 Minute).mp3
+2019-08-21 16:26:18,630 [INFO] commande_ext: Musique/Musiques de gym/Floor music - Narnia Voyage of the Dawn.mp3
+2019-08-21 16:26:18,631 [INFO] commande_ext: Musique/Musiques de gym/mambo5.mp3
+2019-08-21 16:26:18,631 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Amour d'été (Clip Officiel).mp3
+2019-08-21 16:26:18,631 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3
+2019-08-21 16:26:18,631 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3
+2019-08-21 16:26:18,631 [INFO] commande_ext: Musique/Nouveau dossier/Aux arbres citoyens.mp3
+2019-08-21 16:26:18,631 [INFO] commande_ext: Musique/Nouveau dossier/Becky G - Shower (Audio).mp3
+2019-08-21 16:26:18,631 [INFO] commande_ext: Musique/Nouveau dossier/Black M - Je garde le sourire.mp3
+2019-08-21 16:26:18,631 [INFO] commande_ext: Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3
+2019-08-21 16:26:18,631 [INFO] commande_ext: Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2019-08-21 16:26:18,632 [INFO] commande_ext: Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2019-08-21 16:26:18,632 [INFO] commande_ext: Musique/Nouveau dossier/Indila - Love Story.mp3
+2019-08-21 16:26:18,632 [INFO] commande_ext: Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2019-08-21 16:26:18,632 [INFO] commande_ext: Musique/Nouveau dossier/Kendji Girac - Mon Univers [OFFICIEL] [ALBUM].mp3
+2019-08-21 16:26:18,632 [INFO] commande_ext: Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2019-08-21 16:26:18,632 [INFO] commande_ext: Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2019-08-21 16:26:18,632 [INFO] commande_ext: Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2019-08-21 16:26:18,632 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2019-08-21 16:26:18,632 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2019-08-21 16:26:18,633 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2019-08-21 16:26:18,633 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2019-08-21 16:26:18,633 [INFO] commande_ext: Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2019-08-21 16:26:18,633 [INFO] commande_ext: Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2019-08-21 16:26:18,633 [INFO] commande_ext: Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2019-08-21 16:26:18,633 [INFO] commande_ext: Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2019-08-21 16:26:18,633 [INFO] commande_ext: Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2019-08-21 16:26:18,633 [INFO] commande_ext: Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2019-08-21 16:26:18,633 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/France Gall - Cézanne peint - (1985) - HQ!.mp3
+2019-08-21 16:26:18,634 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/Le Cirque   Yves Duteil.mp3
+2019-08-21 16:26:18,634 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3
+2019-08-21 16:26:18,634 [INFO] commande_ext: 
+2019-08-21 16:26:18,634 [INFO] commande_ext: sent 607,259 bytes  received 397,915 bytes  154,642.15 bytes/sec
+2019-08-21 16:26:18,634 [INFO] commande_ext: total size is 406,352,493  speedup is 404.26
+2019-08-21 16:26:18,634 [INFO] commande_ext: 
+2019-08-21 16:26:18,636 [DEBUG] analyse_retour_pour_bilan: Ligne 'sent received' trouvée 
+2019-08-21 16:26:18,636 [DEBUG] analyse_retour_pour_bilan: Ligne total size' trouvée 
+2019-08-21 16:26:18,636 [INFO] copie: renomme /media/johannes/Extension/Temp/sauvegarde/home_internet/temp en /media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1
+2019-08-21 16:26:18,637 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1
+2019-08-21 16:26:18,640 [DEBUG] <module>: nouveau cliché ajouté à l'arbre de essai:
+2019-08-21 16:26:18,640 [DEBUG] <module>: <objet Cliche date:2019-08-21 16-26, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1, reussi:True, signale_erreur:None, md5:False, taille:406352493, noeud:{'15338': 3169540, '15339': 2160587, '15340': 3149480, '15341': 2981334, '15342': 3365021, '15343': 2608639, '16985': 3601712, '16986': 2195153, '16987': 2082428, '16988': 3388845, '16989': 3036630, '16990': 3368071, '16994': 261138758, '16996': 2909987, '16997': 2218683, '16998': 2593174, '16995': 2598608, '17000': 1062610, '16999': 961886, '17001': 1433565, '17013': 3281137, '17002': 3246865, '17003': 3443879, '17004': 3509499, '17005': 3161893, '17006': 3333800, '17007': 3720288, '17008': 3469637, '17009': 3295086, '17010': 2869185, '17011': 4552151, '17012': 3255098, '17014': 3458094, '17015': 3734623, '17016': 3463659, '17017': 2980916, '17018': 3366975, '17019': 3247992, '17020': 3362639, '17021': 3455008, '17022': 2979109, '17023': 4145633, '17024': 3238923, '17025': 3138613, '17026': 3504745, '17027': 3831171, '17028': 3062962, '17029': 4218202}>
+2019-08-21 16:26:18,640 [DEBUG] reduit_inode: Test de date: 2017-10-11 22:17:00 >= 2018-01-12 20:25:00
+2019-08-21 16:26:18,640 [DEBUG] reduit_inode: Test de date: 2018-01-12 20:25:00 >= 2018-11-01 20:15:00
+2019-08-21 16:26:18,640 [DEBUG] reduit_inode: Test de date: 2018-11-01 20:15:00 >= 2018-11-02 19:00:00
+2019-08-21 16:26:18,640 [DEBUG] reduit_inode: Test de date: 2018-11-02 19:00:00 >= 2018-11-07 19:23:00
+2019-08-21 16:26:18,640 [DEBUG] reduit_inode: Test de date: 2018-11-07 19:23:00 >= 2019-08-21 16:26:12.203146
+2019-08-21 16:26:18,640 [DEBUG] analyse_repertoire: Lancement de 'analyse_repertoire'
+2019-08-21 16:26:18,640 [DEBUG] regroupe: Lancement de 'regroupe'
+2019-08-21 16:26:18,640 [DEBUG] regroupe: Déplacement de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1 dans /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1
+2019-08-21 16:26:18,641 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique'
+2019-08-21 16:26:18,661 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Amir - On dirait (Clip officiel).mp3'
+2019-08-21 16:26:18,661 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Amir - On dirait (Clip officiel).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Amir - On dirait (Clip officiel).mp3'
+2019-08-21 16:26:18,693 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Au chant de l'alouette.mp3'
+2019-08-21 16:26:18,693 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Au chant de l'alouette.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Au chant de l'alouette.mp3'
+2019-08-21 16:26:18,694 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3'
+2019-08-21 16:26:18,694 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3'
+2019-08-21 16:26:18,694 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3'
+2019-08-21 16:26:18,713 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3'
+2019-08-21 16:26:18,713 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Indochine - J'Ai Demandé A La Lune.mp3'
+2019-08-21 16:26:18,713 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Indochine - J'Ai Demandé A La Lune.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Indochine - J'Ai Demandé A La Lune.mp3'
+2019-08-21 16:26:18,714 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Je suis Vaiana (Le chant des ancêtres).mp3'
+2019-08-21 16:26:18,714 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Je suis Vaiana (Le chant des ancêtres).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Je suis Vaiana (Le chant des ancêtres).mp3'
+2019-08-21 16:26:18,731 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3'
+2019-08-21 16:26:18,731 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3'
+2019-08-21 16:26:18,733 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Les Choristes - Caresse Sur L'Océan.mp3'
+2019-08-21 16:26:18,733 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Les Choristes - Caresse Sur L'Océan.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Les Choristes - Caresse Sur L'Océan.mp3'
+2019-08-21 16:26:18,738 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Logo Te Pate.mp3'
+2019-08-21 16:26:18,738 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Logo Te Pate.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Logo Te Pate.mp3'
+2019-08-21 16:26:18,743 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Lorie - Sur Un Air Latino.mp3'
+2019-08-21 16:26:18,743 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Lorie - Sur Un Air Latino.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Lorie - Sur Un Air Latino.mp3'
+2019-08-21 16:26:18,743 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Mucho - El Sol De Maria.mp3'
+2019-08-21 16:26:18,743 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Mucho - El Sol De Maria.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Mucho - El Sol De Maria.mp3'
+2019-08-21 16:26:18,744 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Musiques de gym'
+2019-08-21 16:26:18,785 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Musiques de gym/Floor music - Narnia Voyage of the Dawn.mp3'
+2019-08-21 16:26:18,805 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Musiques de gym/Floor music - Narnia Voyage of the Dawn.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Musiques de gym/Floor music - Narnia Voyage of the Dawn.mp3'
+2019-08-21 16:26:18,805 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Musiques de gym/Floor Music Gymnastics- Tosca Fantasy (1 Minute).mp3'
+2019-08-21 16:26:18,806 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Musiques de gym/Floor Music Gymnastics- Tosca Fantasy (1 Minute).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Musiques de gym/Floor Music Gymnastics- Tosca Fantasy (1 Minute).mp3'
+2019-08-21 16:26:18,825 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Musiques de gym/mambo5.mp3'
+2019-08-21 16:26:18,825 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Musiques de gym/mambo5.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Musiques de gym/mambo5.mp3'
+2019-08-21 16:26:18,828 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Notre terre.mp3'
+2019-08-21 16:26:18,828 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Notre terre.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Notre terre.mp3'
+2019-08-21 16:26:18,832 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier'
+2019-08-21 16:26:18,845 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Nouveau'
+2019-08-21 16:26:18,856 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Nouveau/France Gall - Cézanne peint - (1985) - HQ!.mp3'
+2019-08-21 16:26:18,856 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Nouveau/France Gall - Cézanne peint - (1985) - HQ!.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Nouveau/France Gall - Cézanne peint - (1985) - HQ!.mp3'
+2019-08-21 16:26:18,857 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Nouveau/Le Cirque   Yves Duteil.mp3'
+2019-08-21 16:26:18,857 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Nouveau/Le Cirque   Yves Duteil.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Nouveau/Le Cirque   Yves Duteil.mp3'
+2019-08-21 16:26:18,857 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3'
+2019-08-21 16:26:18,858 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3'
+2019-08-21 16:26:18,871 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/ADICT - Amour d'été (Clip Officiel).mp3'
+2019-08-21 16:26:18,871 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/ADICT - Amour d'été (Clip Officiel).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/ADICT - Amour d'été (Clip Officiel).mp3'
+2019-08-21 16:26:18,874 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3'
+2019-08-21 16:26:18,874 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3'
+2019-08-21 16:26:18,874 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3'
+2019-08-21 16:26:18,875 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3'
+2019-08-21 16:26:18,875 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Aux arbres citoyens.mp3'
+2019-08-21 16:26:18,878 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Aux arbres citoyens.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Aux arbres citoyens.mp3'
+2019-08-21 16:26:18,879 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Becky G - Shower (Audio).mp3'
+2019-08-21 16:26:18,879 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Becky G - Shower (Audio).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Becky G - Shower (Audio).mp3'
+2019-08-21 16:26:18,879 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Black M - Je garde le sourire.mp3'
+2019-08-21 16:26:18,880 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Black M - Je garde le sourire.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Black M - Je garde le sourire.mp3'
+2019-08-21 16:26:18,881 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3'
+2019-08-21 16:26:18,881 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3'
+2019-08-21 16:26:18,882 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3'
+2019-08-21 16:26:18,883 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3'
+2019-08-21 16:26:18,883 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3'
+2019-08-21 16:26:18,883 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3'
+2019-08-21 16:26:18,884 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Indila - Love Story.mp3'
+2019-08-21 16:26:18,884 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Indila - Love Story.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Indila - Love Story.mp3'
+2019-08-21 16:26:18,884 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3'
+2019-08-21 16:26:18,885 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3'
+2019-08-21 16:26:18,885 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Kendji Girac - Mon Univers [OFFICIEL] [ALBUM].mp3'
+2019-08-21 16:26:18,885 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Kendji Girac - Mon Univers [OFFICIEL] [ALBUM].mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Kendji Girac - Mon Univers [OFFICIEL] [ALBUM].mp3'
+2019-08-21 16:26:18,891 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3'
+2019-08-21 16:26:18,891 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3'
+2019-08-21 16:26:18,891 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3'
+2019-08-21 16:26:18,891 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3'
+2019-08-21 16:26:18,892 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3'
+2019-08-21 16:26:18,892 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3'
+2019-08-21 16:26:18,892 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3'
+2019-08-21 16:26:18,893 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3'
+2019-08-21 16:26:18,894 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3'
+2019-08-21 16:26:18,895 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3'
+2019-08-21 16:26:18,896 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3'
+2019-08-21 16:26:18,896 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3'
+2019-08-21 16:26:18,897 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3'
+2019-08-21 16:26:18,897 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3'
+2019-08-21 16:26:18,898 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3'
+2019-08-21 16:26:18,898 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3'
+2019-08-21 16:26:18,901 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3'
+2019-08-21 16:26:18,901 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3'
+2019-08-21 16:26:18,902 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3'
+2019-08-21 16:26:18,902 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3'
+2019-08-21 16:26:18,903 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3'
+2019-08-21 16:26:18,905 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3'
+2019-08-21 16:26:18,905 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3'
+2019-08-21 16:26:18,905 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3'
+2019-08-21 16:26:18,906 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3'
+2019-08-21 16:26:18,906 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3'
+2019-08-21 16:26:18,907 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar'
+2019-08-21 16:26:18,907 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar'
+2019-08-21 16:26:18,920 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Vaiana - Bling bling (lyrics).mp3'
+2019-08-21 16:26:18,920 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Vaiana - Bling bling (lyrics).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Vaiana - Bling bling (lyrics).mp3'
+2019-08-21 16:26:18,920 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Vaiana - L'explorateur (lyrics).mp3'
+2019-08-21 16:26:18,921 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Vaiana - L'explorateur (lyrics).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Vaiana - L'explorateur (lyrics).mp3'
+2019-08-21 16:26:18,921 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3'
+2019-08-21 16:26:18,921 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3'
+2019-08-21 16:26:18,924 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/VAIANA - Pour les hommes (clip entier).mp3'
+2019-08-21 16:26:18,924 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-02 19-00_1/Musique/VAIANA - Pour les hommes (clip entier).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/VAIANA - Pour les hommes (clip entier).mp3'
+2019-08-21 16:26:18,925 [DEBUG] regroupe: Déplacement de /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1 dans /media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1
+2019-08-21 16:26:18,925 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique'
+2019-08-21 16:26:18,925 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Amir - On dirait (Clip officiel).mp3'
+2019-08-21 16:26:18,925 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Amir - On dirait (Clip officiel).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Amir - On dirait (Clip officiel).mp3'
+2019-08-21 16:26:18,926 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Au chant de l'alouette.mp3'
+2019-08-21 16:26:18,926 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Au chant de l'alouette.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Au chant de l'alouette.mp3'
+2019-08-21 16:26:18,926 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3'
+2019-08-21 16:26:18,926 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3'
+2019-08-21 16:26:18,927 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3'
+2019-08-21 16:26:18,927 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3'
+2019-08-21 16:26:18,927 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Indochine - J'Ai Demandé A La Lune.mp3'
+2019-08-21 16:26:18,927 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Indochine - J'Ai Demandé A La Lune.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Indochine - J'Ai Demandé A La Lune.mp3'
+2019-08-21 16:26:18,927 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Je suis Vaiana (Le chant des ancêtres).mp3'
+2019-08-21 16:26:18,928 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Je suis Vaiana (Le chant des ancêtres).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Je suis Vaiana (Le chant des ancêtres).mp3'
+2019-08-21 16:26:18,928 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3'
+2019-08-21 16:26:18,928 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3'
+2019-08-21 16:26:18,928 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Les Choristes - Caresse Sur L'Océan.mp3'
+2019-08-21 16:26:18,928 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Les Choristes - Caresse Sur L'Océan.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Les Choristes - Caresse Sur L'Océan.mp3'
+2019-08-21 16:26:18,929 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Logo Te Pate.mp3'
+2019-08-21 16:26:18,929 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Logo Te Pate.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Logo Te Pate.mp3'
+2019-08-21 16:26:18,929 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Lorie - Sur Un Air Latino.mp3'
+2019-08-21 16:26:18,929 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Lorie - Sur Un Air Latino.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Lorie - Sur Un Air Latino.mp3'
+2019-08-21 16:26:18,930 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Mucho - El Sol De Maria.mp3'
+2019-08-21 16:26:18,930 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Mucho - El Sol De Maria.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Mucho - El Sol De Maria.mp3'
+2019-08-21 16:26:18,930 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Musiques de gym'
+2019-08-21 16:26:18,930 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Musiques de gym/Floor music - Narnia Voyage of the Dawn.mp3'
+2019-08-21 16:26:18,930 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Musiques de gym/Floor music - Narnia Voyage of the Dawn.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Musiques de gym/Floor music - Narnia Voyage of the Dawn.mp3'
+2019-08-21 16:26:18,931 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Musiques de gym/Floor Music Gymnastics- Tosca Fantasy (1 Minute).mp3'
+2019-08-21 16:26:18,931 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Musiques de gym/Floor Music Gymnastics- Tosca Fantasy (1 Minute).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Musiques de gym/Floor Music Gymnastics- Tosca Fantasy (1 Minute).mp3'
+2019-08-21 16:26:18,931 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Musiques de gym/mambo5.mp3'
+2019-08-21 16:26:18,931 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Musiques de gym/mambo5.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Musiques de gym/mambo5.mp3'
+2019-08-21 16:26:18,932 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Notre terre.mp3'
+2019-08-21 16:26:18,932 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Notre terre.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Notre terre.mp3'
+2019-08-21 16:26:18,932 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier'
+2019-08-21 16:26:18,932 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Nouveau'
+2019-08-21 16:26:18,933 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Nouveau/France Gall - Cézanne peint - (1985) - HQ!.mp3'
+2019-08-21 16:26:18,933 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Nouveau/France Gall - Cézanne peint - (1985) - HQ!.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Nouveau/France Gall - Cézanne peint - (1985) - HQ!.mp3'
+2019-08-21 16:26:18,936 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Nouveau/Le Cirque   Yves Duteil.mp3'
+2019-08-21 16:26:18,936 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Nouveau/Le Cirque   Yves Duteil.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Nouveau/Le Cirque   Yves Duteil.mp3'
+2019-08-21 16:26:18,936 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3'
+2019-08-21 16:26:18,937 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3'
+2019-08-21 16:26:18,946 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/ADICT - Amour d'été (Clip Officiel).mp3'
+2019-08-21 16:26:18,946 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/ADICT - Amour d'été (Clip Officiel).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/ADICT - Amour d'été (Clip Officiel).mp3'
+2019-08-21 16:26:18,947 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3'
+2019-08-21 16:26:18,947 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3'
+2019-08-21 16:26:18,947 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3'
+2019-08-21 16:26:18,947 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3'
+2019-08-21 16:26:18,948 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Aux arbres citoyens.mp3'
+2019-08-21 16:26:18,948 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Aux arbres citoyens.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Aux arbres citoyens.mp3'
+2019-08-21 16:26:18,948 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Becky G - Shower (Audio).mp3'
+2019-08-21 16:26:18,948 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Becky G - Shower (Audio).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Becky G - Shower (Audio).mp3'
+2019-08-21 16:26:18,949 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Black M - Je garde le sourire.mp3'
+2019-08-21 16:26:18,949 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Black M - Je garde le sourire.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Black M - Je garde le sourire.mp3'
+2019-08-21 16:26:18,949 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3'
+2019-08-21 16:26:18,949 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3'
+2019-08-21 16:26:18,950 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3'
+2019-08-21 16:26:18,950 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3'
+2019-08-21 16:26:18,950 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3'
+2019-08-21 16:26:18,950 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Icona Pop - I Love It.mp3'
+2019-08-21 16:26:18,951 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Indila - Love Story.mp3'
+2019-08-21 16:26:18,951 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Indila - Love Story.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Indila - Love Story.mp3'
+2019-08-21 16:26:18,951 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3'
+2019-08-21 16:26:18,951 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3'
+2019-08-21 16:26:18,952 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Kendji Girac - Mon Univers [OFFICIEL] [ALBUM].mp3'
+2019-08-21 16:26:18,952 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Kendji Girac - Mon Univers [OFFICIEL] [ALBUM].mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Kendji Girac - Mon Univers [OFFICIEL] [ALBUM].mp3'
+2019-08-21 16:26:18,952 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3'
+2019-08-21 16:26:18,952 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3'
+2019-08-21 16:26:18,953 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3'
+2019-08-21 16:26:18,953 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3'
+2019-08-21 16:26:18,953 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3'
+2019-08-21 16:26:18,953 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3'
+2019-08-21 16:26:18,953 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3'
+2019-08-21 16:26:18,954 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3'
+2019-08-21 16:26:18,954 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3'
+2019-08-21 16:26:18,954 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3'
+2019-08-21 16:26:18,954 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3'
+2019-08-21 16:26:18,954 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3'
+2019-08-21 16:26:18,955 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3'
+2019-08-21 16:26:18,955 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3'
+2019-08-21 16:26:18,955 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3'
+2019-08-21 16:26:18,955 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3'
+2019-08-21 16:26:18,956 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3'
+2019-08-21 16:26:18,956 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Shy'm - Je Sais.mp3'
+2019-08-21 16:26:18,956 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3'
+2019-08-21 16:26:18,956 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3'
+2019-08-21 16:26:18,957 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3'
+2019-08-21 16:26:18,957 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3'
+2019-08-21 16:26:18,957 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3'
+2019-08-21 16:26:18,957 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3'
+2019-08-21 16:26:18,958 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3'
+2019-08-21 16:26:18,958 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3'
+2019-08-21 16:26:18,958 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar'
+2019-08-21 16:26:18,958 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar'
+2019-08-21 16:26:18,968 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Vaiana - Bling bling (lyrics).mp3'
+2019-08-21 16:26:18,968 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Vaiana - Bling bling (lyrics).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Vaiana - Bling bling (lyrics).mp3'
+2019-08-21 16:26:18,968 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Vaiana - L'explorateur (lyrics).mp3'
+2019-08-21 16:26:18,968 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Vaiana - L'explorateur (lyrics).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Vaiana - L'explorateur (lyrics).mp3'
+2019-08-21 16:26:18,969 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3'
+2019-08-21 16:26:18,969 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/Vaiana - Le bleu lumière (lyrics).mp3'
+2019-08-21 16:26:18,969 [DEBUG] fusion_rep: boucle de traitement de : '/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/VAIANA - Pour les hommes (clip entier).mp3'
+2019-08-21 16:26:18,969 [DEBUG] fusion_rep: déplacement du fichier: /media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-07 19-23_1/Musique/VAIANA - Pour les hommes (clip entier).mp3 dans '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1/Musique/VAIANA - Pour les hommes (clip entier).mp3'
+2019-08-21 16:26:18,970 [INFO] regroupe: Renomme le répertoire 2019-08-21 16-26_1 
+2019-08-21 16:26:18,970 [INFO] regroupe: en 2019-08-21 16-26_2 
+2019-08-21 16:26:18,970 [DEBUG] regroupe: renomme /media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_1 en /media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_2
+2019-08-21 16:26:18,970 [INFO] reduction: Objectif: 30,000,000,000
+2019-08-21 16:26:18,970 [INFO] reduction: Pas besoin de réduction
+2019-08-21 16:26:18,970 [DEBUG] calcul_retention: entrée dans calcul_rétention
+2019-08-21 16:26:18,970 [DEBUG] calcul_retention: recherche 5 warning consécutifs
+2019-08-21 16:26:18,970 [DEBUG] calcul_retention: 0:.......................................
+2019-08-21 16:26:18,970 [DEBUG] calcul_retention: <objet Cliche date:2019-08-21 16-26, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_2, reussi:True, signale_erreur:None, md5:False, taille:1219057479, noeud:{'15338': 3169540, '15339': 2160587, '15340': 3149480, '15341': 2981334, '15342': 3365021, '15343': 2608639, '16985': 3601712, '16986': 2195153, '16987': 2082428, '16988': 3388845, '16989': 3036630, '16990': 3368071, '16994': 261138758, '16996': 2909987, '16997': 2218683, '16998': 2593174, '16995': 2598608, '17000': 1062610, '16999': 961886, '17001': 1433565, '17013': 3281137, '17002': 3246865, '17003': 3443879, '17004': 3509499, '17005': 3161893, '17006': 3333800, '17007': 3720288, '17008': 3469637, '17009': 3295086, '17010': 2869185, '17011': 4552151, '17012': 3255098, '17014': 3458094, '17015': 3734623, '17016': 3463659, '17017': 2980916, '17018': 3366975, '17019': 3247992, '17020': 3362639, '17021': 3455008, '17022': 2979109, '17023': 4145633, '17024': 3238923, '17025': 3138613, '17026': 3504745, '17027': 3831171, '17028': 3062962, '17029': 4218202}>
+2019-08-21 16:26:18,970 [INFO] ecriture_bilan: ecriture des données dans /home/johannes/programme/centralkeeper/bilan.dbf
+2019-08-21 16:26:18,970 [DEBUG] ecriture_bilan: {'datecliche': '2019-08-21 16-26', 'vtransfere': 1005174, 'vcliche': 406352493, 'debit': 404.26, 'job': 'essai', 'avec_hash': False, 'oduree1': '2', 'oduree2': '48', 'oduree3': '1000', 'odureeg': 1050.0, 'duree2': 678.0, 'dureeg': 678.0, 'vsauvegard': 1644535682, 'ovsauvegar': 30}
+2019-08-21 16:26:18,972 [DEBUG] demonte: Lancement de 'demonte'
+2019-08-21 16:26:18,972 [DEBUG] demonte: {None}
+2019-08-21 16:26:18,972 [DEBUG] sauv_arbre: Lancement de 'sauv_arbre'
+2019-08-21 16:26:18,972 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2019-08-21 16:26:18,972 [INFO] deverrouille: suppression du verrou de la sauvegarde
+2019-08-21 16:26:18,972 [INFO] <module>: --------------- Fin de la sauvegarde ------------------

@@ -62,7 +62,7 @@
 #version = 0.42 # réorganisation de l'écriture de bilan
 # 07-11-2018
 
-version = 0.48
+version = 0.49
 #voir modification dans les commits
 
 import argparse
@@ -127,8 +127,10 @@ conf_sauv = 'sauv.conf'
 var_env_verrou = "SAUV_VERROU"
 # fichier d'enregistrement de l'historique des sauvegardes
 f_arbre = 'historique.sauv'
-# définit un variable globale pour conserver la trace des processus extérieur lancé et les fermer si nécessaire
+# définit un variable globale pour conserver la trace des processus extérieurs lancés et les fermer si nécessaire
 process_en_cours = None
+# Nombre d'erreur sans warning
+nbr_err_muette = 1
 
 bl_date = "datecliche"
 bl_job = "job"
@@ -727,12 +729,22 @@ def charge_arbre(f_arbre):
 		if type(donnees) != dict:
 			raise SyntaxError("le fichier historique n'est pas au format 'dictionnaire'")
 		
-		if 'arbre' in donnees:
+		if not 'arbre' in donnees:
+			raise SyntaxError("le fichier historique ne contient pas d'arbre'")
+		else:
 			arbre = donnees['arbre']
+
+		if 'rappel' in donnees:
 			rappel = donnees['rappel']
 		else:
-			arbre = donnees
 			rappel = {}
+
+		if 'err_prec' in donnees:
+			err_prec = donnees['err_prec']
+		else:
+			err_prec = {}
+
+
 		
 		# Pour toutes les sauvegardes
 		for clef, sauv in arbre.items():
@@ -753,7 +765,7 @@ def charge_arbre(f_arbre):
 							"Au moins un élément d'historique de '{0}' n'est pas valide : {1}".format(hsauv, clef))
 		
 		# renvoi l'arbre valide
-		return arbre, rappel
+		return arbre, rappel, err_prec
 	
 	else:
 		raise InitErreur("historique non trouvé")
@@ -770,13 +782,13 @@ def taille_arbre(arbre):
 	return taille
 
 
-def sauv_arbre(f_arbre, arbre , rappel):
+def sauv_arbre(f_arbre, arbre , rappel, err_prec):
 	logger.debug("Lancement de 'sauv_arbre'")
 	
 	if arbre is None:
 		raise SyntaxError("l'arbre est vide")
 	
-	donnees = {'arbre':arbre, 'rappel':rappel}
+	donnees = {'arbre':arbre, 'rappel':rappel, 'err_prec':err_prec}
 	
 	if os.path.exists(os.path.split(f_arbre)[0]):
 		with  open(f_arbre, 'w', encoding='utf8') as f:
@@ -1763,8 +1775,43 @@ def gestion_des_rappels(config, arbre, rappel):
 					 .format(config.name, maintenant - dernier_cliche, delai))
 		rappel.insert(0, maintenant)
 
-		
-	
+
+def gestion_des_alertes(err_cour, err_prec, sauv):
+	""" envoi un warning si le nombre d'erreur inférieur à nbr_err_muette,
+	gère le dictionnaire des erreurs précédentes
+	paramètres:
+		err_cour: string, erreur courante
+		err_prec:{} données des erreurs précédentes
+			'err_nombre':nombre d'erreur consécutive; si absent: 0
+			'err_dernier_texte': description de la dernière; si absent: ""
+		sauv: string, sauvegarde concernée
+	"""
+
+	if not 'err_nombre' in err_prec:
+		err_prec['err_nombre'] = 0
+
+	if err_prec['err_nombre'] == nbr_err_muette:
+		logger.warning("{}-plus de {} erreurs consécutives sont détectées".format(sauv, nbr_err_muette))
+		try:
+			logger.warning("{}-précédente erreur: {}".format(sauv, err_prec['err_dernier_texte']))
+		except IndexError:
+			None
+		logger.warning("{}-erreur courante:{}".format(sauv, err_cour))
+
+		err_prec['err_dernier_texte'] = ""
+
+	else :
+		if err_prec['err_nombre'] > nbr_err_muette:
+			logger.warning("{}- {} erreurs consécutives sont détectées".format(sauv, err_prec['err_nombre']))
+			logger.warning("{}-erreur courante:{}".format(sauv, err_cour))
+		else:
+			# si masquée
+			logger.debug("{}-Une erreur est masquée:{}".format(sauv, err_cour))
+
+			err_prec['err_dernier_texte'] = err_cour
+
+	err_prec['err_nombre'] = err_prec['err_nombre'] + 1
+
 # Début du programme
 if __name__ == '__main__':
 	
@@ -1809,8 +1856,10 @@ if __name__ == '__main__':
 	chemin_arbre = os.path.join(os.path.split(os.path.abspath(__file__))[0], f_arbre)
 	arbre = {}
 	rappel = {}
+	err_prec = {}
+
 	try:
-		arbre, rappel = charge_arbre(chemin_arbre)
+		arbre, rappel, err_prec = charge_arbre(chemin_arbre)
 	except (SyntaxError, InitErreur) as exception:
 		logger.warning(exception)
 	
@@ -1834,7 +1883,9 @@ if __name__ == '__main__':
 			arbre[sauv] = [[], [], []]
 		if sauv not in rappel:
 			rappel[sauv] = []
-		
+		if sauv not in err_prec:
+			err_prec[sauv] = {}
+
 		# regarde si une sauvegarde est nécessaire
 		if pas_de_sauv(config[sauv], arbre[sauv], args.force):
 			continue
@@ -1863,9 +1914,10 @@ if __name__ == '__main__':
 		try:
 			cliche = copie(config[sauv], arbre[sauv])
 		except (OSError, InitErreur) as exception:
-			logger.warning("{}-{}".format(sauv, exception))
-			logger.warning("{}-La sauvegarde  a renvoyée une erreur".format(sauv))
+			gestion_des_alertes(exception, err_prec[sauv], sauv)
 			continue
+
+		err_prec[sauv]['err_nombre'] = 0
 
 		if cliche:
 			arbre[sauv][0].insert(0, cliche)
@@ -1892,7 +1944,7 @@ if __name__ == '__main__':
 	demonte(a_demonter)
 	
 	try:
-		sauv_arbre(chemin_arbre, arbre, rappel)
+		sauv_arbre(chemin_arbre, arbre, rappel, err_prec)
 	except SyntaxError as exception:
 		logger.warning(exception)
 	
