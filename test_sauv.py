@@ -2514,19 +2514,19 @@ class Gestion_Des_Alertes(unittest.TestCase):
 	def test_fonctionnel(self):
 		"""test le masquage des premières erreurs"""
 
-		err_cour = "message d'erreur"
+		err_cour = OSError("message")
 		err_prec = {'err_nombre':sauv.nbr_err_muette-1, 'err_dernier_texte':""}
 		n_sauv = "partage"
 
 		sauv.gestion_des_alertes(err_cour, err_prec, n_sauv)
 		sauv.logger.warning.assert_not_called()
 		self.assertEqual(err_prec['err_nombre'], sauv.nbr_err_muette)
-		self.assertEqual(err_prec['err_dernier_texte'], err_cour)
+		self.assertEqual(err_prec['err_dernier_texte'], str(err_cour))
 
 	def test_fonctionnel2(self):
 		"""test le masquage des premières erreurs"""
 
-		err_cour = "message d'erreur"
+		err_cour = OSError("message d'erreur")
 		err_prec = {'err_nombre':sauv.nbr_err_muette, 'err_dernier_texte':""}
 		n_sauv = "partage"
 
@@ -2538,7 +2538,7 @@ class Gestion_Des_Alertes(unittest.TestCase):
 	def test_fonctionnel3(self):
 		"""test le masquage des premières erreurs"""
 
-		err_cour = "message d'erreur"
+		err_cour = OSError("message d'erreur")
 		err_prec = {'err_nombre':sauv.nbr_err_muette+1, 'err_dernier_texte':""}
 		n_sauv = "partage"
 
@@ -2549,14 +2549,14 @@ class Gestion_Des_Alertes(unittest.TestCase):
 	def test_si_err_prec_vide(self):
 		"""test le masquage des premières erreurs"""
 
-		err_cour = "message d'erreur"
+		err_cour = OSError("message d'erreur")
 		err_prec = {}
 		n_sauv = "partage"
 
 		sauv.gestion_des_alertes(err_cour, err_prec, n_sauv)
 		sauv.logger.warning.assert_not_called()
 		self.assertEqual(err_prec['err_nombre'], 1)
-		self.assertEqual(err_prec['err_dernier_texte'], err_cour)
+		self.assertEqual(err_prec['err_dernier_texte'], str(err_cour))
 
 # Programme principal
 

@@ -10391,3 +10391,210 @@ Fin anormale du programme
 2019-08-21 16:26:18,972 [DEBUG] deverrouille: Lancement de 'deverrouille'
 2019-08-21 16:26:18,972 [INFO] deverrouille: suppression du verrou de la sauvegarde
 2019-08-21 16:26:18,972 [INFO] <module>: --------------- Fin de la sauvegarde ------------------
+2019-08-22 16:31:19,191 [INFO] <module>:  
+2019-08-22 16:31:19,191 [INFO] <module>: Sauv.py version 0.49
+2019-08-22 16:31:19,191 [INFO] <module>: --------------- Début de la sauvegarde ------------------
+2019-08-22 16:31:19,191 [DEBUG] init_args: Lancement de 'init_args'
+2019-08-22 16:31:19,192 [DEBUG] init_args: résultat des arguments
+2019-08-22 16:31:19,192 [DEBUG] init_args: Namespace(force=True, ignore_verrou=True)
+2019-08-22 16:31:19,192 [DEBUG] init_para: Lancement de 'init_para'
+2019-08-22 16:31:19,192 [INFO] init_para: Début de lecture du fichier de configuration sauv.conf
+2019-08-22 16:31:19,193 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2019-08-22 16:31:19,193 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2019-08-22 16:31:19,193 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2019-08-22 16:31:19,193 [INFO] init_para: Sortie normale de l'analyse des paramètres de sauvegarde 'essai'
+2019-08-22 16:31:19,193 [DEBUG] charge_arbre: Lancement de 'charge_arbre'
+2019-08-22 16:31:19,195 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2019-08-22 16:31:19,195 [INFO] deverrouille: le fichier verrou n'existe pas
+2019-08-22 16:31:19,195 [DEBUG] verrouille: Lancement de 'verrouille'
+2019-08-22 16:31:19,195 [INFO] <module>: ----------------------------------------------------------------------------------------------------
+
+			-------------------------  Début de sauvegarde [essai] --------------------------------------------------
+2019-08-22 16:31:19,195 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2019-08-22 16:31:19,195 [INFO] pas_de_sauv: sauvegarde forcée
+2019-08-22 16:31:19,195 [DEBUG] monte: Lancement de 'monte' /home/isabelle;192.168.1.29::internet_home/isabelle/Musique
+2019-08-22 16:31:19,195 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /home/isabelle
+2019-08-22 16:31:19,195 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/home/isabelle']
+2019-08-22 16:31:19,195 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/home/isabelle']
+2019-08-22 16:31:19,197 [DEBUG] repertoire_accessible: Répertoire '/home/isabelle' non trouvé
+2019-08-22 16:31:19,197 [DEBUG] monte: Le répertoire /home/isabelle n'est pas accessible
+2019-08-22 16:31:19,197 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2019-08-22 16:31:19,198 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2019-08-22 16:31:19,198 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2019-08-22 16:31:19,335 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2019-08-22 16:31:19,336 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé 
+2019-08-22 16:31:19,337 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '192.168.1.29::internet_home/isabelle/Musique/']
+2019-08-22 16:31:19,475 [DEBUG] monte: ['drwxr-xr-x          4,096 2019/04/06 09:50:22 .', '-rw-r--r--      3,169,540 2017/03/08 11:48:06 Amir - On dirait (Clip officiel).mp3', "-rw-r-----      2,160,587 2015/03/15 13:59:57 Au chant de l'alouette.mp3", '-rw-r-----      3,149,480 2015/03/01 13:47:35 Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3', '-rw-r--r--      2,981,334 2013/09/28 13:00:46 Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3', "-rw-r-----      3,365,021 2015/03/01 13:49:51 Indochine - J'Ai Demandé A La Lune.mp3", '-rw-rw-r--      2,608,639 2017/01/14 09:56:37 Je suis Vaiana (Le chant des ancêtres).mp3', '-rw-r-----      3,601,712 2015/03/08 10:05:09 La reine des neiges - Libérée, délivrée (Instrumental).mp3', "-rw-r--r--      2,195,153 2013/09/28 13:02:34 Les Choristes - Caresse Sur L'Océan.mp3", '-rw-rw-r--      2,082,428 2017/01/14 10:01:18 Logo Te Pate.mp3', '-rw-r--r--      3,388,845 2013/11/11 10:34:52 Lorie - Sur Un Air Latino.mp3', '-rw-r--r--      3,036,630 2013/09/28 12:59:08 Mucho - El Sol De Maria.mp3', '-rw-rw-r--      3,368,071 2017/01/14 09:59:49 Notre terre.mp3', '-rw-r-----    261,138,758 2015/02/06 15:17:34 Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar', '-rw-rw-r--      2,598,608 2017/01/14 09:58:55 VAIANA - Pour les hommes (clip entier).mp3', '-rw-rw-r--      2,909,987 2017/01/14 10:00:35 Vaiana - Bling bling (lyrics).mp3', "-rw-rw-r--      2,218,683 2017/01/14 09:57:40 Vaiana - L'explorateur (lyrics).mp3", '-rw-rw-r--      2,593,174 2017/01/14 09:58:17 Vaiana - Le bleu lumière (lyrics).mp3', 'drwx------          4,096 2017/05/14 15:47:25 Musiques de gym', 'drwxrwxr-x          4,096 2015/07/31 09:32:07 Nouveau dossier', '']
+2019-08-22 16:31:19,476 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé avec 21 sous-répertoires ou fichiers
+2019-08-22 16:31:19,476 [DEBUG] monte: Lancement de 'monte' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2019-08-22 16:31:19,477 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2019-08-22 16:31:19,477 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2019-08-22 16:31:19,477 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2019-08-22 16:31:19,582 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet' non trouvé
+2019-08-22 16:31:19,583 [DEBUG] monte: Le répertoire /media/johannes/Extension/Temp/sauvegarde/home_internet n'est pas accessible
+2019-08-22 16:31:19,583 [INFO] <module>: essai-Le répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet' n'est pas accessible et aucune instruction de montage
+			n'est disponible
+2019-08-22 16:31:19,584 [WARNING] <module>: essai-La sauvegarde  est abandonnée, les répertoires ne sont pas accessibles
+2019-08-22 16:31:19,584 [DEBUG] demonte: Lancement de 'demonte'
+2019-08-22 16:31:19,584 [DEBUG] demonte: {None}
+2019-08-22 16:31:19,584 [DEBUG] sauv_arbre: Lancement de 'sauv_arbre'
+2019-08-22 16:31:19,585 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2019-08-22 16:31:19,586 [INFO] deverrouille: suppression du verrou de la sauvegarde
+2019-08-22 16:31:19,586 [INFO] <module>: --------------- Fin de la sauvegarde ------------------
+2019-08-22 16:31:45,870 [INFO] <module>:  
+2019-08-22 16:31:45,870 [INFO] <module>: Sauv.py version 0.49
+2019-08-22 16:31:45,870 [INFO] <module>: --------------- Début de la sauvegarde ------------------
+2019-08-22 16:31:45,870 [DEBUG] init_args: Lancement de 'init_args'
+2019-08-22 16:31:45,870 [DEBUG] init_args: résultat des arguments
+2019-08-22 16:31:45,870 [DEBUG] init_args: Namespace(force=True, ignore_verrou=True)
+2019-08-22 16:31:45,870 [DEBUG] init_para: Lancement de 'init_para'
+2019-08-22 16:31:45,870 [INFO] init_para: Début de lecture du fichier de configuration sauv.conf
+2019-08-22 16:31:45,871 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2019-08-22 16:31:45,871 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2019-08-22 16:31:45,871 [DEBUG] chemin_invalide: Lancement de 'chemin_invalide'
+2019-08-22 16:31:45,871 [INFO] init_para: Sortie normale de l'analyse des paramètres de sauvegarde 'essai'
+2019-08-22 16:31:45,871 [DEBUG] charge_arbre: Lancement de 'charge_arbre'
+2019-08-22 16:31:45,872 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2019-08-22 16:31:45,873 [INFO] deverrouille: le fichier verrou n'existe pas
+2019-08-22 16:31:45,873 [DEBUG] verrouille: Lancement de 'verrouille'
+2019-08-22 16:31:45,873 [INFO] <module>: ----------------------------------------------------------------------------------------------------
+
+			-------------------------  Début de sauvegarde [essai] --------------------------------------------------
+2019-08-22 16:31:45,873 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2019-08-22 16:31:45,873 [INFO] pas_de_sauv: sauvegarde forcée
+2019-08-22 16:31:45,873 [DEBUG] monte: Lancement de 'monte' /home/isabelle;192.168.1.29::internet_home/isabelle/Musique
+2019-08-22 16:31:45,873 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /home/isabelle
+2019-08-22 16:31:45,873 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/home/isabelle']
+2019-08-22 16:31:45,873 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/home/isabelle']
+2019-08-22 16:31:45,876 [DEBUG] repertoire_accessible: Répertoire '/home/isabelle' non trouvé
+2019-08-22 16:31:45,876 [DEBUG] monte: Le répertoire /home/isabelle n'est pas accessible
+2019-08-22 16:31:45,876 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2019-08-22 16:31:45,876 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2019-08-22 16:31:45,876 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2019-08-22 16:31:46,015 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2019-08-22 16:31:46,016 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé 
+2019-08-22 16:31:46,016 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '192.168.1.29::internet_home/isabelle/Musique/']
+2019-08-22 16:31:46,155 [DEBUG] monte: ['drwxr-xr-x          4,096 2019/04/06 09:50:22 .', '-rw-r--r--      3,169,540 2017/03/08 11:48:06 Amir - On dirait (Clip officiel).mp3', "-rw-r-----      2,160,587 2015/03/15 13:59:57 Au chant de l'alouette.mp3", '-rw-r-----      3,149,480 2015/03/01 13:47:35 Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3', '-rw-r--r--      2,981,334 2013/09/28 13:00:46 Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3', "-rw-r-----      3,365,021 2015/03/01 13:49:51 Indochine - J'Ai Demandé A La Lune.mp3", '-rw-rw-r--      2,608,639 2017/01/14 09:56:37 Je suis Vaiana (Le chant des ancêtres).mp3', '-rw-r-----      3,601,712 2015/03/08 10:05:09 La reine des neiges - Libérée, délivrée (Instrumental).mp3', "-rw-r--r--      2,195,153 2013/09/28 13:02:34 Les Choristes - Caresse Sur L'Océan.mp3", '-rw-rw-r--      2,082,428 2017/01/14 10:01:18 Logo Te Pate.mp3', '-rw-r--r--      3,388,845 2013/11/11 10:34:52 Lorie - Sur Un Air Latino.mp3', '-rw-r--r--      3,036,630 2013/09/28 12:59:08 Mucho - El Sol De Maria.mp3', '-rw-rw-r--      3,368,071 2017/01/14 09:59:49 Notre terre.mp3', '-rw-r-----    261,138,758 2015/02/06 15:17:34 Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar', '-rw-rw-r--      2,598,608 2017/01/14 09:58:55 VAIANA - Pour les hommes (clip entier).mp3', '-rw-rw-r--      2,909,987 2017/01/14 10:00:35 Vaiana - Bling bling (lyrics).mp3', "-rw-rw-r--      2,218,683 2017/01/14 09:57:40 Vaiana - L'explorateur (lyrics).mp3", '-rw-rw-r--      2,593,174 2017/01/14 09:58:17 Vaiana - Le bleu lumière (lyrics).mp3', 'drwx------          4,096 2017/05/14 15:47:25 Musiques de gym', 'drwxrwxr-x          4,096 2015/07/31 09:32:07 Nouveau dossier', '']
+2019-08-22 16:31:46,156 [DEBUG] monte: 192.168.1.29::internet_home/isabelle/Musique est trouvé avec 21 sous-répertoires ou fichiers
+2019-08-22 16:31:46,156 [DEBUG] monte: Lancement de 'monte' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2019-08-22 16:31:46,156 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet
+2019-08-22 16:31:46,157 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2019-08-22 16:31:46,157 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet']
+2019-08-22 16:31:46,169 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet' trouvé
+2019-08-22 16:31:46,170 [DEBUG] monte: /media/johannes/Extension/Temp/sauvegarde/home_internet est trouvé 
+2019-08-22 16:31:46,170 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '/media/johannes/Extension/Temp/sauvegarde/home_internet/']
+2019-08-22 16:31:46,232 [DEBUG] monte: ['drwxrwxrwx          4,096 2019/08/21 16:26:18 .', 'drwxrwxrwx              0 2017/10/11 22:17:28 2017-10-11 22-17_2', 'drwxrwxrwx              0 2018/03/12 10:10:31 2018-01-12 20-25_2', 'drwxrwxrwx              0 2018/11/01 20:15:36 2018-11-01 20-15_2', 'drwxrwxrwx              0 2019/08/21 16:26:12 2019-08-21 16-26_2', '']
+2019-08-22 16:31:46,233 [DEBUG] monte: /media/johannes/Extension/Temp/sauvegarde/home_internet est trouvé avec 6 sous-répertoires ou fichiers
+2019-08-22 16:31:46,233 [DEBUG] verifie_arbre: Lancement de 'verifie_arbre'
+2019-08-22 16:31:46,233 [DEBUG] verifie_arbre: début d'analyse de l'historique des sauvegardes de essai
+2019-08-22 16:31:46,233 [DEBUG] verifie_arbre: Analyse du répertoire'2017-10-11 22-17_2'
+2019-08-22 16:31:46,233 [INFO] verifie_arbre: Répertoire '2017-10-11 22-17_2' validé
+2019-08-22 16:31:46,233 [DEBUG] verifie_arbre: <objet Cliche date:2017-10-11 22-17, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2017-10-11 22-17_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2019-08-22 16:31:46,233 [DEBUG] verifie_arbre: Analyse du répertoire'2018-01-12 20-25_2'
+2019-08-22 16:31:46,233 [INFO] verifie_arbre: Répertoire '2018-01-12 20-25_2' validé
+2019-08-22 16:31:46,233 [DEBUG] verifie_arbre: <objet Cliche date:2018-01-12 20-25, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-01-12 20-25_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2019-08-22 16:31:46,233 [DEBUG] verifie_arbre: Analyse du répertoire'2018-11-01 20-15_2'
+2019-08-22 16:31:46,233 [INFO] verifie_arbre: Répertoire '2018-11-01 20-15_2' validé
+2019-08-22 16:31:46,233 [DEBUG] verifie_arbre: <objet Cliche date:2018-11-01 20-15, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2018-11-01 20-15_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2019-08-22 16:31:46,233 [DEBUG] verifie_arbre: Analyse du répertoire'2019-08-21 16-26_2'
+2019-08-22 16:31:46,233 [INFO] verifie_arbre: Répertoire '2019-08-21 16-26_2' validé
+2019-08-22 16:31:46,234 [DEBUG] verifie_arbre: <objet Cliche date:2019-08-21 16-26, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_2, reussi:None, signale_erreur:None, md5:None, taille:0, noeud:{}>
+2019-08-22 16:31:46,234 [INFO] comparaison_arbre: Les sauvegardes en mémoire et sur disques sont identiques 
+2019-08-22 16:31:46,234 [DEBUG] pas_de_sauv: Lancement de 'pas_de_sauv'
+2019-08-22 16:31:46,234 [INFO] pas_de_sauv: sauvegarde forcée
+2019-08-22 16:31:46,234 [DEBUG] copie: Lancement de 'copie'
+2019-08-22 16:31:46,234 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' 192.168.1.29::internet_home/isabelle/Musique
+2019-08-22 16:31:46,234 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2019-08-22 16:31:46,234 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '192.168.1.29::internet_home/isabelle/Musique']
+2019-08-22 16:31:46,371 [DEBUG] repertoire_accessible: Répertoire '192.168.1.29::internet_home/isabelle/Musique' trouvé
+2019-08-22 16:31:46,372 [DEBUG] repertoire_accessible: Lancement de 'repertoire_accessible' /media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_2
+2019-08-22 16:31:46,373 [DEBUG] repertoire_accessible: ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_2']
+2019-08-22 16:31:46,373 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '--list-only', '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_2']
+2019-08-22 16:31:46,379 [DEBUG] repertoire_accessible: Répertoire '/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_2' trouvé
+2019-08-22 16:31:46,379 [INFO] copie: copie de 192.168.1.29::internet_home/isabelle/Musique vers /media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-22 16-31_1
+2019-08-22 16:31:46,380 [DEBUG] copie: Commande:['rsync', '-rv', '--delete', '--filter=. /home/johannes/programme/centralkeeper/filter.conf', '--link-dest=/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_2', '192.168.1.29::internet_home/isabelle/Musique', '/media/johannes/Extension/Temp/sauvegarde/home_internet/temp']
+2019-08-22 16:31:46,380 [DEBUG] commande_ext: Lancement de 'commande_ext' avec ['rsync', '-rv', '--delete', '--filter=. /home/johannes/programme/centralkeeper/filter.conf', '--link-dest=/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-21 16-26_2', '192.168.1.29::internet_home/isabelle/Musique', '/media/johannes/Extension/Temp/sauvegarde/home_internet/temp']
+2019-08-22 16:31:53,003 [INFO] commande_ext: Retour de la commande:
+2019-08-22 16:31:53,004 [INFO] commande_ext: receiving incremental file list
+2019-08-22 16:31:53,004 [INFO] commande_ext: created directory /media/johannes/Extension/Temp/sauvegarde/home_internet/temp
+2019-08-22 16:31:53,004 [INFO] commande_ext: Musique/Amir - On dirait (Clip officiel).mp3
+2019-08-22 16:31:53,004 [INFO] commande_ext: Musique/Au chant de l'alouette.mp3
+2019-08-22 16:31:53,004 [INFO] commande_ext: Musique/Chanson pour enfants - La Forêt - Nouveauté 2013 - Chanson sur les animaux de la forêt.mp3
+2019-08-22 16:31:53,004 [INFO] commande_ext: Musique/Génération Goldman - Tal & MPokora - Envole moi [Officiel Lyrics].mp3
+2019-08-22 16:31:53,005 [INFO] commande_ext: Musique/Indochine - J'Ai Demandé A La Lune.mp3
+2019-08-22 16:31:53,005 [INFO] commande_ext: Musique/Je suis Vaiana (Le chant des ancêtres).mp3
+2019-08-22 16:31:53,005 [INFO] commande_ext: Musique/La reine des neiges - Libérée, délivrée (Instrumental).mp3
+2019-08-22 16:31:53,005 [INFO] commande_ext: Musique/Les Choristes - Caresse Sur L'Océan.mp3
+2019-08-22 16:31:53,006 [INFO] commande_ext: Musique/Logo Te Pate.mp3
+2019-08-22 16:31:53,006 [INFO] commande_ext: Musique/Lorie - Sur Un Air Latino.mp3
+2019-08-22 16:31:53,006 [INFO] commande_ext: Musique/Mucho - El Sol De Maria.mp3
+2019-08-22 16:31:53,006 [INFO] commande_ext: Musique/Notre terre.mp3
+2019-08-22 16:31:53,006 [INFO] commande_ext: Musique/Tal-A_Linfini_(Edition_Collector)-2CD-(WEB)-FR-2013-AMG.www.zone-telechargement.com.rar
+2019-08-22 16:31:53,006 [INFO] commande_ext: Musique/VAIANA - Pour les hommes (clip entier).mp3
+2019-08-22 16:31:53,007 [INFO] commande_ext: Musique/Vaiana - Bling bling (lyrics).mp3
+2019-08-22 16:31:53,007 [INFO] commande_ext: Musique/Vaiana - L'explorateur (lyrics).mp3
+2019-08-22 16:31:53,007 [INFO] commande_ext: Musique/Vaiana - Le bleu lumière (lyrics).mp3
+2019-08-22 16:31:53,007 [INFO] commande_ext: Musique/Musiques de gym/Floor Music Gymnastics- Tosca Fantasy (1 Minute).mp3
+2019-08-22 16:31:53,007 [INFO] commande_ext: Musique/Musiques de gym/Floor music - Narnia Voyage of the Dawn.mp3
+2019-08-22 16:31:53,007 [INFO] commande_ext: Musique/Musiques de gym/mambo5.mp3
+2019-08-22 16:31:53,007 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Amour d'été (Clip Officiel).mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Bye Bye (Clip Officiel).mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/ADICT - Dis Moi Tout (Clip Officiel).mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Aux arbres citoyens.mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Becky G - Shower (Audio).mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Black M - Je garde le sourire.mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Black M - On S'Fait Du Mal.mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Charli XCX - Break The Rules [Official Video].mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Icona Pop - I Love It.mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Indila - Love Story.mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Kendji Girac - Andalouse.mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Kendji Girac - Mon Univers [OFFICIEL] [ALBUM].mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Le pouvoir des fleurs - Laurent Voulzy   paroles.mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/MAGIC SYSTEM - Magic In The Air Feat. Chawki (Clip Officiel).mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Mika - Elle Me Dit (clip officiel).mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Naturally.mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez &amp; The Scene - Un Año Sin Lluvia.mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez - Round and Round lyrics.mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Selena Gomez - Slow Down.mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Shin Sekaï - Si j'étais.mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Shy'm - Je Sais.mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Soprano - Cosmo [ clip Officiel] #Cosmofolie.mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/TAL - Marcher au Soleil [Clip officiel].mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Team BS - 1. 2. 3. [Audio].mp3
+2019-08-22 16:31:53,008 [INFO] commande_ext: Musique/Nouveau dossier/Team BS - Mon Destin [Audio].mp3
+2019-08-22 16:31:53,009 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/France Gall - Cézanne peint - (1985) - HQ!.mp3
+2019-08-22 16:31:53,009 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/Le Cirque   Yves Duteil.mp3
+2019-08-22 16:31:53,009 [INFO] commande_ext: Musique/Nouveau dossier/Nouveau/Veronique Sanson - Rien que de l'eau.mp3
+2019-08-22 16:31:53,009 [INFO] commande_ext: 
+2019-08-22 16:31:53,009 [INFO] commande_ext: sent 607,259 bytes  received 397,899 bytes  154,639.69 bytes/sec
+2019-08-22 16:31:53,009 [INFO] commande_ext: total size is 406,352,493  speedup is 404.27
+2019-08-22 16:31:53,009 [INFO] commande_ext: 
+2019-08-22 16:31:53,009 [DEBUG] analyse_retour_pour_bilan: Ligne 'sent received' trouvée 
+2019-08-22 16:31:53,009 [DEBUG] analyse_retour_pour_bilan: Ligne total size' trouvée 
+2019-08-22 16:31:53,010 [INFO] copie: renomme /media/johannes/Extension/Temp/sauvegarde/home_internet/temp en /media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-22 16-31_1
+2019-08-22 16:31:53,010 [INFO] analyse: analyse de /media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-22 16-31_1
+2019-08-22 16:31:53,015 [DEBUG] <module>: nouveau cliché ajouté à l'arbre de essai:
+2019-08-22 16:31:53,015 [DEBUG] <module>: <objet Cliche date:2019-08-22 16-31, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-22 16-31_1, reussi:True, signale_erreur:None, md5:False, taille:406352493, noeud:{'15338': 3169540, '15339': 2160587, '15340': 3149480, '15342': 2981334, '15343': 3365021, '16985': 2608639, '16988': 3601712, '16989': 2195153, '16990': 2082428, '16994': 3388845, '16995': 3036630, '16997': 3368071, '16998': 261138758, '17004': 2909987, '17005': 2218683, '17006': 2593174, '17003': 2598608, '17008': 1062610, '17007': 961886, '17009': 1433565, '17021': 3281137, '17010': 3246865, '17011': 3443879, '17012': 3509499, '17013': 3161893, '17014': 3333800, '17015': 3720288, '17016': 3469637, '17017': 3295086, '17018': 2869185, '17019': 4552151, '17020': 3255098, '17022': 3458094, '17023': 3734623, '17024': 3463659, '17025': 2980916, '17026': 3366975, '17027': 3247992, '17028': 3362639, '17029': 3455008, '17030': 2979109, '17031': 4145633, '17032': 3238923, '17033': 3138613, '17034': 3504745, '17035': 3831171, '17036': 3062962, '17037': 4218202}>
+2019-08-22 16:31:53,015 [DEBUG] reduit_inode: Test de date: 2017-10-11 22:17:00 >= 2018-01-12 20:25:00
+2019-08-22 16:31:53,015 [DEBUG] reduit_inode: Test de date: 2018-01-12 20:25:00 >= 2018-11-01 20:15:00
+2019-08-22 16:31:53,015 [DEBUG] reduit_inode: Test de date: 2018-11-01 20:15:00 >= 2019-08-21 16:26:00
+2019-08-22 16:31:53,015 [DEBUG] reduit_inode: Test de date: 2019-08-21 16:26:00 >= 2019-08-22 16:31:46.379739
+2019-08-22 16:31:53,015 [DEBUG] analyse_repertoire: Lancement de 'analyse_repertoire'
+2019-08-22 16:31:53,015 [DEBUG] regroupe: Lancement de 'regroupe'
+2019-08-22 16:31:53,015 [INFO] regroupe: Renomme le répertoire 2019-08-22 16-31_1 
+2019-08-22 16:31:53,015 [INFO] regroupe: en 2019-08-22 16-31_2 
+2019-08-22 16:31:53,015 [DEBUG] regroupe: renomme /media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-22 16-31_1 en /media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-22 16-31_2
+2019-08-22 16:31:53,045 [INFO] reduction: Objectif: 30,000,000,000
+2019-08-22 16:31:53,045 [INFO] reduction: Pas besoin de réduction
+2019-08-22 16:31:53,045 [DEBUG] calcul_retention: entrée dans calcul_rétention
+2019-08-22 16:31:53,046 [DEBUG] calcul_retention: recherche 5 warning consécutifs
+2019-08-22 16:31:53,046 [DEBUG] calcul_retention: 0:.......................................
+2019-08-22 16:31:53,046 [DEBUG] calcul_retention: <objet Cliche date:2019-08-22 16-31, chemin:/media/johannes/Extension/Temp/sauvegarde/home_internet/2019-08-22 16-31_2, reussi:True, signale_erreur:None, md5:False, taille:406352493, noeud:{'15338': 3169540, '15339': 2160587, '15340': 3149480, '15342': 2981334, '15343': 3365021, '16985': 2608639, '16988': 3601712, '16989': 2195153, '16990': 2082428, '16994': 3388845, '16995': 3036630, '16997': 3368071, '16998': 261138758, '17004': 2909987, '17005': 2218683, '17006': 2593174, '17003': 2598608, '17008': 1062610, '17007': 961886, '17009': 1433565, '17021': 3281137, '17010': 3246865, '17011': 3443879, '17012': 3509499, '17013': 3161893, '17014': 3333800, '17015': 3720288, '17016': 3469637, '17017': 3295086, '17018': 2869185, '17019': 4552151, '17020': 3255098, '17022': 3458094, '17023': 3734623, '17024': 3463659, '17025': 2980916, '17026': 3366975, '17027': 3247992, '17028': 3362639, '17029': 3455008, '17030': 2979109, '17031': 4145633, '17032': 3238923, '17033': 3138613, '17034': 3504745, '17035': 3831171, '17036': 3062962, '17037': 4218202}>
+2019-08-22 16:31:53,046 [INFO] ecriture_bilan: ecriture des données dans /home/johannes/programme/centralkeeper/bilan.dbf
+2019-08-22 16:31:53,046 [DEBUG] ecriture_bilan: {'datecliche': '2019-08-22 16-31', 'vtransfere': 1005158, 'vcliche': 406352493, 'debit': 404.27, 'job': 'essai', 'avec_hash': False, 'oduree1': '2', 'oduree2': '48', 'oduree3': '1000', 'odureeg': 1050.0, 'duree2': 679.0, 'dureeg': 679.0, 'vsauvegard': 848704524, 'ovsauvegar': 30}
+2019-08-22 16:31:53,047 [DEBUG] demonte: Lancement de 'demonte'
+2019-08-22 16:31:53,048 [DEBUG] demonte: {None}
+2019-08-22 16:31:53,048 [DEBUG] sauv_arbre: Lancement de 'sauv_arbre'
+2019-08-22 16:31:53,048 [DEBUG] deverrouille: Lancement de 'deverrouille'
+2019-08-22 16:31:53,048 [INFO] deverrouille: suppression du verrou de la sauvegarde
+2019-08-22 16:31:53,048 [INFO] <module>: --------------- Fin de la sauvegarde ------------------

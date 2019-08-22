@@ -62,7 +62,7 @@
 #version = 0.42 # réorganisation de l'écriture de bilan
 # 07-11-2018
 
-version = 0.49
+version = 0.50
 #voir modification dans les commits
 
 import argparse
@@ -1780,7 +1780,7 @@ def gestion_des_alertes(err_cour, err_prec, sauv):
 	""" envoi un warning si le nombre d'erreur inférieur à nbr_err_muette,
 	gère le dictionnaire des erreurs précédentes
 	paramètres:
-		err_cour: string, erreur courante
+		err_cour: Error, erreur courante
 		err_prec:{} données des erreurs précédentes
 			'err_nombre':nombre d'erreur consécutive; si absent: 0
 			'err_dernier_texte': description de la dernière; si absent: ""
@@ -1796,19 +1796,19 @@ def gestion_des_alertes(err_cour, err_prec, sauv):
 			logger.warning("{}-précédente erreur: {}".format(sauv, err_prec['err_dernier_texte']))
 		except IndexError:
 			None
-		logger.warning("{}-erreur courante:{}".format(sauv, err_cour))
+		logger.warning("{}-erreur courante:{}".format(sauv, str(err_cour)))
 
 		err_prec['err_dernier_texte'] = ""
 
 	else :
 		if err_prec['err_nombre'] > nbr_err_muette:
 			logger.warning("{}- {} erreurs consécutives sont détectées".format(sauv, err_prec['err_nombre']))
-			logger.warning("{}-erreur courante:{}".format(sauv, err_cour))
+			logger.warning("{}-erreur courante:{}".format(sauv, str(err_cour)))
 		else:
 			# si masquée
-			logger.debug("{}-Une erreur est masquée:{}".format(sauv, err_cour))
+			logger.debug("{}-Une erreur est masquée:{}".format(sauv, str(err_cour)))
 
-			err_prec['err_dernier_texte'] = err_cour
+			err_prec['err_dernier_texte'] = str(err_cour)
 
 	err_prec['err_nombre'] = err_prec['err_nombre'] + 1
 
@@ -1916,8 +1916,10 @@ if __name__ == '__main__':
 		except (OSError, InitErreur) as exception:
 			gestion_des_alertes(exception, err_prec[sauv], sauv)
 			continue
-
+		# réinitialisation des erreurs antérieures après un fonctionnement sans erreur
+		# TODO remplacer les textes de structure de données par des constantes
 		err_prec[sauv]['err_nombre'] = 0
+		err_prec[sauv]['err_dernier_texte'] = ""
 
 		if cliche:
 			arbre[sauv][0].insert(0, cliche)
