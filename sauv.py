@@ -62,7 +62,7 @@
 #version = 0.42 # réorganisation de l'écriture de bilan
 # 07-11-2018
 
-version = 0.50
+version = 0.52
 #voir modification dans les commits
 
 import argparse
@@ -1875,7 +1875,7 @@ if __name__ == '__main__':
 	
 	for sauv in config.sections():
 		
-		logger.info("""----------------------------------------------------------------------------------------------------\n
+		logger.info("""\n\n\n\n----------------------------------------------------------------------------------------------------\n
 			-------------------------  Début de sauvegarde [{0}] --------------------------------------------------""".format(
 			sauv))
 		# créé une branche vide pour l'arbre si elle n'existe pas
@@ -1918,8 +1918,9 @@ if __name__ == '__main__':
 			continue
 		# réinitialisation des erreurs antérieures après un fonctionnement sans erreur
 		# TODO remplacer les textes de structure de données par des constantes
-		err_prec[sauv]['err_nombre'] = 0
-		err_prec[sauv]['err_dernier_texte'] = ""
+		else:
+			err_prec[sauv]['err_nombre'] = 0
+			err_prec[sauv]['err_dernier_texte'] = ""
 
 		if cliche:
 			arbre[sauv][0].insert(0, cliche)
@@ -1942,14 +1943,15 @@ if __name__ == '__main__':
 				ecriture_bilan(config[sauv], cliche)
 			except (FileNotFoundError, dbf.DbfError) as exception:
 				logger.warning("{}-l'écriture du bilan impossible: {}".format(sauv, exception))
+
+		try:
+			sauv_arbre(chemin_arbre, arbre, rappel, err_prec)
+		except SyntaxError as exception:
+			logger.warning(exception)
 	
 	demonte(a_demonter)
 	
-	try:
-		sauv_arbre(chemin_arbre, arbre, rappel, err_prec)
-	except SyntaxError as exception:
-		logger.warning(exception)
-	
+
 	deverrouille()
 	logger.info("--------------- Fin de la sauvegarde ------------------")
 # else:
