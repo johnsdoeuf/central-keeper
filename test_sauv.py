@@ -10,7 +10,9 @@ import json
 import glob
 from pathlib import Path
 import unittest.mock
+import psutil
 import time
+import subprocess
 
 def config_log():
 	sauv.logger = unittest.mock.Mock()
@@ -181,6 +183,7 @@ class verifie_arbre(unittest.TestCase):
 		self.config['dessus'] = {sauv.dest: self.repsauv}
 	
 	def tearDown(self):
+		fin_log()
 		try:
 			shutil.rmtree(self.repsauv)
 		except OSError:
@@ -304,6 +307,7 @@ class Init_log(unittest.TestCase):
 		config_log()
 	
 	def tearDown(self):
+		fin_log()
 		try:
 			os.remove(self.fichconf)
 		except OSError:
@@ -366,48 +370,86 @@ class Init_log(unittest.TestCase):
 
 
 class Verrou(unittest.TestCase):
+	fichverrou = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'essai.lock')
 	
 	def setUp(self):
-		sauv.logger = logging.getLogger(__name__)
+		config_log()
+		try:
+			os.remove(self.fichverrou)
+		except OSError:
+			pass
 	
 	def tearDown(self):
+		fin_log()
 		try:
-			del os.environ[sauv.var_env_verrou]
-		except KeyError:
+			os.remove(self.fichverrou)
+		except OSError:
 			pass
 	
 	def test_fonctionnel(self):
 		"""test fonctionnel de verrouille puis déverrouille"""
 		
-		self.assertTrue(sauv.verrouille())
-		self.assertTrue(sauv.var_env_verrou in os.environ)
+		# vérifie le retour
+		self.assertTrue(sauv.verrouille(self.fichverrou))
+		# vérifie la présence du fichier
+		self.assertTrue(os.path.exists(self.fichverrou))
+		# vérifie que le fichier contient un nombre
+		with open(self.fichverrou, 'r', encoding='utf8') as f:
+			self.assertLess( int(f.read()), 10000)
+		# vérifie la coérence de la date dud fichier
 		maintenant = (datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds() - 2 * 60 * 60 - 10
-		self.assertLess(maintenant, float(os.environ[sauv.var_env_verrou]))
+		self.assertLess(maintenant, os.stat(self.fichverrou).st_mtime)
 		
-		sauv.deverrouille()
-		self.assertFalse(sauv.var_env_verrou in os.environ)
+		sauv.deverrouille(self.fichverrou)
+		self.assertFalse(os.path.exists(self.fichverrou))
 	
-	def test_verrou_présent(self):
-		"""test du comportement si un lock existe déjà"""
-		# créé le verrou
-		os.environ[sauv.var_env_verrou] = str(
-			(datetime.datetime.now() - datetime.datetime(1970, 1, 1) - datetime.timedelta(
-				hours=4, minutes=3)).total_seconds())
-		self.assertFalse(sauv.verrouille())
+	def test_sauvegarde_en_cours(self):
+		"""test du comportement si un fichier lock existe déjà"""
+		# créé un fichier avec le pid de ce programme
+		with open(self.fichverrou, 'w', encoding='utf8') as f:
+			f.write("{0}".format(os.getpid() ))
+			
+		self.assertFalse(sauv.verrouille(self.fichverrou))
+
+		with open(self.fichverrou, 'r', encoding='utf8') as f:
+			self.assertEqual(f.read(),"{0}".format(os.getpid() ))
 		
-		os.environ[sauv.var_env_verrou] = str(
-			(datetime.datetime.now() - datetime.datetime(1970, 1, 1) - datetime.timedelta(
-				hours=21, minutes=50)).total_seconds())
-		self.assertFalse(sauv.verrouille())
-		#
-		os.environ[sauv.var_env_verrou] = str(
-			(datetime.datetime.now() - datetime.datetime(1970, 1, 1) - datetime.timedelta(
-				days=2, hours=0, minutes=3)).total_seconds())
-		self.assertTrue(sauv.verrouille())
+
+	def test_apres_coupure(self):
+		"""test si le verrou est bien écrasé après coupure"""
 		
+		# créé un fichier avec un pid inutilisé
+		pid = os.getpid() + 1
+		while psutil.pid_exists(pid):
+			pid = pid + 1
+		with open(self.fichverrou, 'w', encoding='utf8') as f:
+			f.write("{0}".format(pid))
+		
+		self.assertTrue(sauv.verrouille(self.fichverrou))
 		# test si un nouveau verrou a bien été créé
-		maintenant = (datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds()
-		self.assertLess(maintenant - float(os.environ[sauv.var_env_verrou]), 5)
+		with open(self.fichverrou, 'r', encoding='utf8') as f:
+			self.assertNotEqual(pid,int(f.read()) )
+	
+	def test_deverouille_bloqué(self):
+		"""test deverrouille avec fichier ouvert"""
+		with open(self.fichverrou, 'w', encoding='utf8') as f:
+			f.write("Lancement d'une sauvegarde le {0}".format(datetime.datetime.now()))
+			
+			sauv.deverrouille(self.fichverrou)
+			sauv.logger.error.assert_called_once()
+			self.assertTrue(os.path.exists(self.fichverrou))
+	
+	def test_pid_errone(self):
+		"""test si le verrou est bien écrasé si le contenu du verrou ne contient pas un pid """
+		
+		# créé un fichier avec un texte
+		with open(self.fichverrou, 'w', encoding='utf8') as f:
+			f.write("erreur")
+		
+		self.assertTrue(sauv.verrouille(self.fichverrou))
+		# test si un nouveau verrou a bien été créé
+		with open(self.fichverrou, 'r', encoding='utf8') as f:
+			int(f.read())
 
 
 class monte(unittest.TestCase):
@@ -526,6 +568,7 @@ class Copie(unittest.TestCase):
 			pass
 	
 	def tearDown(self):
+		fin_log()
 		try:
 			shutil.rmtree(self.source)
 			shutil.rmtree(os.path.join(os.path.split(__file__)[0], 'sauvegarde'))
@@ -703,6 +746,7 @@ class rep_accessible(unittest.TestCase):
 		config_log()
 	
 	def tearDown(self):
+		fin_log()
 		try:
 			shutil.rmtree(self.repsauv)
 		except OSError:
@@ -742,6 +786,7 @@ class charge_arbre(unittest.TestCase):
 		config_log()
 	
 	def tearDown(self):
+		fin_log()
 		try:
 			os.remove(self.fich)
 		except OSError:
@@ -887,6 +932,7 @@ class Cliche(unittest.TestCase):
 			pass
 	
 	def tearDown(self):
+		fin_log()
 		try:
 			shutil.rmtree(self.repsauv)
 		except OSError:
@@ -985,6 +1031,7 @@ class reduit_inode(unittest.TestCase):
 		config_log()
 	
 	def tearDown(self):
+		fin_log()
 		pass
 	
 	def test_fonctionnel(self):
@@ -1073,6 +1120,7 @@ class sauv_arbre(unittest.TestCase):
 		config_log()
 	
 	def tearDown(self):
+		fin_log()
 		try:
 			os.remove(self.fich)
 		except OSError:
@@ -1194,6 +1242,7 @@ class fusion_rep(unittest.TestCase):
 			pass
 	
 	def tearDown(self):
+		fin_log()
 		try:
 			shutil.rmtree(self.rep)
 		except OSError:
@@ -1356,6 +1405,7 @@ class regroupe(unittest.TestCase):
 			pass
 	
 	def tearDown(self):
+		fin_log()
 		try:
 			shutil.rmtree(self.rep)
 		except OSError:
@@ -1801,6 +1851,7 @@ class reduction(unittest.TestCase):
 			pass
 	
 	def tearDown(self):
+		fin_log()
 		try:
 			shutil.rmtree(self.rep)
 		except OSError:
@@ -2120,6 +2171,7 @@ class Ecriture_Bilan(unittest.TestCase):
 		self.config['sauv'] = {}
 	
 	def tearDown(self):
+		fin_log()
 		try:
 			shutil.rmtree(os.path.split(self.rep)[0])
 		except OSError:
@@ -2229,6 +2281,7 @@ class Calcul_Retention(unittest.TestCase):
 		self.config['sauv'] = {}
 	
 	def tearDown(self):
+		fin_log()
 		self.cli = None
 		self.config = None
 	
@@ -2394,6 +2447,7 @@ class analyse_retour_pour_bilan(unittest.TestCase):
 		self.cli = sauv.Cliche(datetime.datetime(2017, 3, 1), "chemin")
 	
 	def tearDown(self):
+		fin_log()
 		self.cli = None
 	
 	def test_fonctionnel(self):
@@ -2437,6 +2491,7 @@ class gestion_des_rappels(unittest.TestCase):
 		self.maintenant = datetime.datetime.now()
 	
 	def tearDown(self):
+		fin_log()
 		self.cli = None
 
 	def test_fonctionnel(self):
@@ -2509,6 +2564,7 @@ class Gestion_Des_Alertes(unittest.TestCase):
 		config_log()
 
 	def tearDown(self):
+		fin_log()
 		None
 
 	def test_fonctionnel(self):
