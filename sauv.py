@@ -83,6 +83,7 @@ import time
 from pathlib import Path
 # from StringIO import StringIO
 import configparser
+# modules externes
 import dbf
 import psutil
 
@@ -1844,9 +1845,12 @@ if __name__ == '__main__':
 	# initialise l'interception générale des erreurs non gérées
 	sys.excepthook = attrape_exceptions
 	
-	logger.info(" ")  # intercalaire
-	logger.info("Sauv.py version {}".format(version))
+	logger.info("""
+	
+	
+	""")  # intercalaire
 	logger.info("--------------- Début de la sauvegarde ------------------")
+	logger.info("Sauv.py version {}".format(version))
 	
 	# Lecture des arguments
 	args = init_args()
@@ -1960,5 +1964,4 @@ if __name__ == '__main__':
 	
 	deverrouille(path_file_lock)
 	logger.info("--------------- Fin de la sauvegarde ------------------")
-# else:
-#    logger=logging.getLogger("main.sub")
+
