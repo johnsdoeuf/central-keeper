@@ -11,8 +11,7 @@ import glob
 from pathlib import Path
 import unittest.mock
 import psutil
-import time
-import subprocess
+
 
 def config_log():
 	sauv.logger = unittest.mock.Mock()

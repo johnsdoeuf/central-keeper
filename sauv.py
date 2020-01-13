@@ -62,7 +62,7 @@
 #version = 0.42 # réorganisation de l'écriture de bilan
 # 07-11-2018
 
-version = 0.52
+version = 0.56
 #voir modification dans les commits
 
 import argparse
@@ -1845,10 +1845,7 @@ if __name__ == '__main__':
 	# initialise l'interception générale des erreurs non gérées
 	sys.excepthook = attrape_exceptions
 	
-	logger.info("""
-	
-	
-	""")  # intercalaire
+	logger.info("""\n\n\n\n-----------------------------------------------------""")  # intercalaire
 	logger.info("--------------- Début de la sauvegarde ------------------")
 	logger.info("Sauv.py version {}".format(version))
 
@@ -1887,8 +1884,8 @@ if __name__ == '__main__':
 	
 	for sauv in config.sections():
 		
-		logger.info("""\n\n\n\n----------------------------------------------------------------------------------------------------\n
-			-------------------------  Début de sauvegarde [{0}] --------------------------------------------------""".format(
+		logger.info("""-------------------------------------------------------------------------------------------------\n
+			-------------------------  Début de sauvegarde [{0}] ---------------------------------------------""".format(
 			sauv))
 		# créé une branche vide pour l'arbre si elle n'existe pas
 		if sauv not in arbre:
@@ -1961,10 +1958,7 @@ if __name__ == '__main__':
 		except SyntaxError as exception:
 			logger.warning(exception)
 
-    demonte(a_demonter)
-
+	demonte(a_demonter)
 	deverrouille(path_file_lock)
-
-
 	logger.info("--------------- Fin de la sauvegarde ------------------")
 
