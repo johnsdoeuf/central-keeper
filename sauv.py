@@ -83,7 +83,9 @@ import time
 from pathlib import Path
 # from StringIO import StringIO
 import configparser
+# modules externes
 import dbf
+import psutil
 
 # clé du fichier de configuration (en minucule)
 per1 = 'periode1'
@@ -131,6 +133,8 @@ f_arbre = 'historique.sauv'
 process_en_cours = None
 # Nombre d'erreur sans warning
 nbr_err_muette = 1
+# fichier de lock
+f_lock='sauv.lock'
 
 bl_date = "datecliche"
 bl_job = "job"
@@ -1355,46 +1359,50 @@ def init_logging(fichier):
 	return logger
 
 
-def verrouille():
+def verrouille(flock):
 	logger.debug("Lancement de 'verrouille'")
 	
-	if var_env_verrou in os.environ:
-		# calcule le temps en heure depuis sa création. un décalage de une heure apparait en fonction des décalages
-		delai_h = ((datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds() - float(
-			os.environ[var_env_verrou])) / 3600
-		# si une autre sauvegarde n'est pas terminée
-		if delai_h < 14:
-			logger.info("une sauvegarde est déjà en cours depuis {0:.1f} heures".format(delai_h))
-			return False
+
+	if os.path.exists(flock):
+		# extrait le pid
+		with open(flock, 'r', encoding='utf8') as f:
+			try:
+				old_pid = f.read()
+			except  OSError:
+				old_pid = "erreur"
+
+		try:
+			old_pid = int(old_pid)
+		except ValueError:
+			deverrouille(flock)
 		else:
-			# si une autre sauvegarde date de plus d'un jour
-			if delai_h > 2 * 24:
-				logger.error("Un verrou de plus de deux jours est détecté. force la sauvegarde")
-				deverrouille()
-				return verrouille()
-			else:
+
+			if psutil.pid_exists(old_pid):
 				logger.warning("sauvegarde déjà verrouillée - sauvegarde annulée")
 				return False
-	else:
-		try:  # nombre de seconde depuis 1970
-			os.environ[var_env_verrou] = str((datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds())
+			else:
+				deverrouille(flock)
+
+	with open (flock, 'w', encoding='utf8') as f:
+		try:
+			f.write("{0}".format(os.getpid()))
 		except OSError:
 			logger.error("Impossible de créer le fichier de verrou")
 			return False
-		return True
+	return True
 
-
-def deverrouille():
+def deverrouille(flock):
 	logger.debug("Lancement de 'deverrouille'")
 	
-	if var_env_verrou in os.environ:
+	if os.path.exists(flock):
 		logger.info("suppression du verrou de la sauvegarde")
 		try:
-			del (os.environ[var_env_verrou])
-		except (OSError, KeyError):
-			logger.error("Suppression du verrou impossible")
+			os.remove(flock)
+		except OSError:
+			logger.error("Suppression du fichier verrou '{0}' impossible".format(flock))
 	else:
 		logger.info("le fichier verrou n'existe pas")
+
 
 
 def monte(sens, config):
@@ -1837,10 +1845,13 @@ if __name__ == '__main__':
 	# initialise l'interception générale des erreurs non gérées
 	sys.excepthook = attrape_exceptions
 	
-	logger.info(" ")  # intercalaire
-	logger.info("Sauv.py version {}".format(version))
-	logger.info("--------------- Début de la sauvegarde ------------------")
+	logger.info("""
 	
+	
+	""")  # intercalaire
+	logger.info("--------------- Début de la sauvegarde ------------------")
+	logger.info("Sauv.py version {}".format(version))
+
 	# Lecture des arguments
 	args = init_args()
 	
@@ -1864,11 +1875,12 @@ if __name__ == '__main__':
 		logger.warning(exception)
 	
 	# si l'argument ignore_verrou est demandé, supprime le verrou antérieur
+	path_file_lock = os.path.join(os.path.split(os.path.abspath(__file__))[0], f_lock)
 	if args.ignore_verrou:
-		deverrouille()
+		deverrouille(path_file_lock)
 	
 	# verrouille la sauvegarde pour éviter un second lancement
-	if not verrouille():
+	if not verrouille(path_file_lock):
 		sys.exit()
 	
 	a_demonter = set()
@@ -1948,11 +1960,11 @@ if __name__ == '__main__':
 			sauv_arbre(chemin_arbre, arbre, rappel, err_prec)
 		except SyntaxError as exception:
 			logger.warning(exception)
-	
-	demonte(a_demonter)
-	
 
-	deverrouille()
+    demonte(a_demonter)
+
+	deverrouille(path_file_lock)
+
+
 	logger.info("--------------- Fin de la sauvegarde ------------------")
-# else:
-#    logger=logging.getLogger("main.sub")
+
