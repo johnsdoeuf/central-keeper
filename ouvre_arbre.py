@@ -40,12 +40,6 @@ for clef, sauv in arbre.items():
 	if len(sauv) != 3:
 		raise SyntaxError("le fichier historique de '{}' ne comporte pas le bon nombre de niveau".format(clef))
 	
-	# # Vérification du contenu
-	# for niveau in sauv:
-	# 	for hsauv in niveau:
-	# 		if type(hsauv) != sauv.Cliche:
-	# 			raise SyntaxError(
-	# 				"Au moins un élément d'historique de '{0}' n'est pas valide : {1}".format(hsauv, clef))
 
 
 
