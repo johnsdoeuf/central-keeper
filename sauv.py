@@ -395,7 +395,10 @@ def fermer_programme(signal, frame):
 	if process_en_cours:
 		process_en_cours.terminate()
 	# déverrouille
-	deverrouille()
+	try:
+		deverrouille(path_file_lock)
+	except NameError:
+		logger.info("path_file_lock non défini")
 	# démonte les volumes
 	demonte(a_demonter)
 	
