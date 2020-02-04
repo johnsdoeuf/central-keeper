@@ -1,4 +1,5 @@
 import sauv
+from pathlib import Path
 
 f_arbre = "H:/Temp/historique.sauv"
 with  open(f_arbre, 'r', encoding='utf8') as f:
@@ -39,12 +40,14 @@ for clef, sauv in arbre.items():
 	if len(sauv) != 3:
 		raise SyntaxError("le fichier historique de '{}' ne comporte pas le bon nombre de niveau".format(clef))
 	
-	# # Vérification du contenu
-	# for niveau in sauv:
-	# 	for hsauv in niveau:
-	# 		if type(hsauv) != sauv.Cliche:
-	# 			raise SyntaxError(
-	# 				"Au moins un élément d'historique de '{0}' n'est pas valide : {1}".format(hsauv, clef))
 
 
 
+
+def test_fusion():
+	sauv.logger = sauv.logging.basicConfig(level=sauv.logging.DEBUG)
+	
+	src = Path('/media/sauv3T/jeux_home/2019-12-25 09-00_1_3645/johannes/snap/gnome-system-monitor/current/.local/share/icons/Papirus-Adapta-Maia')
+	dst = Path('/media/sauv3T/jeux_home/2019-12-25 10-00_1/johannes/snap/gnome-system-monitor/current/.local/share/icons/Papirus-Adapta-Maia')
+	
+	sauv.fusion_rep(src,dst)
