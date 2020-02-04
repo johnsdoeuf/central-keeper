@@ -62,7 +62,7 @@
 #version = 0.42 # réorganisation de l'écriture de bilan
 # 07-11-2018
 
-version = 0.56
+version = 0.57
 #voir modification dans les commits
 
 import argparse
@@ -1145,14 +1145,17 @@ def fusion_rep(src, dst):
 		# 	logger.debug("     {}".format(a))
 		
 		sdst = dst / elem.name
-		if elem.is_dir():
+
+		if elem.is_dir() and not elem.is_symlink():
 			if sdst.exists():
 				# regarde le niveau supérieur
 				fusion_rep(elem, sdst)
 			else:
+				if not sdst.parent.exists():
+					sdst.parent.mkdir(parents=True)
 				# déplace le répertoire
 				try:
-					os.renames(str(elem), str(sdst))
+					elem.replace(sdst)
 				except OSError as exception:
 					logger.error("erreur de déplacement du répertoire: {} dans '{}'".format(str(elem), str(sdst)))
 					logger.error("erreur: {}".format(exception))
@@ -1163,21 +1166,21 @@ def fusion_rep(src, dst):
 			logger.debug("déplacement du fichier: {} dans '{}'".format(str(elem), str(sdst)))
 			if sdst.exists():
 				try:
-					os.remove(str(sdst))
+					sdst.unlink()
 				except OSError as exception:
 					logger.error("erreur de supression du fichier: {} ".format(str(sdst)))
 					logger.error("erreur: {}".format(exception))
 					raise OSError("erreur de supression du fichier: {}".format(exception))
+
 			try:
-				
-				os.rename(str(elem), str(sdst))
+				elem.rename(sdst)
 			except OSError as exception:
 				logger.error("erreur de déplacement du fichier: {} dans '{}'".format(str(elem), str(sdst)))
 				logger.error("erreur: {}".format(exception))
 				raise OSError("erreur de déplacement du fichier: {}".format(exception))
 	# supprime le répertoire vidé
 	try:
-		os.rmdir(str(src))
+		src.rmdir()
 	except FileNotFoundError:
 		pass
 
