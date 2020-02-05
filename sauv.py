@@ -62,7 +62,7 @@
 #version = 0.42 # réorganisation de l'écriture de bilan
 # 07-11-2018
 
-version = 0.57
+version = 0.58
 #voir modification dans les commits
 
 import argparse
@@ -1164,7 +1164,7 @@ def fusion_rep(src, dst):
 		else:
 			# déplace le fichier
 			logger.debug("déplacement du fichier: {} dans '{}'".format(str(elem), str(sdst)))
-			if sdst.exists():
+			if sdst.exists() or sdst.is_symlink():
 				try:
 					sdst.unlink()
 				except OSError as exception:
