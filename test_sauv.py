@@ -394,7 +394,7 @@ class Verrou(unittest.TestCase):
 		self.assertTrue(os.path.exists(self.fichverrou))
 		# vérifie que le fichier contient un nombre
 		with open(self.fichverrou, 'r', encoding='utf8') as f:
-			self.assertLess( int(f.read()), 10000)
+			self.assertLess( int(f.read()), 100000)
 		# vérifie la coérence de la date dud fichier
 		maintenant = (datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds() - 2 * 60 * 60 - 10
 		self.assertLess(maintenant, os.stat(self.fichverrou).st_mtime)
@@ -582,6 +582,7 @@ class Copie(unittest.TestCase):
 		config.read_dict({'sauv': {sauv.src: '/dddfffff/ffrfff/erer', sauv.dest: '/'}})
 		
 		self.assertRaises(OSError, sauv.copie, config['sauv'], arbre)
+		sauv.logger.error.assert_not_called()
 	
 	def test_destination_absente(self):
 		"""teste destination absente"""
@@ -591,6 +592,7 @@ class Copie(unittest.TestCase):
 		shutil.rmtree(os.path.join(os.path.split(__file__)[0], 'sauvegarde'))
 		
 		self.assertRaises(OSError, sauv.copie, config, arbre)
+		sauv.logger.error.assert_not_called()
 	
 	def test_reference_absente(self):
 		"""teste reference_absente"""
@@ -621,15 +623,18 @@ class Copie(unittest.TestCase):
 			pass
 		
 		arbre = [[], [], []]
-		config = {sauv.src: source, sauv.dest: dest}
+		#config = {sauv.src: source, sauv.dest: dest}
+		config = configparser.ConfigParser()
+		config.read_dict({'sauv': {sauv.src: source, sauv.dest: dest}})
 		
 		# vérifie la sortie de la fonction
-		ret = sauv.copie(config, arbre)
+		ret = sauv.copie(config['sauv'], arbre)
 		self.assertTrue(ret.chemin[0:-12], (self.dest + datetime.datetime.now().strftime(sauv.formatdate))[0:-12])
 		self.assertEqual(ret.date.day, datetime.datetime.now().day)
 		# vérifie la taille
 		arbre[0].insert(0, ret)
 		self.assertEqual(sauv.taille_arbre(arbre), 30)
+
 	
 	def test_copie_avec_ref(self):
 		"""teste la copie avec lien en dur"""
@@ -728,8 +733,14 @@ class commande_ext(unittest.TestCase):
 	
 	def test_liste_multiple(self):
 		"""teste le passage de paramètres via une chaîne multiple"""
-		sauv.commande_ext(["ls", "-l"], False)
-	
+		ret = sauv.commande_ext(["ls", "-l"], False)
+		sauv.logger.info.assert_not_called()
+		
+	def test_le_retour(self):
+		"""teste la recupération du retour de la commande"""
+		ret = sauv.commande_ext(["ls", "-l"], True)
+		self.assertLess(0, len(ret))
+		
 	def test_none(self):
 		"""teste avec un set de None"""
 		self.assertRaises(SyntaxError, sauv.commande_ext, None, False)
@@ -845,7 +856,7 @@ class charge_arbre(unittest.TestCase):
 		"""teste de la correspondance résultat"""
 		test = sauv.Cliche(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		arbre = {'sauv': [[test, test], [5], []]}
-		err_prec = {'sauv':{'err_nombre':2, 'err_dernier_texte':"blabla"}}
+		err_prec = {'sauv':{sauv.nbr_erreur_consecutive:2, sauv.derniere_erreur:"blabla"}}
 		donnees = {'arbre':arbre, 'rappel':{}, 'err_prec':err_prec}
 		val = sauv.my_encoder().encode(donnees)
 		try:
@@ -867,7 +878,7 @@ class charge_arbre(unittest.TestCase):
 		
 		arbre = {'sauv': [[test, test], [test], []]}
 		rappel = {'sauv':datetime.datetime(2000, 1, 20)}
-		err_prec = {'sauv': {'err_nombre': 2, 'err_dernier_texte': "blabla"}}
+		err_prec = {'sauv': {sauv.nbr_erreur_consecutive: 2, sauv.derniere_erreur: "blabla"}}
 		donnees = {'arbre': arbre, 'rappel': rappel, 'err_prec': err_prec}
 
 		val = sauv.my_encoder().encode(donnees)
@@ -1138,7 +1149,7 @@ class sauv_arbre(unittest.TestCase):
 		test = sauv.Cliche(datetime.datetime(2000, 1, 1), "/home/ghhhjhjh.n")
 		arbre = {'sauv': [[test, test], [test], []]}
 		rappel = {'sauv':datetime.datetime(2000, 3, 1)}
-		err_prec = {'sauv': {'err_nombre': 5}}
+		err_prec = {'sauv': {sauv.nbr_erreur_consecutive: 5}}
 		sauv.sauv_arbre(self.fich, arbre, rappel, err_prec)
 		
 		self.assertEqual(sauv.charge_arbre(self.fich), (arbre, rappel, err_prec))
@@ -2507,7 +2518,7 @@ class gestion_des_rappels(unittest.TestCase):
 		self.assertLessEqual(self.maintenant - datetime.timedelta(days=25), rappel[1])
 	
 	def test_fonctionnel_rappel(self):
-		""" teste le rappel avec dernier clicé et rappel + 1 jour"""
+		""" teste le rappel avec dernier cliché et rappel + 1 jour"""
 		self.conf_job[sauv.cons3] = '30'
 		
 		rappel = [self.maintenant - datetime.timedelta(days=8)]
@@ -2536,7 +2547,19 @@ class gestion_des_rappels(unittest.TestCase):
 		
 		sauv.gestion_des_rappels(self.conf_job, arbre, rappel)
 		sauv.logger.error.assert_not_called()
+		self.assertEqual(len(rappel) , 1)
 	
+	def test_fonctionnel_avec_rappel_vide(self):
+		"""teste le rappel si aucun rappel n'existe"""
+		self.conf_job[sauv.cons2] = '30'
+		
+		rappel = []
+		arbre = [[sauv.Cliche(self.maintenant - datetime.timedelta(days=46), "chemin")], [], []]
+		
+		sauv.gestion_des_rappels(self.conf_job, arbre, rappel)
+		sauv.logger.error.assert_called()
+		self.assertEqual(len(rappel) , 1)
+		
 	def test_fonctionnel_sans_cons(self):
 		"""teste l'absence de rappel si consX non configuré"""
 		
@@ -2545,6 +2568,7 @@ class gestion_des_rappels(unittest.TestCase):
 		
 		sauv.gestion_des_rappels(self.conf_job, arbre, rappel)
 		sauv.logger.error.assert_not_called()
+		self.assertEqual(len(rappel) , 1)
 	
 	def test_priorite_cons2_sur_3(self):
 		"""teste l'absence de rappel si cons 2 est bien pris en compte"""
@@ -2556,8 +2580,18 @@ class gestion_des_rappels(unittest.TestCase):
 		
 		sauv.gestion_des_rappels(self.conf_job, arbre, rappel)
 		sauv.logger.error.assert_not_called()
-
-
+		self.assertEqual(len(rappel) , 0)
+	
+	def test_arbre_vide(self):
+		"""teste le renvoi d'une erreur si arbre est vide"""
+		self.conf_job[sauv.cons2] = '30'
+		rappel = []
+		arbre = [[], [], []]
+		
+		sauv.gestion_des_rappels(self.conf_job, arbre, rappel)
+		sauv.logger.error.assert_called()
+		self.assertEqual(len(rappel) , 1)
+	
 class Gestion_Des_Alertes(unittest.TestCase):
 	def setUp(self):
 		config_log()
@@ -2570,36 +2604,36 @@ class Gestion_Des_Alertes(unittest.TestCase):
 		"""test le masquage des premières erreurs"""
 
 		err_cour = OSError("message")
-		err_prec = {'err_nombre':sauv.nbr_err_muette-1, 'err_dernier_texte':""}
+		err_prec = {sauv.nbr_erreur_consecutive:sauv.nbr_err_muette-1, sauv.derniere_erreur:""}
 		n_sauv = "partage"
 
 		sauv.gestion_des_alertes(err_cour, err_prec, n_sauv)
 		sauv.logger.warning.assert_not_called()
-		self.assertEqual(err_prec['err_nombre'], sauv.nbr_err_muette)
-		self.assertEqual(err_prec['err_dernier_texte'], str(err_cour))
+		self.assertEqual(err_prec[sauv.nbr_erreur_consecutive], sauv.nbr_err_muette)
+		self.assertEqual(err_prec[sauv.derniere_erreur], str(err_cour))
 
 	def test_fonctionnel2(self):
 		"""test le masquage des premières erreurs"""
 
 		err_cour = OSError("message d'erreur")
-		err_prec = {'err_nombre':sauv.nbr_err_muette, 'err_dernier_texte':""}
+		err_prec = {sauv.nbr_erreur_consecutive:sauv.nbr_err_muette, sauv.derniere_erreur:""}
 		n_sauv = "partage"
 
 		sauv.gestion_des_alertes(err_cour, err_prec, n_sauv)
 		sauv.logger.warning.assert_called()
-		self.assertEqual(err_prec['err_nombre'], sauv.nbr_err_muette+1)
-		self.assertEqual(err_prec['err_dernier_texte'], "")
+		self.assertEqual(err_prec[sauv.nbr_erreur_consecutive], sauv.nbr_err_muette+1)
+		self.assertEqual(err_prec[sauv.derniere_erreur], "")
 
 	def test_fonctionnel3(self):
 		"""test le masquage des premières erreurs"""
 
 		err_cour = OSError("message d'erreur")
-		err_prec = {'err_nombre':sauv.nbr_err_muette+1, 'err_dernier_texte':""}
+		err_prec = {sauv.nbr_erreur_consecutive:sauv.nbr_err_muette+1, sauv.derniere_erreur:""}
 		n_sauv = "partage"
 
 		sauv.gestion_des_alertes(err_cour, err_prec, n_sauv)
 		sauv.logger.warning.assert_called()
-		self.assertEqual(err_prec['err_nombre'], sauv.nbr_err_muette+2)
+		self.assertEqual(err_prec[sauv.nbr_erreur_consecutive], sauv.nbr_err_muette+2)
 
 	def test_si_err_prec_vide(self):
 		"""test le masquage des premières erreurs"""
@@ -2610,8 +2644,8 @@ class Gestion_Des_Alertes(unittest.TestCase):
 
 		sauv.gestion_des_alertes(err_cour, err_prec, n_sauv)
 		sauv.logger.warning.assert_not_called()
-		self.assertEqual(err_prec['err_nombre'], 1)
-		self.assertEqual(err_prec['err_dernier_texte'], str(err_cour))
+		self.assertEqual(err_prec[sauv.nbr_erreur_consecutive], 1)
+		self.assertEqual(err_prec[sauv.derniere_erreur], str(err_cour))
 
 # Programme principal
 

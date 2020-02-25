@@ -2,8 +2,7 @@
 """ sauvegarde de
 	"""
 
-
-version = 0.58
+version = 0.56
 #voir modification dans les commits
 
 import argparse
@@ -74,8 +73,12 @@ f_arbre = 'historique.sauv'
 process_en_cours = None
 # Nombre d'erreur sans warning
 nbr_err_muette = 1
+# clé de gestion des alertes
+nbr_erreur_consecutive = 'err_nombre'
+derniere_erreur = 'err_dernier_texte'
 # fichier de lock
 f_lock='sauv.lock'
+jours_entre_rappels = 7
 
 bl_date = "datecliche"
 bl_job = "job"
@@ -336,10 +339,7 @@ def fermer_programme(signal, frame):
 	if process_en_cours:
 		process_en_cours.terminate()
 	# déverrouille
-	try:
-		deverrouille(path_file_lock)
-	except NameError:
-		logger.info("path_file_lock non défini")
+	deverrouille()
 	# démonte les volumes
 	demonte(a_demonter)
 	
@@ -753,8 +753,8 @@ def commande_ext(commande, verb):
 	""" lance une commande système
 
 		 Paramètres:
-		 commande: commande extérieure sous la forme d'une liste
-		 verb: Boolean définit si le retour de la commande doit etre écrit dans logger
+		 - commande: commande extérieure sous la forme d'une liste
+		 - verb: Boolean définit si le retour de la commande doit etre écrit dans logger
 	"""
 	logger.debug("Lancement de 'commande_ext' avec {}".format(commande))
 	if type(commande) != list:
@@ -771,9 +771,9 @@ def commande_ext(commande, verb):
 		process_output, process_erreur = process.communicate()
 		process_en_cours = None
 	except (OSError) as exception:
-		if verb:
-			logger.error("Retour de la commande: \n {}".format(process_erreur.decode('utf8')))
-		raise OSError(exception)
+		# if verb:
+		# 	logger.error("Retour de la commande: \n {}".format(process_erreur.decode('utf8')))
+		raise OSError(str(exception) + "\nRetour de la commande: \n {}".format(process_erreur.decode('utf8')))
 	else:
 		# écriture du message de stdout
 		sortie_normale = process_output.decode('utf8').split('\n')
@@ -784,15 +784,26 @@ def commande_ext(commande, verb):
 				logger.info(lig)
 		# écriture du message de stderr
 		if process_erreur != b'':
-			if verb:
-				logger.error(process_erreur.decode('utf8'))
+			# if verb:
+			# 	logger.error(process_erreur.decode('utf8'))
 			
-			raise OSError("Commande ou paramètres invalides")
+			raise OSError("Commande ou paramètres invalides\n Retour de la commande:\n{}".format(process_erreur.decode('utf8')))
 		
 		return sortie_normale
 
 
 def copie(config, arbre):
+	"""Copie les données
+		Paramètres:
+		- Config, objet configparser qui contient:
+			- src la source
+			- para: les paramètres rsync à passer
+			- permd5: periode entre vérifications MD5
+			- md5:
+			- filt: chemin vers le filtre rsync
+			- dest: le répertoire de base de la sauvegarde
+		-arbre, [[],[],[]]
+		"""
 	logger.debug("Lancement de 'copie'")
 	
 	source = config[src]
@@ -1086,17 +1097,14 @@ def fusion_rep(src, dst):
 		# 	logger.debug("     {}".format(a))
 		
 		sdst = dst / elem.name
-
-		if elem.is_dir() and not elem.is_symlink():
+		if elem.is_dir():
 			if sdst.exists():
 				# regarde le niveau supérieur
 				fusion_rep(elem, sdst)
 			else:
-				if not sdst.parent.exists():
-					sdst.parent.mkdir(parents=True)
 				# déplace le répertoire
 				try:
-					elem.replace(sdst)
+					os.renames(str(elem), str(sdst))
 				except OSError as exception:
 					logger.error("erreur de déplacement du répertoire: {} dans '{}'".format(str(elem), str(sdst)))
 					logger.error("erreur: {}".format(exception))
@@ -1105,23 +1113,23 @@ def fusion_rep(src, dst):
 		else:
 			# déplace le fichier
 			logger.debug("déplacement du fichier: {} dans '{}'".format(str(elem), str(sdst)))
-			if sdst.exists() or sdst.is_symlink():
+			if sdst.exists():
 				try:
-					sdst.unlink()
+					os.remove(str(sdst))
 				except OSError as exception:
 					logger.error("erreur de supression du fichier: {} ".format(str(sdst)))
 					logger.error("erreur: {}".format(exception))
 					raise OSError("erreur de supression du fichier: {}".format(exception))
-
 			try:
-				elem.rename(sdst)
+				
+				os.rename(str(elem), str(sdst))
 			except OSError as exception:
 				logger.error("erreur de déplacement du fichier: {} dans '{}'".format(str(elem), str(sdst)))
 				logger.error("erreur: {}".format(exception))
 				raise OSError("erreur de déplacement du fichier: {}".format(exception))
 	# supprime le répertoire vidé
 	try:
-		src.rmdir()
+		os.rmdir(str(src))
 	except FileNotFoundError:
 		pass
 
@@ -1454,7 +1462,7 @@ def demonte(a_demonter):
 			if commande != "":
 				logger.info("commande de démontage '{}'".format(commande))
 				try:
-					commande_ext(shlex.split(commande), verb=True)
+					commande_ext(shlex.split(commande), verb=False)
 				except OSError:
 					logger.warning("Une erreur est apparue lors du démontage '{}'".format(commande))
 
@@ -1715,20 +1723,23 @@ def gestion_des_rappels(config, arbre, rappel):
 	try:
 		dernier_rappel = rappel[0]
 	except IndexError:
-		dernier_rappel = maintenant
+		dernier_rappel = maintenant - datetime.timedelta(days=jours_entre_rappels + 1)
 	
 	# recherche le dernier cliché
 	gene = iterateur_arbre(arbre)
 	try:
 		dernier_cliche = gene.__next__().date
 	except StopIteration:
-		return
-	
-	# teste si la dernière sauvegarde est trop ancienne ou le rappel date de moins de 7 jours
-	if maintenant - datetime.timedelta(days=delai) > dernier_cliche and maintenant - datetime.timedelta(days=7) > dernier_rappel:
-		logger.error("[{}] n'a pas été sauvegardé depuis {},(maximum admis: {}"
-					 .format(config.name, maintenant - dernier_cliche, delai))
-		rappel.insert(0, maintenant)
+		logger.error("[{}] n'a jamais été sauvegardé".format(config.name ))
+	else:
+		# teste si la dernière sauvegarde est trop ancienne ou le rappel date de moins de jours_entre_rappels jours
+		if maintenant - datetime.timedelta(days=delai) > dernier_cliche and maintenant - datetime.timedelta(days=jours_entre_rappels) > dernier_rappel:
+			logger.error("[{}] n'a pas été sauvegardé depuis {},(maximum admis: {}"
+						 .format(config.name, maintenant - dernier_cliche, delai))
+		else:
+			return
+	# inscrit le rappel
+	rappel.insert(0, maintenant)
 
 
 def gestion_des_alertes(err_cour, err_prec, sauv):
@@ -1737,35 +1748,35 @@ def gestion_des_alertes(err_cour, err_prec, sauv):
 	paramètres:
 		err_cour: Error, erreur courante
 		err_prec:{} données des erreurs précédentes
-			'err_nombre':nombre d'erreur consécutive; si absent: 0
-			'err_dernier_texte': description de la dernière; si absent: ""
+			nbr_erreur_consecutive:nombre d'erreur consécutive; si absent: 0
+			derniere_erreur: description de la dernière; si absent: ""
 		sauv: string, sauvegarde concernée
 	"""
 
-	if not 'err_nombre' in err_prec:
-		err_prec['err_nombre'] = 0
+	if not nbr_erreur_consecutive in err_prec:
+		err_prec[nbr_erreur_consecutive] = 0
 
-	if err_prec['err_nombre'] == nbr_err_muette:
+	if err_prec[nbr_erreur_consecutive] == nbr_err_muette:
 		logger.warning("{}-plus de {} erreurs consécutives sont détectées".format(sauv, nbr_err_muette))
 		try:
-			logger.warning("{}-précédente erreur: {}".format(sauv, err_prec['err_dernier_texte']))
+			logger.warning("{}-précédente erreur: {}".format(sauv, err_prec[derniere_erreur]))
 		except IndexError:
 			None
 		logger.warning("{}-erreur courante:{}".format(sauv, str(err_cour)))
 
-		err_prec['err_dernier_texte'] = ""
+		err_prec[derniere_erreur] = ""
 
 	else :
-		if err_prec['err_nombre'] > nbr_err_muette:
-			logger.warning("{}- {} erreurs consécutives sont détectées".format(sauv, err_prec['err_nombre']))
+		if err_prec[nbr_erreur_consecutive] > nbr_err_muette:
+			logger.warning("{}- {} erreurs consécutives sont détectées".format(sauv, err_prec[nbr_erreur_consecutive]))
 			logger.warning("{}-erreur courante:{}".format(sauv, str(err_cour)))
 		else:
 			# si masquée
 			logger.debug("{}-Une erreur est masquée:{}".format(sauv, str(err_cour)))
 
-			err_prec['err_dernier_texte'] = str(err_cour)
+			err_prec[derniere_erreur] = str(err_cour)
 
-	err_prec['err_nombre'] = err_prec['err_nombre'] + 1
+	err_prec[nbr_erreur_consecutive] = err_prec[nbr_erreur_consecutive] + 1
 
 # Début du programme
 if __name__ == '__main__':
@@ -1875,8 +1886,8 @@ if __name__ == '__main__':
 		# réinitialisation des erreurs antérieures après un fonctionnement sans erreur
 		# TODO remplacer les textes de structure de données par des constantes
 		else:
-			err_prec[sauv]['err_nombre'] = 0
-			err_prec[sauv]['err_dernier_texte'] = ""
+			err_prec[sauv][nbr_erreur_consecutive] = 0
+			err_prec[sauv][derniere_erreur] = ""
 
 		if cliche:
 			arbre[sauv][0].insert(0, cliche)
