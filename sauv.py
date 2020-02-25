@@ -2,7 +2,7 @@
 """ sauvegarde de
 	"""
 
-version = 0.56
+version = 0.59
 #voir modification dans les commits
 
 import argparse
@@ -339,7 +339,10 @@ def fermer_programme(signal, frame):
 	if process_en_cours:
 		process_en_cours.terminate()
 	# déverrouille
-	deverrouille()
+	try:
+		deverrouille(path_file_lock)
+	except NameError:
+		logger.info("path_file_lock non défini")
 	# démonte les volumes
 	demonte(a_demonter)
 	
@@ -1097,14 +1100,17 @@ def fusion_rep(src, dst):
 		# 	logger.debug("     {}".format(a))
 		
 		sdst = dst / elem.name
-		if elem.is_dir():
+
+		if elem.is_dir() and not elem.is_symlink():
 			if sdst.exists():
 				# regarde le niveau supérieur
 				fusion_rep(elem, sdst)
 			else:
+				if not sdst.parent.exists():
+					sdst.parent.mkdir(parents=True)
 				# déplace le répertoire
 				try:
-					os.renames(str(elem), str(sdst))
+					elem.replace(sdst)
 				except OSError as exception:
 					logger.error("erreur de déplacement du répertoire: {} dans '{}'".format(str(elem), str(sdst)))
 					logger.error("erreur: {}".format(exception))
@@ -1113,23 +1119,23 @@ def fusion_rep(src, dst):
 		else:
 			# déplace le fichier
 			logger.debug("déplacement du fichier: {} dans '{}'".format(str(elem), str(sdst)))
-			if sdst.exists():
+			if sdst.exists() or sdst.is_symlink():
 				try:
-					os.remove(str(sdst))
+					sdst.unlink()
 				except OSError as exception:
 					logger.error("erreur de supression du fichier: {} ".format(str(sdst)))
 					logger.error("erreur: {}".format(exception))
 					raise OSError("erreur de supression du fichier: {}".format(exception))
+
 			try:
-				
-				os.rename(str(elem), str(sdst))
+				elem.rename(sdst)
 			except OSError as exception:
 				logger.error("erreur de déplacement du fichier: {} dans '{}'".format(str(elem), str(sdst)))
 				logger.error("erreur: {}".format(exception))
 				raise OSError("erreur de déplacement du fichier: {}".format(exception))
 	# supprime le répertoire vidé
 	try:
-		os.rmdir(str(src))
+		src.rmdir()
 	except FileNotFoundError:
 		pass
 
