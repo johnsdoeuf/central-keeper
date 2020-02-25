@@ -1,66 +1,7 @@
 # -*- coding: UTF-8 -*-
 """ sauvegarde de
 	"""
-# version 0.1 du 26-04-2017
-# version = 0.11 # 26-04-2017 correction de pas_de_sauv pour allez chercher les dates dans tous les niveaux de sauvegarde
-# version = 0.12 # 30-04-2017 Inversion date et niveau dans les noms de répertoire
-# Ajout de la gestion des sommes de contrôle
-# version = 0.13   Copie dans un répertoire temp puis renomme
-# version = 0.14   Lance le montage aussi si la source est vide
-# ajout paramètre temp de sauvegade temporaire et le traite de manière particulière lorsque trouvé dans le répertoire
-# Les info de Lancement de fonction passe de info à debug
-# version = 0.15 # Améliore Log
-# préserve au moins une sauvegarde malgré quota
-# version = 0.16 # ajout d'une capture d'erreur générale
-# suppression boucle infinie lorsque erreur dans manipulation des répertoires de sauvegarde
-# version = 0.17 # correction du bug avec les protocoles rsync
-# version = 0.18 # Le paramètre "verb" de commande_ext masque aussi les erreurs
-# étend les recherches de reférence à tous les niveaux au lieu de seulement le premier
-# version = 0.19 # corrrection du bug sur la gestion du md5 ligne 299
-# version = 0.20 # Remplacement de taille_réelle par la classe Taille
-# Ajout de la fonction "bilan"
-# version = 0.21 # Correction non démontage de sauvegarde
-# Distinction entre source et destination pour le montage
-# Ajout d'une fonction pour intercepter les signaux de fermeture
 
-# version = 0.22 # L'interception des signaux de fermeture est étendu
-# 06-06-2017     Ajouté lors de l'interception: démonte les volumes, termine le processus fils si il est en cours.
-
-# version = 0.23 # Ajout de séparateur de millier dans les affichage de volume de données
-# 11-06-2017    # Regroupement de des log d'erreur et critique en vue de l'envoi par mail
-# Ajout de l'écriture de la taille totale dans le bilan
-# Révision des messsages de warning pour afficher la sauvegarde concernée
-
-# version = 0.24 # supression de --ignore-missing-args des paramètres par défaut
-# 14-06-2017    #supprime le bug de double écriture de la taille des sauvegardes
-
-# version = 0.25 # definition de chemin absolus pour le répertoire conteneur
-# 19-06-2017    # Definition d'un logger par defaut
-
-# version = 0.26 # Ajout du multisource
-# 09-01-2018    # réduction du délai de reprise sauvegarde à 1 jour
-# Modification du calcul de taille des sauvegardes
-
-# version = 0.27 # Correction bug en cas d'erreur de d'initialisation du log
-# 10-01-2018	# supression du code obsolète
-
-# version = 0.30 # ajout de l'effacement avant de renommer dans fusion_rep
-# 15-01-2018
-
-#version = 0.31  # suppression log de fusion et verifie_arbre
-# 20-01-2018
-
-#version = 0.4 # modifie hiérarchie log
-# 02-11-2018	# détecte la suppression de sauvegarde dans la période de conservation
-# 				le verrou par fichier est remplacé par une variable d'environnement qui sera perdu à chaque coupure électrique
-#				remplacement du bilan au format texte par le format dbf, extension de bilan
-#				enregistrement des rappels
-#				erreur lorsque 5 warning sont envoyés et lorque la dernière sauvegarde est trop ancienne
-
-#version = 0.41 # ajout de log
-
-#version = 0.42 # réorganisation de l'écriture de bilan
-# 07-11-2018
 
 version = 0.58
 #voir modification dans les commits
